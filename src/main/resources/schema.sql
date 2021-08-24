@@ -1,4 +1,8 @@
-create table if not exists customer_table
+create schema if not exists `digitalgolddb`;
+
+DROP table if exists `digitalgolddb`.`customer_table`;
+
+create table if not exists `digitalgolddb`. `customer_table`
 (
     username    varchar(255)   not null    primary key,
     password    varchar(255)   not null,
@@ -10,6 +14,9 @@ create table if not exists customer_table
     houseNumber varchar(255)   not null,
     streetname varchar(255)    not null,
     zipCode     varchar(255)   not null,
-    city       varchar(255)   not null
+    city       varchar(255)   not null,
+    emailAddress       varchar(255)   not null,
+    salt       varchar(255)
+
     );
 

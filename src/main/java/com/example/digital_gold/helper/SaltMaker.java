@@ -1,7 +1,10 @@
 package com.example.digital_gold.helper;
 
+import org.springframework.stereotype.Service;
+
 import java.security.SecureRandom;
 
+@Service
 public class SaltMaker {
     private static final int SALT_LENGTH = 8;
     private int saltLength;

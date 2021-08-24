@@ -2,7 +2,9 @@ package com.example.digital_gold.service;
 
 import com.example.digital_gold.helper.HashHelper;
 import com.example.digital_gold.service.PepperService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HashService {
     private static final int DEFAULT_ROUNDS = 4;
     private final PepperService pepperService;
