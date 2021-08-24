@@ -9,31 +9,32 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 
+//TODO aanpassen vanalles Shaun
+// salt aanmaken : String salt = saltMaker.generateSalt();
+// hashService.hash()
+//oftewel registermethode aanpassen
+
 
 @Service
-public class CustomerService {
+public class RegisterService {
 
     private RootRepository rootRepository;
 
-    private final Logger logger = LoggerFactory.getLogger(CustomerService.class);
+    private final Logger logger = LoggerFactory.getLogger(RegisterService.class);
 
     @Autowired
-    public CustomerService(RootRepository rootRepository) {
+    public RegisterService(RootRepository rootRepository) {
         this.rootRepository = rootRepository;
         logger.info("New CustomerService");
     }
 
-    public Customer register(String username) {
-        String password = generatePassword();
-        Customer customer = new Customer("bla", password, "bla", "bla", "bla", Date.valueOf("2021-08-20"),
-                1548646546, 10, "bla","bla", "bla");
+    public Customer register(Customer customer) {
+
         rootRepository.saveCustomer(customer);
         return customer;
     }
 
-    private String generatePassword() {
-        return "welkom123";
-    }
+
 
     public RootRepository getRootRepository() {
         return rootRepository;

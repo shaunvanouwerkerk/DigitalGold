@@ -1,5 +1,7 @@
 package com.example.digital_gold.domain;
 
+//TODO constructor met salt default null Jany
+//TODO objecten aanmaken Fiona (fullname) / Sandra (details) /Jany (address)
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,15 +10,20 @@ import java.sql.Date;
 public class Customer extends Account {
     private final Logger logger = LoggerFactory.getLogger(Customer.class);
 
-    private String firstName;
+    private String firstName; //FullName
     private String prefix;
     private String lastName;
-    private Date dateOfBirth;
+
+    private Date dateOfBirth; //CustomerDetails
     private int bsn;
-    private int houseNumber;
+    private String emailaddress;
+
+    private int houseNumber; //adress
     private String streetName;
     private String zipCode;
     private String city;
+
+
 
     public Customer(String username, String password, String firstName, String prefix, String lastName, Date dateOfBirth,
                     int bsn, int houseNumber, String streetName, String zipCode, String city) {
@@ -68,6 +75,7 @@ public class Customer extends Account {
     public String getCity() {
         return city;
     }
+
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.example.digital_gold.domain;
 
+//TODO AANPASSEN SALT toevoeggen en setters SALT MOET DEFAULT NULL Jany
 public abstract class Account {
 
     protected String username;
@@ -17,4 +18,6 @@ public abstract class Account {
     public String getPassword() {
         return password;
     }
+
+
 }
