@@ -7,24 +7,30 @@ import java.util.Objects;
 public class Customer extends Account {
     private final Logger logger = LoggerFactory.getLogger(Customer.class);
 
-    private Fullname fullname;
+    private FullName fullName;
     private Address address;
     private CustomerDetails customerDetails;
 
-    public Customer(String username, String password, String salt) {
+    public Customer(String username, String password, String salt, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, salt);
+        this.fullName = fullName;
+        this.address = address;
+        this.customerDetails = customerDetails;
     }
 
-    public Customer(String username, String password) {
+    public Customer(String username, String password, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password);
+        this.fullName = fullName;
+        this.address = address;
+        this.customerDetails = customerDetails;
     }
 
-    public Fullname getFullname() {
-        return fullname;
+    public FullName getFullName() {
+        return fullName;
     }
 
-    public void setFullname(Fullname fullname) {
-        this.fullname = fullname;
+    public void setFullName(FullName fullName) {
+        this.fullName = fullName;
     }
 
     public Address getAddress() {
@@ -49,18 +55,18 @@ public class Customer extends Account {
         if (!(o instanceof Customer)) return false;
         if (!super.equals(o)) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(getFullname(), customer.getFullname()) && Objects.equals(getAddress(), customer.getAddress()) && Objects.equals(getCustomerDetails(), customer.getCustomerDetails());
+        return Objects.equals(getFullName(), customer.getFullName()) && Objects.equals(getAddress(), customer.getAddress()) && Objects.equals(getCustomerDetails(), customer.getCustomerDetails());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getFullname(), getAddress(), getCustomerDetails());
+        return Objects.hash(super.hashCode(), getFullName(), getAddress(), getCustomerDetails());
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "fullname=" + fullname +
+                "fullName=" + fullName +
                 ", address=" + address +
                 ", customerDetails=" + customerDetails +
                 '}';
