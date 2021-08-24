@@ -1,94 +1,68 @@
 package com.example.digital_gold.domain;
 
-//TODO constructor met salt default null Jany
-//TODO objecten aanmaken Fiona (fullname) / Sandra (details) /Jany (address)
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Date;
+import java.util.Objects;
 
 public class Customer extends Account {
     private final Logger logger = LoggerFactory.getLogger(Customer.class);
 
-    private String firstName; //FullName
-    private String prefix;
-    private String lastName;
+    private Fullname fullname;
+    private Address address;
+    private CustomerDetails customerDetails;
 
-    private Date dateOfBirth; //CustomerDetails
-    private int bsn;
-    private String emailaddress;
+    public Customer(String username, String password, String salt) {
+        super(username, password, salt);
+    }
 
-    private int houseNumber; //adress
-    private String streetName;
-    private String zipCode;
-    private String city;
-
-
-
-    public Customer(String username, String password, String firstName, String prefix, String lastName, Date dateOfBirth,
-                    int bsn, int houseNumber, String streetName, String zipCode, String city) {
+    public Customer(String username, String password) {
         super(username, password);
-        this.firstName = firstName;
-        this.prefix = prefix;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.bsn = bsn;
-        this.houseNumber = houseNumber;
-        this.streetName = streetName;
-        this.zipCode = zipCode;
-        this.city = city;
-        logger.info("New Customer");
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Fullname getFullname() {
+        return fullname;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public void setFullname(Fullname fullname) {
+        this.fullname = fullname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Address getAddress() {
+        return address;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public int getBsn() {
-        return bsn;
+    public CustomerDetails getCustomerDetails() {
+        return customerDetails;
     }
 
-    public int getHouseNumber() {
-        return houseNumber;
+    public void setCustomerDetails(CustomerDetails customerDetails) {
+        this.customerDetails = customerDetails;
     }
 
-    public String getStreetName() {
-        return streetName;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        if (!super.equals(o)) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(getFullname(), customer.getFullname()) && Objects.equals(getAddress(), customer.getAddress()) && Objects.equals(getCustomerDetails(), customer.getCustomerDetails());
     }
 
-    public String getZipCode() {
-        return zipCode;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getFullname(), getAddress(), getCustomerDetails());
     }
-
-    public String getCity() {
-        return city;
-    }
-
 
     @Override
     public String toString() {
         return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", prefix='" + prefix + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", bsn=" + bsn +
-                ", houseNumber=" + houseNumber +
-                ", streetName='" + streetName + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", city='" + city + '\'' +
+                "fullname=" + fullname +
+                ", address=" + address +
+                ", customerDetails=" + customerDetails +
                 '}';
     }
 }
