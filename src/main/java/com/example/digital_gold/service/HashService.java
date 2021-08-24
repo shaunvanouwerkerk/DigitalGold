@@ -2,6 +2,7 @@ package com.example.digital_gold.service;
 
 import com.example.digital_gold.helper.HashHelper;
 import com.example.digital_gold.service.PepperService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,7 @@ public class HashService {
     private final PepperService pepperService;
     private int rounds;
 
+    @Autowired
     public HashService(PepperService pepperService) {
         this(pepperService, DEFAULT_ROUNDS);
     }

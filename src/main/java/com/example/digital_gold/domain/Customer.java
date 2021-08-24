@@ -10,6 +10,7 @@ public class Customer extends Account {
     private FullName fullName;
     private Address address;
     private CustomerDetails customerDetails;
+    private final static String DEFAULT_SALT = null;
 
     public Customer(String username, String password, String salt, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, salt);
@@ -18,8 +19,8 @@ public class Customer extends Account {
         this.customerDetails = customerDetails;
     }
 
-    public Customer(String username, String password, FullName fullName, Address address, CustomerDetails customerDetails) {
-        super(username, password);
+    public Customer(String username, String password,FullName fullName, Address address, CustomerDetails customerDetails) {
+        super(username, password, DEFAULT_SALT);
         this.fullName = fullName;
         this.address = address;
         this.customerDetails = customerDetails;

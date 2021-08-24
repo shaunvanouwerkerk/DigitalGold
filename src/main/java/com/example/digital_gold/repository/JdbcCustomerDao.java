@@ -22,19 +22,21 @@ public class JdbcCustomerDao implements CustomerDao {
     private PreparedStatement insertCustomerStatement(Customer customer, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into customer_table (username, password, firstname, prefix, lastname, dateofbirth, bsn, " +
-                        "housenumber, streetname, zipcode, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
+                        "housenumber, streetname, zipcode, city, emailaddress, salt) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )"
         );
         preparedStatement.setString(1, customer.getUsername());
         preparedStatement.setString(2, customer.getPassword());
-        preparedStatement.setString(3, customer.getFirstName());
-        preparedStatement.setString(4, customer.getPrefix());
-        preparedStatement.setString(5, customer.getLastName());
-        preparedStatement.setString(6, String.valueOf(customer.getDateOfBirth()));
-        preparedStatement.setInt(7, customer.getBsn());
-        preparedStatement.setInt(8, customer.getHouseNumber());
-        preparedStatement.setString(9, customer.getStreetName());
-        preparedStatement.setString(10, customer.getZipCode());
-        preparedStatement.setString(11, customer.getCity());
+        preparedStatement.setString(3, customer.getFullName().getFirstName());
+        preparedStatement.setString(4, customer.getFullName().getPrefix());
+        preparedStatement.setString(5, customer.getFullName().getLastName());
+        preparedStatement.setString(6, String.valueOf(customer.getCustomerDetails().getDateOfBirth()));
+        preparedStatement.setString(7, customer.getCustomerDetails().getBsn());
+        preparedStatement.setInt(8, customer.getAddress().getHouseNumber());
+        preparedStatement.setString(9, customer.getAddress().getStreetName());
+        preparedStatement.setString(10, customer.getAddress().getZipCode());
+        preparedStatement.setString(11, customer.getAddress().getCity());
+        preparedStatement.setString(12, customer.getCustomerDetails().getEmailaddress());
+        preparedStatement.setString(13, customer.getSalt());
         return preparedStatement;
     }
 

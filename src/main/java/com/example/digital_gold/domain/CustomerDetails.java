@@ -6,10 +6,10 @@ import java.sql.Date;
 public class CustomerDetails {
 
     private Date dateOfBirth;
-    private long bsn;
+    private String bsn;
     private String emailaddress;
 
-    public CustomerDetails(Date dateOfBirth, long bsn, String emailaddress) {
+    public CustomerDetails(Date dateOfBirth, String bsn, String emailaddress) {
         this.dateOfBirth = dateOfBirth;
         this.bsn = bsn;
         this.emailaddress = emailaddress;
@@ -23,11 +23,11 @@ public class CustomerDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public long getBsn() {
+    public String getBsn() {
         return bsn;
     }
 
-    public void setBsn(long bsn) {
+    public void setBsn(String bsn) {
         this.bsn = bsn;
     }
 

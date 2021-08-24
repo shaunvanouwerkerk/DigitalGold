@@ -10,7 +10,7 @@ create table if not exists `digitalgolddb`. `customer_table`
     prefix      varchar(10),
     lastName    varchar(255)   not null,
     dateOfBirth varchar(255)   not null,
-    bsn         int(255)        not null,
+    bsn         varchar(255)   not null,
     houseNumber varchar(255)   not null,
     streetname varchar(255)    not null,
     zipCode     varchar(255)   not null,
