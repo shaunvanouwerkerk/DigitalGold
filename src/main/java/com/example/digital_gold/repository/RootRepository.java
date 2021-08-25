@@ -26,4 +26,9 @@ public class RootRepository {
         return customerDao.save(customer);
     }
 
+
+    public boolean findCustomerByUsername(String username) {
+        return customerDao.findCustomerByUsername(username);
+    }
+
 }

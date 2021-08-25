@@ -47,7 +47,8 @@ public class JdbcCustomerDao implements CustomerDao {
     }
 
     @Override
-    public Customer findByUsername(String username) {
-        return null;
+    public boolean findCustomerByUsername(String username) {
+        String sql = "SELECT 1 FROM customer_table WHERE username = ?";
+        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE username = ?)", Boolean.class, username);
     }
 }

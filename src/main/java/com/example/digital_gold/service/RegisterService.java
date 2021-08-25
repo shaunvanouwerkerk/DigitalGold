@@ -2,6 +2,7 @@ package com.example.digital_gold.service;
 
 import com.example.digital_gold.domain.Customer;
 import com.example.digital_gold.helper.SaltMaker;
+import com.example.digital_gold.repository.JdbcCustomerDao;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -38,10 +39,13 @@ public class RegisterService {
         customer.setSalt(salt);
         String hashPassword = customer.getPassword() + salt;
         customer.setPassword(hashService.hash(hashPassword));
-        rootRepository.saveCustomer(customer);
-        return customer;
+        if (rootRepository.findCustomerByUsername(customer.getUsername())) {
+            return null;
+        } else {
+            rootRepository.saveCustomer(customer);
+            return customer;
+        }
     }
-
 
     public RootRepository getRootRepository() {
         return rootRepository;

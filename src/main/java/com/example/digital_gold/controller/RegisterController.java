@@ -53,7 +53,7 @@ public class RegisterController {
         if(registeredCustomer != null) {
             return ResponseEntity.created(URI.create("/registration")).body("Successfull registration");
         } else {
-            return ResponseEntity.internalServerError().body("Registration failed");
+            return ResponseEntity.internalServerError().body("Registration failed; username already exists");
         }
     }
 
