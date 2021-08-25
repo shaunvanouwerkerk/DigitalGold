@@ -17,7 +17,7 @@ public class Address {
         this.streetName = streetName;
         this.zipCode = zipCode;
         this.city = city;
-        logger.info("New Adress");
+        logger.info("New Adress" + this);
     }
 
     public int getHouseNumber() {

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,19 +31,30 @@ public class RegisterController {
     }
 
     @PutMapping("/register")
-    public ResponseEntity<?> aanmeldenCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<?> registreerKlant(@RequestParam String username,
+                                             @RequestParam String password,
+                                             @RequestParam String firstName,
+                                             @RequestParam String prefix,
+                                             @RequestParam String lastName,
+                                             @RequestParam int houseNumber,
+                                             @RequestParam String streetName,
+                                             @RequestParam String zipCode,
+                                             @RequestParam String city,
+                                             @RequestParam String dateOfBirth,
+                                             @RequestParam String bsn,
+                                             @RequestParam String emailAddress) {
+        Customer customer = new Customer(username,password,new FullName(firstName,prefix,lastName),
+                new Address(houseNumber,streetName,zipCode,city),
+                new CustomerDetails(Date.valueOf(dateOfBirth),bsn,emailAddress));
+
         logger.info("New: " + customer);
-        //registerService.register(customer);
-        return ResponseEntity.created(URI.create("/register")).body("Successfull registration");
-    }
-    @PutMapping("/registreer")
-    public ResponseEntity<?> aanmeldenKlant(@RequestParam String username) {
-        Customer customer = new Customer(username,"wachtwoord", "leeg",new FullName("Jan","","Jansen"),
-                new Address(1,"Straat","1111bb","city"),
-                new CustomerDetails(Date.valueOf("2001-01-01"),"1232145","test@test.nl"));
-        logger.info("New: " + customer);
-        registerService.register(customer);
-        return ResponseEntity.created(URI.create("/register")).body("Successfull registration");
+        Customer registeredCustomer = registerService.register(customer);
+
+        if(registeredCustomer != null) {
+            return ResponseEntity.created(URI.create("/registration")).body("Successfull registration");
+        } else {
+            return ResponseEntity.internalServerError().body("Registration failed");
+        }
     }
 
 }
