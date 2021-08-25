@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 
-//TODO aanpassen vanalles Shaun
-// salt aanmaken : String salt = saltMaker.generateSalt();
-// hashService.hash()
-//oftewel registermethode aanpassen
-
 
 @Service
 public class RegisterService {
@@ -31,7 +26,7 @@ public class RegisterService {
         this.rootRepository = rootRepository;
         this.saltMaker = saltMaker;
         this.hashService = hashService;
-        logger.info("New CustomerService");
+        logger.info("New RegisterService");
     }
 
     public Customer register(Customer customer) {

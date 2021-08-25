@@ -27,11 +27,11 @@ public class RegisterController {
     public RegisterController(RegisterService registerService) {
         super();
         this.registerService = registerService;
-        logger.info("New CustomerController");
+        logger.info("New RegisterController");
     }
 
     @PutMapping("/register")
-    public ResponseEntity<?> registreerKlant(@RequestParam String username,
+    public ResponseEntity<?> registerCustomer(@RequestParam String username,
                                              @RequestParam String password,
                                              @RequestParam String firstName,
                                              @RequestParam String prefix,
@@ -53,7 +53,7 @@ public class RegisterController {
         if(registeredCustomer != null) {
             return ResponseEntity.created(URI.create("/registration")).body("Successfull registration");
         } else {
-            return ResponseEntity.internalServerError().body("Registration failed; username already exists");
+            return ResponseEntity.badRequest().body("Registration failed; username already exists");
         }
     }
 
