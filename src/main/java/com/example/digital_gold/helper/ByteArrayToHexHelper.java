@@ -1,7 +1,8 @@
 package com.example.digital_gold.helper;
 
 public class ByteArrayToHexHelper {
-    // Zet een array van bytes om naar een representatie in hexadecimalen
+
+    // een array van bytes omzetteh naar hexadecimalen
     public static String encodeHexString(byte[] byteArray) {
         StringBuffer hexStringBuffer = new StringBuffer();
         for (byte b : byteArray) {
@@ -10,6 +11,7 @@ public class ByteArrayToHexHelper {
         return hexStringBuffer.toString();
     }
 
+    // 1 byte omzetten naar hexadecimalen
     private static String byteToHex(byte num) {
         char[] hexDigits = new char[2];
         hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);

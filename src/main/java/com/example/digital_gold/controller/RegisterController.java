@@ -55,7 +55,6 @@ public class RegisterController {
 
     @Autowired
     public RegisterController(RegisterService registerService) {
-        super();
         this.registerService = registerService;
         logger.info("New RegisterController");
     }
