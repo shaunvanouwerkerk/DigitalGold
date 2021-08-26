@@ -1,5 +1,7 @@
 package com.example.digital_gold.domain;
-
+/**
+*  @author Fiona Gray
+* */
 public class FullName {
 
     private String firstName;

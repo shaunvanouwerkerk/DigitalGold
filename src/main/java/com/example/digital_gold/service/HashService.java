@@ -1,7 +1,6 @@
 package com.example.digital_gold.service;
 
 import com.example.digital_gold.helper.HashHelper;
-import com.example.digital_gold.service.PepperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +18,27 @@ public class HashService {
     public HashService(PepperService pepperService, int rounds) {
         this.pepperService = pepperService;
         this.rounds = rounds;
-        // eventueel controleren op te grote waarden (< 6)
     }
 
     public String hash(String value) {
-        String hash = HashHelper.hash(value, pepperService.getPeper()); // hacks! gebruik pepper in plaats van salt
-        // pas eventueel een key stretch toe: x ronden uitvoeren
-        return processRounds(hash, numberOfRounds(rounds));
+        String hash = HashHelper.hash(value, pepperService.getPepper());
+        // key stretch; aantal rounds uitvoeren
+        return processRounds(hash, numberOfRounds(DEFAULT_ROUNDS));
     }
 
-    private String processRounds(String hash, long r) {
-        for (long i = 0; i < r; i++) {
-            // niet zo efficient om dit met String te doen en HashHelper hash maakt ook steeds nieuwe objecten aan
-            // wordt wel al heel snel erg traag
+    private String processRounds(String hash, long rounds) {
+        for (long i = 0; i < rounds; i++) {
             hash = HashHelper.hash(hash);
         }
         return hash;
     }
 
-    // Math.pow geeft een double terug, een long is gewenst
-    // om testbaar te maken, naar eigen klasse toe zetten
-    private long numberOfRounds(int load){
+    // int naar long
+    private long numberOfRounds(int rounds){
         int base = 10;
-        long result = base; // base ^ 1
+        long result = base;
 
-        for (int i = 0; i < load; i++) {
+        for (int i = 0; i < rounds; i++) {
             result *= base;
         }
         return result;

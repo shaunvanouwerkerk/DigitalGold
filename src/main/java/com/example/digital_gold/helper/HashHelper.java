@@ -11,21 +11,21 @@ public class HashHelper {
 
     public static String hash(String value) {
         try {
-            MessageDigest sha = MessageDigest.getInstance(SHA_256);
+            MessageDigest sha = MessageDigest.getInstance(SHA_256); // hash aanmaken m.b.v. sha-256 hashing algoritme
             sha.update(value.getBytes(StandardCharsets.UTF_8));
             byte[] digest = sha.digest();
             return ByteArrayToHexHelper.encodeHexString(digest);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException exception) {
+            exception.printStackTrace();
             throw new RuntimeException(ALGORITME_BESTAAT_NIET);
         }
     }
 
-    public static String hash(String password, String salt) {
+    public static String hash(String password, String pepper) {
         try {
             MessageDigest sha = MessageDigest.getInstance(SHA_256);
             sha.update(password.getBytes(StandardCharsets.UTF_8));
-            sha.update(salt.getBytes(StandardCharsets.UTF_8));
+            sha.update(pepper.getBytes(StandardCharsets.UTF_8));
             byte[] digest = sha.digest();
             return ByteArrayToHexHelper.encodeHexString(digest);
         } catch (NoSuchAlgorithmException e) {
@@ -34,6 +34,7 @@ public class HashHelper {
         }
     }
 
+    // for testing purposes
     public static String hash(String password, String salt, String pepper) {
         try {
             MessageDigest sha = MessageDigest.getInstance(SHA_256);
