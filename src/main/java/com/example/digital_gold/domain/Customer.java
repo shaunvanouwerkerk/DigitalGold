@@ -12,6 +12,8 @@ public class Customer extends Account {
     private CustomerDetails customerDetails;
     private final static String DEFAULT_SALT = null;
 
+    public Customer(){};
+
     public Customer(String username, String password, String salt, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, salt);
         this.fullName = fullName;

@@ -8,6 +8,8 @@ public abstract class Account {
     protected String password;
     protected String salt;
 
+    public Account(){};
+
     public Account(String username, String password, String salt) {
         this.username = username;
         this.password = password;
