@@ -9,12 +9,14 @@ import com.example.digital_gold.service.RegisterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.sql.Date;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ServiceRepoIntegrationTest {
 
    private RegisterService registerService;
@@ -40,7 +42,7 @@ public class ServiceRepoIntegrationTest {
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
                 "tester@gmail.com" );
-        Customer testcustomer = new Customer("TestUser10", "TestPassword", "zoutje", testfullname,
+        Customer testcustomer = new Customer("TestUser04", "TestPassword", "zoutje", testfullname,
                 testadress, testcustomerDetails);
         assertThat(registerService.register(testcustomer)).isEqualTo(testcustomer);
     }

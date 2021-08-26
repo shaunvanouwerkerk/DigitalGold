@@ -34,7 +34,7 @@ public class JdbcCustomerDaoTest {
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
                 "tester@gmail.com" );
-        Customer testcustomer = new Customer("TestUser10", "TestPassword", "zoutje", testfullname,
+        Customer testcustomer = new Customer("TestUser02", "TestPassword", "zoutje", testfullname,
                 testadress, testcustomerDetails);
         Customer actualcustomer = jdbcCustomerDaoTest.save(testcustomer);
         assertThat(actualcustomer).isEqualTo(testcustomer);
@@ -42,14 +42,14 @@ public class JdbcCustomerDaoTest {
 
     @Test
     public void findCustomerByUsernameTrue() {
-        Boolean actual = jdbcCustomerDaoTest.findCustomerByUsername("TestUser01");
+        Boolean actual = jdbcCustomerDaoTest.findCustomerByUsername("TestUser02");
         Boolean expected = true;
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void findCustomerByUsernameFalse() {
-        Boolean actual = jdbcCustomerDaoTest.findCustomerByUsername("TestUser05");
+        Boolean actual = jdbcCustomerDaoTest.findCustomerByUsername("TestUser03");
         Boolean expected = false;
         assertThat(actual).isEqualTo(expected);
     }
