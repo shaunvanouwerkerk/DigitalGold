@@ -1,0 +1,53 @@
+//Postman
+//JSON body voor genereren customer in DigitalGold project
+//HTTP PUT request op endpoint "/register"
+
+{
+	"username":"username",
+	"password":"password",
+	"fullName":
+	{
+		"firstName":"firstName",
+		"prefix":"prefix",
+		"lastName":"lastName"
+	},
+	"address":
+	{
+		"houseNumber":houseNumber,
+		"streetName":"streetName",
+		"zipCode":"zipCode",
+		"city":"city"
+	},
+	"customerDetails":
+	{
+		"dateOfBirth":"dateOfBirth",
+		"bsn":"bsn",
+		"emailaddress":"emailaddres"
+	}
+}
+
+//Voorbeeld met data:
+
+{
+  	"username":"Pietje",
+  	"password":"IkBenMallePietje",
+  	"fullName":
+         {
+  		"firstName":"Piet",
+  		"prefix":" ",
+  		"lastName":"Jansen"
+     },
+  	"address":
+     {
+  		"houseNumber":12,
+  		"streetName":"Straatje",
+  		"zipCode":"1000BB",
+  		"city":"Plaatsje"
+     },
+  	"customerDetails":
+     {
+  		"dateOfBirth":"1965-01-01",
+  		"bsn":"123456789",
+  		"emailaddress":"pietje@provider.nl"
+     }
+  }
