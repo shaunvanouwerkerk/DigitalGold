@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PepperService {
-    private static final String PEPPER = "EenApplicatieMoetNietTeFlauwZijn";
+    private static final String PEPPER = "DigForGoldHere";
 
     public String getPeper() {
         return PEPPER;
