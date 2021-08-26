@@ -3,14 +3,17 @@ package com.example.digital_gold.helper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-//TODO Fiona
+/**
+* @author Fiona Gray
+* */
+
 class SaltMakerTest {
 
     @Test
-    void generateSalt() {
-    }
-
-    @Test
-    void setlength() {
+    public void generateSalt_default_length(){
+        // salt met 8 characters
+        SaltMaker saltMaker = new SaltMaker();
+        String result = saltMaker.generateSalt();
+        assertEquals(8, result.length());
     }
 }

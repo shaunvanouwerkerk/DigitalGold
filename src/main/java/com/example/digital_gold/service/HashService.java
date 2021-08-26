@@ -20,8 +20,8 @@ public class HashService {
         this.rounds = rounds;
     }
 
-    public String hash(String value) {
-        String hash = HashHelper.hash(value, pepperService.getPepper());
+    public String hash(String passwordWithSalt) {
+        String hash = HashHelper.hash(passwordWithSalt, pepperService.getPepper());
         // key stretch; aantal rounds uitvoeren
         return processRounds(hash, numberOfRounds(DEFAULT_ROUNDS));
     }
