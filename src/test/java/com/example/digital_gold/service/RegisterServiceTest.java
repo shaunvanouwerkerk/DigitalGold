@@ -14,10 +14,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
+import org.springframework.test.context.ActiveProfiles;
+
 import java.sql.Date;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ActiveProfiles("test")
 class RegisterServiceTest {
 
     private RegisterService registerService;
