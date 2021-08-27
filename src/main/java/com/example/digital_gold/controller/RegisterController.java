@@ -41,7 +41,7 @@ public class RegisterController {
         Customer registeredCustomer = registerService.register(customer);
 
         if(registeredCustomer != null) {
-            return ResponseEntity.created(URI.create("/register")).body("Successfull registration");
+            return ResponseEntity.created(URI.create("/register")).build();
         } else {
             return ResponseEntity.badRequest().body("Registration failed; username already exists");
         }
