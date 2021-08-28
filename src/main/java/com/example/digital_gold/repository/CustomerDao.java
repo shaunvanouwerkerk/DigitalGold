@@ -6,5 +6,6 @@ import com.example.digital_gold.domain.Customer;
 public interface CustomerDao {
 
     Customer save(Customer customer);
-    boolean findCustomerByUsername(String username);
+    boolean findCustomerByUsernameAndEmail (String username, String emailAddress);
+
 }

@@ -21,8 +21,8 @@ public class JdbcCustomerDao implements CustomerDao {
 
     private PreparedStatement insertCustomerStatement(Customer customer, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into customer_table (username, password, firstname, prefix, lastname, dateofbirth, bsn, " +
-                        "housenumber, streetname, zipcode, city, emailaddress, salt) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )"
+                "insert into customer_table (username, password, firstName, prefix, lastName, dateOfBirth, bsn, " +
+                        "houseNumber, streetName, zipCode, city, emailAddress, salt) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )"
         );
         preparedStatement.setString(1, customer.getUsername());
         preparedStatement.setString(2, customer.getPassword());
@@ -46,9 +46,19 @@ public class JdbcCustomerDao implements CustomerDao {
         return customer;
     }
 
+    /**
+    * @author Fiona Gray
+    * */
     @Override
+    public boolean findCustomerByUsernameAndEmail(String username, String emailAddress) {
+        return ((findCustomerByUsername(username)) || (findCustomerByEmailAddress(emailAddress)));
+    }
+
     public boolean findCustomerByUsername(String username) {
-        String sql = "SELECT 1 FROM customer_table WHERE username = ?";
         return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE username = ?)", Boolean.class, username);
+    }
+
+    public boolean findCustomerByEmailAddress(String emailAddress) {
+        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE emailAddress = ?)", Boolean.class, emailAddress);
     }
 }

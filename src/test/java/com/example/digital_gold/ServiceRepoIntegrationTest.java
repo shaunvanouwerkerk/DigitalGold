@@ -41,7 +41,7 @@ public class ServiceRepoIntegrationTest {
         FullName testfullname = new FullName("Tester", "van", "Tester");
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
-                "tester@gmail.com" );
+                "tester4@gmail.com" );
         Customer testcustomer = new Customer("TestUser04", "TestPassword", "zoutje", testfullname,
                 testadress, testcustomerDetails);
         assertThat(registerService.register(testcustomer)).isEqualTo(testcustomer);
