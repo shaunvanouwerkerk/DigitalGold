@@ -27,4 +27,8 @@ public class RootRepository {
     public boolean findCustomerByUsernameAndEmail(String username, String emailAddress) {
         return customerDao.findCustomerByUsernameAndEmail(username, emailAddress);
     }
+    public String findCustomerSalt(String username){return customerDao.findCustomerSalt(username); }
+
+    public String findCustomerHashPassword(String username){return customerDao.findCustomerHashPassword(username);}
+
 }

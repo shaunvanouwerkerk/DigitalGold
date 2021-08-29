@@ -61,4 +61,19 @@ public class JdbcCustomerDao implements CustomerDao {
     public boolean findCustomerByEmailAddress(String emailAddress) {
         return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE emailAddress = ?)", Boolean.class, emailAddress);
     }
+
+    /**
+     * @Author Shaun
+     */
+    @Override
+    public String findCustomerSalt(String username) {
+        String sql = "SELECT salt FROM customer_table WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
+    }
+
+    @Override
+    public String findCustomerHashPassword(String username) {
+        String sql = "SELECT password FROM customer_table WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
+    }
 }
