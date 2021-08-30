@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -36,7 +37,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<?> registerCustomer(@Valid @RequestBody Customer customer) {
         logger.info("Uit body via JSON aangemaakt: " + customer);
         Customer registeredCustomer = registerService.register(customer);
 
