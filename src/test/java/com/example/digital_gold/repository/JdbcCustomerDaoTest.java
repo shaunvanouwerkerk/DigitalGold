@@ -53,4 +53,18 @@ public class JdbcCustomerDaoTest {
         Boolean expected = false;
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void findCustomerByEmailAddressTrue() {
+        Boolean actual = jdbcCustomerDaoTest.findCustomerByEmailAddress("tester@gmail.com");
+        Boolean expected = true;
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void findCustomerByEmailAddressFalse() {
+        Boolean actual = jdbcCustomerDaoTest.findCustomerByEmailAddress("tester@hotmail.com");
+        Boolean expected = false;
+        assertThat(actual).isEqualTo(expected);
+    }
 }

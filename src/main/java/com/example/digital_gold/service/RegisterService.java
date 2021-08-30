@@ -29,12 +29,13 @@ public class RegisterService {
         logger.info("New RegisterService");
     }
 
+    // TODO: if-statement en methodes refactoren op basis van front end (email en username op andere pagina gechecked?)
     public Customer register(Customer customer) {
         String salt = saltMaker.generateSalt();
         customer.setSalt(salt);
         String hashPassword = customer.getPassword() + salt;
         customer.setPassword(hashService.hash(hashPassword));
-        if (rootRepository.findCustomerByUsername(customer.getUsername())) {
+        if (rootRepository.findCustomerByUsernameAndEmail(customer.getUsername(), customer.getCustomerDetails().getEmailaddress())) {
             return null;
         } else {
             rootRepository.saveCustomer(customer);
