@@ -1,11 +1,16 @@
 package com.example.digital_gold.domain;
+
+import javax.validation.constraints.NotBlank;
+
 /**
 *  @author Fiona Gray
 * */
 public class FullName {
 
+    @NotBlank(message = "verplicht")
     private String firstName;
     private String prefix;
+    @NotBlank(message = "verplicht")
     private String lastName;
 
     public FullName(String firstName, String prefix, String lastName) {

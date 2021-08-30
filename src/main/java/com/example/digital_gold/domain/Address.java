@@ -3,13 +3,22 @@ package com.example.digital_gold.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotBlank;
+
+/*
+@Author Jany Gaal
+*/
+
 public class Address {
 
     private final Logger logger = LoggerFactory.getLogger(Address.class);
 
     private int houseNumber;
+    @NotBlank(message = "verplicht")
     private String streetName;
+    @NotBlank(message = "verplicht")
     private String zipCode;
+    @NotBlank(message = "verplicht")
     private String city;
 
     public Address(int houseNumber, String streetName, String zipCode, String city) {

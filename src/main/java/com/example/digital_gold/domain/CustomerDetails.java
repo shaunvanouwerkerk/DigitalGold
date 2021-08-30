@@ -1,12 +1,20 @@
 package com.example.digital_gold.domain;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 // @author Sandra Turina
 
 public class CustomerDetails {
 
     private Date dateOfBirth;
+    @NotBlank(message = "verplicht")
+    @Size(min = 9, max = 9, message
+            = "Ongeldig BSN")
     private String bsn;
+    @NotBlank(message = "verplicht")
+    @Email
     private String emailaddress;
 
     public CustomerDetails(Date dateOfBirth, String bsn, String emailaddress) {

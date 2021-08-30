@@ -1,10 +1,24 @@
 package com.example.digital_gold.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/*
+@Author Jany Gaal
+*/
+
+@Entity
 public abstract class Account {
 
+    @Id
+    @NotBlank(message = "Gebruikernaam is verplicht")
     protected String username;
+    @NotBlank(message = " Wachtwoord is verplicht")
+    @Size(min = 8, max = 200, message
+            = "Wachtwoord moet tussen de 8 en 200 tekens zijn")
     protected String password;
     protected String salt;
 

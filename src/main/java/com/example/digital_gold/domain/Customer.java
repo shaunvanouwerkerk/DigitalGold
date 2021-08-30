@@ -2,13 +2,23 @@ package com.example.digital_gold.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
+
+/*
+@Author Jany Gaal
+*/
 
 public class Customer extends Account {
     private final Logger logger = LoggerFactory.getLogger(Customer.class);
 
+    @Valid
     private FullName fullName;
+    @Valid
     private Address address;
+    @Valid
     private CustomerDetails customerDetails;
     private final static String DEFAULT_SALT = null;
 
