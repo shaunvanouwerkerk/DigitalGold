@@ -53,11 +53,11 @@ public class RegisterControllerTest {
 
        when(registerServiceMock.register(any(Customer.class))).thenReturn(createTestCustomer());
 
-        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
-        putRequest.contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder postRequest = MockMvcRequestBuilders.post("/register");
+        postRequest.contentType(MediaType.APPLICATION_JSON)
                 .content(createJSONfromCustomer());
         try {
-            mockMvc.perform(putRequest).andExpect(status().isCreated());
+            mockMvc.perform(postRequest).andExpect(status().isCreated());
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -68,11 +68,11 @@ public class RegisterControllerTest {
 
         when(registerServiceMock.register(any(Customer.class))).thenReturn(null);
 
-        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
-        putRequest.contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder postRequest = MockMvcRequestBuilders.post("/register");
+        postRequest.contentType(MediaType.APPLICATION_JSON)
                 .content(createJSONfromCustomer());
         try {
-            mockMvc.perform(putRequest).andExpect(status().isBadRequest())
+            mockMvc.perform(postRequest).andExpect(status().isBadRequest())
                     .andExpect(content().string("Registration failed, username or emailaddress already exists"));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -84,11 +84,11 @@ public class RegisterControllerTest {
 
         when(registerServiceMock.register(any(Customer.class))).thenReturn(createTestCustomer());
 
-        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
-        putRequest.contentType(MediaType.APPLICATION_JSON)
+        MockHttpServletRequestBuilder postRequest = MockMvcRequestBuilders.post("/register");
+        postRequest.contentType(MediaType.APPLICATION_JSON)
                 .content("this is an invalid request");
         try {
-            mockMvc.perform(putRequest).andExpect(status().is4xxClientError());
+            mockMvc.perform(postRequest).andExpect(status().is4xxClientError());
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
