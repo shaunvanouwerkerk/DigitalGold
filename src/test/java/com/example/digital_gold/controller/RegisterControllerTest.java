@@ -1,48 +1,96 @@
 package com.example.digital_gold.controller;
 
-import com.example.digital_gold.domain.Address;
-import com.example.digital_gold.domain.Customer;
-import com.example.digital_gold.domain.CustomerDetails;
-import com.example.digital_gold.domain.FullName;
+import com.example.digital_gold.domain.*;
 import com.example.digital_gold.service.RegisterService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.sql.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @WebMvcTest(RegisterController.class)
 public class RegisterControllerTest {
 
-    @MockBean
-    private RegisterService registerService;
-
     private MockMvc mockMvc;
+
+    @MockBean
+    private RegisterService registerServiceMock;
 
     @Autowired
     public RegisterControllerTest(MockMvc mockMvc) {
         this.mockMvc = mockMvc;
     }
 
-    @Test
-    public void registerTest() {
-        FullName testfullname = new FullName("Tester", "van", "Tester");
+    private Customer createTestCustomer(){
+        FullName testfullname = new FullName("Tester", "van", "De Test");
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
-        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
-                "tester@gmail.com" );
-        Customer testcustomer = new Customer("TestUser01", "TestPassword", "zoutje", testfullname, testadress, testcustomerDetails);
+        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"987654321",
+                "tester@tester.tst" );
+        return new Customer("TestUser01", "TestPassword", testfullname, testadress, testcustomerDetails);
+    }
 
-/*
-        Mockito.when(registerService.register("TestUser01", "TestPassword", "Tester", "van", "Tester", 1, "TestStraat", "1111AA",
-                 "TestCity","1900-01-01", "753654852", "tester@gmail.com")).thenReturn(testcustomer);
-*/
+    private String createJSONfromCustomer() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(createTestCustomer());
+    }
 
+    @Test
+    public void registerValidRequestTest() throws Exception{
 
+       when(registerServiceMock.register(any(Customer.class))).thenReturn(createTestCustomer());
+
+        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
+        putRequest.contentType(MediaType.APPLICATION_JSON)
+                .content(createJSONfromCustomer());
+        try {
+            mockMvc.perform(putRequest).andExpect(status().isCreated());
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    @Test
+    public void registerExistingUsernameRequestTest() throws Exception{
+
+        when(registerServiceMock.register(any(Customer.class))).thenReturn(null);
+
+        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
+        putRequest.contentType(MediaType.APPLICATION_JSON)
+                .content(createJSONfromCustomer());
+        try {
+            mockMvc.perform(putRequest).andExpect(status().isBadRequest())
+                    .andExpect(content().string("Registration failed; username already exists"));
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    @Test
+    public void registerInvalidRequestTest() throws Exception{
+
+        when(registerServiceMock.register(any(Customer.class))).thenReturn(createTestCustomer());
+
+        MockHttpServletRequestBuilder putRequest = MockMvcRequestBuilders.put("/register");
+        putRequest.contentType(MediaType.APPLICATION_JSON)
+                .content("this is an invalid request");
+        try {
+            mockMvc.perform(putRequest).andExpect(status().is4xxClientError());
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
