@@ -73,7 +73,7 @@ public class RegisterControllerTest {
                 .content(createJSONfromCustomer());
         try {
             mockMvc.perform(putRequest).andExpect(status().isBadRequest())
-                    .andExpect(content().string("Registration failed; username already exists"));
+                    .andExpect(content().string("Registration failed, username or emailaddress already exists"));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

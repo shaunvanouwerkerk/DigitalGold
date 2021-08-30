@@ -43,7 +43,7 @@ public class RegisterController {
         if(registeredCustomer != null) {
             return ResponseEntity.created(URI.create("/register")).build();
         } else {
-            return ResponseEntity.badRequest().body("Registration failed; username or emailaddress already exists");
+            return ResponseEntity.badRequest().body("Registration failed, username or emailaddress already exists");
         }
     }
 
