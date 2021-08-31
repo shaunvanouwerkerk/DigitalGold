@@ -4,8 +4,8 @@ package com.example.digital_gold.controller;
  * @author David Truijens
  * Methode register Customer is endpoint voor registratie van een klant.
  * Benodigd: NoArgs constructors in Account en Customer
- * HTTP request: PUT request met JSON body
- * JSON format en voorbeeld : resources/JSON HTTP PUT.txt
+ * HTTP request: POST request met JSON body
+ * JSON format en voorbeeld : resources/JSON HTTP POST.txt
  */
 
 

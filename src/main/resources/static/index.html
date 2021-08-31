@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="typeWriter()">
 <div class="pagina"><!---pagina container--->
 
 <header>
@@ -25,7 +25,7 @@
 	</div>
 </header>	
     <div class="container">
-		<div class="title"><h1>Welcome to your gateway to crypto</h1>
+		<div class="title"><h1 id="tagline"></h1>
 		</div>
 		<div class="inhoud">
 			<div class="centered">
@@ -37,5 +37,21 @@
 	
 	</div>
 	</div><!---pagecontainer--->
+
+	<script>
+		var i = 0;
+		var txt = 'Welcome to your gateway to crypto';
+		var speed = 50;
+		
+		function typeWriter() {
+		  if (i < txt.length) {
+			document.getElementById("tagline").innerHTML += txt.charAt(i);
+			i++;
+			setTimeout(typeWriter, speed);
+		  }
+		}
+		</script>
+
+
 </body>
 </html>
