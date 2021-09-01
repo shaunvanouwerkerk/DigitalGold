@@ -1,6 +1,6 @@
 //Postman
 //JSON body voor genereren customer in DigitalGold project
-//HTTP PUT request op endpoint "/register"
+//HTTP POST request op endpoint "/register"
 
 {
 	"username":"username",
