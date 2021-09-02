@@ -9,16 +9,17 @@ import org.slf4j.LoggerFactory;
 public class Administrator extends Account{
     private final Logger logger = LoggerFactory.getLogger(Administrator.class);
 
-    private final static String DEFAULT_SALT = null;
 
     public Administrator(String username, String password, String salt) {
         super(username, password, salt);
     }
 
     public Administrator(String username, String password) {
-        super(username, password,DEFAULT_SALT);
+        super(username, password);
     }
 
+    public Administrator() {
+    }
 
     @Override
     public String toString() {

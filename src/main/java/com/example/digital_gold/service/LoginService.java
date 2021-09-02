@@ -32,9 +32,23 @@ public class LoginService {
         if(hashPassword.equals(storedHash)){
             token = UUID.randomUUID().toString();
             //todo token opslaan in database
-
 //            tokenDatabase.insertUsernameWithHash(token, username); // DAO komen voor opslaan naam methode komt natuurlijk niet overeen
         }
         return token;
     }
+    public String loginAdministrator(String username, String password) {
+        String token = null;
+        String savedSalt = rootRepository.findAdministratorSalt(username);
+        String hashPassword = hashService.hash(password + savedSalt);
+        String storedHash = rootRepository.findAdministratorHashPassword(username);
+
+        // als hash en stored hash overeen komen moet een token gegenereerd worden
+        if(hashPassword.equals(storedHash)){
+            token = UUID.randomUUID().toString();
+            //todo token opslaan in database
+//            tokenDatabase.insertUsernameWithHash(token, username); // DAO komen voor opslaan naam methode komt natuurlijk niet overeen
+        }
+        return token;
+    }
+
 }

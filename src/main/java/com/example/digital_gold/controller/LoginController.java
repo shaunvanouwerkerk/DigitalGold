@@ -39,5 +39,15 @@ public class LoginController {
             return ResponseEntity.badRequest().body("Token not created");
         }
     }
+    @PutMapping("/login/administrator")
+    public ResponseEntity<?> loginAdministrator(@RequestParam String username, @RequestParam String password) {
+        String token = loginService.loginAdministrator(username,password);
+
+        if(token != null) {
+            return ResponseEntity.created(URI.create("/login")).body("Token created" + token);
+        } else {
+            return ResponseEntity.badRequest().body("Token not created");
+        }
+    }
 
 }

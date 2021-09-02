@@ -21,7 +21,7 @@ public class JdbcCustomerDao implements CustomerDao {
 
     private PreparedStatement insertCustomerStatement(Customer customer, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into customer_table (username, password, firstName, prefix, lastName, dateOfBirth, bsn, " +
+                "insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, " +
                         "houseNumber, streetName, zipCode, city, emailAddress, salt) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )"
         );
         preparedStatement.setString(1, customer.getUsername());

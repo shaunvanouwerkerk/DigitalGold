@@ -1,7 +1,7 @@
 package com.example.digital_gold.controller;
 
 /**
- * @author David Truijens
+ * @author David Truijens / Shaun van Ouwerkerk
  * Methode register Customer is endpoint voor registratie van een klant.
  * Benodigd: NoArgs constructors in Account en Customer
  * HTTP request: POST request met JSON body
@@ -9,6 +9,7 @@ package com.example.digital_gold.controller;
  */
 
 
+import com.example.digital_gold.domain.Administrator;
 import com.example.digital_gold.domain.Customer;
 import com.example.digital_gold.service.RegisterService;
 import org.slf4j.Logger;
@@ -36,6 +37,8 @@ public class RegisterController {
         logger.info("New RegisterController");
     }
 
+
+
     @PostMapping("/register")
     public ResponseEntity<?> registerCustomer(@Valid @RequestBody Customer customer) {
         logger.info("Uit body via JSON aangemaakt: " + customer);
@@ -45,6 +48,18 @@ public class RegisterController {
             return ResponseEntity.created(URI.create("/register")).build();
         } else {
             return ResponseEntity.badRequest().body("Registration failed, username or emailaddress already exists");
+        }
+    }
+
+    @PostMapping("/register/administrator")
+    public ResponseEntity<?> registerAdministrator(@Valid @RequestBody Administrator administrator) {
+        logger.info("Uit body via JSON aangemaakt: " + administrator);
+        Administrator registeredAdministrator = registerService.register(administrator);
+
+        if(registeredAdministrator != null) {
+            return ResponseEntity.created(URI.create("/register")).build();
+        } else {
+            return ResponseEntity.badRequest().body("Registration failed, username already exists");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.digital_gold.service;
 
+import com.example.digital_gold.domain.Administrator;
 import com.example.digital_gold.domain.Customer;
 import com.example.digital_gold.helper.SaltMaker;
 import com.example.digital_gold.repository.JdbcCustomerDao;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.tags.form.AbstractDataBoundFormElementTag;
 
 import java.sql.Date;
 
@@ -42,6 +44,20 @@ public class RegisterService {
             return customer;
         }
     }
+    public Administrator register(Administrator administrator) {
+        String salt = saltMaker.generateSalt();
+        administrator.setSalt(salt);
+        String hashPassword = administrator.getPassword() + salt;
+        administrator.setPassword(hashService.hash(hashPassword));
+        if (rootRepository.findAdministratorByUsername(administrator.getUsername())){
+            return null;
+        } else {
+            rootRepository.saveAdministrator(administrator);
+            return administrator;
+        }
+    }
+
+
 
     public RootRepository getRootRepository() {
         return rootRepository;
