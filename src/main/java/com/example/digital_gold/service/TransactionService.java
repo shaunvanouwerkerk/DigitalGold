@@ -2,6 +2,7 @@ package com.example.digital_gold.service;
 
 
 import com.example.digital_gold.domain.Transaction;
+import com.example.digital_gold.repository.JdbcTransactionDao;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,7 @@ public class TransactionService {
         //TODO: amount van verkoper checken, balance van koper checken,
         // transactie opslaan in database, balances bijwerken, asset amounts bijwerken, transactiekosten boeken.
 
-        //return transaction;
-        return null;
+        return rootRepository.saveTransaction(transaction);
     }
 
     public Boolean checkAccountBalance(double transactionValue, String ibanBuyer) {

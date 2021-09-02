@@ -19,18 +19,24 @@ public class Transaction {
     private double transactionFee; //kosten in euro/dollar of percentage??
     private String ibanSell;
     private String ibanBuy;
-    private final int DEFAULT_ID = 0;
 
     private final Logger logger = LoggerFactory.getLogger(Transaction.class);
 
     public Transaction() {
+        this.transactionId = 0;
         transactionDate = LocalDateTime.now();
         logger.info("New empty transaction with timestamp: " + this.transactionDate);
     }
 
     public Transaction(LocalDateTime transactionDate, String assetCode, double assetAmount, double assetPrice,
                        double transactionFee, String ibanSell, String ibanBuy) {
-        this.transactionId = DEFAULT_ID; //ID komt uit de database
+        this(0,transactionDate,assetCode,assetAmount,assetPrice,transactionFee,ibanSell,ibanBuy);
+        logger.info("New transaction: " + this);
+    }
+
+    public Transaction(int transactionId, LocalDateTime transactionDate, String assetCode, double assetAmount, double assetPrice,
+                       double transactionFee, String ibanSell, String ibanBuy) {
+        this.transactionId = transactionId;
         this.transactionDate = transactionDate;
         this.assetCode = assetCode;
         this.assetAmount = assetAmount;
