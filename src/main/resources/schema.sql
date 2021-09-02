@@ -14,14 +14,14 @@ create table Customer
     emailAddress       varchar(255)   not null  unique,
     salt       varchar(255),
     status TINYINT NOT NULL,
-    iban varchar(9) NOT NULL
+    iban varchar(20) NOT NULL
     );
 
 create table Administrator
 (
     `userName` VARCHAR(200) NOT NULL primary key ,
     `password` VARCHAR(200) NOT NULL,
-    `salt` VARCHAR(200) NOT NULL
+    `salt` VARCHAR(200)
 );
 
 create table BankAccount
@@ -64,7 +64,8 @@ create table AssetPrice
 );
 create table PortfolioHistory
 (
-    `userName` VARCHAR(200) NOT NULL PRIMARY KEY ,
-    `date` DATE NOT NULL PRIMARY KEY ,
-    `totalValue` DECIMAL(2) NOT NULL
+    `userName` VARCHAR(200) NOT NULL ,
+    `date` DATE NOT NULL ,
+    `totalValue` DECIMAL(2) NOT NULL,
+    PRIMARY KEY (`userName`, `date`)
 );
