@@ -1,6 +1,7 @@
 package com.example.digital_gold.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @author Fiona Gray
@@ -57,5 +58,18 @@ public class AssetPrice {
                 ", price=" + price +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AssetPrice that = (AssetPrice) o;
+        return Double.compare(that.price, price) == 0 && Objects.equals(asset, that.asset) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(asset, price, date);
     }
 }

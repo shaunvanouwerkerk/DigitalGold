@@ -1,5 +1,6 @@
 package com.example.digital_gold.repository;
 
+import com.example.digital_gold.domain.Asset;
 import com.example.digital_gold.domain.AssetPrice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,38 +29,40 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
 
     private PreparedStatement insertAssetPriceStatement(AssetPrice assetPrice, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into AssetPrice (assetCode, price, date) values (?, ?, ?)");
+                "insert into AssetPrice (assetCode, date, price) values (?, ?, ?)");
         preparedStatement.setString(1, assetPrice.getAsset().getAssetCode());
-        preparedStatement.setDouble(2, assetPrice.getPrice());
-        preparedStatement.setObject(3, assetPrice.getDate());
+        preparedStatement.setObject(2, assetPrice.getDate());
+        preparedStatement.setDouble(3, assetPrice.getPrice());
         return preparedStatement;
     }
 
     @Override
-    public void saveAssetPrice(AssetPrice assetPrice) {
+    public AssetPrice saveAssetPrice(AssetPrice assetPrice) {
         jdbcTemplate.update(connection -> insertAssetPriceStatement(assetPrice, connection));
+        return assetPrice;
     }
 
-    // todo throws SQLexception?
+    //TODO throws SQLexception?
+    //TODO parameter Asset of String assetCode?
     @Override
     public AssetPrice findPriceByAssetCode(String assetCode) {
-        String sql = "Select 1 from AssetPrice where assetCode = ?";
-        return jdbcTemplate.queryForObject(sql, new JdbcAssetPriceDao.AssetPriceRowMapper(), assetCode);
+        String sql = "Select * from AssetPrice where assetCode = ?";
+        return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
     }
 
-    // todo AssetList findAllAvailableAssets() methode schrijven met SQL view?
+    //TODO AssetList findAllAvailableAssets() methode schrijven met SQL view?
 
-    // todo methode findAssetPriceByAssetCodeAndDate() schrijven?
+    //TODO methode findAssetPriceByAssetCodeAndDate() schrijven?
 
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
 
         @Override
         public AssetPrice mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
+            Asset asset = null;
             double price = resultSet.getDouble("price");
             LocalDate date = resultSet.getDate("date").toLocalDate();
-            AssetPrice assetPrice = new AssetPrice(price, date);
-            assetPrice.setAsset(null);
+            AssetPrice assetPrice = new AssetPrice(asset, price, date);
             return assetPrice;
         }
     }

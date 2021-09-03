@@ -35,14 +35,15 @@ public class JdbcAssetDao implements AssetDao {
     }
 
     @Override
-    public void saveAsset(Asset asset) {
+    public Asset saveAsset(Asset asset) {
         jdbcTemplate.update(connection -> insertAssetStatement(asset, connection));
+        return asset;
     }
 
-    // todo throws SQLexception?
+    //todo throws SQLexception?
     @Override
     public Asset findByAssetCode(String assetCode) {
-        String sql = "Select 1 from Asset where assetCode = ?";
+        String sql = "Select * from Asset where assetCode = ?";
         return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetCode);
     }
 

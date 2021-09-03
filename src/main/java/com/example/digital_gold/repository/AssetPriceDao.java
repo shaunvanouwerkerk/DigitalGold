@@ -1,5 +1,6 @@
 package com.example.digital_gold.repository;
 
+import com.example.digital_gold.domain.Asset;
 import com.example.digital_gold.domain.AssetPrice;
 
 /**
@@ -8,7 +9,7 @@ import com.example.digital_gold.domain.AssetPrice;
 
 public interface AssetPriceDao {
 
-    void saveAssetPrice(AssetPrice assetPrice);
+    AssetPrice saveAssetPrice(AssetPrice assetPrice);
     AssetPrice findPriceByAssetCode(String assetCode);
 
 }

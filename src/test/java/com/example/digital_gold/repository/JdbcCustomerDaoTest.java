@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles ("test")
 public class JdbcCustomerDaoTest {
 
+    // todo customerdao als attribuut meegeven ipv jdbc
     private JdbcCustomerDao jdbcCustomerDaoTest;
 
     @Autowired
