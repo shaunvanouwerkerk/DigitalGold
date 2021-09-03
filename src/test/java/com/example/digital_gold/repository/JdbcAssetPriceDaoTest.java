@@ -39,7 +39,6 @@ class JdbcAssetPriceDaoTest {
         assertThat(actualAssetPrice).isEqualTo(testAssetPrice);
     }
 
-    // todo uitzoeken waarom hij column assetCode + price niet vindt
     @Test
     void findPriceByAssetCode() {
         AssetPrice expected = new AssetPrice(null, 3965.20, LocalDate.parse("2021-09-03"));

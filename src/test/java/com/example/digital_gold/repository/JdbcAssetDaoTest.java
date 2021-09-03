@@ -35,7 +35,6 @@ class JdbcAssetDaoTest {
         assertThat(actualAsset).isEqualTo(testAsset);
     }
 
-    // todo uitzoeken waarom hij column assetCodeniet vindt
     @Test
     public void findByAssetCode() {
         Asset actual = assetDaoTest.findByAssetCode("BTC");
