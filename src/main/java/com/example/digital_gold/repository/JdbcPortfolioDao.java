@@ -27,7 +27,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     private PreparedStatement insertPortfolioAssetStatement(RootRepository.PortfolioDatabase portfolioDatabase,
                                                             Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into portfolio_table (username, assetCode, amount) values (?,?,?)");
+                "insert into portfolio (username, assetCode, amount) values (?,?,?)");
         preparedStatement.setString(1, portfolioDatabase.getUsername());
         preparedStatement.setString(2, portfolioDatabase.getAssetCode());
         preparedStatement.setDouble(3, portfolioDatabase.getAmount());
@@ -37,7 +37,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     private PreparedStatement updatePortfolioAssetStatement(RootRepository.PortfolioDatabase portfolioDatabase,
                                                             Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE portfolio_table Set amount = ? WHERE username = ? AND assetCode = ?");
+                "UPDATE portfolio Set amount = ? WHERE username = ? AND assetCode = ?");
         preparedStatement.setDouble(1, portfolioDatabase.getAmount());
         preparedStatement.setString(2, portfolioDatabase.getUsername());
         preparedStatement.setString(3, portfolioDatabase.getAssetCode());
@@ -47,7 +47,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     private PreparedStatement deletePortfolioAssetStatement(RootRepository.PortfolioDatabase portfolioDatabase,
                                                             Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "DELETE FROM portfolio_table WHERE username = ? AND assetCode = ?;");
+                "DELETE FROM portfolio WHERE username = ? AND assetCode = ?;");
         preparedStatement.setString(1, portfolioDatabase.getUsername());
         preparedStatement.setString(2, portfolioDatabase.getAssetCode());
         return preparedStatement;

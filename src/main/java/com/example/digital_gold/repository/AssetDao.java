@@ -8,7 +8,8 @@ import com.example.digital_gold.domain.Asset;
 
 public interface AssetDao {
 
-    // todo eventueel returntype Asset meegeven aan save()
-    void saveAsset(Asset asset);
+    Asset saveAsset(Asset asset);
     Asset findByAssetCode(String assetCode);
+
+    // todo evt. deleteAsset/updateAsset
 }

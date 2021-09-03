@@ -23,3 +23,5 @@ INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('ICP', 'In
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('WBTC', 'Wrapped Bitcoin', 'Beschrijving ');
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('MATIC', 'Polygon', 'Beschrijving');
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('VET', 'VeChain', 'Beschrijving');
+
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-03', 3965.20);

@@ -55,11 +55,11 @@ public class JdbcCustomerDao implements CustomerDao {
     }
 
     public boolean findCustomerByUsername(String username) {
-        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE username = ?)", Boolean.class, username);
+        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer WHERE username = ?)", Boolean.class, username);
     }
 
     public boolean findCustomerByEmailAddress(String emailAddress) {
-        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer_table WHERE emailAddress = ?)", Boolean.class, emailAddress);
+        return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer WHERE emailAddress = ?)", Boolean.class, emailAddress);
     }
 
     /**
@@ -67,13 +67,13 @@ public class JdbcCustomerDao implements CustomerDao {
      */
     @Override
     public String findCustomerSalt(String username) {
-        String sql = "SELECT salt FROM customer_table WHERE username = ?";
+        String sql = "SELECT salt FROM customer WHERE username = ?";
         return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
     }
 
     @Override
     public String findCustomerHashPassword(String username) {
-        String sql = "SELECT password FROM customer_table WHERE username = ?";
+        String sql = "SELECT password FROM customer WHERE username = ?";
         return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
     }
 }
