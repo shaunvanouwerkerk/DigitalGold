@@ -43,7 +43,6 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
     }
 
     //TODO throws SQLexception?
-    //TODO parameter Asset of String assetCode?
     @Override
     public AssetPrice findPriceByAssetCode(String assetCode) {
         String sql = "Select * from AssetPrice where assetCode = ?";
