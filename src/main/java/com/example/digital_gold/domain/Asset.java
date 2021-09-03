@@ -1,17 +1,23 @@
 package com.example.digital_gold.domain;
 
+import java.util.Objects;
+
+/**
+ * @author Fiona Gray
+ * */
+
 public class Asset {
     private String assetCode;
     private String assetName;
     private String description;
 
-    public Asset() {
-    }
-
     public Asset(String assetCode, String assetName, String description) {
         this.assetCode = assetCode;
         this.assetName = assetName;
         this.description = description;
+    }
+
+    public Asset() {
     }
 
     public String getAssetCode() {
@@ -47,4 +53,16 @@ public class Asset {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Asset asset = (Asset) o;
+        return Objects.equals(assetCode, asset.assetCode) && Objects.equals(assetName, asset.assetName) && Objects.equals(description, asset.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(assetCode, assetName, description);
+    }
 }

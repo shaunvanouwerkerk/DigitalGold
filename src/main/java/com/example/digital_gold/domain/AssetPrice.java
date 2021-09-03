@@ -2,23 +2,32 @@ package com.example.digital_gold.domain;
 
 import java.time.LocalDate;
 
+/**
+ * @author Fiona Gray
+ * */
+
 public class AssetPrice {
 
     private Asset asset;
     private double price;
     private LocalDate date;
 
-    public AssetPrice() {
-    }
-
+    // todo uitzoeken of deze constructor private/public moet zijn
     public AssetPrice(Asset asset, double price, LocalDate date) {
         this.asset = asset;
         this.price = price;
         this.date = date;
     }
 
+    public AssetPrice(double price, LocalDate date) {
+        this(null, price, date);
+    }
+
     public Asset getAsset() {
         return asset;
+    }
+
+    public AssetPrice() {
     }
 
     public void setAsset(Asset asset) {
