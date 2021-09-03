@@ -27,7 +27,7 @@ create table Administrator
 create table BankAccount
 (
     `iban` VARCHAR(9) NOT NULL primary key,
-    `balance` DECIMAL(2) NOT NULL
+    `balance` DOUBLE NOT NULL
 
 );
 
@@ -42,7 +42,7 @@ create table Portfolio
 (
     `userName` VARCHAR(200) NOT NULL PRIMARY KEY ,
     `assetCode` VARCHAR(9) NOT NULL,
-    `amount` DECIMAL(2) NOT NULL
+    `amount` DOUBLE NOT NULL
 );
 
 create table Transaction
@@ -51,21 +51,21 @@ create table Transaction
     `assetCode` VARCHAR(9) NOT NULL,
     `ibanSell` VARCHAR(9) NOT NULL,
     `ibanBuy` VARCHAR(9) NOT NULL,
-    `amount` DECIMAL(2) NOT NULL,
-    `sellingPrice` DECIMAL(2) NOT NULL,
-    `transactionCost` DECIMAL(2) NOT NULL,
+    `amount` DOUBLE NOT NULL,
+    `sellingPrice` DOUBLE NOT NULL,
+    `transactionCost` DOUBLE NOT NULL,
     `date` DATE NOT NULL
 );
 create table AssetPrice
 (
     `assetCode` VARCHAR(9) NOT NULL PRIMARY KEY ,
     `date` DATE NOT NULL,
-    `price` DECIMAL(2) NOT NULL
+    `price` DOUBLE NOT NULL
 );
 create table PortfolioHistory
 (
     `userName` VARCHAR(200) NOT NULL ,
     `date` DATE NOT NULL ,
-    `totalValue` DECIMAL(2) NOT NULL,
+    `totalValue` DOUBLE NOT NULL,
     PRIMARY KEY (`userName`, `date`)
 );

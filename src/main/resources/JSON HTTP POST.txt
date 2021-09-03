@@ -39,3 +39,11 @@
 "ibanSell":"NL64INGB00055778811",
 "ibanBuy":"NL52RABO00022772233"
 }
+
+//Postman
+//JSON body voor genereren customer in DigitalGold project
+//HTTP POST request op endpoint "/register/administrator
+{
+	"username":"username",
+	"password":"password"
+}
