@@ -1,31 +1,6 @@
 //Postman
 //JSON body voor genereren customer in DigitalGold project
 //HTTP POST request op endpoint "/register"
-
-{
-	"username":"username",
-	"password":"password",
-	"fullName":
-	{
-		"firstName":"firstName",
-		"prefix":"prefix",
-		"lastName":"lastName"
-	},
-	"address":
-	{
-		"houseNumber":houseNumber,
-		"streetName":"streetName",
-		"zipCode":"zipCode",
-		"city":"city"
-	},
-	"customerDetails":
-	{
-		"dateOfBirth":"dateOfBirth",
-		"bsn":"bsn",
-		"emailaddress":"emailaddres"
-	}
-}
-
 //Voorbeeld met data:
 
 {
@@ -51,3 +26,16 @@
   		"emailaddress":"pietje@provider.nl"
      }
   }
+
+  //Postman
+  //JSON body voor genereren transactie in DigitalGold project
+  //HTTP POST request op endpoint "/transaction"
+  //Voorbeeld met data:
+
+{"assetCode":"BTC",
+"assetAmount":"0.23",
+"assetPrice":"43500.0",
+"transactionFee":"0.01",
+"ibanSell":"NL64INGB00055778811",
+"ibanBuy":"NL52RABO00022772233"
+}
