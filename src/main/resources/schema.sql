@@ -26,7 +26,7 @@ create table Administrator
 
 create table BankAccount
 (
-    `iban` VARCHAR(9) NOT NULL primary key,
+    `iban` VARCHAR(20) NOT NULL primary key,
     `balance` DOUBLE NOT NULL
 
 );
@@ -50,8 +50,8 @@ create table Transaction
 (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `assetCode` VARCHAR(9) NOT NULL,
-    `ibanSell` VARCHAR(9) NOT NULL,
-    `ibanBuy` VARCHAR(9) NOT NULL,
+    `ibanSell` VARCHAR(20) NOT NULL,
+    `ibanBuy` VARCHAR(20) NOT NULL,
     `amount` DOUBLE NOT NULL,
     `sellingPrice` DOUBLE NOT NULL,
     `transactionCost` DOUBLE NOT NULL,
