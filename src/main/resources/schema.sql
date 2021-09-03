@@ -42,7 +42,8 @@ create table Portfolio
 (
     `userName` VARCHAR(200) NOT NULL PRIMARY KEY ,
     `assetCode` VARCHAR(9) NOT NULL,
-    `amount` DOUBLE NOT NULL
+    `amount` DOUBLE NOT NULL,
+    PRIMARY KEY (`userName`, `assetCode`)
 );
 
 create table Transaction
