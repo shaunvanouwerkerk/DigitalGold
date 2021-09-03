@@ -1,14 +1,12 @@
 package com.example.digital_gold.repository;
 
-import com.example.digital_gold.domain.Administrator;
-import com.example.digital_gold.domain.Asset;
-import com.example.digital_gold.domain.AssetPrice;
-import com.example.digital_gold.domain.Customer;
-import com.example.digital_gold.domain.Transaction;
+import com.example.digital_gold.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 @Repository
 public class RootRepository {
@@ -20,15 +18,17 @@ public class RootRepository {
     private TransactionDao transactionDao;
     private AssetDao assetDao;
     private AssetPriceDao assetPriceDao;
+    private PortfolioDao portfolioDao;
 
     @Autowired
     public RootRepository(CustomerDao customerDao, AdministratorDao administratorDao, TransactionDao transactionDao,
-                          AssetDao assetDao, AssetPriceDao assetPriceDao) {
+                          AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao) {
         this.customerDao = customerDao;
         this.administratorDao = administratorDao;
         this.transactionDao = transactionDao;
         this.assetDao = assetDao;
         this.assetPriceDao = assetPriceDao;
+        this.portfolioDao = portfolioDao;
         logger.info("New RootRepository");
     }
 
@@ -67,4 +67,45 @@ public class RootRepository {
 
     public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
 
+    public Portfolio savePortfolio (Portfolio portfolio){
+        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
+                    entry.getKey().getAssetCode(), entry.getValue());
+            portfolioDao.addPortfolioAsset(portfolioDatabase);
+        }
+        return portfolio;
+    }
+
+    public Portfolio updatePortfolio (Portfolio portfolio){
+        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
+                    entry.getKey().getAssetCode(), entry.getValue());
+            portfolioDao.updatePortfolioAsset(portfolioDatabase);
+        }
+        return portfolio;
+    }
+
+    static class PortfolioDatabase {
+        String username;
+        String assetCode;
+        double amount;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getAssetCode() {
+            return assetCode;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public PortfolioDatabase(String username, String assetCode, double amount) {
+            this.username = username;
+            this.assetCode = assetCode;
+            this.amount = amount;
+        }
+    }
 }

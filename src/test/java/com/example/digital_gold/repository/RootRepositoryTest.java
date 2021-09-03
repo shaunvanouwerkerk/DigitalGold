@@ -32,8 +32,8 @@ class RootRepositoryTest {
         Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
                 testadress, testcustomerDetails);
 
-        Asset testAsset01 = new Asset("DGC");
-        Asset testAsset02 = new Asset("ETH");
+        Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
+        Asset testAsset02 = new Asset("ETH", "Ethereum", "Beschrijving");
 
         HashMap<Asset, Double> testAssetsMap = new HashMap();
 
@@ -54,8 +54,8 @@ class RootRepositoryTest {
             Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
                     testadress, testcustomerDetails);
 
-            Asset testAsset01 = new Asset("DGC");
-            Asset testAsset02 = new Asset("ETH");
+            Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
+            Asset testAsset02 = new Asset("ETH", "Ethereum", "Beschrijving");
 
             HashMap<Asset, Double> testAssetsMap = new HashMap();
 
