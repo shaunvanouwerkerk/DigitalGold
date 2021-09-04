@@ -32,6 +32,13 @@ public class TransactionService {
     public Transaction executeTransaction(Transaction transaction){
         //TODO: amount van verkoper checken, balance van koper checken,
         // transactie opslaan in database, balances bijwerken, asset amounts bijwerken, transactiekosten boeken.
+        //waarde van de transactie berekenen:
+        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
+        //checken of koper genoeg saldo heeft:
+        checkAccountBalance(transactionValue,transaction.getIbanBuy());
+
+        //checken of de verkoper genoeg assets heeft:
+
 
         return rootRepository.saveTransaction(transaction);
     }
