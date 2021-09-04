@@ -1,8 +1,8 @@
 package com.example.digital_gold.service;
 
-
+import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Transaction;
-import com.example.digital_gold.repository.JdbcTransactionDao;
+import com.example.digital_gold.helper.TransactionFeeHelper;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
  */
 
 //TODO: check of AuthenticatorService nodig is voor transactie.
-// Check of Helper nodig is voor berekenen/afhandelen transactiekosten.
 // Berekenen we transactiekosten in front-end al? Lijkt logisch, of tonen we alleen het percentage transactiekosten?
 
 @Service
 public class TransactionService {
 
     private RootRepository rootRepository;
+    private TransactionFeeHelper transactionFeeHelper;
 
     private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
@@ -29,27 +29,45 @@ public class TransactionService {
         this.rootRepository = rootRepository;
     }
 
-    public Transaction executeTransaction(Transaction transaction){
-        //TODO: amount van verkoper checken, balance van koper checken,
-        // transactie opslaan in database, balances bijwerken, asset amounts bijwerken, transactiekosten boeken.
-        //waarde van de transactie berekenen:
-        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
-        //checken of koper genoeg saldo heeft:
-        checkAccountBalance(transactionValue,transaction.getIbanBuy());
+    public Transaction processTransaction(Transaction transaction){
+        TransactionFeeHelper feeSplit = transactionFeeHelper.splitTransactionFee(transaction);
+        double valueBuyer = feeSplit.getFeeBuyer() + (transaction.getAssetPrice() * transaction.getAssetAmount());
+        double valueSeller = feeSplit.getFeeSeller();
 
+        //checken of koper genoeg saldo heeft:
+        if(checkAccountBalance(valueBuyer,transaction.getIbanBuy())) {
+            logger.info("Buyer has sufficient account balance");
+        } else {
+            logger.info("Buyer has insufficient account balance!");
+            return null;
+        }
+
+        //checken of verkoper genoeg saldo heeft:
+        if(checkAccountBalance(valueSeller,transaction.getIbanSell())) {
+            logger.info("Seller has sufficient account balance");
+        } else {
+            logger.info("Seller has insufficient account balance!");
+            return null;
+        }
+        //TODO: amount van verkoper checken
+        // balances bijwerken, asset amounts bijwerken.
         //checken of de verkoper genoeg assets heeft:
 
 
         return rootRepository.saveTransaction(transaction);
     }
 
-    public Boolean checkAccountBalance(double transactionValue, String ibanBuyer) {
-        //TODO: BankAccount saldo van koper vergelijken met transactiewaarde. Methode nodig die saldo van IBAN ophaalt.
 
-        return false;
+
+
+    public Boolean checkAccountBalance(double value, String iban) {
+        //TODO: Methode nodig die Bankaccount via IBAN ophaalt. Constructor call vervangen!!
+        BankAccount bankAccount = new BankAccount();//rootRepository.getBankAccountByIban(iban);
+        double accountBalance = bankAccount.getBalance();
+        return (accountBalance >= value);
     }
 
-    public Boolean checkAssetAmount(double transactionAmount, String userName, String assetCode) {
+    public Boolean checkAssetAmount(double amount, String userName, String assetCode) {
         //TODO: Portfolio asset amount van verkoper vergelijken met transactie asset aantal.
         // uit transactie iban van verkoper halen en via Customer checken welke username om
         // in de juiste portfolio te kijken bij de juiste asset naar de beschikbare hoeveelheid
@@ -57,15 +75,13 @@ public class TransactionService {
         return false;
     }
 
-    public void adjustAccountBalances(double transactionValue,double transactionCost, String ibanBuyer, String ibanSeller){
+    public void adjustAccountBalances(Transaction transaction, TransactionFeeHelper transactionFeeHelper){
         //TODO: saldo van koper en verkoper aanpassen
     }
 
-    public void adjustPortfolioAmount() {
+    public void adjustPortfolioAmount(Transaction transaction) {
         //TODO: aantal van de asset bijwerken in portfolio van koper en verkoper.
     }
-
-
 
     public RootRepository getRootRepository() {
         return rootRepository;
