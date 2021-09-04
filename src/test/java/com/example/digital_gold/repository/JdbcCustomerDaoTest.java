@@ -68,4 +68,18 @@ public class JdbcCustomerDaoTest {
         Boolean expected = false;
         assertThat(actual).isEqualTo(expected);
     }
+
+//    @Test
+//    void findAndReturnCustomerByUsername() {
+//        FullName testfullname = new FullName("Tester", "van", "Tester");
+//        Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
+//        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
+//                "tester1@gmail.com", "Nl123456789" );
+//        Customer expected = new Customer("TestUser01", "TestPassword", "testzoutje",true, testfullname,
+//                testadress, testcustomerDetails);
+////        Customer databaseCustomer = jdbcCustomerDaoTest.save(expected);
+//        Customer actual = jdbcCustomerDaoTest.findAndReturnCustomerByUsername("TestUser01");
+//        assertThat(actual).isEqualTo(expected);
+//
+//    }
 }

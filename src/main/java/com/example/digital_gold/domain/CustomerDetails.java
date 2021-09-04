@@ -57,7 +57,8 @@ public class CustomerDetails {
     public String toString() {
         return "CustomerDetails{" +
                 "dateOfBirth=" + dateOfBirth +
-                ", bsn=" + bsn +
+                ", bsn='" + bsn + '\'' +
+                ", iban='" + iban + '\'' +
                 ", emailaddress='" + emailaddress + '\'' +
                 '}';
     }

@@ -1,7 +1,10 @@
 package com.example.digital_gold.repository;
 
+import com.example.digital_gold.domain.Address;
 import com.example.digital_gold.domain.Customer;
-import org.slf4j.LoggerFactory;
+import com.example.digital_gold.domain.CustomerDetails;
+import com.example.digital_gold.domain.FullName;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -76,4 +79,40 @@ public class JdbcCustomerDao implements CustomerDao {
         String sql = "SELECT password FROM customer WHERE username = ?";
         return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
     }
-}
+    @Override
+    public Customer findAndReturnCustomerByUsername (String username){
+        String sql = "SELECT * FROM customer WHERE username = ?";
+        return jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), username);
+    }
+    private static class CustomerRowMapper implements RowMapper<Customer>{
+
+        @Override
+        public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String firstname = resultSet.getString("firstname");
+            String prefix = resultSet.getString("prefix");
+            String lastname = resultSet.getString("lastname");
+            Date dateOfBirth = resultSet.getDate("dateOfBirth");
+            String bsn = resultSet.getString("bsn");
+            Integer houseNumber = resultSet.getInt("housenumber");
+            String streetName = resultSet.getString("streetName");
+            String zipcode = resultSet.getString("zipcode");
+            String city = resultSet.getString("city");
+            String emailAddress = resultSet.getString("emailaddress");
+            String salt = resultSet.getString("salt");
+            String iban = resultSet.getString("iban");
+            Boolean status = resultSet.getBoolean("status");
+            FullName fullname= new FullName(firstname,prefix,lastname);
+            Address address = new Address(houseNumber,streetName,zipcode,city);
+            CustomerDetails customerDetails = new CustomerDetails(dateOfBirth,bsn,emailAddress,iban);
+            Customer customer = new Customer(username,password,salt,status,fullname,address,customerDetails);
+
+            return customer;
+        }
+    }
+
+
+
+    }
+

@@ -8,5 +8,6 @@ public interface CustomerDao {
     boolean findCustomerByUsernameAndEmail (String username, String emailAddress);
     String findCustomerSalt (String username);
     String findCustomerHashPassword (String username);
+    Customer findAndReturnCustomerByUsername (String username);
 
 }

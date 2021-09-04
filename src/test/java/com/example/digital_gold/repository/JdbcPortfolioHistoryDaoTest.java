@@ -39,7 +39,7 @@ class JdbcPortfolioHistoryDaoTest {
         Customer testCustomer = new Customer("TestUser200", "TestPassword", "zoutje",
                 new FullName("Tester", "van", "Tester"),
                 new Address(1, "TestStraat", "1111AA", "TestCity"),
-                new CustomerDetails(Date.valueOf("1900-01-01"),"753654852","tester@gmail.com"));
+                new CustomerDetails(Date.valueOf("1900-01-01"),"753654852","tester@gmail.com","Nl181234567890"));
         PortfolioHistory testPortfolioHistory = new PortfolioHistory(testCustomer, LocalDate.now(),254753.53);
         int expected = 1;
         int actual = porfolioHistoryDaoTest.savePortfolioValue(testPortfolioHistory);
