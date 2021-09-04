@@ -110,7 +110,7 @@ public class RootRepository {
 
     public Portfolio getPortfolioForCustomer(String username) {
         List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
-        Customer customer = null; //TODO get customer from DB
+        Customer customer = customerDao.findAndReturnCustomerByUsername(username);
         Map<Asset, Double> assetMap = new HashMap<>();
         for (JdbcPortfolioDao.PortfolioDatabase p : tempList) {
             assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);

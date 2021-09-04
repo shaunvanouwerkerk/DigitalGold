@@ -61,7 +61,7 @@ class PortfolioOverviewServiceTest {
         Customer testCustomer300 = new Customer("TestUser105", "TestPassword", "zoutje",
                 new FullName("Tester", "van", "Tester"),
                 new Address(1, "TestStraat", "1111AA", "TestCity"),
-                new CustomerDetails(Date.valueOf("1900-01-01"),"753654852","tester@gmail.com"));
+                new CustomerDetails(Date.valueOf("1900-01-01"),"753654852","tester@gmail.com", "Nl123456789"));
         Asset testAsset001 = new Asset("DOGE", "Dogecoin", "Beschrijving");
         Asset testAsset002 = new Asset("ETH", "Ethereum", "Beschrijving");
         HashMap<Asset, Double> testAssetsMap = new HashMap();
