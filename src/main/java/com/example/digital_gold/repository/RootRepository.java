@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -19,16 +21,19 @@ public class RootRepository {
     private AssetDao assetDao;
     private AssetPriceDao assetPriceDao;
     private PortfolioDao portfolioDao;
+    private PortfolioHistoryDao portfolioHistoryDao;
 
     @Autowired
     public RootRepository(CustomerDao customerDao, AdministratorDao administratorDao, TransactionDao transactionDao,
-                          AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao) {
+                          AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao,
+                          PortfolioHistoryDao portfolioHistoryDao) {
         this.customerDao = customerDao;
         this.administratorDao = administratorDao;
         this.transactionDao = transactionDao;
         this.assetDao = assetDao;
         this.assetPriceDao = assetPriceDao;
         this.portfolioDao = portfolioDao;
+        this.portfolioHistoryDao = portfolioHistoryDao;
         logger.info("New RootRepository");
     }
 
@@ -94,5 +99,23 @@ public class RootRepository {
             result++;
         }
         return result;
+    }
+
+    public Portfolio getPortfolioForCustomer(String username) {
+        List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
+        Customer customer = null; //TODO get customer from DB
+        Map<Asset, Double> assetMap = new HashMap<>();
+        for (JdbcPortfolioDao.PortfolioDatabase p : tempList) {
+            assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);
+        }
+        return new Portfolio(null, assetMap);
+    }
+
+    public int savePortfolioValue (PortfolioHistory portfolioHistory) {
+        return portfolioHistoryDao.savePortfolioValue(portfolioHistory);
+    }
+
+    public List<PortfolioHistory> getPortfolioValuesForCustomer(String username) {
+        return portfolioHistoryDao.getPortfolioValuesByUserName(username);
     }
 }
