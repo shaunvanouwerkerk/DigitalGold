@@ -69,7 +69,7 @@ public class RootRepository {
 
     public Portfolio savePortfolio (Portfolio portfolio){
         for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
+            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.addPortfolioAsset(portfolioDatabase);
         }
@@ -78,34 +78,21 @@ public class RootRepository {
 
     public Portfolio updatePortfolio (Portfolio portfolio){
         for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
+            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.updatePortfolioAsset(portfolioDatabase);
         }
         return portfolio;
     }
 
-    static class PortfolioDatabase {
-        String username;
-        String assetCode;
-        double amount;
-
-        public String getUsername() {
-            return username;
+    public int deletePortfolio (Portfolio portfolio){
+        int result = 0;
+        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
+                    entry.getKey().getAssetCode(), entry.getValue());
+            portfolioDao.deletePortfolioAsset(portfolioDatabase);
+            result++;
         }
-
-        public String getAssetCode() {
-            return assetCode;
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-
-        public PortfolioDatabase(String username, String assetCode, double amount) {
-            this.username = username;
-            this.assetCode = assetCode;
-            this.amount = amount;
-        }
+        return result;
     }
 }

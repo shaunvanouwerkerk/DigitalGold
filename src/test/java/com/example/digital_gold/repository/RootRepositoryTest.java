@@ -45,31 +45,47 @@ class RootRepositoryTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-        @Test
-        void updatePortfolio() {
-            FullName testfullname = new FullName("PortfolioTester", "", "PortfolioTester");
-            Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
-            CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
-                    "PortfolioTester@gmail.com" );
-            Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
-                    testadress, testcustomerDetails);
+    @Test
+    void updatePortfolio() {
+        FullName testfullname = new FullName("PortfolioTester", "", "PortfolioTester");
+        Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
+        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"), "753654852",
+                "PortfolioTester@gmail.com");
+        Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
+                testadress, testcustomerDetails);
 
-            Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
-            Asset testAsset02 = new Asset("ETH", "Ethereum", "Beschrijving");
+        Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
+        Asset testAsset02 = new Asset("ETH", "Ethereum", "Beschrijving");
 
-            HashMap<Asset, Double> testAssetsMap = new HashMap();
+        HashMap<Asset, Double> testAssetsMap = new HashMap();
 
-            testAssetsMap.put(testAsset01, 1.00);
-            testAssetsMap.put(testAsset02, 1.00);
+        testAssetsMap.put(testAsset01, 1.00);
+        testAssetsMap.put(testAsset02, 1.00);
 
-            Portfolio expected = new Portfolio(testUser005, testAssetsMap);
-            Portfolio actual = rootRepository.updatePortfolio(expected);
-            assertThat(actual).isEqualTo(expected);
+        Portfolio expected = new Portfolio(testUser005, testAssetsMap);
+        Portfolio actual = rootRepository.updatePortfolio(expected);
+        assertThat(actual).isEqualTo(expected);
+    }
 
+    @Test
+    void deletePortfolio() {
+        FullName testfullname = new FullName("PortfolioTester", "", "PortfolioTester");
+        Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
+        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"), "753654852",
+                "PortfolioTester@gmail.com");
+        Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
+                testadress, testcustomerDetails);
 
+        Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
+        Asset testAsset02 = new Asset("ETH", "Ethereum", "Beschrijving");
 
+        HashMap<Asset, Double> testAssetsMap = new HashMap();
+        testAssetsMap.put(testAsset01, 5.00);
+        testAssetsMap.put(testAsset02, 2645.00);
 
-
-
+        Portfolio testPortfolio = new Portfolio(testUser005, testAssetsMap);
+        int expected = 2;
+        int actual = rootRepository.deletePortfolio(testPortfolio);
+        assertThat(actual).isEqualTo(expected);
     }
 }

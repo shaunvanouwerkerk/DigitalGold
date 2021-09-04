@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /*
@@ -28,27 +31,58 @@ class JdbcPortfolioDaoTest {
     }
 
     @Test
-    public void addPortfolioAsset() {
-        RootRepository.PortfolioDatabase expected = new RootRepository.PortfolioDatabase
-                ("TestUser001", " BTC", 5);
-        RootRepository.PortfolioDatabase actual = portfolioDaoTest.addPortfolioAsset(expected);
+    public void addPortfolioAssetTestRowsChanged() {
+        JdbcPortfolioDao.PortfolioDatabase testAsset = new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser100", "BTC", 5);
+        int expected = 1;
+        int actual = portfolioDaoTest.addPortfolioAsset(testAsset);
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void updatePortfolioAsset() {
-        RootRepository.PortfolioDatabase expected = new RootRepository.PortfolioDatabase
-                ("TestUser001", " BTC", 25);
-        RootRepository.PortfolioDatabase actual = portfolioDaoTest.updatePortfolioAsset(expected);
+        JdbcPortfolioDao.PortfolioDatabase expected = new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser101", "BTC", 25);
+        JdbcPortfolioDao.PortfolioDatabase actual = portfolioDaoTest.updatePortfolioAsset(expected);
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void deletePortfolioAsset() {
-        RootRepository.PortfolioDatabase expected = null;
-        RootRepository.PortfolioDatabase testDelete = new RootRepository.PortfolioDatabase
-                ("TestUser001", " BTC", 25);
-        RootRepository.PortfolioDatabase actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
+    public void deletePortfolioAssetInDB() {
+        JdbcPortfolioDao.PortfolioDatabase testDelete = new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser102", "ETH", 25);
+        int expected = 1;
+        int actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
+    }
+
+    @Test
+    public void deletePortfolioAssetNotInDB() {
+        int expected = 0;
+        JdbcPortfolioDao.PortfolioDatabase testDelete = new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser003", "ETH", 25);
+        int actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void getPortfolioAssetByUsername () {
+        List<JdbcPortfolioDao.PortfolioDatabase> expected = new ArrayList<>();
+        expected.add(new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser104", "BTC", 3.00));
+        List<JdbcPortfolioDao.PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser104");
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void getPortfolioAssetsByUsername () {
+        JdbcPortfolioDao.PortfolioDatabase testPortfolioDatabase1 =new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser105", "DOGE", 7566.00);
+        JdbcPortfolioDao.PortfolioDatabase testPortfolioDatabase2 =new JdbcPortfolioDao.PortfolioDatabase
+                ("TestUser105", "ETH", 5000.00);
+        List<JdbcPortfolioDao.PortfolioDatabase> expected = new ArrayList<>();
+        expected.add(testPortfolioDatabase1);
+        expected.add(testPortfolioDatabase2);
+        List<JdbcPortfolioDao.PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser105");
         assertThat(actual).isEqualTo(expected);
     }
 }
