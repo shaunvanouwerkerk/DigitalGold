@@ -12,6 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Fiona Gray
@@ -50,6 +54,14 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
     }
 
     //TODO AssetList findAllAvailableAssets() methode schrijven met SQL view?
+    @Override
+    public  List<AssetPrice> findAllAvailableAssets(LocalDate today) {
+        //String sql = "create view assetOverview AS (select assetCode, price from assetPrice where date = ?)";
+        //return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
+        String sql = "select * from assetPrice where date = ?";
+        return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
+    }
+
 
     //TODO methode findAssetPriceByAssetCodeAndDate() schrijven?
 
@@ -60,7 +72,7 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
         public AssetPrice mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             Asset asset = null;
             double price = resultSet.getDouble("price");
-            LocalDate date = resultSet.getDate("date").toLocalDate();
+            LocalDate date = LocalDate.parse(resultSet.getString("date"));
             AssetPrice assetPrice = new AssetPrice(asset, price, date);
             return assetPrice;
         }
