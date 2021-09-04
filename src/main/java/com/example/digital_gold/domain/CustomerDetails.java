@@ -13,14 +13,16 @@ public class CustomerDetails {
     @Size(min = 9, max = 9, message
             = "Ongeldig BSN")
     private String bsn;
+    private String iban;
     @NotBlank(message = "verplicht")
     @Email
     private String emailaddress;
 
-    public CustomerDetails(Date dateOfBirth, String bsn, String emailaddress) {
+    public CustomerDetails(Date dateOfBirth, String bsn, String emailaddress, String iban) {
         this.dateOfBirth = dateOfBirth;
         this.bsn = bsn;
         this.emailaddress = emailaddress;
+        this.iban = iban;
     }
 
     public Date getDateOfBirth() {
@@ -46,6 +48,10 @@ public class CustomerDetails {
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
     }
+
+    public String getIban() { return iban; }
+
+    public void setIban(String iban) { this.iban = iban; }
 
     @Override
     public String toString() {

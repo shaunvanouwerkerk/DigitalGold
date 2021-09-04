@@ -24,15 +24,15 @@ public class Customer extends Account {
 
     public Customer(){};
 
-    public Customer(String username, String password, String salt, FullName fullName, Address address, CustomerDetails customerDetails) {
-        super(username, password, salt);
+    public Customer(String username, String password, String salt, Boolean status, FullName fullName, Address address, CustomerDetails customerDetails) {
+        super(username, password, salt,status);
         this.fullName = fullName;
         this.address = address;
         this.customerDetails = customerDetails;
     }
 
     public Customer(String username, String password,FullName fullName, Address address, CustomerDetails customerDetails) {
-        super(username, password, DEFAULT_SALT);
+        super(username, password, DEFAULT_SALT, true);
         this.fullName = fullName;
         this.address = address;
         this.customerDetails = customerDetails;
@@ -61,6 +61,8 @@ public class Customer extends Account {
     public void setCustomerDetails(CustomerDetails customerDetails) {
         this.customerDetails = customerDetails;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

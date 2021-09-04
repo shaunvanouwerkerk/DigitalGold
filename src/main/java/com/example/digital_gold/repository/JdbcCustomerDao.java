@@ -22,7 +22,7 @@ public class JdbcCustomerDao implements CustomerDao {
     private PreparedStatement insertCustomerStatement(Customer customer, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, " +
-                        "houseNumber, streetName, zipCode, city, emailAddress, salt) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,? )"
+                        "houseNumber, streetName, zipCode, city, emailAddress, salt, iban, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,? )"
         );
         preparedStatement.setString(1, customer.getUsername());
         preparedStatement.setString(2, customer.getPassword());
@@ -37,6 +37,9 @@ public class JdbcCustomerDao implements CustomerDao {
         preparedStatement.setString(11, customer.getAddress().getCity());
         preparedStatement.setString(12, customer.getCustomerDetails().getEmailaddress());
         preparedStatement.setString(13, customer.getSalt());
+        preparedStatement.setString(14, customer.getCustomerDetails().getIban());
+        preparedStatement.setBoolean(15,customer.isStatus());
+
         return preparedStatement;
     }
 
@@ -62,9 +65,6 @@ public class JdbcCustomerDao implements CustomerDao {
         return jdbcTemplate.queryForObject("SELECT EXISTS(SELECT 1 FROM customer WHERE emailAddress = ?)", Boolean.class, emailAddress);
     }
 
-    /**
-     * @Author Shaun
-     */
     @Override
     public String findCustomerSalt(String username) {
         String sql = "SELECT salt FROM customer WHERE username = ?";

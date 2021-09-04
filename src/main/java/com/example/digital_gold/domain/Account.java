@@ -21,19 +21,22 @@ public abstract class Account {
             = "Wachtwoord moet tussen de 8 en 200 tekens zijn")
     protected String password;
     protected String salt;
+    protected boolean status;
 
     public Account(){};
 
-    public Account(String username, String password, String salt) {
+    public Account(String username, String password, String salt, boolean status) {
         this.username = username;
         this.password = password;
         this.salt = salt;
+        this.status = status;
     }
 
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
         this.salt = null;
+        this.status = true;
     }
 
     public String getUsername() {
@@ -59,6 +62,10 @@ public abstract class Account {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+    public boolean isStatus() { return status; }
+
+    public void setStatus(boolean status) { this.status = status; }
 
     @Override
     public boolean equals(Object o) {

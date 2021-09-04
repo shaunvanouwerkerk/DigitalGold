@@ -34,8 +34,8 @@ public class JdbcCustomerDaoTest {
         FullName testfullname = new FullName("Tester", "van", "Tester");
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
-                "tester@gmail.com" );
-        Customer testcustomer = new Customer("TestUser02", "TestPassword", "zoutje", testfullname,
+                "tester@gmail.com", "NL123456789" );
+        Customer testcustomer = new Customer("TestUser02", "TestPassword", "zoutje",true, testfullname,
                 testadress, testcustomerDetails);
         Customer actualcustomer = jdbcCustomerDaoTest.save(testcustomer);
         assertThat(actualcustomer).isEqualTo(testcustomer);
