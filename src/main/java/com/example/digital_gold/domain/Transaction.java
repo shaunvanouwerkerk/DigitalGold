@@ -17,7 +17,7 @@ public class Transaction {
     private String assetCode;
     private double assetAmount;
     private double assetPrice;
-    private double transactionFee; //kosten in euro/dollar of percentage??
+    private double transactionFee; //dit is het default percentage, in beheer van Admin
     private String ibanSell;
     private String ibanBuy;
 
@@ -83,6 +83,10 @@ public class Transaction {
 
     public String getIbanBuy() {
         return ibanBuy;
+    }
+
+    public void setTransactionFee(double transactionFee) {
+        this.transactionFee = transactionFee;
     }
 
     @Override

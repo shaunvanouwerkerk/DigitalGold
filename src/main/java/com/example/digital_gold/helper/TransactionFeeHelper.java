@@ -1,0 +1,83 @@
+package com.example.digital_gold.helper;
+
+
+import com.example.digital_gold.domain.Transaction;
+
+/**
+ * @author David Truijens
+ *
+ * Helper voor het verdelen van de transactiekosten tussen koper en verkoper
+ * Logica: Als IBAN_BANK == ibanBuy dan seller 100% fee
+ *          Als IBAN_BANK == ibanSell dan buyer 100% fee
+ *          anders seller 50% fee en buyer 50% fee
+ *
+ * Hier wordt ook de IBAN van de bank vastgelegd en de verdeling tussen klant transacties
+ * Beide onderhoudbaar door de Admin
+ */
+
+public class TransactionFeeHelper {
+
+    private String ibanBank = "NL00DIGO0000000001";
+    private double shareBuyer = 0.5;
+    private double shareSeller = 0.5;
+    private double feeBuyer;
+    private double feeSeller;
+
+
+    public TransactionFeeHelper(double feeBuyer, double feeSeller) {
+        this.feeBuyer = feeBuyer;
+        this.feeSeller = feeSeller;
+    }
+
+    public TransactionFeeHelper splitTransactionFee(Transaction transaction) {
+        double feeBuyer = 0, feeSeller = 0;
+        //waarde van de transactie berekenen:
+        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
+        //transactiekosten berekenen
+        double transactionCosts = transactionValue * transaction.getTransactionFee();
+        if(transaction.getIbanSell().equals(ibanBank)) {
+            feeBuyer = transactionCosts;
+        } else if (transaction.getIbanBuy().equals(ibanBank)) {
+            feeSeller = transactionCosts;
+        } else {
+            feeBuyer = transactionCosts * shareBuyer;
+            feeSeller = feeBuyer * shareSeller;
+        }
+        return new TransactionFeeHelper(feeBuyer,feeSeller);
+    }
+
+    public String getIbanBank() {
+        return ibanBank;
+    }
+
+    public void setIbanBank(String ibanBank) {
+        this.ibanBank = ibanBank;
+    }
+
+    public double getShareBuyer() {
+        return shareBuyer;
+    }
+
+    public void setShareBuyer(double shareBuyer) {
+        this.shareBuyer = shareBuyer;
+    }
+
+    public double getShareSeller() {
+        return shareSeller;
+    }
+
+    public void setShareSeller(double shareSeller) {
+        this.shareSeller = shareSeller;
+    }
+
+    public double getFeeBuyer() {
+        return feeBuyer;
+    }
+
+    public double getFeeSeller() {
+        return feeSeller;
+    }
+}
+
+
+

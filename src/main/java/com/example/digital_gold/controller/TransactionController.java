@@ -33,7 +33,7 @@ public class TransactionController {
     @PostMapping("/transaction")
     public ResponseEntity<?> processTransaction(@Valid @RequestBody Transaction transaction) {
         logger.info("Uit body via JSON aangemaakt: " + transaction);
-        Transaction requestedTransaction = transactionService.executeTransaction(transaction);
+        Transaction requestedTransaction = transactionService.processTransaction(transaction);
 
         if(requestedTransaction != null) {
             return ResponseEntity.created(URI.create("/transaction")).build();
