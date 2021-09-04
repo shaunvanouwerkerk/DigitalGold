@@ -53,8 +53,8 @@ public class JdbcTransactionDao implements TransactionDao{
     //TODO: getTransactionsByIban
     public List<Transaction> findTransactionsByIban(String iban) {
         String sql = "select * from transaction where ibanSell = ? OR ibanBuy = ?";
-        return jdbcTemplate.query(sql,new Object[]{iban},(rs,rowNum)-> new Transaction(
-                rs.getInt("transactionId"),
+        return jdbcTemplate.query(sql,new Object[]{iban,iban},(rs,rowNum)-> new Transaction(
+                rs.getInt("id"),
                 rs.getObject("date",LocalDateTime.class),
                 rs.getString("assetCode"),
                 rs.getDouble("amount"),

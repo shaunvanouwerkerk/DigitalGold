@@ -4,6 +4,7 @@ package com.example.digital_gold.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
 @author David Truijens
@@ -96,5 +97,18 @@ public class Transaction {
                 ", ibanSell='" + ibanSell + '\'' +
                 ", ibanBuy='" + ibanBuy + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return transactionId == that.transactionId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId);
     }
 }
