@@ -10,8 +10,8 @@ public class Administrator extends Account{
     private final Logger logger = LoggerFactory.getLogger(Administrator.class);
 
 
-    public Administrator(String username, String password, String salt) {
-        super(username, password, salt);
+    public Administrator(String username, String password, String salt, boolean status) {
+        super(username, password, salt, status);
     }
 
     public Administrator(String username, String password) {

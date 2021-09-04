@@ -28,8 +28,8 @@ class RootRepositoryTest {
         FullName testfullname = new FullName("PortfolioTester", "", "PortfolioTester");
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"), "753654852",
-                "PortfolioTester@gmail.com");
-        Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
+                "PortfolioTester@gmail.com", "NL123456789");
+        Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje",true, testfullname,
                 testadress, testcustomerDetails);
 
         Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");
@@ -50,8 +50,8 @@ class RootRepositoryTest {
             FullName testfullname = new FullName("PortfolioTester", "", "PortfolioTester");
             Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
             CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"753654852",
-                    "PortfolioTester@gmail.com" );
-            Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje", testfullname,
+                    "PortfolioTester@gmail.com", "NL123456789" );
+            Customer testUser005 = new Customer("TestUserTest35", "TestPassword", "zoutje",true, testfullname,
                     testadress, testcustomerDetails);
 
             Asset testAsset01 = new Asset("BTC", "Bitcoin", "Beschrijving");

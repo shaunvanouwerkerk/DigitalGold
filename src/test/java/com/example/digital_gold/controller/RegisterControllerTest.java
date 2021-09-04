@@ -39,7 +39,7 @@ public class RegisterControllerTest {
         FullName testfullname = new FullName("Tester", "van", "De Test");
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"987654321",
-                "tester@tester.tst" );
+                "tester@tester.tst" ,"NL 123456789");
         return new Customer("TestUser01", "TestPassword", testfullname, testadress, testcustomerDetails);
     }
 

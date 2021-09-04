@@ -23,7 +23,8 @@
      {
   		"dateOfBirth":"1965-01-01",
   		"bsn":"123456789",
-  		"emailaddress":"pietje@provider.nl"
+  		"emailaddress":"pietje@provider.nl",
+  		"iban":"NL18INGB1234567890"
      }
   }
 
