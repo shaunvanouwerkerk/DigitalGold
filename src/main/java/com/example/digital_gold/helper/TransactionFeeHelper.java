@@ -17,9 +17,9 @@ import com.example.digital_gold.domain.Transaction;
 
 public class TransactionFeeHelper {
 
-    private String ibanBank = "NL00DIGO0000000001";
-    private double shareBuyer = 0.5;
-    private double shareSeller = 0.5;
+    private static String ibanBank = "NL00DIGO0000000001";
+    private static double shareBuyer = 0.5;
+    private static double shareSeller = 0.5;
     private double feeBuyer;
     private double feeSeller;
 
@@ -29,7 +29,7 @@ public class TransactionFeeHelper {
         this.feeSeller = feeSeller;
     }
 
-    public TransactionFeeHelper splitTransactionFee(Transaction transaction) {
+    public static TransactionFeeHelper splitTransactionFee(Transaction transaction) {
         double feeBuyer = 0, feeSeller = 0;
         //waarde van de transactie berekenen:
         double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();

@@ -60,6 +60,7 @@ public class RootRepository {
     public String findCustomerHashPassword(String username){return customerDao.findCustomerHashPassword(username);}
     public String findAdministratorHashPassword(String username){return administratorDao.findAdministratorHashPassword(username);}
 
+    //TransactionDao
     public Transaction saveTransaction(Transaction transaction) {
         return transactionDao.saveTransaction(transaction);
     }

@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
     private RootRepository rootRepository;
-    private TransactionFeeHelper transactionFeeHelper;
 
     private final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
@@ -30,9 +29,9 @@ public class TransactionService {
     }
 
     public Transaction processTransaction(Transaction transaction){
-        TransactionFeeHelper feeSplit = transactionFeeHelper.splitTransactionFee(transaction);
-        double valueBuyer = feeSplit.getFeeBuyer() + (transaction.getAssetPrice() * transaction.getAssetAmount());
-        double valueSeller = feeSplit.getFeeSeller();
+        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
+        double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
+        double valueSeller = TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
 
         //checken of koper genoeg saldo heeft:
         if(checkAccountBalance(valueBuyer,transaction.getIbanBuy())) {
