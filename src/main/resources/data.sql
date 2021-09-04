@@ -25,6 +25,8 @@ INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('MATIC', '
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('VET', 'VeChain', 'Beschrijving');
 
 INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-03', 3965.20);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-04', 3406.78);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-04', 42273.5);
 
 insert into portfolio (username, assetCode, amount)
 values ('TestUser101', 'BTC', 7566.00);

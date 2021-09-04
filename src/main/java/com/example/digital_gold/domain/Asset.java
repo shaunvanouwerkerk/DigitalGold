@@ -6,6 +6,7 @@ import java.util.Objects;
  * @author Fiona Gray
  * */
 
+// Todo: validation annotations
 public class Asset {
     private String assetCode;
     private String assetName;

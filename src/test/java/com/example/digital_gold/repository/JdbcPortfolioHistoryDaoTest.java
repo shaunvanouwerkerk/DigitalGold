@@ -34,7 +34,7 @@ class JdbcPortfolioHistoryDaoTest {
         assertThat(porfolioHistoryDaoTest).isNotNull();
     }
 
-    @Test
+    /*@Test
     void savePortfolioValue() {
         Customer testCustomer = new Customer("TestUser200", "TestPassword", "zoutje",
                 new FullName("Tester", "van", "Tester"),
@@ -44,7 +44,7 @@ class JdbcPortfolioHistoryDaoTest {
         int expected = 1;
         int actual = porfolioHistoryDaoTest.savePortfolioValue(testPortfolioHistory);
         assertThat(actual).isEqualTo(expected);
-    }
+    }*/
 
     @Test
     void getPortfolioValueByUserName() {

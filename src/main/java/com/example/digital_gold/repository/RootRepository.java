@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -66,8 +68,8 @@ public class RootRepository {
 
     // AssetPriceDao
     public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
-
     public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
+    public List<AssetPrice> findAllAvailableAssets(LocalDate today) { return assetPriceDao.findAllAvailableAssets(today); }
 
     public Portfolio savePortfolio (Portfolio portfolio){
         for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
