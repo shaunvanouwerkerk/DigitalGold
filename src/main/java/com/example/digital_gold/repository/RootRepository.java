@@ -19,16 +19,18 @@ public class RootRepository {
     private AssetDao assetDao;
     private AssetPriceDao assetPriceDao;
     private PortfolioDao portfolioDao;
+    private BankAccountDao bankAccountDao;
 
     @Autowired
     public RootRepository(CustomerDao customerDao, AdministratorDao administratorDao, TransactionDao transactionDao,
-                          AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao) {
+                          AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao, BankAccountDao bankAccountDao) {
         this.customerDao = customerDao;
         this.administratorDao = administratorDao;
         this.transactionDao = transactionDao;
         this.assetDao = assetDao;
         this.assetPriceDao = assetPriceDao;
         this.portfolioDao = portfolioDao;
+        this.bankAccountDao = bankAccountDao;
         logger.info("New RootRepository");
     }
 
@@ -95,4 +97,9 @@ public class RootRepository {
         }
         return result;
     }
-}
+    // BankAccountDao
+    public BankAccount saveBankAccount(BankAccount bankAccount) {return bankAccountDao.saveBankAccount(bankAccount);}
+
+    public BankAccount updateBalance(BankAccount bankAccount) {return bankAccountDao.updateBalance(bankAccount);}
+
+    }

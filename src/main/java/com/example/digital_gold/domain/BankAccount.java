@@ -20,6 +20,11 @@ public class BankAccount {
         this.balance = STARTING_BUDGET;
     }
 
+    public BankAccount(String iban, double balance) {
+        this.iban = iban;
+        this.balance = balance;
+    }
+
     public String getIban() {
         return iban;
     }
