@@ -89,6 +89,33 @@ public class Transaction {
         this.transactionFee = transactionFee;
     }
 
+
+    //TODO: Setters voor testen van TransactionContoller.
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public void setAssetCode(String assetCode) {
+        this.assetCode = assetCode;
+    }
+
+    public void setAssetAmount(double assetAmount) {
+        this.assetAmount = assetAmount;
+    }
+
+    public void setAssetPrice(double assetPrice) {
+        this.assetPrice = assetPrice;
+    }
+
+    public void setIbanSell(String ibanSell) {
+        this.ibanSell = ibanSell;
+    }
+
+    public void setIbanBuy(String ibanBuy) {
+        this.ibanBuy = ibanBuy;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
