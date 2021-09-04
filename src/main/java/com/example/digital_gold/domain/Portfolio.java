@@ -52,9 +52,7 @@ public class Portfolio {
 
     @Override
     public String toString() {
-        return "Portfolio{" +
-                "username=" + customer +
-                ", assetList=" + assetList +
+        return "assetList=" + assetList +
                 '}';
     }
 }
