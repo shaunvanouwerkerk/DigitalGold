@@ -40,7 +40,7 @@ public class RegisterControllerTest {
         Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
         CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"987654321",
                 "tester@tester.tst" ,"NL 123456789");
-        return new Customer("TestUser01", "TestPassword", testfullname, testadress, testcustomerDetails);
+        return new Customer("TestUser01", "TestPassword",null,true, testfullname, testadress, testcustomerDetails);
     }
 
     private String createJSONfromCustomer() throws Exception {

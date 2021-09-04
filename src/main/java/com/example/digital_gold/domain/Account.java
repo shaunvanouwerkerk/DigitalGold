@@ -70,14 +70,14 @@ public abstract class Account {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Account)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(getUsername(), account.getUsername()) && Objects.equals(getPassword(), account.getPassword()) && Objects.equals(getSalt(), account.getSalt());
+        return status == account.status && username.equals(account.username) && password.equals(account.password) && salt.equals(account.salt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getPassword(), getSalt());
+        return Objects.hash(username, password, salt, status);
     }
 
     @Override
@@ -86,6 +86,7 @@ public abstract class Account {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

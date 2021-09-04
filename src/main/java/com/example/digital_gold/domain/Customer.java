@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.sql.Date;
 import java.util.Objects;
 
 /*
@@ -22,7 +23,7 @@ public class Customer extends Account {
     private CustomerDetails customerDetails;
     private final static String DEFAULT_SALT = null;
 
-    public Customer(){};
+    public Customer(String username, String password, String firstname, String prefix, String lastname, Date dateOfBirth, int bsn, int housenumber, String name, String resultSetString, String string, String streetName, String zipcode, String city, boolean status){};
 
     public Customer(String username, String password, String salt, Boolean status, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, salt,status);
@@ -31,7 +32,7 @@ public class Customer extends Account {
         this.customerDetails = customerDetails;
     }
 
-    public Customer(String username, String password,FullName fullName, Address address, CustomerDetails customerDetails) {
+    public Customer(String testUser200, String username, String password, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, DEFAULT_SALT, true);
         this.fullName = fullName;
         this.address = address;
@@ -84,7 +85,7 @@ public class Customer extends Account {
                 "fullName=" + fullName +
                 ", address=" + address +
                 ", customerDetails=" + customerDetails +
-                '}';
+                "} " + super.toString();
     }
 }
 
