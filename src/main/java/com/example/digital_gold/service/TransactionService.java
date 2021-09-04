@@ -37,7 +37,7 @@ public class TransactionService {
     }
 
     public Boolean checkAccountBalance(double transactionValue, String ibanBuyer) {
-        //TODO: BankAccount saldo van koper vergelijken met transactiewaarde.
+        //TODO: BankAccount saldo van koper vergelijken met transactiewaarde. Methode nodig die saldo van IBAN ophaalt.
 
         return false;
     }
