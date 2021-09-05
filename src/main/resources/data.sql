@@ -46,8 +46,27 @@ VALUES ('TestUser202', '2021-09-03', 250);
 insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser202', '2021-09-02', 1);
 
-
-
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (1,'BTC','NL24DIGO1111111111','NL24DIGO2222222222',1,1000,0.01,'2020-01-01');
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (2,'ETH','NL24DIGO2222222222','NL24DIGO3333333333',2,1000,0.01,'2020-02-01');
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (3,'ADA','NL24DIGO2222222222','NL24DIGO4444444444',3,1500,0.02,'2020-03-01');
+
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser101','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester101@gmail.com', 'testzoutje',true, 'Nl123456789' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser102','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester102@gmail.com', 'testzoutje',true, 'Nl123456789' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser104','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester104@gmail.com', 'testzoutje',true, 'Nl123456789' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'Nl123456789' );
+
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-05', 5.20);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-05', 12.00);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('DOGE', '2021-09-05', 25.75);

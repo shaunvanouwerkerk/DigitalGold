@@ -76,6 +76,11 @@ public class JdbcPortfolioDao implements PortfolioDao {
         return jdbcTemplate.query("SELECT * FROM portfolio WHERE username = ?", new PortfolioRowMapper(), username);
     }
 
+    @Override
+    public List<String> getAllUsersWithAPortfolio() {
+        return jdbcTemplate.queryForList("SELECT DISTINCT userName FROM portfolio;",String.class);
+    }
+
     private static class PortfolioRowMapper implements RowMapper<PortfolioDatabase> {
         @Override
         public PortfolioDatabase mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -95,7 +100,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
          public PortfolioDatabase() {
          }
 
-         public String getUsername() {
+        public String getUsername() {
             return username;
         }
 
@@ -120,10 +125,10 @@ public class JdbcPortfolioDao implements PortfolioDao {
          }
 
          public PortfolioDatabase(String username, String assetCode, double amount) {
-            this.username = username;
-            this.assetCode = assetCode;
-            this.amount = amount;
-        }
+             this.username = username;
+             this.assetCode = assetCode;
+             this.amount = amount;
+         }
 
         @Override
         public boolean equals(Object o) {

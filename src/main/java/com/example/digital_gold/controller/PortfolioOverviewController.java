@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+
 /*
 @Author Jany Gaal
 */
@@ -29,7 +31,7 @@ public class PortfolioOverviewController {
         }*/
 
     @GetMapping("/portfoliooverview/{username}")
-    public ResponseEntity<Portfolio> getOverviewAssets(@PathVariable String username) {
+    public ResponseEntity<?> getOverviewAssets(@PathVariable String username) {
         return new ResponseEntity(portfolioOverviewService.getPortfolioForCustomer(username), HttpStatus.OK);
     }
 }

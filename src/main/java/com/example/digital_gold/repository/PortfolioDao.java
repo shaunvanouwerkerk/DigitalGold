@@ -12,6 +12,5 @@ public interface PortfolioDao {
     JdbcPortfolioDao.PortfolioDatabase updatePortfolioAsset (JdbcPortfolioDao.PortfolioDatabase portfolioDatabase);
     int deletePortfolioAsset (JdbcPortfolioDao.PortfolioDatabase portfolioDatabase);
     List<JdbcPortfolioDao.PortfolioDatabase> getPortfolioAssetsByUsername(String username);
-
-
+    List<String> getAllUsersWithAPortfolio();
 }
