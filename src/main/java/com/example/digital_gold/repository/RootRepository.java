@@ -6,11 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RootRepository {
@@ -45,6 +42,7 @@ public class RootRepository {
     public Customer saveCustomer(Customer customer) {
         return customerDao.save(customer);
     }
+
     public Administrator saveAdministrator(Administrator administrator) {
         return administratorDao.save(administrator);
     }
@@ -56,11 +54,22 @@ public class RootRepository {
     public boolean findAdministratorByUsername(String username) {
         return administratorDao.findAdministratorByUsername(username);
     }
-    public String findCustomerSalt(String username){return customerDao.findCustomerSalt(username); }
-    public String findAdministratorSalt(String username){return administratorDao.findAdministratorSalt(username); }
 
-    public String findCustomerHashPassword(String username){return customerDao.findCustomerHashPassword(username);}
-    public String findAdministratorHashPassword(String username){return administratorDao.findAdministratorHashPassword(username);}
+    public String findCustomerSalt(String username) {
+        return customerDao.findCustomerSalt(username);
+    }
+
+    public String findAdministratorSalt(String username) {
+        return administratorDao.findAdministratorSalt(username);
+    }
+
+    public String findCustomerHashPassword(String username) {
+        return customerDao.findCustomerHashPassword(username);
+    }
+
+    public String findAdministratorHashPassword(String username) {
+        return administratorDao.findAdministratorHashPassword(username);
+    }
 
     //TransactionDao
     public Transaction saveTransaction(Transaction transaction) {
@@ -68,17 +77,29 @@ public class RootRepository {
     }
 
     // AssetDao
-    public void saveAsset(Asset asset) { assetDao.saveAsset(asset); }
+    public void saveAsset(Asset asset) {
+        assetDao.saveAsset(asset);
+    }
 
-    public Asset findByAssetCode(String assetCode) { return assetDao.findByAssetCode(assetCode); }
+    public Asset findByAssetCode(String assetCode) {
+        return assetDao.findByAssetCode(assetCode);
+    }
 
     // AssetPriceDao
-    public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
-    public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
-    public List<AssetPrice> findAllAvailableAssets(LocalDate today) { return assetPriceDao.findAllAvailableAssets(today); }
+    public void saveAssetPrice(AssetPrice assetPrice) {
+        assetPriceDao.saveAssetPrice(assetPrice);
+    }
 
-    public Portfolio savePortfolio (Portfolio portfolio){
-        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+    public AssetPrice findPriceByAssetCode(String assetCode) {
+        return assetPriceDao.findPriceByAssetCode(assetCode);
+    }
+
+    public List<AssetPrice> findAllAvailableAssets(LocalDate today) {
+        return assetPriceDao.findAllAvailableAssets(today);
+    }
+
+    public Portfolio savePortfolio(Portfolio portfolio) {
+        for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
             JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.addPortfolioAsset(portfolioDatabase);
@@ -86,8 +107,8 @@ public class RootRepository {
         return portfolio;
     }
 
-    public Portfolio updatePortfolio (Portfolio portfolio){
-        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+    public Portfolio updatePortfolio(Portfolio portfolio) {
+        for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
             JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.updatePortfolioAsset(portfolioDatabase);
@@ -95,9 +116,9 @@ public class RootRepository {
         return portfolio;
     }
 
-    public int deletePortfolio (Portfolio portfolio){
+    public int deletePortfolio(Portfolio portfolio) {
         int result = 0;
-        for(Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
+        for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
             JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.deletePortfolioAsset(portfolioDatabase);
@@ -107,9 +128,13 @@ public class RootRepository {
     }
 
     // BankAccountDao
-    public BankAccount saveBankAccount(BankAccount bankAccount) {return bankAccountDao.saveBankAccount(bankAccount);}
+    public BankAccount saveBankAccount(BankAccount bankAccount) {
+        return bankAccountDao.saveBankAccount(bankAccount);
+    }
 
-    public BankAccount updateBalance(BankAccount bankAccount) {return bankAccountDao.updateBalance(bankAccount);}
+    public BankAccount updateBalance(BankAccount bankAccount) {
+        return bankAccountDao.updateBalance(bankAccount);
+    }
 
     public Portfolio getPortfolioForCustomer(String username) {
         List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
@@ -119,6 +144,10 @@ public class RootRepository {
             assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);
         }
         return new Portfolio(customer, assetMap);
+    }
+
+    public double getPortfolioAssetByUsernameAssetCode(String username, String assetCode) {
+        return portfolioDao.getPortfolioAssetByUsernameAssetCode(username, assetCode);
     }
 
     public List<Portfolio> getAllPortfolios() {
@@ -133,12 +162,33 @@ public class RootRepository {
         return portfolios;
     }
 
-    public int savePortfolioValue (PortfolioHistory portfolioHistory) {
+    public int savePortfolioValue(PortfolioHistory portfolioHistory) {
         return portfolioHistoryDao.savePortfolioValue(portfolioHistory);
     }
 
     public List<PortfolioHistory> getPortfolioValuesForCustomer(String username) {
         return portfolioHistoryDao.getPortfolioValuesByUserName(username);
     }
+
+    public String[][] getPortfolioForCustomer2(String username) {
+        List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
+        String[][] portfolioTable = new String[tempList.size()][4];
+        int row = 0;
+        for (JdbcPortfolioDao.PortfolioDatabase assets : tempList) {
+                portfolioTable[row][0] = assets.assetCode;
+                AssetPrice assetPrice = assetPriceDao.findPriceByAssetCode(assets.getAssetCode());
+                double price = assetPrice.getPrice();
+                portfolioTable[row][1] = "€ " + price;
+                portfolioTable[row][2] = String.valueOf(assets.getAmount());
+                portfolioTable[row][3] = "€ " + (assets.getAmount() * 12.75);
+                row++;
+        }
+        return portfolioTable;
+    }
 }
+
+
+
+
+
 

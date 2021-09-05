@@ -32,6 +32,6 @@ public class PortfolioOverviewController {
 
     @GetMapping("/portfoliooverview/{username}")
     public ResponseEntity<?> getOverviewAssets(@PathVariable String username) {
-        return new ResponseEntity(portfolioOverviewService.getPortfolioForCustomer(username), HttpStatus.OK);
+        return new ResponseEntity(portfolioOverviewService.getPortfolioForCustomer2(username), HttpStatus.OK);
     }
 }

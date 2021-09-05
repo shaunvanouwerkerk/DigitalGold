@@ -88,4 +88,11 @@ class RootRepositoryTest {
         int actual = rootRepository.deletePortfolio(testPortfolio);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void getPortfolioAssetByUsernameAssetCode () {
+        double expected = 5000.00;
+        double actual = rootRepository.getPortfolioAssetByUsernameAssetCode("TestUser105", "ETH");
+        assertThat(actual).isEqualTo(expected);
+    }
 }
