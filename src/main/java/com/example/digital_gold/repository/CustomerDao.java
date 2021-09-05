@@ -9,5 +9,6 @@ public interface CustomerDao {
     String findCustomerSalt (String username);
     String findCustomerHashPassword (String username);
     Customer findAndReturnCustomerByUsername (String username);
+    String findUsernameByIban(String iban);
 
 }

@@ -51,6 +51,14 @@ public class JdbcCustomerDao implements CustomerDao {
         jdbcTemplate.update(connection -> insertCustomerStatement(customer, connection));
         return customer;
     }
+    /**
+     * @author David Truijens
+     * */
+    @Override
+    public String findUsernameByIban(String iban) {
+        String sql = "SELECT username FROM customer WHERE iban = ?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{iban}, String.class);
+    }
 
     /**
     * @author Fiona Gray

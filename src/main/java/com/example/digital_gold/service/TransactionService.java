@@ -1,6 +1,5 @@
 package com.example.digital_gold.service;
 
-import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Transaction;
 import com.example.digital_gold.helper.TransactionFeeHelper;
 import com.example.digital_gold.repository.RootRepository;
@@ -32,6 +31,8 @@ public class TransactionService {
         double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
         double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
         double valueSeller = TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
+        String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
+        String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
 
         //checken of koper genoeg saldo heeft:
         if(checkAccountBalance(valueBuyer,transaction.getIbanBuy())) {
@@ -48,38 +49,42 @@ public class TransactionService {
             logger.info("Seller has insufficient account balance!");
             return null;
         }
-        //TODO: amount van verkoper checken
-        // balances bijwerken, asset amounts bijwerken.
+
         //checken of de verkoper genoeg assets heeft:
+        if(checkAssetAmount(transaction.getAssetAmount(),usernameSeller,transaction.getAssetCode())) {
+            logger.info("Seller has sufficient asset amount");
+        } else {
+            logger.info("Seller has insufficient asset amount!");
+            return null;
+        }
+
+        //TODO: balances bijwerken, asset amounts bijwerken.
+        logger.info("Transaction validation successful.");
+
+        adjustAccountBalances(transaction,valueBuyer,valueSeller);
 
 
         return rootRepository.saveTransaction(transaction);
     }
 
-
-
-
     public Boolean checkAccountBalance(double value, String iban) {
-        //TODO: Methode nodig die Bankaccount via IBAN ophaalt. Constructor call vervangen!!
-        BankAccount bankAccount = new BankAccount();//rootRepository.getBankAccountByIban(iban);
-        double accountBalance = bankAccount.getBalance();
-        return (accountBalance >= value);
+        double bankBalance = rootRepository.getBalanceByIban(iban);
+        return (bankBalance >= value);
     }
 
     public Boolean checkAssetAmount(double amount, String userName, String assetCode) {
-        //TODO: Portfolio asset amount van verkoper vergelijken met transactie asset aantal.
-        // uit transactie iban van verkoper halen en via Customer checken welke username om
-        // in de juiste portfolio te kijken bij de juiste asset naar de beschikbare hoeveelheid
-
-        return false;
+        double portfolioAssetAmount = 100.0; //TODO: rootRepository.getPortfolioAssetAmountByUsernameAssetCode(userName,assetCode);
+        return (portfolioAssetAmount >= amount);
     }
 
-    public void adjustAccountBalances(Transaction transaction, TransactionFeeHelper transactionFeeHelper){
+    public void adjustAccountBalances(Transaction transaction, double valueBuyer, double valueSeller){
         //TODO: saldo van koper en verkoper aanpassen
+        logger.info("AccountBalances updated.");
     }
 
     public void adjustPortfolioAmount(Transaction transaction) {
         //TODO: aantal van de asset bijwerken in portfolio van koper en verkoper.
+        logger.info("Portfolio assets updated.");
     }
 
     public RootRepository getRootRepository() {
