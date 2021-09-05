@@ -1,16 +1,12 @@
 package com.example.digital_gold.service;
 
-import com.example.digital_gold.domain.Asset;
-import com.example.digital_gold.domain.AssetPrice;
 import com.example.digital_gold.domain.Portfolio;
 import com.example.digital_gold.domain.PortfolioHistory;
 import com.example.digital_gold.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 /*
 @Author Jany Gaal
@@ -32,6 +28,10 @@ public class PortfolioOverviewService {
 
     public Portfolio getPortfolioForCustomer (String username) {
         return rootRepository.getPortfolioForCustomer(username);
+    }
+
+    public String[][] getPortfolioForCustomer2(String username) {
+        return rootRepository.getPortfolioForCustomer2(username);
     }
 }
 

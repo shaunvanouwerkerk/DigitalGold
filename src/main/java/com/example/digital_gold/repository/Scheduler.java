@@ -37,7 +37,6 @@ public class Scheduler {
     public void saveDailyPortfolioValues () {
         List<Portfolio> portfolios = rootRepository.getAllPortfolios();
         portfolios.forEach(this::calculateDailyValue);
-
     }
 
     public void calculateDailyValue(Portfolio portfolio) {

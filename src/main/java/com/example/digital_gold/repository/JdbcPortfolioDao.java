@@ -81,6 +81,11 @@ public class JdbcPortfolioDao implements PortfolioDao {
         return jdbcTemplate.queryForList("SELECT DISTINCT userName FROM portfolio;",String.class);
     }
 
+    @Override
+    public double getPortfolioAssetByUsernameAssetCode(String username, String assetCode) {
+        return jdbcTemplate.queryForObject("SELECT amount FROM portfolio WHERE username = ? AND assetCode = ?",Double.class, username, assetCode);
+    }
+
     private static class PortfolioRowMapper implements RowMapper<PortfolioDatabase> {
         @Override
         public PortfolioDatabase mapRow(ResultSet resultSet, int i) throws SQLException {
