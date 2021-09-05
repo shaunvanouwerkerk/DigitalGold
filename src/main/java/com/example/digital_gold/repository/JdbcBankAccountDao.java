@@ -38,12 +38,6 @@ public class JdbcBankAccountDao implements BankAccountDao{
         return bankAccount;
     }
 
-    @Override
-    public BankAccount updateBalance(BankAccount bankAccount) {
-        jdbcTemplate.update(connection -> updateBalanceStatement(bankAccount, connection));
-        return bankAccount;
-    }
-
     private PreparedStatement updateBalanceStatement(BankAccount bankAccount, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE BankAccount Set balance = ? WHERE iban = ?");
@@ -51,4 +45,21 @@ public class JdbcBankAccountDao implements BankAccountDao{
         preparedStatement.setString(2, bankAccount.getIban());
         return preparedStatement;
     }
+
+    // todo als deze iban niet bestaat gebeurt niets, ook geen foutmelding
+    @Override
+    public BankAccount updateBalance(BankAccount bankAccount) {
+        jdbcTemplate.update(connection -> updateBalanceStatement(bankAccount, connection));
+        return bankAccount;
+    }
+
+
+    @Override
+    public double getBalanceByIban(String iban) {
+        String sql= "SELECT balance FROM bankAccount WHERE iban = ?";
+        return jdbcTemplate.queryForObject(sql,new Object[]{iban}, Double.class);
+    }
+
+
+
 }
