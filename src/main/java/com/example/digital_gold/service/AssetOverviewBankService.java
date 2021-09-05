@@ -1,6 +1,5 @@
 package com.example.digital_gold.service;
 
-import com.example.digital_gold.domain.AssetPrice;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +27,8 @@ public class AssetOverviewBankService {
         logger.info("New AssetOverviewBankService");
     }
 
-    public List<AssetPrice> getAssetOverviewBank(LocalDate today) {
-        List<AssetPrice> assetList = rootRepository.findAllAvailableAssets(today);
+    public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
+        List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
         if (assetList.size() > 0) {
             return assetList;
         } else {

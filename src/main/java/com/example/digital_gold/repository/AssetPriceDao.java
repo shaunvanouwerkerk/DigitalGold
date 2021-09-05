@@ -14,7 +14,8 @@ import java.util.Map;
 public interface AssetPriceDao {
 
     AssetPrice saveAssetPrice(AssetPrice assetPrice);
-    AssetPrice findPriceByAssetCode(String assetCode);
-    List<AssetPrice>  findAllAvailableAssets(LocalDate today);
+    AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date);
+    List<AssetPrice> findPricesByAssetCode(String assetCode);
+    List<Map<String, Object>> findAllAvailableAssets(LocalDate today);
 
 }

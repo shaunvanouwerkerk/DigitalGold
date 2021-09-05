@@ -37,8 +37,11 @@ class PortfolioOverviewServiceTest {
         AssetPrice assetPrice001 = new AssetPrice(testAsset001, 1.00, LocalDate.now());
         AssetPrice assetPrice002 = new AssetPrice(testAsset002, 1.00, LocalDate.now());
 
-        Mockito.when(mockRepo.findPriceByAssetCode("DOGE")).thenReturn(assetPrice001);
-        Mockito.when(mockRepo.findPriceByAssetCode("ETH")).thenReturn(assetPrice002);
+        // methode heeft nu tweede parameter LocalDate:
+        Mockito.when(mockRepo.findPriceByAssetCodeAndDate("DOGE", LocalDate.now())).thenReturn(assetPrice001);
+        Mockito.when(mockRepo.findPriceByAssetCodeAndDate("ETH", LocalDate.now())).thenReturn(assetPrice002);
+        /*Mockito.when(mockRepo.findPriceByAssetCode("DOGE")).thenReturn(assetPrice001);
+        Mockito.when(mockRepo.findPriceByAssetCode("ETH")).thenReturn(assetPrice002);*/
     }
 
     @AfterAll

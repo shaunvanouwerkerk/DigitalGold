@@ -48,23 +48,25 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
 
     //TODO throws SQLexception?
     @Override
-    public AssetPrice findPriceByAssetCode(String assetCode) {
+    public List<AssetPrice> findPricesByAssetCode(String assetCode) {
         String sql = "Select * from AssetPrice where assetCode = ?";
-        return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
+        return jdbcTemplate.query(sql, new AssetPriceRowMapper(), assetCode);
     }
 
-    //TODO AssetList findAllAvailableAssets() methode schrijven met SQL view?
+    //TODO throws SQLexception?
+    public AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date) {
+        String sql = "Select * from AssetPrice where assetCode = ? and date = ?";
+        return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode, date);
+    }
+
+    //TODO: OPTIE SQL view ophalen? throws SQLexception?
+    //String sql = "create view assetOverview AS (select assetCode, price from assetPrice where date = ?)";
+    //return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
     @Override
-    public  List<AssetPrice> findAllAvailableAssets(LocalDate today) {
-        //String sql = "create view assetOverview AS (select assetCode, price from assetPrice where date = ?)";
-        //return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
-        String sql = "select * from assetPrice where date = ?";
-        return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
+    public  List<Map<String, Object>> findAllAvailableAssets(LocalDate today) {
+        String sql = "select `assetCode`, `price` from `AssetPrice` where `date` = ?";
+        return jdbcTemplate.queryForList(sql, today);
     }
-
-
-    //TODO methode findAssetPriceByAssetCodeAndDate() schrijven?
-
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
 

@@ -43,7 +43,9 @@ public class Scheduler {
         final Double[] totalValue = {0.00};
         Map<Asset, Double> assetMap = portfolio.getAssetList();
         assetMap.forEach((key, value) -> {
-            AssetPrice assetPrice = rootRepository.findPriceByAssetCode(key.getAssetCode());
+            //AssetPrice assetPrice = rootRepository.findPriceByAssetCode(key.getAssetCode());
+            // methode heeft nu tweede parameter LocalDate:
+            AssetPrice assetPrice = rootRepository.findPriceByAssetCodeAndDate(key.getAssetCode(), LocalDate.now());
             double price = assetPrice.getPrice();
             double amount = value;
             totalValue[0] += (price * amount);

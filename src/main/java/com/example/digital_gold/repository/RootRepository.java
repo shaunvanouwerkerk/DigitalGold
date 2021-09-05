@@ -88,17 +88,10 @@ public class RootRepository {
     }
 
     // AssetPriceDao
-    public void saveAssetPrice(AssetPrice assetPrice) {
-        assetPriceDao.saveAssetPrice(assetPrice);
-    }
-
-    public AssetPrice findPriceByAssetCode(String assetCode) {
-        return assetPriceDao.findPriceByAssetCode(assetCode);
-    }
-
-    public List<AssetPrice> findAllAvailableAssets(LocalDate today) {
-        return assetPriceDao.findAllAvailableAssets(today);
-    }
+    public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
+    public AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date) { return assetPriceDao.findPriceByAssetCodeAndDate(assetCode, date); }
+    public List<AssetPrice> findPricesByAssetCode(String assetCode) { return assetPriceDao.findPricesByAssetCode(assetCode); }
+    public List<Map<String, Object>> findAllAvailableAssets(LocalDate today) { return assetPriceDao.findAllAvailableAssets(today); }
 
     public Portfolio savePortfolio(Portfolio portfolio) {
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
@@ -181,7 +174,8 @@ public class RootRepository {
         int row = 0;
         for (JdbcPortfolioDao.PortfolioDatabase assets : tempList) {
                 portfolioTable[row][0] = assets.assetCode;
-                AssetPrice assetPrice = assetPriceDao.findPriceByAssetCode(assets.getAssetCode());
+                // LocalDate.now() toegevoegd wegens veranderde methode:
+                AssetPrice assetPrice = assetPriceDao.findPriceByAssetCodeAndDate(assets.getAssetCode(), LocalDate.now());
                 double price = assetPrice.getPrice();
                 portfolioTable[row][1] = "€ " + price;
                 portfolioTable[row][2] = String.valueOf(assets.getAmount());
