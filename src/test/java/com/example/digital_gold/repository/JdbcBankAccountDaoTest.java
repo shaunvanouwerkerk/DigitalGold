@@ -22,21 +22,30 @@ public class JdbcBankAccountDaoTest {
         assertThat(bankAccountDaoTest).isNotNull();
     }
 
-    BankAccount  testAccount = new BankAccount("NL13DIGO6940102114", 93580.35);
 
     @Test
     public void saveBankAccount() {
-        BankAccount actualAccount = bankAccountDaoTest.saveBankAccount(testAccount);
-        assertThat(actualAccount).isEqualTo(testAccount);
+        BankAccount  testSave = new BankAccount("NL13DIGO6940102114", 93580.35);
+        BankAccount actualAccount = bankAccountDaoTest.saveBankAccount(testSave);
+        assertThat(actualAccount).isEqualTo(testSave);
     }
 
     @Test
     public void updateBalance() {
-        BankAccount expected = new BankAccount("NL13DIGO6940102114", 99.99);
+        BankAccount testUpdateBalance = new BankAccount("NL39DIGO4296384680", 3840.26);
+        bankAccountDaoTest.saveBankAccount(testUpdateBalance);
+        BankAccount expected = new BankAccount("NL39DIGO4296384680", 99.99);
         BankAccount actual  = bankAccountDaoTest.updateBalance(expected);
-        System.out.println(expected);
-        System.out.println(actual);
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    public void getBalanceByIban() {
+        BankAccount  testBalance = new BankAccount("NL96DIGO3074958287", 92880.25);
+        bankAccountDaoTest.saveBankAccount(testBalance);
+        double expected = 92880.25;
+        double actual = bankAccountDaoTest.getBalanceByIban("NL96DIGO3074958287");
+        assertThat(actual).isEqualTo(expected);
+
+    }
 }
