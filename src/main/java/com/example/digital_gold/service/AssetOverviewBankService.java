@@ -28,8 +28,8 @@ public class AssetOverviewBankService {
         logger.info("New AssetOverviewBankService");
     }
 
-    public List<AssetPrice> getAssetOverviewBank(LocalDate today) {
-        List<AssetPrice> assetList = rootRepository.findAllAvailableAssets(today);
+    public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
+        List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
         if (assetList.size() > 0) {
             return assetList;
         } else {
