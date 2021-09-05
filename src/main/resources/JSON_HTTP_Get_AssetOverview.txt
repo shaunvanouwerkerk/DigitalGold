@@ -1,0 +1,92 @@
+// @author Fiona Gray
+
+//Postman
+  //JSON body voor ophalen AssetOverviewBank in DigitalGold project
+  //HTTP GET request op endpoint "/assetOverviewBank"
+  //Voorbeeld met data:
+
+ http://localhost:8080/assetOverviewBank/2021-09-05
+
+ [
+     {
+         "assetCode": "ADA",
+         "price": 30.75
+     },
+     {
+         "assetCode": "BCH",
+         "price": 654.7
+     },
+     {
+         "assetCode": "BNB",
+         "price": 102.56
+     },
+     {
+         "assetCode": "BTC",
+         "price": 5.2
+     },
+     {
+         "assetCode": "BUSD",
+         "price": 123.89
+     },
+     {
+         "assetCode": "DOGE",
+         "price": 25.75
+     },
+     {
+         "assetCode": "DOT",
+         "price": 36.89
+     },
+     {
+         "assetCode": "ETH",
+         "price": 12.0
+     },
+     {
+         "assetCode": "ICP",
+         "price": 2008.9
+     },
+     {
+         "assetCode": "LINK",
+         "price": 200.7
+     },
+     {
+         "assetCode": "LTC",
+         "price": 321.65
+     },
+     {
+         "assetCode": "LUNA",
+         "price": 345.67
+     },
+     {
+         "assetCode": "MATIC",
+         "price": 80.9
+     },
+     {
+         "assetCode": "SOL",
+         "price": 35.9
+     },
+     {
+         "assetCode": "UNI",
+         "price": 100.45
+     },
+     {
+         "assetCode": "USDC",
+         "price": 3003.45
+     },
+     {
+         "assetCode": "USDT",
+         "price": 203.78
+     },
+     {
+         "assetCode": "VET",
+         "price": 76.89
+     },
+     {
+         "assetCode": "WBTC",
+         "price": 28.54
+     },
+     {
+         "assetCode": "XRP",
+         "price": 405.68
+     }
+ ]
+
