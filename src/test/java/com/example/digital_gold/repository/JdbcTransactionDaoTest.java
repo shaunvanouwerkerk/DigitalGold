@@ -7,12 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author David Truijens
@@ -37,7 +35,7 @@ class JdbcTransactionDaoTest {
 
     @Test //TODO: check welk datatype we nodig hebben. LocalDate of LocalDateTime. Nu een conflict met de database.
     void saveTransaction() {
-        Transaction testTransaction = new Transaction(LocalDateTime.now(),"BTC",0.233,
+        Transaction testTransaction = new Transaction(LocalDate.now(),"BTC",0.233,
                 102.67,0.01,"NL64DIGO0001734105","NL52DEUT0009374258");
         Transaction transaction = transactionDaoTest.saveTransaction(testTransaction);
         assertThat(transaction).isEqualTo(testTransaction);

@@ -1,5 +1,6 @@
 package com.example.digital_gold.service;
 
+import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Transaction;
 import com.example.digital_gold.helper.TransactionFeeHelper;
 import com.example.digital_gold.repository.RootRepository;
@@ -30,7 +31,7 @@ public class TransactionService {
     public Transaction processTransaction(Transaction transaction){
         double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
         double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
-        double valueSeller = TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
+        double valueSeller = transactionValue - TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
         String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
         String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
 
@@ -39,14 +40,6 @@ public class TransactionService {
             logger.info("Buyer has sufficient account balance");
         } else {
             logger.info("Buyer has insufficient account balance!");
-            return null;
-        }
-
-        //checken of verkoper genoeg saldo heeft:
-        if(checkAccountBalance(valueSeller,transaction.getIbanSell())) {
-            logger.info("Seller has sufficient account balance");
-        } else {
-            logger.info("Seller has insufficient account balance!");
             return null;
         }
 
@@ -78,7 +71,16 @@ public class TransactionService {
     }
 
     public void adjustAccountBalances(Transaction transaction, double valueBuyer, double valueSeller){
-        //TODO: saldo van koper en verkoper aanpassen
+        double transactionCosts = transaction.getAssetAmount() * transaction.getAssetPrice() * transaction.getTransactionFee();
+        double newBalanceSeller = rootRepository.getBalanceByIban(transaction.getIbanSell()) + valueSeller;
+        double newBalanceBuyer = rootRepository.getBalanceByIban(transaction.getIbanBuy()) - valueBuyer;
+        double newBalanceBank = rootRepository.getBalanceByIban(transaction.getIbanBuy()) + transactionCosts;
+        BankAccount bankAccountSeller = new BankAccount(transaction.getIbanSell(),newBalanceSeller);
+        BankAccount bankAccountBuyer = new BankAccount(transaction.getIbanBuy(), newBalanceBuyer);
+        BankAccount bankAccountBank = new BankAccount(TransactionFeeHelper.getIbanBank(),newBalanceBank);
+        rootRepository.updateBalance(bankAccountBuyer);
+        rootRepository.updateBalance(bankAccountSeller);
+        rootRepository.updateBalance(bankAccountBank);
         logger.info("AccountBalances updated.");
     }
 

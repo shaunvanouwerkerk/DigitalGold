@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class JdbcTransactionDao implements TransactionDao{
         preparedStatement.setDouble(4,transaction.getAssetAmount());
         preparedStatement.setDouble(5,transaction.getAssetPrice());
         preparedStatement.setDouble(6,transaction.getTransactionFee());
-        preparedStatement.setString(7, DateTimeFormatter.ISO_DATE_TIME.format(transaction.getTransactionDate()));
+        preparedStatement.setString(7, DateTimeFormatter.ISO_DATE.format(transaction.getTransactionDate()));
         return preparedStatement;
     }
 
@@ -55,7 +55,7 @@ public class JdbcTransactionDao implements TransactionDao{
         String sql = "select * from transaction where ibanSell = ? OR ibanBuy = ?";
         return jdbcTemplate.query(sql,new Object[]{iban,iban},(rs,rowNum)-> new Transaction(
                 rs.getInt("id"),
-                rs.getObject("date",LocalDateTime.class),
+                rs.getObject("date", LocalDate.class),
                 rs.getString("assetCode"),
                 rs.getDouble("amount"),
                 rs.getDouble("sellingPrice"),
