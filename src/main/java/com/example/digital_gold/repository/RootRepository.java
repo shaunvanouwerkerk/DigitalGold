@@ -111,6 +111,8 @@ public class RootRepository {
 
     public BankAccount updateBalance(BankAccount bankAccount) {return bankAccountDao.updateBalance(bankAccount);}
 
+    public double getBalanceByIban(String iban) {return bankAccountDao.getBalanceByIban(iban);}
+
     public Portfolio getPortfolioForCustomer(String username) {
         List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
         Customer customer = null;
@@ -140,5 +142,6 @@ public class RootRepository {
     public List<PortfolioHistory> getPortfolioValuesForCustomer(String username) {
         return portfolioHistoryDao.getPortfolioValuesByUserName(username);
     }
+
 }
 
