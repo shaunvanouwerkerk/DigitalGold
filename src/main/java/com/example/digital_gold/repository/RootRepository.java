@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.List;
@@ -111,12 +113,24 @@ public class RootRepository {
 
     public Portfolio getPortfolioForCustomer(String username) {
         List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
-        Customer customer = customerDao.findAndReturnCustomerByUsername(username);
+        Customer customer = null;
         Map<Asset, Double> assetMap = new HashMap<>();
         for (JdbcPortfolioDao.PortfolioDatabase p : tempList) {
             assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);
         }
-        return new Portfolio(null, assetMap);
+        return new Portfolio(customer, assetMap);
+    }
+
+    public List<Portfolio> getAllPortfolios() {
+        List<String> userList = portfolioDao.getAllUsersWithAPortfolio();
+        List<Portfolio> portfolios = new ArrayList<>();
+        for (String user : userList) {
+            Customer customer = customerDao.findAndReturnCustomerByUsername(user);
+            Portfolio portfolio = getPortfolioForCustomer(user);
+            portfolio.setCustomer(customer);
+            portfolios.add(portfolio);
+        }
+        return portfolios;
     }
 
     public int savePortfolioValue (PortfolioHistory portfolioHistory) {

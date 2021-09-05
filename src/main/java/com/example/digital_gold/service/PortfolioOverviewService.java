@@ -33,21 +33,6 @@ public class PortfolioOverviewService {
     public Portfolio getPortfolioForCustomer (String username) {
         return rootRepository.getPortfolioForCustomer(username);
     }
-
-
-    public double calculateDailyValue(Portfolio portfolio) {
-       final Double[] totalValue = {0.00};
-        Map<Asset, Double> assetMap = portfolio.getAssetList();
-        assetMap.forEach((key, value) -> {
-            AssetPrice assetPrice =rootRepository.findPriceByAssetCode(key.getAssetCode());
-            double price = assetPrice.getPrice();
-            double amount = value;
-            totalValue[0] += (price * amount);
-        });
-        PortfolioHistory portfolioHistory = new PortfolioHistory(portfolio.getCustomer(), LocalDate.now(),totalValue[0]);
-        rootRepository.savePortfolioValue(portfolioHistory);
-        return totalValue[0];
-    }
 }
 
 
