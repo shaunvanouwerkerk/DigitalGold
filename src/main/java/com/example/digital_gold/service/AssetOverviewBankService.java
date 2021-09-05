@@ -30,8 +30,10 @@ public class AssetOverviewBankService {
     public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
         List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
         if (assetList.size() > 0) {
+            logger.info("AssetOverview is created");
             return assetList;
         } else {
+            logger.info("AssetOverview could not be created");
             return null;
         }
     }

@@ -26,18 +26,11 @@ public class AssetOverviewBankController {
     }
 
     //Todo: front-end? automatically get today's date when a customer requests this page
+    // Todo: deliver message if request failed
     // retrieves list of all available assets + current prices
     @GetMapping ("/assetOverviewBank/{today}")
     public ResponseEntity<?> getAssetOverviewBank(@PathVariable String today) {
         return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.parse(today)), HttpStatus.OK);
-
-       /* List<Map<String, Object>> assetOverview = assetOverviewBankService.getAssetOverviewBank(today);
-
-        if (assetOverview != null) {
-            return ResponseEntity.created(URI.create("/assetOverviewBank")).build();
-        } else {
-            return ResponseEntity.badRequest().body("Overview for date not found");
-        }*/
     }
 
 
