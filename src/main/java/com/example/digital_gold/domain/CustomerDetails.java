@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.Objects;
 // @author Sandra Turina
 
 public class CustomerDetails {
@@ -52,6 +53,19 @@ public class CustomerDetails {
     public String getIban() { return iban; }
 
     public void setIban(String iban) { this.iban = iban; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomerDetails that = (CustomerDetails) o;
+        return dateOfBirth.equals(that.dateOfBirth) && bsn.equals(that.bsn) && iban.equals(that.iban) && emailaddress.equals(that.emailaddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateOfBirth, bsn, iban, emailaddress);
+    }
 
     @Override
     public String toString() {

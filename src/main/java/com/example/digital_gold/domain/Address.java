@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 /*
 @Author Jany Gaal
@@ -59,6 +60,19 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return houseNumber == address.houseNumber && streetName.equals(address.streetName) && zipCode.equals(address.zipCode) && city.equals(address.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(houseNumber, streetName, zipCode, city);
     }
 
     @Override

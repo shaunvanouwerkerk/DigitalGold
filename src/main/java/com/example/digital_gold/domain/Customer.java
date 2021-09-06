@@ -23,20 +23,22 @@ public class Customer extends Account {
     private CustomerDetails customerDetails;
     private final static String DEFAULT_SALT = null;
 
-    public Customer(String username, String password, String firstname, String prefix, String lastname, Date dateOfBirth, int bsn, int housenumber, String name, String resultSetString, String string, String streetName, String zipcode, String city, boolean status){};
 
-    public Customer(String username, String password, String salt, Boolean status, FullName fullName, Address address, CustomerDetails customerDetails) {
+    public Customer(String username, String password, String salt, boolean status, FullName fullName, Address address, CustomerDetails customerDetails) {
         super(username, password, salt,status);
         this.fullName = fullName;
         this.address = address;
         this.customerDetails = customerDetails;
     }
 
-    public Customer(String testUser200, String username, String password, FullName fullName, Address address, CustomerDetails customerDetails) {
-        super(username, password, DEFAULT_SALT, true);
+    public Customer(String username, String password, FullName fullName, Address address, CustomerDetails customerDetails) {
+        super(username, password, DEFAULT_SALT,true);
         this.fullName = fullName;
         this.address = address;
         this.customerDetails = customerDetails;
+    }
+
+    public Customer() {
     }
 
     public FullName getFullName() {
@@ -63,21 +65,6 @@ public class Customer extends Account {
         this.customerDetails = customerDetails;
     }
 
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
-        if (!super.equals(o)) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(getFullName(), customer.getFullName()) && Objects.equals(getAddress(), customer.getAddress()) && Objects.equals(getCustomerDetails(), customer.getCustomerDetails());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getFullName(), getAddress(), getCustomerDetails());
-    }
 
     @Override
     public String toString() {
