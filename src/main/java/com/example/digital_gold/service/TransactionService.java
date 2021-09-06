@@ -3,6 +3,7 @@ package com.example.digital_gold.service;
 import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Transaction;
 import com.example.digital_gold.helper.TransactionFeeHelper;
+import com.example.digital_gold.repository.JdbcPortfolioDao;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,48 +30,43 @@ public class TransactionService {
     }
 
     public Transaction processTransaction(Transaction transaction){
-        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
-        double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
-        double valueSeller = transactionValue - TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
-        String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
-        String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
-
-        //checken of koper genoeg saldo heeft:
-        if(checkAccountBalance(valueBuyer,transaction.getIbanBuy())) {
+        if(checkAccountBalanceBuyer(transaction)) {
             logger.info("Buyer has sufficient account balance");
         } else {
             logger.info("Buyer has insufficient account balance!");
             return null;
         }
-
-        //checken of de verkoper genoeg assets heeft:
-        if(checkAssetAmount(transaction.getAssetAmount(),usernameSeller,transaction.getAssetCode())) {
+        if(checkAssetAmount(transaction)) {
             logger.info("Seller has sufficient asset amount");
         } else {
             logger.info("Seller has insufficient asset amount!");
             return null;
         }
-
-        //TODO: balances bijwerken, asset amounts bijwerken.
+        //TODO: asset amounts bijwerken.
         logger.info("Transaction validation successful.");
-
-        adjustAccountBalances(transaction,valueBuyer,valueSeller);
-
-
+        adjustAccountBalances(transaction);
+        //TODO: adjustPortfolioAmount(transaction);
         return rootRepository.saveTransaction(transaction);
     }
 
-    public Boolean checkAccountBalance(double value, String iban) {
-        double bankBalance = rootRepository.getBalanceByIban(iban);
-        return (bankBalance >= value);
+    public Boolean checkAccountBalanceBuyer(Transaction transaction) {
+        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
+        double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
+        double bankBalance = rootRepository.getBalanceByIban(transaction.getIbanBuy());
+        return (bankBalance >= valueBuyer);
     }
 
-    public Boolean checkAssetAmount(double amount, String userName, String assetCode) {
-        double portfolioAssetAmount = 100.0; //TODO: rootRepository.getPortfolioAssetAmountByUsernameAssetCode(userName,assetCode);
-        return (portfolioAssetAmount >= amount);
+    public Boolean checkAssetAmount(Transaction transaction) {
+        String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
+        String assetCode = transaction.getAssetCode();
+        double portfolioAssetAmount = 100.0; //TODO: rootRepository.getPortfolioAssetByUsernameAssetCode(usernameSeller,assetCode);
+        return (portfolioAssetAmount >= transaction.getAssetAmount());
     }
 
-    public void adjustAccountBalances(Transaction transaction, double valueBuyer, double valueSeller){
+    public void adjustAccountBalances(Transaction transaction){
+        double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
+        double valueSeller = transactionValue - TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
+        double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
         double transactionCosts = transaction.getAssetAmount() * transaction.getAssetPrice() * transaction.getTransactionFee();
         double newBalanceSeller = rootRepository.getBalanceByIban(transaction.getIbanSell()) + valueSeller;
         double newBalanceBuyer = rootRepository.getBalanceByIban(transaction.getIbanBuy()) - valueBuyer;
@@ -86,6 +82,15 @@ public class TransactionService {
 
     public void adjustPortfolioAmount(Transaction transaction) {
         //TODO: aantal van de asset bijwerken in portfolio van koper en verkoper.
+        double assetAmount = transaction.getAssetAmount();
+        String assetCode = transaction.getAssetCode();
+        String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
+        String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
+        double newAssetAmountSeller = 100.0; //TODO: rootRepository.getPortfolioAssetByUsernameAssetCode(usernameSeller) - assetAmount;
+        double newAssetAmountBuyer = 100.0; //TODO: rootRepository.getPortfolioAssetByUsernameAssetCode(usernameBuyer) + assetAmount;
+        JdbcPortfolioDao.PortfolioDatabase pfDbSeller = new JdbcPortfolioDao.PortfolioDatabase(usernameSeller,assetCode,newAssetAmountSeller);
+        JdbcPortfolioDao.PortfolioDatabase pfDbBuyer = new JdbcPortfolioDao.PortfolioDatabase(usernameBuyer,assetCode,newAssetAmountBuyer);
+
         logger.info("Portfolio assets updated.");
     }
 
