@@ -46,12 +46,12 @@ public class TransactionFeeHelper {
         return new TransactionFeeHelper(feeBuyer,feeSeller);
     }
 
-    public String getIbanBank() {
+    public static String getIbanBank() {
         return ibanBank;
     }
 
     public void setIbanBank(String ibanBank) {
-        this.ibanBank = ibanBank;
+        TransactionFeeHelper.ibanBank = ibanBank;
     }
 
     public double getShareBuyer() {
@@ -59,7 +59,7 @@ public class TransactionFeeHelper {
     }
 
     public void setShareBuyer(double shareBuyer) {
-        this.shareBuyer = shareBuyer;
+        TransactionFeeHelper.shareBuyer = shareBuyer;
     }
 
     public double getShareSeller() {
@@ -67,7 +67,7 @@ public class TransactionFeeHelper {
     }
 
     public void setShareSeller(double shareSeller) {
-        this.shareSeller = shareSeller;
+        TransactionFeeHelper.shareSeller = shareSeller;
     }
 
     public double getFeeBuyer() {

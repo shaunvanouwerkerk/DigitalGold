@@ -3,6 +3,8 @@ package com.example.digital_gold.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,7 +15,7 @@ import java.util.Objects;
 public class Transaction {
 
     private int transactionId;
-    private LocalDateTime transactionDate;
+    private LocalDate transactionDate;
     private String assetCode;
     private double assetAmount;
     private double assetPrice;
@@ -25,17 +27,17 @@ public class Transaction {
 
     public Transaction() {
         this.transactionId = 0;
-        transactionDate = LocalDateTime.now();
+        transactionDate = LocalDate.now();
         logger.info("New empty transaction with timestamp: " + this.transactionDate);
     }
 
-    public Transaction(LocalDateTime transactionDate, String assetCode, double assetAmount, double assetPrice,
+    public Transaction(LocalDate transactionDate, String assetCode, double assetAmount, double assetPrice,
                        double transactionFee, String ibanSell, String ibanBuy) {
         this(0,transactionDate,assetCode,assetAmount,assetPrice,transactionFee,ibanSell,ibanBuy);
         logger.info("New transaction: " + this);
     }
 
-    public Transaction(int transactionId, LocalDateTime transactionDate, String assetCode, double assetAmount, double assetPrice,
+    public Transaction(int transactionId, LocalDate transactionDate, String assetCode, double assetAmount, double assetPrice,
                        double transactionFee, String ibanSell, String ibanBuy) {
         this.transactionId = transactionId;
         this.transactionDate = transactionDate;
@@ -57,7 +59,7 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public LocalDateTime getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
@@ -92,7 +94,7 @@ public class Transaction {
 
     //TODO: Setters voor testen van TransactionContoller.
 
-    public void setTransactionDate(LocalDateTime transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 
