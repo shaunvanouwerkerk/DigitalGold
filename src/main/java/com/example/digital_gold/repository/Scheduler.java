@@ -29,28 +29,31 @@ public class Scheduler {
         logger.info("DailyTask executed");
     }
 
-    @Scheduled(cron = "0 59 23 * * *")
+    @Scheduled(cron = "0 01 07 * * *")
     public void testTask() {
         saveDailyPortfolioValues();
     }
 
-    public void saveDailyPortfolioValues () {
+    public void saveDailyPortfolioValues() {
         List<Portfolio> portfolios = rootRepository.getAllPortfolios();
         portfolios.forEach(this::calculateDailyValue);
     }
 
-    public void calculateDailyValue(Portfolio portfolio) {
+    public double calculateDailyValue(Portfolio portfolio) {
         final Double[] totalValue = {0.00};
         Map<Asset, Double> assetMap = portfolio.getAssetList();
         assetMap.forEach((key, value) -> {
-            //AssetPrice assetPrice = rootRepository.findPriceByAssetCode(key.getAssetCode());
-            // methode heeft nu tweede parameter LocalDate:
             AssetPrice assetPrice = rootRepository.findPriceByAssetCodeAndDate(key.getAssetCode(), LocalDate.now());
             double price = assetPrice.getPrice();
             double amount = value;
             totalValue[0] += (price * amount);
         });
-        PortfolioHistory portfolioHistory = new PortfolioHistory(portfolio.getCustomer(), LocalDate.now(),totalValue[0]);
+        PortfolioHistory portfolioHistory = new PortfolioHistory(portfolio.getCustomer(), LocalDate.now(), totalValue[0]);
+        saveDailyValue(portfolioHistory);
+        return totalValue[0];
+    }
+
+    public void saveDailyValue(PortfolioHistory portfolioHistory) {
         rootRepository.savePortfolioValue(portfolioHistory);
     }
 }

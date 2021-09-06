@@ -1,8 +1,6 @@
-package com.example.digital_gold.service;
+package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.*;
-import com.example.digital_gold.repository.JdbcPortfolioDao;
-import com.example.digital_gold.repository.RootRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,25 +9,24 @@ import org.mockito.Mockito;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /*
 @Author Jany Gaal
-* */
+*/
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PortfolioOverviewServiceTest {
+class SchedulerTest {
 
     private RootRepository mockRepo;
-    private PortfolioOverviewService portfolioOverviewService;
+    private Scheduler scheduler;
 
     @BeforeAll
     public void SetUp() {
         mockRepo = Mockito.mock(RootRepository.class);
-        portfolioOverviewService = new PortfolioOverviewService(mockRepo);
+        scheduler = new Scheduler(mockRepo);
 
         Asset testAsset001 = new Asset("DOGE", "Dogecoin", "Beschrijving");
         Asset testAsset002 = new Asset("ETH", "Ethereum", "Beschrijving");
@@ -37,27 +34,23 @@ class PortfolioOverviewServiceTest {
         AssetPrice assetPrice001 = new AssetPrice(testAsset001, 1.00, LocalDate.now());
         AssetPrice assetPrice002 = new AssetPrice(testAsset002, 1.00, LocalDate.now());
 
-        // methode heeft nu tweede parameter LocalDate:
         Mockito.when(mockRepo.findPriceByAssetCodeAndDate("DOGE", LocalDate.now())).thenReturn(assetPrice001);
         Mockito.when(mockRepo.findPriceByAssetCodeAndDate("ETH", LocalDate.now())).thenReturn(assetPrice002);
-        /*Mockito.when(mockRepo.findPriceByAssetCode("DOGE")).thenReturn(assetPrice001);
-        Mockito.when(mockRepo.findPriceByAssetCode("ETH")).thenReturn(assetPrice002);*/
     }
 
     @AfterAll
     public void teadDown() {
         mockRepo = null;
-        portfolioOverviewService = null;
+        scheduler= null;
     }
 
     @Test
-    void getOverviewAssets() {
+    void testTask() {
     }
 
     @Test
-    void getPortfolioForCustomer() {
+    void saveDailyPortfolioValues() {
     }
-
 
     @Test
     void calculateDailyValue() {
@@ -72,7 +65,7 @@ class PortfolioOverviewServiceTest {
         testAssetsMap.put(testAsset002, 5000.00);
         Portfolio portfolio = new Portfolio(testCustomer300, testAssetsMap);
         double expected = 12566.00;
-        //double actual = portfolioOverviewService.calculateDailyValue(portfolio);
-        //assertThat(actual).isEqualTo(expected);
+        double actual = scheduler.calculateDailyValue(portfolio);
+        assertThat(actual).isEqualTo(expected);
     }
 }
