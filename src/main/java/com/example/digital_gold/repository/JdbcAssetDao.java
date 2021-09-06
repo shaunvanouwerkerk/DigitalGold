@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author Fiona Gray
@@ -46,6 +47,12 @@ public class JdbcAssetDao implements AssetDao {
         String sql = "Select * from Asset where assetCode = ?";
         return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetCode);
     }
+
+    public List<Asset> findAllAssets() {
+        String sql = "Select distinct assetCode from Asset";
+        return jdbcTemplate.query(sql, new AssetRowMapper());
+    }
+
 
     private static class AssetRowMapper implements RowMapper<Asset> {
 
