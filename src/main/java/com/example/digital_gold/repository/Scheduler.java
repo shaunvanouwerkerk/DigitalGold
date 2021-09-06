@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-/*
-@Author Jany Gaal
+/**
+* @author Jany Gaal
 */
 
 @Configuration
@@ -22,6 +22,7 @@ public class Scheduler {
 
     private final RootRepository rootRepository;
     private final Logger logger = LoggerFactory.getLogger(Scheduler.class);
+    private Random randomNumberGenerator = new Random();
 
     @Autowired
     public Scheduler(RootRepository rootRepository) {
@@ -32,11 +33,17 @@ public class Scheduler {
     @Scheduled(cron = "0 01 07 * * *")
     public void testTask() {
         saveDailyPortfolioValues();
+        saveDailyAssetPrices();
     }
 
     public void saveDailyPortfolioValues() {
         List<Portfolio> portfolios = rootRepository.getAllPortfolios();
         portfolios.forEach(this::calculateDailyValue);
+    }
+
+    public void saveDailyAssetPrices() {
+        List<Asset> assetList = rootRepository.findAllAssets();
+        assetList.forEach(this::generateAssetPrices);
     }
 
     public double calculateDailyValue(Portfolio portfolio) {
@@ -55,5 +62,18 @@ public class Scheduler {
 
     public void saveDailyValue(PortfolioHistory portfolioHistory) {
         rootRepository.savePortfolioValue(portfolioHistory);
+    }
+
+    public void generateAssetPrices(Asset asset) {
+        List<AssetPrice> assetPriceList = rootRepository.findPricesByAssetCode(asset.getAssetCode());
+        AssetPrice yesterdaysAssetPrice = assetPriceList.get(assetPriceList.size() - 1);
+        double yesterdaysPrice = yesterdaysAssetPrice.getPrice();
+        double todaysPrice = yesterdaysPrice * (1 + randomNumberGenerator.nextDouble());
+        AssetPrice todaysAssetPrice = new AssetPrice(asset, todaysPrice, LocalDate.now());
+        saveGeneratedAssetPrice(todaysAssetPrice);
+    }
+
+    public void saveGeneratedAssetPrice(AssetPrice assetPrice) {
+        rootRepository.saveAssetPrice(assetPrice);
     }
 }
