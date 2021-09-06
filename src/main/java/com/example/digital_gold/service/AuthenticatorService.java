@@ -3,6 +3,7 @@ package com.example.digital_gold.service;
  * @Author Shaun van Ouwerkerk
  */
 
+import com.example.digital_gold.repository.MapDatabase;
 import com.example.digital_gold.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,13 @@ import org.springframework.stereotype.Service;
 public class AuthenticatorService {
     private final HashService hashService;
     private RootRepository rootRepository;
+    private MapDatabase tokenDatabase;
 
     @Autowired
-    public AuthenticatorService(HashService hashService, RootRepository rootRepository) {
+    public AuthenticatorService(HashService hashService, RootRepository rootRepository, MapDatabase tokenDatabase) {
         this.hashService = hashService;
         this.rootRepository = rootRepository;
+        this.tokenDatabase = tokenDatabase;
     }
 
     public boolean authenticate(String username, String password) {
@@ -25,11 +28,10 @@ public class AuthenticatorService {
 
         return hashPassword.equals(storedHash);
     }
-    //Todo Nog afmaken Shaun
-//    public boolean authenticate(String token) {
-////        String username = rootRepository.findUsernameByToken(token);
-//        // als er een user gevonden wordt is er natuurlijk ook een token
-////        return username != null;
-//
-//    }
+
+    public boolean authenticate(String token) {
+        String username = tokenDatabase.findHashByUsername(token);
+        return username != null;
+
+    }
 }
