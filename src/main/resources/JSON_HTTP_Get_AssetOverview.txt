@@ -1,11 +1,12 @@
 // @author Fiona Gray
 
 //Postman
-  //JSON body voor ophalen AssetOverviewBank in DigitalGold project
+  //ophalen actuele AssetOverviewBank in DigitalGold project
   //HTTP GET request op endpoint "/assetOverviewBank"
   //Voorbeeld met data:
 
- http://localhost:8080/assetOverviewBank/2021-09-05
+ // GET http://localhost:8080/assetOverviewBank
+ // Response:
 
  [
      {

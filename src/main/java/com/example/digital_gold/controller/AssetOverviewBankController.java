@@ -25,13 +25,19 @@ public class AssetOverviewBankController {
         logger.info("New AsserOverviewBankController");
     }
 
-    //Todo: front-end? automatically get today's date when a customer requests this page
     // Todo: deliver message if request failed
     // retrieves list of all available assets + current prices
-    @GetMapping ("/assetOverviewBank/{today}")
+
+    @GetMapping ("/assetOverviewBank")
+    public ResponseEntity<?> getAssetOverviewBank() {
+        return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.now()), HttpStatus.OK);
+    }
+
+    /*@GetMapping ("/assetOverviewBank/{today}")
     public ResponseEntity<?> getAssetOverviewBank(@PathVariable String today) {
         return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.parse(today)), HttpStatus.OK);
     }
+*/
 
 
 

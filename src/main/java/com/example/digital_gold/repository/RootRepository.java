@@ -82,7 +82,7 @@ public class RootRepository {
     public void saveAsset(Asset asset) {
         assetDao.saveAsset(asset);
     }
-
+    public List<Asset> findAllAssets() { return assetDao.findAllAssets(); }
     public Asset findByAssetCode(String assetCode) {
         return assetDao.findByAssetCode(assetCode);
     }
