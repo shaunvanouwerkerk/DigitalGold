@@ -18,14 +18,14 @@ public class MapDatabase {
         database = new ConcurrentHashMap<>();
     }
 
-    public String findHashByUsername(String username) {
-        return database.get(username);
+    public String findUserByToken(String token) {
+        return database.get(token);
     }
 
     //Methode die database vult en controleert op dubbele
-    public boolean insertUsernameWithHash(String username, String hash){
-        if(!database.containsKey(username)){
-            database.put(username, hash);
+    public boolean insertTokenWithHash(String token, String username){
+        if(!database.containsKey(token)){
+            database.put(token,username);
             return true;
         }
         return false;
