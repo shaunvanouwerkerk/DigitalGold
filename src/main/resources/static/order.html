@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Gold | Order</title>
+    <meta name="decription" content="Digital Gold - your gateway to crypto.">
+    <meta name="keywords" content="Bitcoin, crypto, cryptocurrency">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/styles-order.css"type="text/css">
+    <script src="javascript/order.js" defer></script>
+</head>
+<body onload="initialize()">
+<nav class="navbar">
+    <div class="brand_name"><a href="index.html"><img class="logo" src="logo_small.png" alt="logo Digital Gold"></a>digital gold</div>
+    <a href="#" class="menu-button">
+        <span class="streep"></span>
+        <span class="streep"></span>
+        <span class="streep"></span>
+    </a>
+    <div class="nav-links">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="title"><h1 id="crypto-title"></h1></div>
+        <div class="form-container">
+            <div class="row">
+                <div class="col-30">
+                    <label for="coinselector">Select crypto: </label>
+                </div>
+                <div class="col-70">
+                    <select title="coinselector" id="coinselector" name="coinselector"></select>
+                </div>
+            </div>
+            <div class="row-hi">
+                <h2L id="form-title"></h2L>
+            </div>
+            <form id="order">
+                <h3>price calculator</h3>
+                <div class="row">
+                    <div class="col-30">
+                        <label for="cryptoAmount">Amount: </label>
+                    </div>
+                    <div class="col-70">
+                        <input type="number" step="0.01" min="0" pattern="\d+(\.\d*)?" id="cryptoAmount" name="cryptoAmount" placeholder="Enter BTC.." required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-30">
+                        <label for="cryptoValue">Value in USD: </label>
+                    </div>
+                    <div class="col-70">
+                        <input type="number" step="0.01" min="0" pattern="\d+(\.\d*)?" id="cryptoValue" name="cryptoValue" placeholder="Enter USD.." required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="action-button-container">
+                        <button class="big-button" id="postButton" type="button">BUY</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="small-button" id="resetbutton" type="reset">reset calculator</button>
+                </div>
+                <div class="row">
+                    <button class="small-button" id="loadcrypto" type="button">load crypto selector</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
