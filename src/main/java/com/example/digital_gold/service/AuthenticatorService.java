@@ -30,7 +30,7 @@ public class AuthenticatorService {
     }
 
     public boolean authenticate(String token) {
-        String username = tokenDatabase.findHashByUsername(token);
+        String username = tokenDatabase.findUserByToken(token);
         return username != null;
 
     }

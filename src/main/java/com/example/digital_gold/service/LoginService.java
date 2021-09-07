@@ -9,8 +9,6 @@ import com.example.digital_gold.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -37,7 +35,7 @@ public class LoginService {
         if(hashPassword.equals(storedHash)){
             token = UUID.randomUUID().toString();
             //Methode om token op te slaan en te checken of de token niet al bestaat
-            tokenDatabase.insertUsernameWithHash(username,token);
+            tokenDatabase.insertTokenWithHash(token,username);
         }
         return token;
     }
@@ -51,7 +49,7 @@ public class LoginService {
         if(hashPassword.equals(storedHash)){
             token = UUID.randomUUID().toString();
             //Methode om token op te slaan en te checken op dubbele
-            tokenDatabase.insertUsernameWithHash(username,token);
+            tokenDatabase.insertTokenWithHash(username,token);
         }
         return token;
     }
