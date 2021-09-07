@@ -51,18 +51,29 @@ h1 {
 
 
 /* table */
-
-th, td, p, input {
-    font:14px Courier;
+tr:hover {
+    background-color: #f9f0a1;
 }
-table, th, td
-{
-    border: solid 1px #DDD;
-    border-collapse: collapse;
-    padding: 2px 3px;
-    text-align: center;
+td {
+    font:16px Courier;
+    color: #1d4a54;
 }
 th {
     font-weight:bold;
+    font:20px Courier;
+    color: #f9f0a1;
+    background-color: #1d4a54;
+    height: 50px;
 }
+table, th, td
+{
+    border: solid 1px #f9f0a1;
+    border-collapse: collapse;
+    padding: 15px 15px;
+    text-align: center;
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
 

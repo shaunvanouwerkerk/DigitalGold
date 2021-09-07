@@ -20,7 +20,7 @@ fetch('../assetOverviewBank')
                 let td1 = document.createElement('td');
                 td1.textContent = value.assetCode;
                 let td2 = document.createElement('td');
-                td2.textContent= new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value.price);
+                td2.textContent= new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value.price);
                 tr.appendChild(td1);
                 tr.appendChild(td2);
                 tableBody.appendChild(tr);
