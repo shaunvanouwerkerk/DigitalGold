@@ -1,6 +1,7 @@
 package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.*;
+import com.example.digital_gold.service.PortfolioValueOverview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +96,7 @@ public class RootRepository {
 
     public Portfolio savePortfolio(Portfolio portfolio) {
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
+            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.addPortfolioAsset(portfolioDatabase);
         }
@@ -104,7 +105,7 @@ public class RootRepository {
 
     public Portfolio updatePortfolio(Portfolio portfolio) {
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
+            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.updatePortfolioAsset(portfolioDatabase);
         }
@@ -114,7 +115,7 @@ public class RootRepository {
     public int deletePortfolio(Portfolio portfolio) {
         int result = 0;
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            JdbcPortfolioDao.PortfolioDatabase portfolioDatabase = new JdbcPortfolioDao.PortfolioDatabase(portfolio.getCustomer().getUsername(),
+            PortfolioDatabase portfolioDatabase = new PortfolioDatabase(portfolio.getCustomer().getUsername(),
                     entry.getKey().getAssetCode(), entry.getValue());
             portfolioDao.deletePortfolioAsset(portfolioDatabase);
             result++;
@@ -134,10 +135,10 @@ public class RootRepository {
     public double getBalanceByIban(String iban) {return bankAccountDao.getBalanceByIban(iban);}
 
     public Portfolio getPortfolioForCustomer(String username) {
-        List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
+        List<PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
         Customer customer = null;
         Map<Asset, Double> assetMap = new HashMap<>();
-        for (JdbcPortfolioDao.PortfolioDatabase p : tempList) {
+        for (PortfolioDatabase p : tempList) {
             assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);
         }
         return new Portfolio(customer, assetMap);
@@ -167,23 +168,6 @@ public class RootRepository {
         return portfolioHistoryDao.getPortfolioValuesByUserName(username);
     }
 
-
-    public String[][] getPortfolioForCustomer2(String username) {
-        List<JdbcPortfolioDao.PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
-        String[][] portfolioTable = new String[tempList.size()][4];
-        int row = 0;
-        for (JdbcPortfolioDao.PortfolioDatabase assets : tempList) {
-                portfolioTable[row][0] = assets.assetCode;
-                // LocalDate.now() toegevoegd wegens veranderde methode:
-                AssetPrice assetPrice = assetPriceDao.findPriceByAssetCodeAndDate(assets.getAssetCode(), LocalDate.now());
-                double price = assetPrice.getPrice();
-                portfolioTable[row][1] = "€ " + price;
-                portfolioTable[row][2] = String.valueOf(assets.getAmount());
-                portfolioTable[row][3] = "€ " + (assets.getAmount() * 12.75);
-                row++;
-        }
-        return portfolioTable;
-    }
 }
 
 

@@ -32,7 +32,7 @@ class JdbcPortfolioDaoTest {
 
     @Test
     public void addPortfolioAssetTestRowsChanged() {
-        JdbcPortfolioDao.PortfolioDatabase testAsset = new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase testAsset = new PortfolioDatabase
                 ("TestUser100", "BTC", 5);
         int expected = 1;
         int actual = portfolioDaoTest.addPortfolioAsset(testAsset);
@@ -41,15 +41,15 @@ class JdbcPortfolioDaoTest {
 
     @Test
     public void updatePortfolioAsset() {
-        JdbcPortfolioDao.PortfolioDatabase expected = new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase expected = new PortfolioDatabase
                 ("TestUser101", "BTC", 25);
-        JdbcPortfolioDao.PortfolioDatabase actual = portfolioDaoTest.updatePortfolioAsset(expected);
+        PortfolioDatabase actual = portfolioDaoTest.updatePortfolioAsset(expected);
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void deletePortfolioAssetInDB() {
-        JdbcPortfolioDao.PortfolioDatabase testDelete = new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase testDelete = new PortfolioDatabase
                 ("TestUser102", "ETH", 25);
         int expected = 1;
         int actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
@@ -58,7 +58,7 @@ class JdbcPortfolioDaoTest {
     @Test
     public void deletePortfolioAssetNotInDB() {
         int expected = 0;
-        JdbcPortfolioDao.PortfolioDatabase testDelete = new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase testDelete = new PortfolioDatabase
                 ("TestUser003", "ETH", 25);
         int actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
         assertThat(actual).isEqualTo(expected);
@@ -66,23 +66,23 @@ class JdbcPortfolioDaoTest {
 
     @Test
     public void getPortfolioAssetByUsername () {
-        List<JdbcPortfolioDao.PortfolioDatabase> expected = new ArrayList<>();
-        expected.add(new JdbcPortfolioDao.PortfolioDatabase
+        List<PortfolioDatabase> expected = new ArrayList<>();
+        expected.add(new PortfolioDatabase
                 ("TestUser104", "BTC", 3.00));
-        List<JdbcPortfolioDao.PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser104");
+        List<PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser104");
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void getPortfolioAssetsByUsername () {
-        JdbcPortfolioDao.PortfolioDatabase testPortfolioDatabase1 =new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase testPortfolioDatabase1 =new PortfolioDatabase
                 ("TestUser105", "DOGE", 7566.00);
-        JdbcPortfolioDao.PortfolioDatabase testPortfolioDatabase2 =new JdbcPortfolioDao.PortfolioDatabase
+        PortfolioDatabase testPortfolioDatabase2 =new PortfolioDatabase
                 ("TestUser105", "ETH", 5000.00);
-        List<JdbcPortfolioDao.PortfolioDatabase> expected = new ArrayList<>();
+        List<PortfolioDatabase> expected = new ArrayList<>();
         expected.add(testPortfolioDatabase1);
         expected.add(testPortfolioDatabase2);
-        List<JdbcPortfolioDao.PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser105");
+        List<PortfolioDatabase> actual = portfolioDaoTest.getPortfolioAssetsByUsername("TestUser105");
         assertThat(actual).isEqualTo(expected);
     }
 }

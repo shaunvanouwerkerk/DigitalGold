@@ -4,6 +4,7 @@ import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Transaction;
 import com.example.digital_gold.helper.TransactionFeeHelper;
 import com.example.digital_gold.repository.JdbcPortfolioDao;
+import com.example.digital_gold.repository.PortfolioDatabase;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,8 +89,8 @@ public class TransactionService {
         String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
         double newAssetAmountSeller = 100.0; //TODO: rootRepository.getPortfolioAssetByUsernameAssetCode(usernameSeller) - assetAmount;
         double newAssetAmountBuyer = 100.0; //TODO: rootRepository.getPortfolioAssetByUsernameAssetCode(usernameBuyer) + assetAmount;
-        JdbcPortfolioDao.PortfolioDatabase pfDbSeller = new JdbcPortfolioDao.PortfolioDatabase(usernameSeller,assetCode,newAssetAmountSeller);
-        JdbcPortfolioDao.PortfolioDatabase pfDbBuyer = new JdbcPortfolioDao.PortfolioDatabase(usernameBuyer,assetCode,newAssetAmountBuyer);
+        PortfolioDatabase pfDbSeller = new PortfolioDatabase(usernameSeller,assetCode,newAssetAmountSeller);
+        PortfolioDatabase pfDbBuyer = new PortfolioDatabase(usernameBuyer,assetCode,newAssetAmountBuyer);
 
         logger.info("Portfolio assets updated.");
     }
