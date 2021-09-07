@@ -69,6 +69,12 @@ insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser202', '2021-09-03', 250);
 insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser202', '2021-09-02', 1);
+insert into portfoliohistory (userName, date, totalValue)
+VALUES ('TestUser105', '2021-09-04', 100);
+insert into portfoliohistory (userName, date, totalValue)
+VALUES ('TestUser105', '2021-09-05', 250.25);
+insert into portfoliohistory (userName, date, totalValue)
+VALUES ('TestUser105', '2021-09-06', 500.75);
 
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (1,'BTC','NL24DIGO1111111111','NL24DIGO2222222222',1,1000,0.01,'2020-01-01');
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (2,'ETH','NL24DIGO2222222222','NL24DIGO3333333333',2,1000,0.01,'2020-02-01');
@@ -91,3 +97,6 @@ insert into customer (username, password, firstName, prefix, lastName, dateOfBir
 values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
         'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'Nl123456789' );
 
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('DOGE', '2021-09-07', 28.54);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-07', 80.90);
+INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-07', 23.15);

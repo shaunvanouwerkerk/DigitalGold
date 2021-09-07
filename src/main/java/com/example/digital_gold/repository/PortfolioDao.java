@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface PortfolioDao {
 
-    int addPortfolioAsset (JdbcPortfolioDao.PortfolioDatabase portfolioDatabase);
-    JdbcPortfolioDao.PortfolioDatabase updatePortfolioAsset (JdbcPortfolioDao.PortfolioDatabase portfolioDatabase);
-    int deletePortfolioAsset (JdbcPortfolioDao.PortfolioDatabase portfolioDatabase);
-    List<JdbcPortfolioDao.PortfolioDatabase> getPortfolioAssetsByUsername(String username);
+    int addPortfolioAsset (PortfolioDatabase portfolioDatabase);
+    PortfolioDatabase updatePortfolioAsset (PortfolioDatabase portfolioDatabase);
+    int deletePortfolioAsset (PortfolioDatabase portfolioDatabase);
+    List<PortfolioDatabase> getPortfolioAssetsByUsername(String username);
     List<String> getAllUsersWithAPortfolio();
     double getPortfolioAssetByUsernameAssetCode (String username, String assetCode);
 }

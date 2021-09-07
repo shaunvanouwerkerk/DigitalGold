@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
 /*
 @Author Jany Gaal
@@ -97,64 +96,4 @@ public class JdbcPortfolioDao implements PortfolioDao {
         }
     }
 
-     public static class PortfolioDatabase {
-        String username;
-        String assetCode;
-        double amount;
-
-         public PortfolioDatabase() {
-         }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getAssetCode() {
-            return assetCode;
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-
-         public void setUsername(String username) {
-             this.username = username;
-         }
-
-         public void setAssetCode(String assetCode) {
-             this.assetCode = assetCode;
-         }
-
-         public void setAmount(double amount) {
-             this.amount = amount;
-         }
-
-         public PortfolioDatabase(String username, String assetCode, double amount) {
-             this.username = username;
-             this.assetCode = assetCode;
-             this.amount = amount;
-         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof PortfolioDatabase)) return false;
-            PortfolioDatabase that = (PortfolioDatabase) o;
-            return Double.compare(that.getAmount(), getAmount()) == 0 && Objects.equals(getUsername(), that.getUsername()) && Objects.equals(getAssetCode(), that.getAssetCode());
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(getUsername(), getAssetCode(), getAmount());
-        }
-
-        @Override
-        public String toString() {
-            return "PortfolioDatabase{" +
-                    "username='" + username + '\'' +
-                    ", assetCode='" + assetCode + '\'' +
-                    ", amount=" + amount +
-                    '}';
-        }
-    }
 }
