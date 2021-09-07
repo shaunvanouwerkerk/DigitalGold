@@ -61,7 +61,7 @@ create table AssetPrice
 (
     `assetCode` VARCHAR(9) NOT NULL,
     `date` DATE NOT NULL,
-    `price` DOUBLE NOT NULL,
+    `price` DOUBLE(20,2) NOT NULL,
     PRIMARY KEY (`assetCode`, `date`)
 
 );
