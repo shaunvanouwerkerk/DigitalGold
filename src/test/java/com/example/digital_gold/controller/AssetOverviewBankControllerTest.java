@@ -64,7 +64,7 @@ class AssetOverviewBankControllerTest {
         List<Map<String, Object>> assetOverview = createTestOverview();
         Mockito.when(assetOverviewBankServiceMock.getAssetOverviewBank(Mockito.any(LocalDate.class))).thenReturn(assetOverview);
 
-        MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get("/assetOverviewBank/2021-09-05");
+        MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get("/assetOverviewBank");
 
         try {
             ResultActions response = mockMvc.perform(getRequest).andExpect(status().isOk());

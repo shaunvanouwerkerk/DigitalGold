@@ -96,7 +96,3 @@ insert into customer (username, password, firstName, prefix, lastName, dateOfBir
                       zipCode, city, emailAddress, salt, status, iban)
 values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
         'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'Nl123456789' );
-
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('DOGE', '2021-09-07', 28.54);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-07', 80.90);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-07', 23.15);

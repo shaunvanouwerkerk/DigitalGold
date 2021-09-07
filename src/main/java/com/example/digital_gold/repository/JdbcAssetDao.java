@@ -49,7 +49,8 @@ public class JdbcAssetDao implements AssetDao {
     }
 
     public List<Asset> findAllAssets() {
-        String sql = "Select distinct assetCode from Asset";
+        //String sql = "Select distinct assetCode from Asset";
+        String sql = "Select * from Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
     }
 
