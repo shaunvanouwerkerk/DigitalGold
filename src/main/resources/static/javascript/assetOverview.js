@@ -14,16 +14,19 @@ fetch('../assetOverviewBank')
         trh.appendChild(th2);
         tableBody.appendChild(trh);
 
+        // tabel data
         data.forEach(function (value) {
                 let tr = document.createElement('tr');
                 let td1 = document.createElement('td');
                 td1.textContent = value.assetCode;
                 let td2 = document.createElement('td');
-                td2.textContent = value.price;
+                td2.textContent= new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value.price);
                 tr.appendChild(td1);
                 tr.appendChild(td2);
                 tableBody.appendChild(tr);
             });
+
+                console.log(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number));
 
         }).catch(error => {
         console.log(error);

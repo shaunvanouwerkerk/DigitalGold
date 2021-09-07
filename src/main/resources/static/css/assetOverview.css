@@ -1,5 +1,59 @@
+/* general styling */
+* {
+    box-sizing: border-box;
+}
+
+a {
+    font-family: 'Courier New', Courier, monospace;
+    color: #1d4a54;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #3b6c7a;
+    padding: 0.5em;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d4a54;
+    color: #f9f0a1;
+}
+
+.logo {
+    margin-right: 1rem;
+}
+
+.brand_name {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0.5rem;
+}
+
+
+/* table */
+
 th, td, p, input {
-    font:14px Verdana;
+    font:14px Courier;
 }
 table, th, td
 {
@@ -11,3 +65,4 @@ table, th, td
 th {
     font-weight:bold;
 }
+
