@@ -336,3 +336,26 @@ MEDIA QUERIES
         font-size: 1.6rem;
     }
 }
+
+/************************************************************************************
+Tables
+*************************************************************************************/
+
+th, td, p, input {
+    font:14px Calibri;
+}
+table, th, td
+{
+    border: 1px solid #f9f0a1;
+    border-collapse: collapse;
+    background-color: #3b6c7a;
+    padding: 2px 3px;
+    text-align: right;
+    font-family: "Calibri Light";
+    font-size: 1.1rem;
+    color: #f9f0a1;
+    margin: 5px;
+}
+th {
+    font-weight:bold;
+}

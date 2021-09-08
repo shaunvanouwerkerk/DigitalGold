@@ -26,20 +26,20 @@ public class PortfolioOverviewController {
         this.portfolioOverviewService = portfolioOverviewService;
     }
 
-    @GetMapping("/portfoliovalueoverviewtoday/{username}")
-    public ResponseEntity<PortfolioValueOverview> getPortfolioValueOverviewToday (@PathVariable String username) {
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday(username), HttpStatus.OK);
+    @GetMapping("/portfoliovalueoverviewtoday")
+    public ResponseEntity<PortfolioValueOverview> getPortfolioValueOverviewToday () {
+        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday("TestUser105"), HttpStatus.OK);
     }
 
-        @GetMapping("/portfoliovalueoverview/{username}")
-        public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@PathVariable String username) {
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(username),
+    @GetMapping("/portfoliovalueoverview")
+    public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview() {
+        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview("TestUser105"),
                 HttpStatus.OK);
-    }
+        }
 
-    @GetMapping("/portfolioassetoverview/{username}")
-        public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets(@PathVariable String username) {
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets(username), HttpStatus.OK);
+    @GetMapping("/portfolioassetoverview")
+        public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets() {
+        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets("TestUser105"), HttpStatus.OK);
         }
 
 }
