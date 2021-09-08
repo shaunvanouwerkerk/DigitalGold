@@ -30,7 +30,7 @@ public class Scheduler {
         logger.info("DailyTask executed");
     }
 
-    @Scheduled(cron = "0 59 23 * * *")
+    @Scheduled(cron = "0 37 16 * * *")
     public void testTask() {
         saveDailyAssetPrices();
         saveDailyPortfolioValues();
