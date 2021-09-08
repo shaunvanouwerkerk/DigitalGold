@@ -1,0 +1,351 @@
+
+/************************************************************************************
+GENERAL STYLING
+*************************************************************************************/
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #3b6c7a;
+    padding: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #1d4a54;
+    padding: 0.5em;
+}
+
+h2L {
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f9f0a1;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #3b6c7a;
+}
+
+h4 {
+    font-size: 1.2em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #3b6c7a;
+}
+
+h4L {
+    font-size: 1.2em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f9f0a1;
+}
+
+h5 {
+    font-size: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #3b6c7a;
+}
+
+a {
+    font-family: 'Courier New', Courier, monospace;
+    color: #1d4a54;
+}
+
+a:hover {
+    color: #3b6c7a;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+.container {
+    display:block;
+    margin: auto;
+    max-width: 700Px;
+    text-align: center;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+button {
+    background-color: #1d4a54;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    padding: 0.5em;
+    border-radius: 10px;
+    border:solid;
+    border-width: 2px;
+}
+
+.big-button {
+    background-color: #3b6c7a;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.4em;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+    margin: 0.5em;
+    border-radius: 10px;
+    border:solid;
+    border-width: 2px;
+}
+
+.small-button {
+    background-color: #1d4a54;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.7em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 0.5em;
+    border-radius: 10px;
+    border:solid;
+    border-width: 1px;
+}
+
+
+button:hover {
+    background-color: #f9f0a1;
+    color: #1d4a54;
+    border-color:#3b6c7a;
+}
+
+.white-back {
+    background-color: white;
+    color: #1d4a54;
+    padding: 1em;
+    text-align: center;
+}
+
+/************************************************************************************
+FORMS
+*************************************************************************************/
+
+.form-container {
+    background-color: #1d4a54;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 10px;
+    padding: 3em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.action-button-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+input[type=text],[type=password],[type=email],[type=number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.col-30 {
+    float: left;
+    width: 30%;
+    margin-top: 6px;
+    text-align: right;
+}
+
+.col-70 {
+    float: left;
+    width: 70%;
+    margin-top: 6px;
+    text-align: left;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row-hi {
+    margin: 1em;
+}
+
+/************************************************************************************
+NAVIGATION
+*************************************************************************************/
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d4a54;
+    color: #f9f0a1;
+}
+
+.logo {
+    margin-right: 1rem;
+}
+
+.brand_name {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0.5rem;
+}
+
+.nav-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: #f9f0a1;
+    padding: 1rem;
+    display: block;
+}
+
+.nav-links li:hover {
+    background-color: #3b6c7a;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 23px;
+}
+
+.menu-button .streep {
+    height: 3px;
+    width: 100%;
+    background-color: #f9f0a1;
+    border-radius: 10px;
+}
+
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+
+
+@media screen and (max-width: 700px) {
+    .menu-button {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar img {
+        max-width: 60%;
+        height: auto;
+    }
+
+    .nav-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .nav-links li {
+        text-align: center;
+    }
+
+    .nav-links li a {
+        padding: 00.5rem 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .title {
+        font-size: 0.4rem;
+        padding: 0.5em;
+    }
+
+    .col-30, .col-70, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+        text-align: left;
+    }
+
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+
+    .title {
+        font-size: 0.6rem;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    .navbar {
+        justify-content:space-evenly;
+    }
+
+    .brand_name {
+        font-size: 3rem;
+    }
+
+    .nav-links li a {
+        font-size: 1.6rem;
+    }
+}
