@@ -32,7 +32,7 @@ public class OrderController {
         logger.info("Uit body via JSON aangemaakt: " + requestOrder);
         Transaction orderTransaction = orderService.processOrder(requestOrder);
         if (orderTransaction != null) {
-            return ResponseEntity.created(URI.create("/order-confirmed")).build();
+            return ResponseEntity.created(URI.create("/order")).build();
         } else {
             return ResponseEntity.internalServerError().body("Your order cannot be processed at the moment. " +
                     "Please try again later");
