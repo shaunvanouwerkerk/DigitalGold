@@ -18,7 +18,17 @@ fetch('../assetOverviewBank')
         data.forEach(function (value) {
                 let tr = document.createElement('tr');
                 let td1 = document.createElement('td');
+                let btn = document.createElement('input');
+
+                btn.type = "button";
+                btn.className = "buy-button";
+                btn.value =  "Buy"
+                btn.onclick = function() {
+                        (window.location.href = "../order.html");
+                }
                 td1.textContent = value.assetCode;
+                td1.appendChild(btn);
+
                 let td2 = document.createElement('td');
                 td2.textContent= new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value.price);
                 tr.appendChild(td1);
@@ -31,3 +41,14 @@ fetch('../assetOverviewBank')
         }).catch(error => {
         console.log(error);
     });
+
+function redirectBuyPage() {
+        document.location.href = "../portfolio"
+}
+/*
+var btn = document.createElement('input');
+btn.type = "button";
+btn.className = "btn";
+btn.value = entry.email;
+btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
+td.appendChild(btn);*/
