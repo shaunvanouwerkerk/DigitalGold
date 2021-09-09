@@ -83,16 +83,26 @@ INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
 values ('TestUser101','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester101@gmail.com', 'testzoutje',true, 'Nl123456789' );
+        'TestCity', 'tester101@gmail.com', 'testzoutje',true, 'NL10DIGO9876543211' );
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
 values ('TestUser102','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester102@gmail.com', 'testzoutje',true, 'Nl123456789' );
+        'TestCity', 'tester102@gmail.com', 'testzoutje',true, 'NL10DIGO9876543212' );
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
 values ('TestUser104','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester104@gmail.com', 'testzoutje',true, 'Nl123456789' );
+        'TestCity', 'tester104@gmail.com', 'testzoutje',true, 'NL10DIGO9876543214' );
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
 values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'Nl123456789' );
+        'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('DigitalGoldBank','GoForGold', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
+        'BankCity', 'bank@digitalgold.com', 'testzoutje',true, 'NL00DIGO0000000001' );
+
+insert into bankaccount (iban, balance) values ("NL10DIGO9876543211", 38459.69);
+insert into bankaccount (iban, balance) values ("NL10DIGO9876543212", 9426.85);
+insert into bankaccount (iban, balance) values ("NL10DIGO9876543214", 10385.24);
+insert into bankaccount (iban, balance) values ("NL10DIGO9876543215", 305.79);
+insert into bankaccount (iban, balance) values ("NL00DIGO0000000001", 5000000.00);

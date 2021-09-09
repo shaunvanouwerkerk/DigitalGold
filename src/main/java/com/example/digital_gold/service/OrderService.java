@@ -30,12 +30,12 @@ public class OrderService {
 
         String ibanSell;
         if (requestOrder.getType().equals("sell")) {
-            ibanSell = "NL99DIGO9999999999" ; // rootRepository.findIbanByUsername(requestOrder.getUsername()); todo
+            ibanSell = "NL10DIGO9876543211" ; // rootRepository.findIbanByUsername(requestOrder.getUsername()); todo
         } else { ibanSell = ibanBank; }
 
         String ibanBuy;
         if (requestOrder.getType().equals("buy")) {
-            ibanBuy = "NL11DIGO1111111111"; // rootRepository.findIbanByUsername(requestOrder.getUsername()); todo
+            ibanBuy = "NL10DIGO9876543212"; // rootRepository.findIbanByUsername(requestOrder.getUsername()); todo
         } else { ibanBuy = ibanBank; }
 
         Transaction orderToTransaction = new Transaction(transactionDate, assetCode, assetAmount, assetPrice,
