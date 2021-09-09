@@ -76,7 +76,7 @@
                     dateOfBirth, bsn: bsn, iban: "12345678910", emailaddress: emailaddress}}
 
 
-            const url = '/register'
+            const url = '../register'
             const options = {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -88,6 +88,12 @@
             fetch(url,options)
                 .then(response => {
                 console.log(response)
+                        if(response.ok) {
+                            alert("Registration successfull")
+                            window.location.href = "../index.html"
+                        } else {
+                            alert("Register unsuccessfull")
+                        }
                 return response.json()}
                 )
                 .catch((error) => {

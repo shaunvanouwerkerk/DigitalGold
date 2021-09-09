@@ -3,7 +3,7 @@
     window.addEventListener('load', (e)=>{
     //voeg click aan listener aan de submit knop toe
 
-            fetch("/authenticate", {
+            fetch("../authenticate", {
                 method: 'GET',
                 headers: {
                     'Authorization': localStorage.getItem("token"),
@@ -18,7 +18,7 @@
                         // return { "text": "Je bent niet geauthenticeerd. Haal eerst je token op" }
                         //
                         console.log(r.headers.get('Location'))
-                        window.location.href = "/index.html"
+                        window.location.href = "../index.html"
 
                     }
                 })
