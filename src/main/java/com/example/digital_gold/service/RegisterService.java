@@ -1,6 +1,7 @@
 package com.example.digital_gold.service;
 
 import com.example.digital_gold.domain.Administrator;
+import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.domain.Customer;
 import com.example.digital_gold.helper.SaltMaker;
 import com.example.digital_gold.repository.JdbcCustomerDao;
@@ -57,7 +58,11 @@ public class RegisterService {
         }
     }
 
-
+    public String createBankAccount() {
+        BankAccount newBankAccount = new BankAccount();
+        rootRepository.saveBankAccount(newBankAccount);
+        return newBankAccount.getIban();
+    }
 
     public RootRepository getRootRepository() {
         return rootRepository;
