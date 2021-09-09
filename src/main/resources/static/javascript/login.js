@@ -25,17 +25,18 @@
                 localStorage.setItem("token", token)
                 console.log(token);
                 })
-                // .then(response =>  {
-                //     if (response.json().ok) {
-                //         alert("Login successfull")
-                //         window.location.href = "../portfolio.html"
-                //     } else {
-                //         alert("Login unsuccessfull")
-                //     }
-                // })
+                .then(response =>  {
+                    if (response.json().ok) {
+                        alert("Login successfull")
+                        window.location.href = "../portfolio.html"
+
+                    } else {
+                        alert("Login unsuccessfull")
+                    }
+                })
 
 
-        })
+    })
 
 
 
