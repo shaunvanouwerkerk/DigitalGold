@@ -101,8 +101,8 @@ insert into customer (username, password, firstName, prefix, lastName, dateOfBir
 values ('DigitalGoldBank','GoForGold', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
         'BankCity', 'bank@digitalgold.com', 'testzoutje',true, 'NL00DIGO0000000001' );
 
-insert into bankaccount (iban, balance) values ("NL10DIGO9876543211", 38459.69);
-insert into bankaccount (iban, balance) values ("NL10DIGO9876543212", 9426.85);
-insert into bankaccount (iban, balance) values ("NL10DIGO9876543214", 10385.24);
-insert into bankaccount (iban, balance) values ("NL10DIGO9876543215", 305.79);
-insert into bankaccount (iban, balance) values ("NL00DIGO0000000001", 5000000.00);
+insert into bankaccount (iban, balance) values ('NL10DIGO9876543211', 38459.69);
+insert into bankaccount (iban, balance) values ('NL10DIGO9876543212', 9426.85);
+insert into bankaccount (iban, balance) values ('NL10DIGO9876543214', 10385.24);
+insert into bankaccount (iban, balance) values ('NL10DIGO9876543215', 305.79);
+insert into bankaccount (iban, balance) values ('NL00DIGO0000000001', 5000000.00);
