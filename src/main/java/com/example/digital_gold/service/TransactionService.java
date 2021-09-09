@@ -31,22 +31,23 @@ public class TransactionService {
     }
 
     public Transaction processTransaction(Transaction transaction){
-        if(checkAccountBalanceBuyer(transaction)) {
-            logger.info("Buyer has sufficient account balance");
-        } else {
-            logger.info("Buyer has insufficient account balance!");
-            return null;
-        }
-        if(checkAssetAmount(transaction)) {
-            logger.info("Seller has sufficient asset amount");
-        } else {
-            logger.info("Seller has insufficient asset amount!");
-            return null;
-        }
-        //TODO: asset amounts bijwerken.
-        logger.info("Transaction validation successful.");
-        adjustAccountBalances(transaction);
-        //TODO: adjustPortfolioAmount(transaction);
+        //TODO: code uitgecomment om validatie te omzeilen
+//        if(checkAccountBalanceBuyer(transaction)) {
+//            logger.info("Buyer has sufficient account balance");
+//        } else {
+//            logger.info("Buyer has insufficient account balance!");
+//            return null;
+//        }
+//        if(checkAssetAmount(transaction)) {
+//            logger.info("Seller has sufficient asset amount");
+//        } else {
+//            logger.info("Seller has insufficient asset amount!");
+//            return null;
+//        }
+//        //TODO: asset amounts bijwerken.
+//        logger.info("Transaction validation successful.");
+//        adjustAccountBalances(transaction);
+//        //TODO: adjustPortfolioAmount(transaction);
         return rootRepository.saveTransaction(transaction);
     }
 
