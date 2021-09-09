@@ -36,6 +36,30 @@ h1 {
     color: #f9f0a1;
 }
 
+.nav-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: #f9f0a1;
+    padding: 1.5rem;
+    display: block;
+}
+
+.nav-links li:hover {
+    background-color: #3b6c7a;
+    border-radius: 10px;
+}
+
 .logo {
     margin-right: 1rem;
 }
@@ -58,6 +82,19 @@ td {
     font:16px Courier;
     color: #1d4a54;
 }
+.buy-button {
+    background-color: #1d4a54;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 0.5em;
+    border-radius: 10px;
+    border:solid;
+    border-width: 1px;
+    float: right;
+}
 th {
     font-weight:bold;
     font:20px Courier;
@@ -70,7 +107,7 @@ table, th, td
     border: solid 1px #f9f0a1;
     border-collapse: collapse;
     padding: 15px 15px;
-    text-align: center;
+    text-align: left;
     width: 50%;
     margin-right: 25%;
     margin-left: 25%;
