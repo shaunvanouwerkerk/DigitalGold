@@ -68,4 +68,6 @@ class SchedulerTest {
         double actual = scheduler.calculateDailyValue(portfolio);
         assertThat(actual).isEqualTo(expected);
     }
+
+    // todo tests for  daily asset prices
 }

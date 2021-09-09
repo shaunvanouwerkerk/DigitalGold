@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class AssetOverviewBankService {
         logger.info("New AssetOverviewBankService");
     }
 
+// todo: throw-catch sql exception?
     public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
         List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
         if (assetList.size() > 0) {
