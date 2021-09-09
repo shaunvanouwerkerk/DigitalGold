@@ -31,15 +31,16 @@ public class AuthenticatedController {
         logger.info("New AuthenticatedController");
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> loginAndAuthenticateCustomer(@RequestParam String token) {
+    @GetMapping ("/authenticate")
+    public ResponseEntity<?> list(@RequestHeader("Authorization") String token) {
         boolean tokenRecognized = authenticatorService.authenticate(token);
 
         if(tokenRecognized) {
-            return ResponseEntity.created(URI.create("/login2")).body("User Known");
+            return ResponseEntity.status(HttpStatus.OK).body("User Known");
         } else {
-            return ResponseEntity.badRequest().body("User Unknown");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User unknown");
         }
     }
 
 }
+
