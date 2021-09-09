@@ -21,16 +21,14 @@ import java.util.Random;
 public class Scheduler {
 
     private final RootRepository rootRepository;
-    private final Logger logger = LoggerFactory.getLogger(Scheduler.class);
     private Random randomNumberGenerator = new Random();
 
     @Autowired
     public Scheduler(RootRepository rootRepository) {
         this.rootRepository = rootRepository;
-        logger.info("DailyTask executed");
     }
 
-    @Scheduled(cron = "0 37 16 * * *")
+    @Scheduled(cron = "0 59 23 * * *")
     public void testTask() {
         saveDailyAssetPrices();
         saveDailyPortfolioValues();

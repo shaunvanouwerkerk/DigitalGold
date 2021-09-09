@@ -346,7 +346,7 @@ th, td, p, input {
 }
 table, th, td
 {
-    border: 1px solid #f9f0a1;
+    border-radius: 5px;
     border-collapse: collapse;
     background-color: #3b6c7a;
     padding: 2px 3px;

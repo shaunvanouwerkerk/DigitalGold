@@ -9,7 +9,7 @@ import java.util.List;
 public interface PortfolioDao {
 
     int addPortfolioAsset (PortfolioDatabase portfolioDatabase);
-    PortfolioDatabase updatePortfolioAsset (PortfolioDatabase portfolioDatabase);
+    int updatePortfolioAsset (PortfolioDatabase portfolioDatabase);
     int deletePortfolioAsset (PortfolioDatabase portfolioDatabase);
     List<PortfolioDatabase> getPortfolioAssetsByUsername(String username);
     List<String> getAllUsersWithAPortfolio();
