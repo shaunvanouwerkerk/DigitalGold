@@ -74,6 +74,9 @@ public class RootRepository {
 
     public String findUsernameByIban(String iban) {return customerDao.findUsernameByIban(iban);}
 
+    public String findIbanByUsername(String username) {return customerDao.findIbanByUsername(username);}
+
+
     //TransactionDao
     public Transaction saveTransaction(Transaction transaction) {
         return transactionDao.saveTransaction(transaction);
