@@ -39,7 +39,7 @@ class SchedulerTest {
     }
 
     @AfterAll
-    public void teadDown() {
+    public void tearDown() {
         mockRepo = null;
         scheduler= null;
     }
@@ -65,6 +65,23 @@ class SchedulerTest {
         testAssetsMap.put(testAsset002, 5000.00);
         Portfolio portfolio = new Portfolio(testCustomer300, testAssetsMap);
         double expected = 12566.00;
+        double actual = scheduler.calculateDailyValue(portfolio);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void calculateDailyValueNoAssets() {
+        Customer testCustomer300 = new Customer("TestUser105", "TestPassword",
+                new FullName("Tester", "van", "Tester"),
+                new Address(1, "TestStraat", "1111AA", "TestCity"),
+                new CustomerDetails(Date.valueOf("1900-01-01"),"753654852","tester@gmail.com", "Nl123456789"));
+        Asset testAsset001 = new Asset("DOGE", "Dogecoin", "Beschrijving");
+        Asset testAsset002 = new Asset("ETH", "Ethereum", "Beschrijving");
+        HashMap<Asset, Double> testAssetsMap = new HashMap();
+        testAssetsMap.put(testAsset001, 0.00);
+        testAssetsMap.put(testAsset002, 0.00);
+        Portfolio portfolio = new Portfolio(testCustomer300, testAssetsMap);
+        double expected = 0.00;
         double actual = scheduler.calculateDailyValue(portfolio);
         assertThat(actual).isEqualTo(expected);
     }

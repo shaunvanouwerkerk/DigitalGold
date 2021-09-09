@@ -29,8 +29,10 @@ public class PortfolioOverviewService {
     public PortfolioValueOverview getPortfolioOverviewToday(String username) {
         List<PortfolioHistory> values = rootRepository.getPortfolioValuesForCustomer(username);
         for (PortfolioHistory portfolioHistory : values) {
-            if (portfolioHistory.getDate().equals(LocalDate.now())) {
-                return new PortfolioValueOverview(portfolioHistory.getDate(), portfolioHistory.getTotalvalue());
+            if (!values.isEmpty()) {
+                if (portfolioHistory.getDate().equals(LocalDate.now())) {
+                    return new PortfolioValueOverview(portfolioHistory.getDate(), portfolioHistory.getTotalvalue());
+                }
             }
         }
         return null;
@@ -61,7 +63,6 @@ public class PortfolioOverviewService {
                     new PortfolioAssetOverview(assetName, assetCode, currentPrice, amountOfAsset, assetTotalValue);
             list.add(portfolioAssetOverview);
         });
-
         return list;
     }
 }

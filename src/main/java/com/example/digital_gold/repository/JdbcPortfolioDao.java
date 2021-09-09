@@ -1,6 +1,9 @@
 package com.example.digital_gold.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -10,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 
 /*
 @Author Jany Gaal
@@ -41,9 +45,8 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
-    public PortfolioDatabase updatePortfolioAsset(PortfolioDatabase portfolioDatabase) {
-        jdbcTemplate.update(connection -> updatePortfolioAssetStatement(portfolioDatabase, connection));
-        return portfolioDatabase;
+    public int updatePortfolioAsset(PortfolioDatabase portfolioDatabase) {
+        return jdbcTemplate.update(connection -> updatePortfolioAssetStatement(portfolioDatabase, connection));
     }
 
     private PreparedStatement updatePortfolioAssetStatement(PortfolioDatabase portfolioDatabase,

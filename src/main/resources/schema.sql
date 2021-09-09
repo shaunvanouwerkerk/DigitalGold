@@ -42,7 +42,7 @@ create table Portfolio
 (
     `userName` VARCHAR(200) NOT NULL ,
     `assetCode` VARCHAR(9) NOT NULL,
-    `amount` DOUBLE(20,2) NOT NULL,
+    `amount` DOUBLE NOT NULL,
     PRIMARY KEY (`userName`, `assetCode`)
 );
 
@@ -61,7 +61,7 @@ create table AssetPrice
 (
     `assetCode` VARCHAR(9) NOT NULL,
     `date` DATE NOT NULL,
-    `price` DOUBLE(20,2) NOT NULL,
+    `price` DOUBLE NOT NULL,
     PRIMARY KEY (`assetCode`, `date`)
 
 );
@@ -69,6 +69,6 @@ create table PortfolioHistory
 (
     `userName` VARCHAR(200) NOT NULL ,
     `date` DATE NOT NULL ,
-    `totalValue` DOUBLE(20,2) NOT NULL,
+    `totalValue` DOUBLE NOT NULL,
     PRIMARY KEY (`userName`, `date`)
 );
