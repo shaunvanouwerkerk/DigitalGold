@@ -12,7 +12,6 @@
             // // selecteer inputs en zet waarden omde normale submit functie uitgevoerd
             username = String(document.querySelector('#username').value)
             password = String(document.querySelector('#password').value)
-            display(username,password)
 
             // Stuurt username en password naar de server
             let data = '?username=' + username + '&password=' + password
