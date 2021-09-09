@@ -15,7 +15,7 @@
 
             // Stuurt username en password naar de server
             let data = '?username=' + username + '&password=' + password
-            const url = `http://localhost:8080/login` + data;
+            const url = `/login` + data;
             const options = {
                 method: `POST`,
                 headers:{

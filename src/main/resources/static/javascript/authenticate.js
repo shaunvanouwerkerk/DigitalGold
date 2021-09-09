@@ -18,7 +18,7 @@
                         // return { "text": "Je bent niet geauthenticeerd. Haal eerst je token op" }
                         //
                         console.log(r.headers.get('Location'))
-                        window.location.href = "/index"
+                        window.location.href = "/index.html"
 
                     }
                 })
