@@ -15,7 +15,10 @@ public class OrderService {
     private static String ibanBank = "NL00DIGO0000000001";
 
     @Autowired
-    public OrderService(RootRepository rootRepository) {this.rootRepository = rootRepository; }
+    public OrderService(RootRepository rootRepository,TransactionService transactionService) {
+        this.rootRepository = rootRepository;
+        this.transactionService = transactionService;
+    }
 
     public Transaction processOrder(Order requestOrder){
         LocalDate transactionDate = LocalDate.now();

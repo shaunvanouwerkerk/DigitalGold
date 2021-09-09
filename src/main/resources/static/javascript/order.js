@@ -1,4 +1,8 @@
+/*
+@author David Truijens - scripts voor orderformulier
+ */
 const menuButton = document.getElementsByClassName('menu-button')[0];
+
 const menuLinks = document.getElementsByClassName('nav-links')[0];
 
 menuButton.addEventListener('click',() => {
@@ -100,14 +104,15 @@ function postRequest() {
         body: JSON.stringify(orderData)  // moet worden omgezet naar een string
     })
         .then(response => {
-            console.log(response)
-            return response.json() }
-        )
-        .then(json => {
-            console.log(json);
+            console.log(response.status);
+            if(response.ok) {
+                alert("Order processed successfully")
+            } else {
+                alert("Order processing failed")
+            }
         })
         .catch((error) => {
-            console.error('Foutje', error);
+            console.log("Order niet verwerkt. Fout: ", error)
         });
 }
 
