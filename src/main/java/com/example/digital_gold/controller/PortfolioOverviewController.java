@@ -7,7 +7,10 @@ import com.example.digital_gold.service.PortfolioValueOverview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,8 +21,8 @@ import java.util.List;
 @RestController
 public class PortfolioOverviewController {
 
-    private PortfolioOverviewService portfolioOverviewService;
-    private AuthenticatorService authenticatorService;
+    private final PortfolioOverviewService portfolioOverviewService;
+    private final AuthenticatorService authenticatorService;
 
     @Autowired
     public PortfolioOverviewController(PortfolioOverviewService portfolioOverviewService, AuthenticatorService authenticatorService) {
@@ -30,25 +33,33 @@ public class PortfolioOverviewController {
     @GetMapping("/portfoliovalueoverviewtoday")
     public ResponseEntity<PortfolioValueOverview> getPortfolioValueOverviewToday(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
-        try {
-            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday(username), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
+        PortfolioValueOverview portfolioValueOverview = portfolioOverviewService.getPortfolioOverviewToday(username);
+        if (!(portfolioValueOverview == null)) {
+            return new ResponseEntity<>(portfolioValueOverview, HttpStatus.OK);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Data Found");
         }
-        return null;
     }
 
     @GetMapping("/portfoliovalueoverview")
     public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(username),
-                HttpStatus.OK);
+        List<PortfolioValueOverview> portfolioValueOverviewList = portfolioOverviewService.getPortfolioOverview(username);
+        if (!(portfolioValueOverviewList == null)) {
+            return new ResponseEntity<>(portfolioValueOverviewList, HttpStatus.OK);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Data Found");
+        }
     }
 
     @GetMapping("/portfolioassetoverview")
     public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets(username), HttpStatus.OK);
+        List<PortfolioAssetOverview> portfolioAssetOverviewList = portfolioOverviewService.getPortfolioOverviewAssets(username);
+        if (!(portfolioAssetOverviewList == null)) {
+            return new ResponseEntity<>(portfolioAssetOverviewList, HttpStatus.OK);
+        } else
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Data Found");
     }
 }
 
