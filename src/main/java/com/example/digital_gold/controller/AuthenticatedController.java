@@ -34,9 +34,7 @@ public class AuthenticatedController {
     @GetMapping ("/authenticate")
     public ResponseEntity<?> list(@RequestHeader("Authorization") String token) {
         boolean tokenRecognized = authenticatorService.authenticate(token);
-
         String username = authenticatorService.authenticateUsername(token);
-        System.out.println(" Dit is de username vanuit authenticate controller" + username);
 
         if(tokenRecognized) {
             return ResponseEntity.status(HttpStatus.OK).body("User Known");

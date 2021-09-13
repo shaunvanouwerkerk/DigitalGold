@@ -40,9 +40,7 @@ public class PortfolioOverviewController {
 
     @GetMapping("/portfoliovalueoverview")
     public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@RequestHeader("Authorization") String token) {
-        System.out.println("Dit is de token vanuit portfoliooverview" + token);
         String username = authenticatorService.authenticateUsername(token);
-        System.out.println(" Dit is de username vanuit portfoliooverview controller" + username);
         return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(username),
                 HttpStatus.OK);
     }
