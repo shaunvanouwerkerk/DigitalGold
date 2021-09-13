@@ -30,7 +30,12 @@ public class AssetOverviewBankController {
     // retrieves list of all available assets + current prices
     @GetMapping ("/assetoverviewbank")
     public ResponseEntity<?> getAssetOverviewBank() {
-        return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.now()), HttpStatus.OK);
+        try {
+            return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.now()), HttpStatus.OK);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
 /*        List<Map<String, Object>> assetList = assetOverviewBankService.getAssetOverviewBank(LocalDate.now());
         if (assetList != null) {
             return ResponseEntity.status(HttpStatus.OK).body("Overview of assets is fetched.");
