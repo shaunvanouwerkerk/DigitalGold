@@ -1,4 +1,8 @@
-fetch('../portfoliovalueoverview')
+fetch('../portfoliovalueoverview',{
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+    },})
     .then((response) => response.json()).then(data => {
     let tr = '';
     let tableBody = document.querySelector('#portfoliovalueoverview');
@@ -16,7 +20,11 @@ fetch('../portfoliovalueoverview')
 }).catch(error => {
 });
 
-fetch('../portfolioassetoverview')
+fetch('../portfolioassetoverview',{
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+    },})
     .then((response) => response.json()).then(data => {
     let tr = '';
     let tableBody = document.querySelector('#portfolioassetoverview');
@@ -44,7 +52,11 @@ fetch('../portfolioassetoverview')
 }).catch(error => {
 });
 
-fetch('../portfoliovalueoverviewtoday')
+fetch('../portfoliovalueoverviewtoday',{
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+    },})
     .then((response) => response.json()).then(data => {
     let tableBody = document.querySelector('#portfoliovalueoverviewtoday');
     let tr = document.createElement('tr');
