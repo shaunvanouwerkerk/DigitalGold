@@ -31,7 +31,7 @@ public class AssetOverviewBankService {
 // todo: throw-catch sql exception?
     public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
         List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
-        if (assetList.size() > 0) {
+        if (!assetList.isEmpty()) {
             logger.info("AssetOverview is created");
             return assetList;
         } else {
