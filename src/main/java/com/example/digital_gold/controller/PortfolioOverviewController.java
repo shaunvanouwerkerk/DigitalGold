@@ -1,15 +1,13 @@
 package com.example.digital_gold.controller;
 
+import com.example.digital_gold.service.AuthenticatorService;
 import com.example.digital_gold.service.PortfolioAssetOverview;
 import com.example.digital_gold.service.PortfolioOverviewService;
 import com.example.digital_gold.service.PortfolioValueOverview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,16 +19,19 @@ import java.util.List;
 public class PortfolioOverviewController {
 
     private PortfolioOverviewService portfolioOverviewService;
+    private AuthenticatorService authenticatorService;
 
     @Autowired
-    public PortfolioOverviewController(PortfolioOverviewService portfolioOverviewService) {
+    public PortfolioOverviewController(PortfolioOverviewService portfolioOverviewService, AuthenticatorService authenticatorService) {
         this.portfolioOverviewService = portfolioOverviewService;
+        this.authenticatorService = authenticatorService;
     }
 
     @GetMapping("/portfoliovalueoverviewtoday")
-    public ResponseEntity<PortfolioValueOverview> getPortfolioValueOverviewToday() {
+    public ResponseEntity<PortfolioValueOverview> getPortfolioValueOverviewToday(@RequestHeader("Authorization") String token) {
+        String username = authenticatorService.authenticateUsername(token);
         try {
-            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday("TestUser105"), HttpStatus.OK);
+            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday(username), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,14 +39,18 @@ public class PortfolioOverviewController {
     }
 
     @GetMapping("/portfoliovalueoverview")
-    public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview() {
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview("TestUser105"),
+    public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@RequestHeader("Authorization") String token) {
+        System.out.println("Dit is de token vanuit portfoliooverview" + token);
+        String username = authenticatorService.authenticateUsername(token);
+        System.out.println(" Dit is de username vanuit portfoliooverview controller" + username);
+        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(username),
                 HttpStatus.OK);
     }
 
     @GetMapping("/portfolioassetoverview")
-    public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets() {
-        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets("TestUser105"), HttpStatus.OK);
+    public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets(@RequestHeader("Authorization") String token) {
+        String username = authenticatorService.authenticateUsername(token);
+        return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets(username), HttpStatus.OK);
     }
 }
 

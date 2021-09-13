@@ -34,4 +34,8 @@ public class AuthenticatorService {
         return username != null;
 
     }
+    public String authenticateUsername(String token){
+        String username = tokenDatabase.findUserByToken(token);
+        return username;
+    }
 }
