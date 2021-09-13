@@ -1,51 +1,40 @@
+let username
+let password
 
+document.querySelector('#sbSubmit').addEventListener('click',
+    function (event) {
+        event.preventDefault() // anders wordt de gebruiker naar andere pagina geleidt
+        // // selecteer inputs en zet waarden omde normale submit functie uitgevoerd
+        username = String(document.querySelector('#username').value)
+        password = String(document.querySelector('#password').value)
 
-    let username
-    let password
-
-    document.querySelector('#sbSubmit').addEventListener('click',
-        function (event) {
-            event.preventDefault() // anders wordt de gebruiker naar andere pagina geleidt
-            // // selecteer inputs en zet waarden omde normale submit functie uitgevoerd
-            username = String(document.querySelector('#username').value)
-            password = String(document.querySelector('#password').value)
-
-            // Stuurt username en password naar de server
-            let data = '?username=' + username + '&password=' + password
-            const url = `../login` + data;
-            const options = {
-                method: `POST`,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        // Stuurt username en password naar de server
+        let data = '?username=' + username + '&password=' + password
+        const url = `../login` + data;
+        const options = {
+            method: `POST`,
+            headers: {
+                'Content-Type': 'application/json'
             }
-            // Token komt terug als username & password erkend wordt
-            fetch(url, options)
-                .then(response => response.text()).then(token => {
-                localStorage.setItem("token", token)
-                console.log(token);
-                })
-                .then(response =>  {
-                    if (response.json().ok) {
-                        alert("Login successfull")
-                        window.location.href = "../portfolio.html"
-
-                    } else {
-                        alert("Login unsuccessfull")
-                    }
-                })
-
+        }
+        // Token komt terug als username & password erkend wordt
+        fetch(url, options)
+            .then(response => {
+                if(!response.ok) {
+                    alert("Login unsuccessful "+ "\n\nCombination of username and password are incorrect.");
+                    console.log(response.status)
+                    return Promise.reject(new Error(response.statusText))
+                }
+                alert("Login successful")
+                console.log(response.status)
+                return response.text()
+            })
+            .then(response => {
+                window.localStorage.setItem("token",response);
+                window.location.replace("/portfolio.html")
+            })
+            .catch(error => {
+                console.error("Issue fetching data: ", error)
+            })
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
