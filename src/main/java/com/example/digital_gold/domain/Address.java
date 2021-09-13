@@ -1,8 +1,5 @@
 package com.example.digital_gold.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -11,8 +8,6 @@ import java.util.Objects;
 */
 
 public class Address {
-
-    private final Logger logger = LoggerFactory.getLogger(Address.class);
 
     private int houseNumber;
     @NotBlank(message = "verplicht")
@@ -27,7 +22,6 @@ public class Address {
         this.streetName = streetName;
         this.zipCode = zipCode;
         this.city = city;
-        logger.info("New Adress" + this);
     }
 
     public int getHouseNumber() {

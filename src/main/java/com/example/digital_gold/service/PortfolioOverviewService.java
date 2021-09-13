@@ -1,6 +1,7 @@
 package com.example.digital_gold.service;
 
 import com.example.digital_gold.domain.Asset;
+import com.example.digital_gold.domain.AssetPrice;
 import com.example.digital_gold.domain.Portfolio;
 import com.example.digital_gold.domain.PortfolioHistory;
 import com.example.digital_gold.repository.RootRepository;
@@ -19,23 +20,17 @@ import java.util.Map;
 @Service
 public class PortfolioOverviewService {
 
-    private RootRepository rootRepository;
+    private final RootRepository rootRepository;
 
     @Autowired
     public PortfolioOverviewService(RootRepository rootRepository) {
         this.rootRepository = rootRepository;
     }
 
+
     public PortfolioValueOverview getPortfolioOverviewToday(String username) {
-        List<PortfolioHistory> values = rootRepository.getPortfolioValuesForCustomer(username);
-        for (PortfolioHistory portfolioHistory : values) {
-            if (!values.isEmpty()) {
-                if (portfolioHistory.getDate().equals(LocalDate.now())) {
-                    return new PortfolioValueOverview(portfolioHistory.getDate(), portfolioHistory.getTotalvalue());
-                }
-            }
-        }
-        return null;
+        Portfolio portfolio = rootRepository.getPortfolioForCustomer(username);
+         return new PortfolioValueOverview(LocalDate.now(), calculatePortfolioValue(portfolio));
     }
 
     public List<PortfolioValueOverview> getPortfolioOverview(String username) {
@@ -64,6 +59,18 @@ public class PortfolioOverviewService {
             list.add(portfolioAssetOverview);
         });
         return list;
+    }
+
+    public double calculatePortfolioValue(Portfolio portfolio) {
+        final Double[] totalValue = {0.00};
+        Map<Asset, Double> assetMap = portfolio.getAssetList();
+        assetMap.forEach((key, value) -> {
+            AssetPrice assetPrice = rootRepository.findPriceByAssetCodeAndDate(key.getAssetCode(), LocalDate.now());
+            double price = assetPrice.getPrice();
+            double amount = value;
+            totalValue[0] += (price * amount);
+        });
+        return totalValue[0];
     }
 }
 
