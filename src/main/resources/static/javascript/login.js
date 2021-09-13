@@ -25,7 +25,7 @@ document.querySelector('#sbSubmit').addEventListener('click',
                     console.log(response.status)
                     return Promise.reject(new Error(response.statusText))
                 }
-                alert("Login successful")
+                alert("Login successful" + "\n\n Welcome to your Digital Gold portfolio")
                 console.log(response.status)
                 return response.text()
             })
