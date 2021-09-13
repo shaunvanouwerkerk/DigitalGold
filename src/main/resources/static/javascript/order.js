@@ -95,7 +95,7 @@ function postRequest() {
 
     let orderData = {assetCode: selectedCryptoSymbol, amountOfAsset: selectedCryptoAmount , type: "buy", limit: 0}; // javascript object Order, matches java Order
 
-    fetch('../order', {
+    fetch('/order', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
