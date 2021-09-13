@@ -1,4 +1,4 @@
-fetch('../assetoverviewbank')
+fetch('/assetoverviewbank')
     .then((response) => response.json()).then(data =>
         {console.log(data);
         let tr = '';
@@ -24,7 +24,7 @@ fetch('../assetoverviewbank')
                 btn.className = "buy-button";
                 btn.value =  "Buy"
                 btn.onclick = function() {
-                        (window.location.href = "../order.html");
+                        (window.location.href = "/order.html");
                 }
                 td1.textContent = value.assetCode;
                 td1.appendChild(btn);
@@ -38,3 +38,4 @@ fetch('../assetoverviewbank')
         }).catch(error => {
         console.log(error);
     });
+

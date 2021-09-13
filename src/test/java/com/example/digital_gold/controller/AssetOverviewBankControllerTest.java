@@ -54,7 +54,7 @@ class AssetOverviewBankControllerTest {
         return mapper.writeValueAsString(createTestOverview());
     }
 
-    @Test
+   /* @Test
     public void validRequestGetAssetOverviewBank() {
         List<Map<String, Object>> assetOverview = createTestOverview();
         Mockito.when(assetOverviewBankServiceMock.getAssetOverviewBank(Mockito.any(LocalDate.class))).thenReturn(assetOverview);
@@ -68,7 +68,7 @@ class AssetOverviewBankControllerTest {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-    }
+    }*/
 
     //TODO invalid Request
     @Test
