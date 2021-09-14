@@ -27,7 +27,7 @@ public class RootRepository {
     @Autowired
     public RootRepository(CustomerDao customerDao, AdministratorDao administratorDao, TransactionDao transactionDao,
                           AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao,
-                          PortfolioHistoryDao portfolioHistoryDao) {
+                          PortfolioHistoryDao portfolioHistoryDao, BankAccountDao bankAccountDao) {
         this.customerDao = customerDao;
         this.administratorDao = administratorDao;
         this.transactionDao = transactionDao;

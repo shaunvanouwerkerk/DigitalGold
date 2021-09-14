@@ -23,7 +23,9 @@ import java.sql.Date;
 @ActiveProfiles("test")
 class RegisterServiceTest {
 
+
     private RegisterService registerService;
+
     private RootRepository mockRepo;
     private SaltMaker mockSaltMaker;
     private HashService mockHashService;
@@ -44,15 +46,24 @@ class RegisterServiceTest {
         registerService = null;
     }
 
-//todo Test werkt nog niet correct, komt steeds null uit;
- /*   @Test
-    void register() {
-        Customer customer1 = new Customer("Test123", "welkom01","salt",new FullName("Jan", "van", "Ridder"),
-                new Address(25,"Kerkstraat","1059 AT","Amsterdam"),new CustomerDetails(Date.valueOf("1995-01-01"),
-                "123456789","janvanridder@gmail.com"));
-        Customer customer2 = registerService.register(customer1);
+    private Customer createTestCustomer(){
+        FullName testfullname = new FullName("Tester", "van", "De Test");
+        Address testadress = new Address(1, "TestStraat", "1111AA", "TestCity");
+        CustomerDetails testcustomerDetails = new CustomerDetails(Date.valueOf("1900-01-01"),"987654321",
+                "tester@tester.tst" ,"NL12DIGO1234567899");
+        return new Customer("TestUser01", "TestPassword",null,true, testfullname, testadress, testcustomerDetails);
+    }
+
+//todo Test werkt nog niet correct, komt steeds null uit
+
+// @Test
+//    void register() {
+//        Customer customer1 = createTestCustomer();
+//        Customer customer2 = registerService.register(customer1);
+//        System.out.println(customer1);
+//        System.out.println(customer2);
 //        Assertions.assertThat(customer1.getSalt()).isEqualTo(null);
 //        Assertions.assertThat(customer2.getSalt()).isNotEmpty();
-
-    }*/
-}
+//
+//    }
+//}
