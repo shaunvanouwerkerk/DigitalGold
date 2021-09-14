@@ -25,30 +25,30 @@ INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('MATIC', '
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('VET', 'VeChain', 'Beschrijving');
 
 
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-03', 3965.20);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-04', 3406.78);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ETH', '2021-09-05', 12.00);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-04', 42273.5);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BTC', '2021-09-05', 5.20);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('DOGE', '2021-09-05', 25.75);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ADA', '2021-09-05', 30.75);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BNB', '2021-09-05', 102.56);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('USDT', '2021-09-05', 203.78);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('XRP', '2021-09-05', 405.68);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('SOL', '2021-09-05', 35.90);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('DOT', '2021-09-05', 36.89);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('USDC', '2021-09-05', 3003.45);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('UNI', '2021-09-05', 100.45);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('LINK', '2021-09-05', 200.70);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('LUNA', '2021-09-05', 345.67);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BCH', '2021-09-05', 654.70);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('BUSD', '2021-09-05', 123.89);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('LTC', '2021-09-05', 321.65);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('ICP', '2021-09-05', 2008.90);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('WBTC', '2021-09-05', 28.54);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('MATIC', '2021-09-05', 80.90);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('VET', '2021-09-05', 76.89);
-INSERT INTO `AssetPrice` (`assetCode`, `date`, `price`) VALUES ('VET', '2021-09-06', 78.89);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('ETH', '2021-09-03 13:58:00', 3965.20);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('ETH', '2021-09-04 13:58:00', 3406.78);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('ETH', '2021-09-05 13:58:00', 12.00);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('BTC', '2021-09-04 13:58:00', 42273.5);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('BTC', '2021-09-05 13:58:00', 5.20);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('DOGE', '2021-09-05 13:58:00', 25.75);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('ADA', '2021-09-05 13:58:00', 30.75);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('BNB', '2021-09-05 13:58:00', 102.56);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('USDT', '2021-09-05 13:58:00', 203.78);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('XRP', '2021-09-05 13:58:00', 405.68);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('SOL', '2021-09-05 13:58:00', 35.90);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('DOT', '2021-09-05 13:58:00', 36.89);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('USDC', '2021-09-05 13:58:00', 3003.45);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('UNI', '2021-09-05 13:58:00', 100.45);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('LINK', '2021-09-05 13:58:00', 200.70);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('LUNA', '2021-09-05 13:58:00', 345.67);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('BCH', '2021-09-05 13:58:00', 654.70);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('BUSD', '2021-09-05 13:58:00', 123.89);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('LTC', '2021-09-05 13:58:00', 321.65);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('ICP', '2021-09-05 13:58:00', 2008.90);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('WBTC', '2021-09-05 13:58:00', 28.54);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('MATIC', '2021-09-05 13:58:00', 80.90);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('VET', '2021-09-05 13:58:00', 76.89);
+INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('VET', '2021-09-06 13:58:00', 78.89);
 
 insert into portfolio (username, assetCode, amount)
 values ('TestUser101', 'BTC', 7566.00);
