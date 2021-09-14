@@ -1,30 +1,36 @@
 /*
-@author David Truijens - scripts voor orderformulier
+@author David Truijens - scripts voor orderpagina Buy
  */
-const menuButton = document.getElementsByClassName('menu-button')[0];
 
+/* * * * * * NAVIGATION * * * * * */
+const menuButton = document.getElementsByClassName('menu-button')[0];
 const menuLinks = document.getElementsByClassName('nav-links')[0];
 
 menuButton.addEventListener('click',() => {
     menuLinks.classList.toggle('active')
 })
+/* * * * * *  END NAVIGATION * * * * * */
 
-function initialize() {
-    document.getElementById("crypto-title").innerHTML += ("Buy Bitcoin (BTC)");
-    document.getElementById("form-title").innerHTML = "Bitcoin";
+
+/* * * * * * CALCULATOR * * * * * */
+
+function getAssetPriceByAssetCode (crypto) {
+    fetch('/assetoverviewbank')
+        .then((response) => response.json()).then(assetData => {
+        console.log(assetData);
+        console.log(crypto);
+
+        assetData.forEach(function (item) {
+            if (item.assetCode === crypto) {
+                console.log("Assetcode gevonden " + item.assetCode)
+            }
+
+        })
+    })
 }
 
-const selector = document.getElementById("coinselector");
 
-selector.addEventListener('change', () => {
-    let selectedCryptoName = selector.options[selector.selectedIndex].text;
-    let selectedCryptoSymbol = selector.options[selector.selectedIndex].value.toUpperCase();
-    console.log(selectedCryptoName + selectedCryptoSymbol);
-    document.getElementById("crypto-title").innerHTML = "";
-    document.getElementById("form-title").innerHTML = "";
-    document.getElementById("crypto-title").innerHTML = "Buy " + selectedCryptoName + "( " + selectedCryptoSymbol + " )";
-    document.getElementById("form-title").innerHTML = selectedCryptoName;
-})
+
 
 const cryptoValue = document.querySelector('#cryptoValue');
 const cryptoAmount = document.querySelector('#cryptoAmount');
@@ -36,6 +42,7 @@ cryptoValue.onchange = ()=>calc()
 cryptoAmount.onkeyup = ()=>calc('crypto')
 cryptoAmount.onchange = ()=>calc('crypto')
 
+/* TODO: Functie moet straks op basis van assetprice data ipv API Coindesk */
 async function calc(changer){
     const currency = "USD"
     const cryptoAmt = Number(cryptoAmount.value)
@@ -53,41 +60,15 @@ async function calc(changer){
         cryptoAmount.value = amount
     }
 }
+/* * * * * * END CALCULATOR * * * * * */
 
-const buttonLoadCrypto = document.getElementById("loadcrypto");
-buttonLoadCrypto.addEventListener("click",() => {
-    getCryptoListFromApi();
-})
 
-async function getCryptoListFromApi() {
-    const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false',
-        {
-            headers: {
-                'accept':'application/json'
-            }
-        });
-    let cryptoList = await response.json();
-    console.info(cryptoList);
-
-    let dropdown = document.getElementById("coinselector");
-    dropdown.length = 0;
-    dropdown.selectedIndex = 0;
-
-    let option;
-    for (let i = 0; i < cryptoList.length; i++) {
-        option = document.createElement('option');
-        option.text = cryptoList[i].name;
-        option.value = cryptoList[i].symbol;
-        dropdown.add(option);
-    }
-}
+/* * * * * * POST ORDER * * * * * */
 
 const buttonPostBuyOrder = document.getElementById("postButton");
 buttonPostBuyOrder.addEventListener("click",() => {
     postRequest();
 })
-
-
 
 function postRequest() {
     let selectedCryptoSymbol = selector.options[selector.selectedIndex].value;
@@ -115,6 +96,62 @@ function postRequest() {
             console.log("Order niet verwerkt. Fout: ", error)
         });
 }
+/* * * * * * END POST ORDER * * * * * */
+
+
+/* * * * * * ASSETLIST DROPDOWN * * * * * */
+
+/* wordt aangeroepen bij body.onload */
+function initialize() {
+    let previousPage = document.referrer;
+    console.log(previousPage);
+    document.getElementById("crypto-title").innerHTML = "";
+    document.getElementById("form-title").innerHTML = "";
+    getAssetList();
+}
+
+const selector = document.getElementById("coinselector");
+
+selector.addEventListener('change', () => {
+    let selectedCryptoName = selector.options[selector.selectedIndex].text;
+    let selectedCryptoSymbol = selector.options[selector.selectedIndex].value.toUpperCase();
+    console.log(selectedCryptoName + selectedCryptoSymbol);
+    document.getElementById("crypto-title").innerHTML = "";
+    document.getElementById("form-title").innerHTML = "";
+    document.getElementById("crypto-title").innerHTML = "Buy " + selectedCryptoName;
+    document.getElementById("form-title").innerHTML = selectedCryptoName;
+})
+
+/*TODO: Help schermpje met info tonen. */
+const buttonHelp = document.getElementById("help");
+buttonHelp.addEventListener("click",() => {
+    getAssetPriceByAssetCode("XRP");
+    /* showHelp(); */
+})
+
+function getAssetList() {
+    fetch('/assetoverviewbank')
+        .then((response) => response.json()).then(assetList => {
+            console.log(assetList);
+            let dropdown = document.getElementById("coinselector");
+            dropdown.length = 0;
+            dropdown.selectedIndex = 0;
+            let option;
+
+            assetList.forEach(function (assetName) {
+                option = document.createElement('option');
+                option.text = assetName.assetCode;
+                /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
+                   Hoe nu de crypto naam tonen hier?? */
+                dropdown.add(option);
+                dropdown.selectedIndex = 0;
+                let firstCryptoInList = dropdown.options[selector.selectedIndex].text;
+                document.getElementById("crypto-title").innerHTML = "Buy " + firstCryptoInList;
+                document.getElementById("form-title").innerHTML = firstCryptoInList;
+            })
+        })
+}
+/* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
 
 

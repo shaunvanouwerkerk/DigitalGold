@@ -50,6 +50,9 @@ public class RootRepository {
     public boolean findCustomerByUsernameAndEmail(String username, String emailAddress) {
         return customerDao.findCustomerByUsernameAndEmail(username, emailAddress);
     }
+    public Customer findAndReturnCustomerByUsername(String username) {
+        return customerDao.findAndReturnCustomerByUsername(username);
+    }
 
     public boolean findAdministratorByUsername(String username) {
         return administratorDao.findAdministratorByUsername(username);
