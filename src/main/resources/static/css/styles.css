@@ -2,6 +2,11 @@
 /************************************************************************************
 GENERAL STYLING
 *************************************************************************************/
+:root {
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+}
 
 * {
     box-sizing: border-box;
@@ -133,6 +138,33 @@ button:hover {
 FORMS
 *************************************************************************************/
 
+
+.form-control small {
+    font-size: 14px;
+    background: #3b6c7a;
+    border-radius: 4px;
+    color: Black;
+    visibility: hidden;
+    border: 0px solid;
+    margin: 10px 0px;
+    padding-left:2em;
+    padding-right:2em;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.form:after {
+    transform: skew(-10deg, -10deg);
+}
+.form-control.error small {
+    visibility: visible;
+}
+.form-control.error input {
+    border-color: var(--error-color);
+}
+.form-control.success input {
+    border-color: var(--success-color);
+}
+
 .form-container {
     background-color: #1d4a54;
     color: #f9f0a1;
@@ -193,6 +225,24 @@ input[type=text],[type=password],[type=email], select, textarea {
     display: table;
     clear: both;
   }
+
+
+.form-field input:focus {
+    outline: none;
+}
+
+.form-field.error input {
+    border-color: var(--error-color);
+}
+
+.form-field.success input {
+    border-color: var(--success-color);
+}
+
+
+.form-field small {
+    color: var(--error-color);
+}
 
 /************************************************************************************
 NAVIGATION

@@ -34,14 +34,19 @@
             <div class="content">
                 <div class="form-container">
                     <h2L>Register</h2L>
-                    <form id="register">
+                    <form id="register" class="form">
                         <h3>Login credentials</h3>
                         <div class="row">
                             <div class="col-30">
                                 <label for="username">Username: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="username" name="username" placeholder="Availability wil be checked.." required>
+                                <div class="form-field">
+                                    <div class="form-control">
+                                <input type="text" id="username" name="username" placeholder="Availability wil be checked.."required>
+                                    <small>Error message</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -49,7 +54,10 @@
                                 <label for="password">Password: </label>
                             </div>
                             <div class="col-70">
-                                <input type="password" id="password" name="password" minlength="8" placeholder="At least 8 characters.." >
+                                <div class="form-control">
+                                <input type="password" id="password" name="password" minlength="8" placeholder="At least 8 characters.."required >
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row"><h3>Name</h3></div>
@@ -58,7 +66,10 @@
                                 <label for="firstname">First name: </label> 
                             </div>
                             <div class="col-70">
-                                <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
+                                <div class="form-control">
+                                <input type="text" id="firstname" name="firstname" placeholder="Your first name.." required >
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -74,7 +85,10 @@
                                 <label for="lastname">Last name: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="lastname" name="lastname" placeholder="Your last name..">
+                                <div class="form-control">
+                                <input type="text" id="lastname" name="lastname" placeholder="Your last name.."required >
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row"><h3>Address</h3></div>
@@ -83,7 +97,10 @@
                                 <label for="housenumber">House number: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="housenumber" name="housenumber" placeholder="Your house number..">
+                                <div class="form-control">
+                                <input type="text" id="housenumber" name="housenumber" placeholder="Your house number.." required>
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -91,7 +108,10 @@
                                 <label for="streetname">Street name: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="streetname" name="streetname" placeholder="Your street name..">
+                                <div class="form-control">
+                                <input type="text" id="streetname" name="streetname" placeholder="Your street name.." required>
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -99,7 +119,10 @@
                                 <label for="zipcode">Zip code: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="zipcode" name="zipcode" placeholder="Your zipcode..">
+                                <div class="form-control">
+                                <input type="text" id="zipcode" name="zipcode" placeholder="Your zipcode.." required>
+                                <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -107,16 +130,23 @@
                                 <label for="city">City: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="city" name="city" placeholder="Your city..">
+                                <div class="form-control">
+                                <input type="text" id="city" name="city" placeholder="Your city.." required>
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row"><h3>Personal</h3></div>
                         <div class="row">
                             <div class="col-30">
                                 <label for="dateofbirth">Date of birth: </label>
+
                             </div>
                             <div class="col-70">
-                                <input type="text" id="dateofbirth" name="dateofbirth" placeholder="Your date of birth..">
+                                <div class="form-control">
+                                <input type="text" id="dateofbirth" name="dateofbirth" maxlenght = "10" placeholder="yyyy-mm-dd" required>
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -124,7 +154,10 @@
                                 <label for="bsn">BSN: </label>
                             </div>
                             <div class="col-70">
-                                <input type="text" id="bsn" name="bsn" placeholder="Your BSN..">
+                                <div class="form-control">
+                                <input type="text" id="bsn" name="bsn" placeholder="Your BSN.." required >
+                                    <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -132,7 +165,10 @@
                                 <label for="emailaddress">Email: </label>
                             </div>
                             <div class="col-70">
-                                <input type="email" id="emailaddress" name="emailaddress" placeholder="Your email address..">
+                                <div class="form-control">
+                                <input type="email" id="emailaddress" name="emailaddress" placeholder="Your email address.." required >
+                                <small>Error message</small>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
