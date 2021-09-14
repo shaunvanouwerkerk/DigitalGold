@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.*;
-import java.time.LocalDate;
 
 @Repository
 public class RootRepository {
@@ -102,21 +102,9 @@ public class RootRepository {
     }
 
     // AssetPriceDao
-    public void saveAssetPrice(AssetPrice assetPrice) {
-        assetPriceDao.saveAssetPrice(assetPrice);
-    }
-
-    public AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date) {
-        return assetPriceDao.findPriceByAssetCodeAndDate(assetCode, date);
-    }
-
-    public List<AssetPrice> findPricesByAssetCode(String assetCode) {
-        return assetPriceDao.findPricesByAssetCode(assetCode);
-    }
-
-    public List<Map<String, Object>> findAllAvailableAssets(LocalDate today) {
-        return assetPriceDao.findAllAvailableAssets(today);
-    }
+    public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
+    public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
+    public List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) { return assetPriceDao.findAllAvailableAssets(now); }
 
     // BankAccountDao
     public BankAccount saveBankAccount(BankAccount bankAccount) {
@@ -131,6 +119,7 @@ public class RootRepository {
         return bankAccountDao.getBalanceByIban(iban);
     }
 
+    // PortfolioDao
     public Portfolio getPortfolioForCustomer(String username) {
         List<PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
         Customer customer = customerDao.findAndReturnCustomerByUsername(username);

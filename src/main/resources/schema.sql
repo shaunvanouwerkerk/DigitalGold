@@ -60,9 +60,9 @@ create table Transaction
 create table AssetPrice
 (
     `assetCode` VARCHAR(9) NOT NULL,
-    `date` DATE NOT NULL,
+    `datetime` DATETIME NOT NULL,
     `price` DOUBLE NOT NULL,
-    PRIMARY KEY (`assetCode`, `date`)
+    PRIMARY KEY (`assetCode`, `datetime`)
 
 );
 create table PortfolioHistory

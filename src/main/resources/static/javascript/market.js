@@ -1,4 +1,4 @@
-fetch('../assetoverviewbank')
+fetch('/assetoverviewbank')
     .then((response) => response.json()).then(data =>
         {console.log(data);
         let tr = '';
@@ -38,3 +38,4 @@ fetch('../assetoverviewbank')
         }).catch(error => {
         console.log(error);
     });
+
