@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -38,7 +39,8 @@ public class Scheduler {
         //saveDailyAssetPrices();
     }
 
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
+    //@Scheduled(cron = "0 25 12 * * *")
     public void testTask2() {
         saveCurrentAssetPrices();
     }
@@ -51,7 +53,7 @@ public class Scheduler {
             savePortfolioValue(portfolioHistory);
         }
     }
-
+// via randomgenerator
     /*public void saveDailyAssetPrices() {
         List<Asset> assetList = rootRepository.findAllAssets();
         assetList.forEach(this::generateAssetPrices);
@@ -59,13 +61,15 @@ public class Scheduler {
 
     public void saveCurrentAssetPrices() {
         List<Asset> assetList = rootRepository.findAllAssets();
-        assetList.forEach(this::getCurrentAssetPrices);
+        getCurrentAssetPrices(assetList);
+        //assetList.forEach(this::getCurrentAssetPrices);
     }
 
     public void savePortfolioValue(PortfolioHistory portfolioHistory) {
         rootRepository.savePortfolioValue(portfolioHistory);
     }
 
+    // via randomgenerator
    /* public void generateAssetPrices(Asset asset) {
         List<AssetPrice> assetPriceList = rootRepository.findPricesByAssetCode(asset.getAssetCode());
         AssetPrice yesterdaysAssetPrice = assetPriceList.get(assetPriceList.size() - 1);
@@ -75,19 +79,24 @@ public class Scheduler {
         saveAssetPrice(todaysAssetPrice);
     }*/
 
-    public void getCurrentAssetPrices(Asset asset) {
+    public void getCurrentAssetPrices(List <Asset> assetList) {
         try {
-            List<CryptoApiAssetPrice> assetPriceList = assetOverviewBankController.getAssetOverviewBank();
-            for(CryptoApiAssetPrice price: assetPriceList) {
-                AssetPrice assetPrice = new AssetPrice(asset, price.getCurrentPrice(), LocalDate.now()); // todo: convert to localdatetime
-                saveAssetPrice(assetPrice);
-            }
+            assetOverviewBankController.getAssetOverviewBank();
+            //List<CryptoApiAssetPrice> assetPriceList = assetOverviewBankController.getAssetOverviewBank();
+            /*for(Asset asset: assetList) {
+                for (CryptoApiAssetPrice price: assetPriceList) {
+                    if (price.getSymbol().toUpperCase(Locale.ROOT).equals(asset.getAssetCode())) {
+                        AssetPrice assetPrice = new AssetPrice(asset, price.getCurrentPrice(), LocalDate.now()); // todo: convert to localdatetime
+                        saveAssetPrice(assetPrice);
+                    }
+                }
+            }*/
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    public void saveAssetPrice(AssetPrice assetPrice) {
+    /*public void saveAssetPrice(AssetPrice assetPrice) {
         rootRepository.saveAssetPrice(assetPrice);
-    }
+    }*/
 }

@@ -12,14 +12,12 @@ public class CryptoApiAssetPrice {
     @JsonProperty("current_price")
     private long currentPrice;
 
-
     public CryptoApiAssetPrice(String symbol, long currentPrice) {
         this.symbol = symbol;
         this.currentPrice = currentPrice;
     }
 
     public CryptoApiAssetPrice() {
-
     }
 
     public String getSymbol() {
@@ -45,4 +43,6 @@ public class CryptoApiAssetPrice {
                 ", currentPrice=" + currentPrice +
                 '}';
     }
+
+
 }

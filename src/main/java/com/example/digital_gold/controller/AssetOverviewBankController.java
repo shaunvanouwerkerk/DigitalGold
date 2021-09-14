@@ -1,4 +1,5 @@
 package com.example.digital_gold.controller;
+import com.example.digital_gold.domain.Asset;
 import com.example.digital_gold.domain.AssetPrice;
 import com.example.digital_gold.domain.CryptoApiAssetPrice;
 import com.example.digital_gold.schedulingtasks.Scheduler;
@@ -20,7 +21,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -57,7 +60,7 @@ public class AssetOverviewBankController {
     //  todo: uppercase maken van assetCode vanuit Json?
     // todo: frontend
     private static final String CRYPTO_API_URL =
-            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=20&page=1&sparkline=false";
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=30&page=1&sparkline=false";
 
     @GetMapping ("/assetoverviewbank")
     public List<CryptoApiAssetPrice> getAssetOverviewBank() throws IOException, InterruptedException {
@@ -73,10 +76,7 @@ public class AssetOverviewBankController {
         // parse JSON into objects --> in pom xml jackson bind toegevoegd als dependency
         ObjectMapper mapper = new ObjectMapper();
         List<CryptoApiAssetPrice> prices = mapper.readValue(response.body(), new TypeReference<>(){});
-
-        for (CryptoApiAssetPrice assetPrice : prices) {
-            logger.info("New CryptoApi price created as object: " + assetPrice);
-        }
-        return prices;
+        List<CryptoApiAssetPrice> twentyPrices = assetOverviewBankService.getTwentyPrices(prices);
+        return twentyPrices;
     }
 }
