@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,10 @@ class PortfolioOverviewServiceTest {
         Mockito.when(mockRepo.getPortfolioForCustomer("TestUser200")).thenReturn(new Portfolio(testCustomer,assetMap));
         Mockito.when(mockRepo.getPortfolioValuesForCustomer("TestUser200")).thenReturn(testList1);
         Mockito.when(mockRepo.getPortfolioValuesForCustomer("TestUser201")).thenReturn(testList2);
-        Mockito.when(mockRepo.findPriceByAssetCodeAndDate("DOGE",LocalDate.now())).
-                thenReturn(new AssetPrice(testAsset001,1, LocalDate.now()));
-        Mockito.when(mockRepo.findPriceByAssetCodeAndDate("ETH",LocalDate.now())).
-                thenReturn(new AssetPrice(testAsset002,1, LocalDate.now()));
+        Mockito.when(mockRepo.findPriceByAssetCode("DOGE")).
+                thenReturn(new AssetPrice(testAsset001,1, LocalDateTime.now()));
+        Mockito.when(mockRepo.findPriceByAssetCode("ETH")).
+                thenReturn(new AssetPrice(testAsset002,1, LocalDateTime.now()));
     }
 
     @AfterAll

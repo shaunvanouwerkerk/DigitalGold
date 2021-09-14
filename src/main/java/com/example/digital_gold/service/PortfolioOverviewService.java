@@ -70,7 +70,7 @@ public class PortfolioOverviewService {
     public PortfolioAssetOverview makePortfolioAssetOverview (Asset asset, double amount) {
         String assetName = asset.getAssetName();
         String assetCode = asset.getAssetCode();
-        double currentPrice = rootRepository.findPriceByAssetCodeAndDate(asset.getAssetCode(), LocalDate.now()).getPrice();
+        double currentPrice = rootRepository.findPriceByAssetCode(asset.getAssetCode()).getPrice();
         double assetTotalValue = (currentPrice * amount);
         return new PortfolioAssetOverview(assetName, assetCode, currentPrice, amount, assetTotalValue);
     }
