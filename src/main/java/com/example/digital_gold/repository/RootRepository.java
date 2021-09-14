@@ -165,7 +165,7 @@ public class RootRepository {
         return portfolioHistoryDao.getPortfolioValuesByUserName(username);
     }
 
-    public void SaveAssetChangesInPortfolio(Portfolio portfolio) {
+    public void saveAssetChangesInPortfolio(Portfolio portfolio) {
         List<PortfolioDatabase> portfolioDatabaseList = new ArrayList<>();
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
             portfolioDatabaseList.add(new PortfolioDatabase(portfolio.getCustomer().getUsername(),

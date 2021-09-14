@@ -101,8 +101,8 @@ public class TransactionService {
         buyerPfAsset.put(asset,newAssetAmountBuyer);
         Portfolio portfolioBuyer = new Portfolio(buyer,buyerPfAsset);
 
-        rootRepository.updatePortfolio(portfolioBuyer);
-        rootRepository.updatePortfolio(portfolioSeller);
+        rootRepository.saveAssetChangesInPortfolio(portfolioBuyer);
+        rootRepository.saveAssetChangesInPortfolio(portfolioSeller);
 
         logger.info("Portfolio assets updated.");
     }

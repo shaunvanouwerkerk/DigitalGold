@@ -106,7 +106,7 @@ class RootRepositoryTest {
     void portfolioToDatabaseDeleteTest() {
         Portfolio testPortfolio = new Portfolio(setUpCustomer1(),setUpAsset1());
         try {
-            rootRepository.SaveAssetChangesInPortfolio(testPortfolio);
+            rootRepository.saveAssetChangesInPortfolio(testPortfolio);
         }catch (EmptyResultDataAccessException e) {
             System.out.println("SQL error test portfolioToDatabaseDeleteTest geslaagd");
         }
@@ -115,7 +115,7 @@ class RootRepositoryTest {
     @Test
     void portfolioToDatabaseSaveTest() {
         Portfolio expected = new Portfolio(setUpCustomer2(),setUpAsset2());
-        rootRepository.SaveAssetChangesInPortfolio(expected);
+        rootRepository.saveAssetChangesInPortfolio(expected);
         Portfolio actual = rootRepository.getPortfolioForCustomer(setUpCustomer2().getUsername());
         assertThat(actual).isEqualTo(expected);
     }
@@ -123,7 +123,7 @@ class RootRepositoryTest {
     @Test
     void portfolioToDatabaseUpdateTest() {
         Portfolio expected = new Portfolio(setUpCustomer3(),setUpAsset3());
-        rootRepository.SaveAssetChangesInPortfolio(expected);
+        rootRepository.saveAssetChangesInPortfolio(expected);
         Portfolio actual = rootRepository.getPortfolioForCustomer(setUpCustomer3().getUsername());
         assertThat(actual).isEqualTo(expected);
     }
@@ -132,7 +132,7 @@ class RootRepositoryTest {
     void portfolioToDatabaseAlloptionsTest() {
         Portfolio expected = new Portfolio(setUpCustomer4(),setUpAsset5());
         Portfolio input = new Portfolio(setUpCustomer4(), setUpAsset4());
-        rootRepository.SaveAssetChangesInPortfolio(input);
+        rootRepository.saveAssetChangesInPortfolio(input);
         Portfolio actual = rootRepository.getPortfolioForCustomer(setUpCustomer4().getUsername());
         assertThat(actual).isEqualTo(expected);
     }
