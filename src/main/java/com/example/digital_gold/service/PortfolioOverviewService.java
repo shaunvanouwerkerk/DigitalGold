@@ -28,7 +28,6 @@ public class PortfolioOverviewService {
         this.rootRepository = rootRepository;
     }
 
-
     public PortfolioValueOverview getPortfolioOverviewToday(String username) {
         try {
             Portfolio portfolio = rootRepository.getPortfolioForCustomer(username);
@@ -59,19 +58,20 @@ public class PortfolioOverviewService {
             Map<Asset, Double> map = portfolio.getAssetList();
             List<PortfolioAssetOverview> list = new ArrayList<>();
             map.forEach((key, value) -> {
-                String assetName = key.getAssetName();
-                String assetCode = key.getAssetCode();
-                double currentPrice = rootRepository.findPriceByAssetCodeAndDate(key.getAssetCode(), LocalDate.now()).getPrice();
-                double amountOfAsset = value;
-                double assetTotalValue = (currentPrice * amountOfAsset);
-                PortfolioAssetOverview portfolioAssetOverview =
-                        new PortfolioAssetOverview(assetName, assetCode, currentPrice, amountOfAsset, assetTotalValue);
-                list.add(portfolioAssetOverview);
+                list.add(makePortfolioAssetOverview(key, value));
             });
             return list;
         } catch (DataAccessException e) {
             return null;
         }
+    }
+
+    public PortfolioAssetOverview makePortfolioAssetOverview (Asset asset, double amount) {
+        String assetName = asset.getAssetName();
+        String assetCode = asset.getAssetCode();
+        double currentPrice = rootRepository.findPriceByAssetCodeAndDate(asset.getAssetCode(), LocalDate.now()).getPrice();
+        double assetTotalValue = (currentPrice * amount);
+        return new PortfolioAssetOverview(assetName, assetCode, currentPrice, amount, assetTotalValue);
     }
 
     public double calculatePortfolioValue(Portfolio portfolio) {

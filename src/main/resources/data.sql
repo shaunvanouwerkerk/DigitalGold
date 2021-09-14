@@ -60,6 +60,16 @@ insert into portfolio (username, assetCode, amount)
 values ('TestUser105', 'DOGE', 7566.00);
 insert into portfolio (username, assetCode, amount)
 values ('TestUser105', 'ETH', 5000.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser108', 'DOGE', 5000.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'BTC', 3.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'ETH', 357.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'BUSD', 457.32);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'VET', 111.00);
 
 insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser201', '2021-09-04', 254159.50);
@@ -75,6 +85,7 @@ insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser105', '2021-09-05', 250.25);
 insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser105', '2021-09-06', 500.75);
+
 
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (1,'BTC','NL24DIGO1111111111','NL24DIGO2222222222',1,1000,0.01,'2020-01-01');
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (2,'ETH','NL24DIGO2222222222','NL24DIGO3333333333',2,1000,0.01,'2020-02-01');
@@ -98,6 +109,24 @@ values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '
         'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser106','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester106@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser107','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester107@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser108','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester108@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser109','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester109@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+
+
 values ('DigitalGoldBank','GoForGold', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
         'BankCity', 'bank@digitalgold.com', 'testzoutje',true, 'NL00DIGO0000000001' );
 

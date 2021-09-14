@@ -65,6 +65,19 @@ public class Customer extends Account {
         this.customerDetails = customerDetails;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Customer)) return false;
+        if (!super.equals(o)) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(getFullName(), customer.getFullName()) && Objects.equals(getAddress(), customer.getAddress()) && Objects.equals(getCustomerDetails(), customer.getCustomerDetails());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getFullName(), getAddress(), getCustomerDetails());
+    }
 
     @Override
     public String toString() {
