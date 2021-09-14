@@ -1,14 +1,13 @@
 package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.*;
-import com.example.digital_gold.service.PortfolioValueOverview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.*;
-import java.time.LocalDate;
 
 @Repository
 public class RootRepository {
@@ -93,9 +92,8 @@ public class RootRepository {
 
     // AssetPriceDao
     public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
-    public AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date) { return assetPriceDao.findPriceByAssetCodeAndDate(assetCode, date); }
-    public List<AssetPrice> findPricesByAssetCode(String assetCode) { return assetPriceDao.findPricesByAssetCode(assetCode); }
-    public List<Map<String, Object>> findAllAvailableAssets(LocalDate today) { return assetPriceDao.findAllAvailableAssets(today); }
+    public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
+    public List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) { return assetPriceDao.findAllAvailableAssets(now); }
 
     public Portfolio savePortfolio(Portfolio portfolio) {
         for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
@@ -137,6 +135,7 @@ public class RootRepository {
 
     public double getBalanceByIban(String iban) {return bankAccountDao.getBalanceByIban(iban);}
 
+    // PortfolioDao
     public Portfolio getPortfolioForCustomer(String username) {
         List<PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
         Customer customer = null;

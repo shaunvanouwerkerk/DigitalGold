@@ -2,13 +2,13 @@ package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.Asset;
 import com.example.digital_gold.domain.AssetPrice;
-import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +60,7 @@ class JdbcAssetPriceDaoTest {
         expectedEthereumOverview.add(ethereum1);
         expectedEthereumOverview.add(ethereum2);
         expectedEthereumOverview.add(ethereum3);
-        List<AssetPrice> actualEthereumPrice = assetPriceDaoTest.findPricesByAssetCode("ETH");
+        List<AssetPrice> actualEthereumPrice = assetPriceDaoTest.findPriceByAssetCode("ETH");
         assertThat(actualEthereumPrice).isEqualTo(expectedEthereumOverview);
     }
 
@@ -76,7 +76,7 @@ class JdbcAssetPriceDaoTest {
         testAssetOverview2.put("PRICE", 42273.5);
         expected.add(testAssetOverview1);
         expected.add(testAssetOverview2);
-        List<Map<String, Object>> actual = assetPriceDaoTest.findAllAvailableAssets(LocalDate.parse("2021-09-04"));
+        List<Map<String, Object>> actual = assetPriceDaoTest.findAllAvailableAssets(LocalDateTime.parse("2021-09-04 00:30:10"));
         assertThat(actual).isEqualTo(expected);
     }
 

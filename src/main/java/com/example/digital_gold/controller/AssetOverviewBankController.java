@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -29,23 +28,9 @@ public class AssetOverviewBankController {
     @Autowired
     public AssetOverviewBankController(AssetOverviewBankService assetOverviewBankService) {
         this.assetOverviewBankService = assetOverviewBankService;
-        logger.info("New AsserOverviewBankController");
+        logger.info("New AssetOverviewBankController");
     }
 
-// via randomgenerator
-  /*  // retrieves list of all available assets + current prices from database via randomgenerator
-    @GetMapping ("/assetoverviewbank")
-    public ResponseEntity<?> getAssetOverviewBank() {
-        try {
-            return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.now()), HttpStatus.OK);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return null;
-    }*/
-
-    // Todo: localdatetime meegeven/ophalen zodat deze opgeslagen kan worden in SQL
-    // todo: frontend: asset met prices tonen, afegrond met decimalen
     private static final String CRYPTO_API_URL =
             "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=30&page=1&sparkline=false";
 
@@ -58,12 +43,24 @@ public class AssetOverviewBankController {
                 .uri(URI.create(CRYPTO_API_URL))
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        logger.info("CryptoAPI HTTP response created");
+        logger.info("CryptoAPI HTTPResponse created");
 
-        // parse JSON into objects --> in pom xml jackson bind toegevoegd als dependency
+        // parse JSON into objects
         ObjectMapper mapper = new ObjectMapper();
         List<CryptoApiAssetPrice> prices = mapper.readValue(response.body(), new TypeReference<>(){});
         List<CryptoApiAssetPrice> twentyPrices = assetOverviewBankService.getAndSaveTwentyPrices(prices);
         return twentyPrices;
     }
+
+    // via randomgenerator
+  /*  // retrieves list of all available assets + current prices from database via randomgenerator
+    @GetMapping ("/assetoverviewbank")
+    public ResponseEntity<?> getAssetOverviewBank() {
+        try {
+            return new ResponseEntity(assetOverviewBankService.getAssetOverviewBank(LocalDate.now()), HttpStatus.OK);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }*/
 }

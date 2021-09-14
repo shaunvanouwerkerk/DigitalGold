@@ -6,20 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Fiona Gray
  * */
+
+//TODO SQLexceptions!
 
 @Repository
 public class JdbcAssetPriceDao implements AssetPriceDao {
@@ -33,10 +33,9 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
 
     private PreparedStatement insertAssetPriceStatement(AssetPrice assetPrice, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into AssetPrice (assetCode, date, price) values (?, ?, ?)");
+                "insert into AssetPrice (assetCode, datetime, price) values (?, now(), ?)");
         preparedStatement.setString(1, assetPrice.getAsset().getAssetCode());
-        preparedStatement.setObject(2, assetPrice.getDate());
-        preparedStatement.setDouble(3, assetPrice.getPrice());
+        preparedStatement.setDouble(2, assetPrice.getPrice());
         return preparedStatement;
     }
 
@@ -46,26 +45,17 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
         return assetPrice;
     }
 
-    //TODO throws SQLexception?
     @Override
-    public List<AssetPrice> findPricesByAssetCode(String assetCode) {
-        String sql = "Select * from AssetPrice where assetCode = ?";
-        return jdbcTemplate.query(sql, new AssetPriceRowMapper(), assetCode);
+    public AssetPrice findPriceByAssetCode(String assetCode) {
+        String sql = "SELECT * FROM AssetPrice WHERE assetCode = ?" +
+                "AND (Datetime) IN (SELECT Max(Datetime) FROM AssetPrice)";
+        return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
     }
 
-    //TODO throws SQLexception?
-    public AssetPrice findPriceByAssetCodeAndDate(String assetCode, LocalDate date) {
-        String sql = "Select * from AssetPrice where assetCode = ? and date = ?";
-        return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode, date);
-    }
-
-    //TODO: OPTIE SQL view ophalen? throws SQLexception?
-    //String sql = "create view assetOverview AS (select assetCode, price from assetPrice where date = ?)";
-    //return jdbcTemplate.query(sql, new AssetPriceRowMapper(), today);
     @Override
-    public  List<Map<String, Object>> findAllAvailableAssets(LocalDate today) {
-        String sql = "select `assetCode`, `price` from `AssetPrice` where `date` = ?";
-        return jdbcTemplate.queryForList(sql, today);
+    public  List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) {
+        String sql = "select `assetCode`, `price` from `AssetPrice` where `datetime` = ?";
+        return jdbcTemplate.queryForList(sql, now);
     }
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
@@ -74,9 +64,16 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
         public AssetPrice mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             Asset asset = null;
             double price = resultSet.getDouble("price");
-            LocalDate date = LocalDate.parse(resultSet.getString("date"));
-            AssetPrice assetPrice = new AssetPrice(asset, price, date);
+            LocalDateTime dateTime = dateTimeFormatter(resultSet.getString("date"));
+            AssetPrice assetPrice = new AssetPrice(asset, price, dateTime);
             return assetPrice;
         }
+    }
+
+    private static LocalDateTime dateTimeFormatter (String resultSet) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String sqlDateTime = resultSet;
+        LocalDateTime dateTime = LocalDateTime.parse(sqlDateTime, formatter);
+        return dateTime;
     }
 }
