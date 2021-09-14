@@ -1,8 +1,3 @@
-insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
-                            zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser01','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester1@gmail.com', 'testzoutje',true, 'Nl123456789' );
-
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('BTC', 'Bitcoin', 'Beschrijving');
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('ETH', 'Ethereum', 'Beschrijving');
 INSERT INTO `Asset` (`assetCode`, `assetName`, `description`) VALUES ('ADA', 'Cardano', 'Beschrijving');
@@ -47,41 +42,58 @@ INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('MATIC', now
 INSERT INTO `AssetPrice` (`assetCode`, `datetime`, `price`) VALUES ('VET', now(), 76.89);
 
 insert into portfolio (username, assetCode, amount)
-values ('TestUser101', 'BTC', 7566.00);
+values ('TestUser100', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser102', 'ETH', 5975.00);
+values ('TestUser100', 'DOGE', 357.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser104', 'BTC', 3.00);
+values ('TestUser101', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser105', 'DOGE', 7566.00);
+values ('TestUser102', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser105', 'ETH', 5000.00);
+values ('TestUser103', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser108', 'DOGE', 5000.00);
+values ('TestUser103', 'ETH', 159.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser109', 'BTC', 3.00);
+values ('TestUser103', 'BTC', 753.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser109', 'ETH', 357.00);
+values ('TestUser104', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser109', 'BUSD', 457.32);
+values ('TestUser105', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser109', 'VET', 111.00);
+values ('TestUser106', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser107', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser108', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser109', 'BTV', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser110', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser111', 'BTC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser111', 'ETH', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser111', 'MATIC', 1.00);
+insert into portfolio (username, assetCode, amount)
+values ('TestUser111', 'DOGE', 1.00);
 
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser201', '2021-09-04', 254159.50);
+VALUES ('TestUser105', '2021-09-13', 100.00);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser202', '2021-09-04', 254159.50);
+VALUES ('TestUser105', '2021-09-12', 75.00);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser202', '2021-09-03', 250);
+VALUES ('TestUser105', '2021-09-11', 120.00);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser202', '2021-09-02', 1);
+VALUES ('TestUser106', '2021-09-12', 1.00);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser105', '2021-09-04', 100);
+VALUES ('TestUser107', '2021-09-4', 254159.50);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser105', '2021-09-05', 250.25);
+VALUES ('TestUser107', '2021-09-3', 250.00);
 insert into portfoliohistory (userName, date, totalValue)
-VALUES ('TestUser105', '2021-09-06', 500.75);
-
+VALUES ('TestUser107', '2021-09-2', 1.00);
 
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (1,'BTC','NL24DIGO1111111111','NL24DIGO2222222222',1,1000,0.01,'2020-01-01');
 INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `sellingPrice`, `transactionCost`, `date`) VALUES (2,'ETH','NL24DIGO2222222222','NL24DIGO3333333333',2,1000,0.01,'2020-02-01');
@@ -89,40 +101,54 @@ INSERT INTO `transaction` (`id`, `assetCode`, `ibanSell`, `ibanBuy`, `amount`, `
 
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser101','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester101@gmail.com', 'testzoutje',true, 'NL10DIGO9876543211' );
+values ('TestUser100','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654850', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester100@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser102','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester102@gmail.com', 'testzoutje',true, 'NL10DIGO9876543212' );
+values ('TestUser101','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654851', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester101@gmail.com', 'testzoutje',true, 'NL10DIGO9876543211');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser104','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester104@gmail.com', 'testzoutje',true, 'NL10DIGO9876543214' );
+values ('TestUser102','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654852', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester102@gmail.com', 'testzoutje',true, 'NL10DIGO9876543212');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser105','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester1055@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+values ('TestUser103','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654853', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester103@gmail.com', 'testzoutje',true, 'NL10DIGO9876543213');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser106','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester106@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+values ('TestUser104','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654854', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester104@gmail.com', 'testzoutje',true, 'NL10DIGO9876543214');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser107','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester107@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+values ('TestUser105','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654855', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester105@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser108','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester108@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+values ('TestUser106','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654856', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester106@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('TestUser109','TestPassword', 'Tester', 'van', 'Tester', '1900-01-01', '753654852', '1', 'TestStraat', '1111AA',
-        'TestCity', 'tester109@gmail.com', 'testzoutje',true, 'NL10DIGO9876543215' );
+values ('TestUser107','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654857', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester107@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-
-
+values ('TestUser108','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654858', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester108@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser109','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '753654859', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester109@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser110','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '763654850', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester110@gmail.com', 'testzoutje',true, 'NL10DIGO9876543210');
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
+values ('TestUser111','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950-01-01', '763654851', '1', 'TestStraat', '1111AA',
+        'TestCity', 'tester111@gmail.com', 'testzoutje',true, 'NL10DIGO9876543211');
+insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
+                      zipCode, city, emailAddress, salt, status, iban)
 values ('DigitalGoldBank','GoForGold', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
         'BankCity', 'bank@digitalgold.com', 'testzoutje',true, 'NL00DIGO0000000001' );
 
