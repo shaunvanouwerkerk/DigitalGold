@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 /**
 * @author Jany Gaal
@@ -22,7 +20,7 @@ public class Scheduler {
 
     private final RootRepository rootRepository;
     private final PortfolioOverviewService portfolioOverviewService;
-    private final Random randomNumberGenerator = new Random();
+    //private final Random randomNumberGenerator = new Random();
     private final AssetOverviewBankController assetOverviewBankController;
 
     @Autowired
@@ -42,7 +40,7 @@ public class Scheduler {
     @Scheduled(cron = "0 0/1 * * * *")
     //@Scheduled(cron = "0 25 12 * * *")
     public void testTask2() {
-        saveCurrentAssetPrices();
+        getCurrentAssetPrices();
     }
 
     public void saveDailyPortfolioValues() {
@@ -60,8 +58,8 @@ public class Scheduler {
     }*/
 
     public void saveCurrentAssetPrices() {
-        List<Asset> assetList = rootRepository.findAllAssets();
-        getCurrentAssetPrices(assetList);
+        //List<Asset> assetList = rootRepository.findAllAssets();
+        //getCurrentAssetPrices();
         //assetList.forEach(this::getCurrentAssetPrices);
     }
 
@@ -79,7 +77,7 @@ public class Scheduler {
         saveAssetPrice(todaysAssetPrice);
     }*/
 
-    public void getCurrentAssetPrices(List <Asset> assetList) {
+    public void getCurrentAssetPrices() {
         try {
             assetOverviewBankController.getAssetOverviewBank();
             //List<CryptoApiAssetPrice> assetPriceList = assetOverviewBankController.getAssetOverviewBank();

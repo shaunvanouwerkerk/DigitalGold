@@ -8,13 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
 * @author Fiona Gray
@@ -33,14 +31,16 @@ public class AssetOverviewBankService {
         logger.info("New AssetOverviewBankService");
     }
 
-    public List<CryptoApiAssetPrice> getTwentyPrices(List<CryptoApiAssetPrice> prices) {
+    public List<CryptoApiAssetPrice> getAndSaveTwentyPrices(List<CryptoApiAssetPrice> prices) {
         List<Asset> assets = rootRepository.findAllAssets();
         List<CryptoApiAssetPrice> twentyPrices = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat(".00");
         for(Asset asset: assets) {
             for (CryptoApiAssetPrice price : prices) {
                 if (price.getSymbol().toUpperCase(Locale.ROOT).equals(asset.getAssetCode())) {
                     twentyPrices.add(price);
-                    AssetPrice assetPrice = new AssetPrice(asset, price.getCurrentPrice(), LocalDate.now());
+                    double roundedAssetPrice = roundDouble(price.getCurrentPrice());
+                    AssetPrice assetPrice = new AssetPrice(asset, roundedAssetPrice, LocalDate.now());
                     rootRepository.saveAssetPrice(assetPrice);
                 }
             }
@@ -48,6 +48,12 @@ public class AssetOverviewBankService {
         return twentyPrices;
     }
 
+    public double roundDouble(double price) {
+        double roundedPrice = Math.round(price * 1000.00) / 1000.00;
+        return roundedPrice;
+    }
+
+// via randomgenerator
 /*// todo: throw-catch sql exception?
     public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
         List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);

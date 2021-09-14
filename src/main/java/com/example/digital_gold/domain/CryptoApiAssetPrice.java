@@ -3,6 +3,10 @@ package com.example.digital_gold.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+* @author Fiona Gray
+* */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CryptoApiAssetPrice {
 
@@ -10,9 +14,9 @@ public class CryptoApiAssetPrice {
     private String symbol;
 
     @JsonProperty("current_price")
-    private long currentPrice;
+    private double currentPrice;
 
-    public CryptoApiAssetPrice(String symbol, long currentPrice) {
+    public CryptoApiAssetPrice(String symbol, double currentPrice) {
         this.symbol = symbol;
         this.currentPrice = currentPrice;
     }
@@ -28,11 +32,11 @@ public class CryptoApiAssetPrice {
         this.symbol = symbol;
     }
 
-    public long getCurrentPrice() {
+    public double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(long currentPrice) {
+    public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
