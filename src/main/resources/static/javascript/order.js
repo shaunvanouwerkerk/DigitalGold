@@ -1,5 +1,5 @@
 /*
-@author David Truijens - scripts voor orderpagina
+@author David Truijens - scripts voor orderpagina Buy
  */
 
 /* * * * * * NAVIGATION * * * * * */
@@ -13,6 +13,25 @@ menuButton.addEventListener('click',() => {
 
 
 /* * * * * * CALCULATOR * * * * * */
+
+function getAssetPriceByAssetCode (crypto) {
+    fetch('/assetoverviewbank')
+        .then((response) => response.json()).then(assetData => {
+        console.log(assetData);
+        console.log(crypto);
+
+        assetData.forEach(function (item) {
+            if (item.assetCode === crypto) {
+                console.log("Assetcode gevonden " + item.assetCode)
+            }
+
+        })
+    })
+}
+
+
+
+
 const cryptoValue = document.querySelector('#cryptoValue');
 const cryptoAmount = document.querySelector('#cryptoAmount');
 
@@ -82,12 +101,12 @@ function postRequest() {
 
 /* * * * * * ASSETLIST DROPDOWN * * * * * */
 
-/* TODO: moet worden aangeroepen bij onload */
+/* wordt aangeroepen bij body.onload */
 function initialize() {
     let previousPage = document.referrer;
     console.log(previousPage);
-    document.getElementById("crypto-title").innerHTML += ("Buy Bitcoin (BTC)");
-    document.getElementById("form-title").innerHTML = "Bitcoin";
+    document.getElementById("crypto-title").innerHTML = "";
+    document.getElementById("form-title").innerHTML = "";
     getAssetList();
 }
 
@@ -99,31 +118,38 @@ selector.addEventListener('change', () => {
     console.log(selectedCryptoName + selectedCryptoSymbol);
     document.getElementById("crypto-title").innerHTML = "";
     document.getElementById("form-title").innerHTML = "";
-    document.getElementById("crypto-title").innerHTML = "Buy " + selectedCryptoName + "( " + selectedCryptoSymbol + " )";
+    document.getElementById("crypto-title").innerHTML = "Buy " + selectedCryptoName;
     document.getElementById("form-title").innerHTML = selectedCryptoName;
 })
 
-/*TODO: Tijdelijk dropdown laden via button --> moet onload worden. */
-const buttonLoadCrypto = document.getElementById("loadcrypto");
-buttonLoadCrypto.addEventListener("click",() => {
-    getAssetList();
+/*TODO: Help schermpje met info tonen. */
+const buttonHelp = document.getElementById("help");
+buttonHelp.addEventListener("click",() => {
+    getAssetPriceByAssetCode("XRP");
+    /* showHelp(); */
 })
 
 function getAssetList() {
-    const response = fetch('/assetoverviewbank')
-        let assetList = response.json();
-    let dropdown = document.getElementById("coinselector");
-    dropdown.length = 0;
-    dropdown.selectedIndex = 0;
+    fetch('/assetoverviewbank')
+        .then((response) => response.json()).then(assetList => {
+            console.log(assetList);
+            let dropdown = document.getElementById("coinselector");
+            dropdown.length = 0;
+            dropdown.selectedIndex = 0;
+            let option;
 
-    let option;
-    for (let i = 0; i < assetList.length; i++) {
-        option = document.createElement('option');
-        option.text = assetList.assetCode;
-        /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
-           Hoe nu de crypto naam tonen hier?? */
-        dropdown.add(option);
-    }
+            assetList.forEach(function (assetName) {
+                option = document.createElement('option');
+                option.text = assetName.assetCode;
+                /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
+                   Hoe nu de crypto naam tonen hier?? */
+                dropdown.add(option);
+                dropdown.selectedIndex = 0;
+                let firstCryptoInList = dropdown.options[selector.selectedIndex].text;
+                document.getElementById("crypto-title").innerHTML = "Buy " + firstCryptoInList;
+                document.getElementById("form-title").innerHTML = firstCryptoInList;
+            })
+        })
 }
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
