@@ -38,6 +38,7 @@ public class RegisterService {
         customer.setSalt(salt);
         String hashPassword = customer.getPassword() + salt;
         customer.setPassword(hashService.hash(hashPassword));
+        customer.getCustomerDetails().setIban(createBankAccount());
         if (rootRepository.findCustomerByUsernameAndEmail(customer.getUsername(), customer.getCustomerDetails().getEmailaddress())) {
             return null;
         } else {

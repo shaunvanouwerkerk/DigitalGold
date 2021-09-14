@@ -1,52 +1,19 @@
 
 
-    // let Address = new Object();
     let houseNumber;
     let streetName;
     let zipCode;
     let city;
-
-    function Address(houseNumber,streetName,zipCode,city){
-        this.houseNumber = houseNumber;
-        this.streetName = streetName;
-        this.zipCode = zipCode;
-        this.city = city;
-    }
-
-    // let CustomerDetails = new Object();
     let dateOfBirth;
     let bsn;
     let iban;
     let emailaddress;
-
-
-    function CustomerDetails(dateOfBirth,bsn,iban,emailaddress){
-        this.dateOfBirth = dateOfBirth;
-        this.bsn = bsn;
-        this.iban = iban;
-        this.emailaddress = emailaddress;
-    }
-    // let FullName = new Object();
     let firstName;
     let prefix;
     let lastName;
-
-    function FullName(firstName,prefix,lastName){
-        this.firstName = firstName;
-        this.prefix = prefix;
-        this.lastName = lastName
-    }
-    // let Customer = new Object();
     let username;
     let password;
 
-    function Customer(username,password,Fullname,Address,CustomerDetails){
-        this.username = username;
-        this.password = password;
-        this.Fullname = Fullname;
-        this.Address = Address;
-        this.CustomerDetails = CustomerDetails
-    }
 
     document.querySelector('#sbRegister').addEventListener('click',
         function (event){
@@ -64,10 +31,6 @@
             dateOfBirth = String(document.querySelector('#dateofbirth').value)
             bsn = String(document.querySelector('#bsn').value)
             emailaddress = String(document.querySelector('#emailaddress').value)
-
-            let address = Address(houseNumber, streetName, zipCode, city);
-            let customerDetails = CustomerDetails(dateOfBirth,bsn,iban,emailaddress)
-            let fullName = FullName(firstName,prefix,lastName)
 
 
 
