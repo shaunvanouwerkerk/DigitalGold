@@ -85,7 +85,11 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public double getPortfolioAssetByUsernameAssetCode(String username, String assetCode) {
-        return jdbcTemplate.queryForObject("SELECT amount FROM portfolio WHERE username = ? AND assetCode = ?",Double.class, username, assetCode);
+        try {
+            return jdbcTemplate.queryForObject("SELECT amount FROM portfolio WHERE username = ? AND assetCode = ?",Double.class, username, assetCode);
+        } catch (DataAccessException e) {
+            return 0.00;
+        }
     }
 
     private static class PortfolioRowMapper implements RowMapper<PortfolioDatabase> {
