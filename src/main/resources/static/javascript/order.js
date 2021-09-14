@@ -14,23 +14,22 @@ menuButton.addEventListener('click',() => {
 
 /* * * * * * CALCULATOR * * * * * */
 
+/* * * * van gekozen crypto prijs ophalen en doorgeven aan calculator * * * */
+
+
 function getAssetPriceByAssetCode (crypto) {
     fetch('/assetoverviewbank')
         .then((response) => response.json()).then(assetData => {
         console.log(assetData);
         console.log(crypto);
 
-        assetData.forEach(function (item) {
-            if (item.assetCode === crypto) {
-                console.log("Assetcode gevonden " + item.assetCode)
+        assetData.forEach(function (value) {
+            if (value.symbol === crypto) {
+                console.log("Assetcode gevonden " + value.symbol + " : " + value.current_price)
             }
-
         })
     })
 }
-
-
-
 
 const cryptoValue = document.querySelector('#cryptoValue');
 const cryptoAmount = document.querySelector('#cryptoAmount');
@@ -47,10 +46,8 @@ async function calc(changer){
     const currency = "USD"
     const cryptoAmt = Number(cryptoAmount.value)
     const cryptoVal = Number(cryptoValue.value)
-    const res = await fetch(`https://api.coindesk.com/v1/bpi/currentprice/${currency.toLowerCase()}.json`) //bpi = bitcoin price index dus BTC only!
+    let exchangeRate = executeDropDownEvents();
 
-    const json = await res.json()
-    const exchangeRate = parseInt(json.bpi[currency].rate_float)
     console.log(exchangeRate)
     if(changer==='crypto'){
         const amount =  cryptoAmt * exchangeRate
@@ -110,9 +107,14 @@ function initialize() {
     getAssetList();
 }
 
+
 const selector = document.getElementById("coinselector");
 
 selector.addEventListener('change', () => {
+    executeDropDownEvents();
+})
+
+function executeDropDownEvents() {
     let selectedCryptoName = selector.options[selector.selectedIndex].text;
     let selectedCryptoSymbol = selector.options[selector.selectedIndex].value.toUpperCase();
     console.log(selectedCryptoName + selectedCryptoSymbol);
@@ -120,12 +122,14 @@ selector.addEventListener('change', () => {
     document.getElementById("form-title").innerHTML = "";
     document.getElementById("crypto-title").innerHTML = "Buy " + selectedCryptoName;
     document.getElementById("form-title").innerHTML = selectedCryptoName;
-})
+    return getAssetPriceByAssetCode(selectedCryptoSymbol);
+}
+
 
 /*TODO: Help schermpje met info tonen. */
 const buttonHelp = document.getElementById("help");
 buttonHelp.addEventListener("click",() => {
-    getAssetPriceByAssetCode("XRP");
+    getAssetPriceByAssetCode("xrp");
     /* showHelp(); */
 })
 
@@ -138,9 +142,9 @@ function getAssetList() {
             dropdown.selectedIndex = 0;
             let option;
 
-            assetList.forEach(function (assetName) {
+            assetList.forEach(function (value) {
                 option = document.createElement('option');
-                option.text = assetName.assetCode;
+                option.text = value.symbol.toUpperCase();
                 /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
                    Hoe nu de crypto naam tonen hier?? */
                 dropdown.add(option);
