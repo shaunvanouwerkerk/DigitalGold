@@ -37,11 +37,11 @@ class JdbcPortfolioHistoryDaoTest {
 
     @Test
     void savePortfolioValue() {
-        Customer testCustomer = new Customer("TestUser200", "TestPassword", "zoutje", true,
-                new FullName("Tester", "van", "Tester"),
+        Customer TestUser105 = new Customer("TestUser105", "TestPassword", "testzoutje", true,
+                new FullName("JanTester", "van", "JanssenTester"),
                 new Address(1, "TestStraat", "1111AA", "TestCity"),
-                new CustomerDetails(Date.valueOf("1950-01-01"),"753654852","tester@gmail.com","Nl181234567890"));
-        PortfolioHistory testPortfolioHistory = new PortfolioHistory(testCustomer, LocalDate.now(),254753.53);
+                new CustomerDetails(Date.valueOf("1950-01-01"), "753654855", "tester105@gmail.com", "NL10DIGO9876543215"));
+        PortfolioHistory testPortfolioHistory = new PortfolioHistory(TestUser105, LocalDate.now(),158.53);
         int expected = 1;
         int actual = porfolioHistoryDaoTest.savePortfolioValue(testPortfolioHistory);
         assertThat(actual).isEqualTo(expected);
@@ -49,13 +49,13 @@ class JdbcPortfolioHistoryDaoTest {
 
     @Test
     void savePortfolioValueDuplicate() {
-        Customer testCustomer = new Customer("TestUser200", "TestPassword", "zoutje", true,
-                new FullName("Tester", "van", "Tester"),
+        Customer TestUser105 = new Customer("TestUser105", "TestPassword", "testzoutje", true,
+                new FullName("JanTester", "van", "JanssenTester"),
                 new Address(1, "TestStraat", "1111AA", "TestCity"),
-                new CustomerDetails(Date.valueOf("1950-01-01"),"753654852","tester@gmail.com","Nl181234567890"));
-        PortfolioHistory testPortfolioHistory = new PortfolioHistory(testCustomer, LocalDate.now(),254753.53);
+                new CustomerDetails(Date.valueOf("1950-01-01"), "753654855", "tester105@gmail.com", "NL10DIGO9876543215"));
+        PortfolioHistory testPortfolioHistory = new PortfolioHistory(TestUser105, LocalDate.now(),158.53);
         try {
-            int actual = porfolioHistoryDaoTest.savePortfolioValue(testPortfolioHistory);
+            porfolioHistoryDaoTest.savePortfolioValue(testPortfolioHistory);
         } catch (DuplicateKeyException e) {
             System.out.println("SQL test error savePortfolioValueDuplicate geslaagd");
         }
@@ -63,10 +63,10 @@ class JdbcPortfolioHistoryDaoTest {
 
     @Test
     void getPortfolioValueByUserName() {
-        PortfolioHistory testPortfolio = new PortfolioHistory(null, LocalDate.parse("2021-09-04"), 254159.50);
+        PortfolioHistory testPortfolio = new PortfolioHistory(null, LocalDate.parse("2021-09-12"), 1.00);
         List<PortfolioHistory> expected = new ArrayList<>();
         expected.add(testPortfolio);
-        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser201");
+        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser106");
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -80,14 +80,14 @@ class JdbcPortfolioHistoryDaoTest {
         expected.add(testPortfolio2);
         expected.add(testPortfolio3);
         Collections.sort(expected);
-        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser202");
+        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser107");
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void getPortfolioValueByUserNameNull() {
         List<PortfolioHistory> expected = new ArrayList<>();
-        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser203");
+        List<PortfolioHistory> actual = porfolioHistoryDaoTest.getPortfolioValuesByUserName("TestUser111");
         assertThat(actual).isEqualTo(expected);
     }
 }

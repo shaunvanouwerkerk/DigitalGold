@@ -2,7 +2,7 @@ package com.example.digital_gold.repository;
 
 import java.util.Objects;
 
-public class PortfolioDatabase {
+public class PortfolioDatabase implements Comparable<PortfolioDatabase> {
     String username;
     String assetCode;
     double amount;
@@ -60,5 +60,10 @@ public class PortfolioDatabase {
                 ", assetCode='" + assetCode + '\'' +
                 ", amount=" + amount +
                 '}';
+    }
+
+    @Override
+    public int compareTo(PortfolioDatabase o) {
+        return this.assetCode.compareTo(o.assetCode);
     }
 }
