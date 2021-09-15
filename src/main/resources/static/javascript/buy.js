@@ -20,7 +20,12 @@ const priceField = document.getElementById("price");
 
 
 function getAssetPriceByAssetCode () {
-    fetch('/assetoverviewbank')
+    fetch('/assetoverviewbank', {
+        method: 'GET',
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        }})
         .then((response) => response.json()).then(assetData => {
         console.log(assetData);
         const crypto = selector.options[selector.selectedIndex].text.toLowerCase();
@@ -36,7 +41,6 @@ function getAssetPriceByAssetCode () {
 
 const cryptoValue = document.querySelector('#cryptoValue');
 const cryptoAmount = document.querySelector('#cryptoAmount');
-
 
 calc('crypto')
 cryptoValue.onkeyup = ()=>calc()
@@ -74,12 +78,14 @@ function postRequest() {
     let selectedCryptoSymbol = selector.options[selector.selectedIndex].text;
     let selectedCryptoAmount = document.getElementById("cryptoAmount").value;
 
-    let orderData = {assetCode: selectedCryptoSymbol, amountOfAsset: selectedCryptoAmount , type: "buy", limit: 0}; // javascript object Order, matches java Order
+    // javascript object Order, matches java Order
+    let orderData = {assetCode: selectedCryptoSymbol, amountOfAsset: selectedCryptoAmount , type: "buy", limit: 0};
 
     fetch('/order', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
+            'Authorization': localStorage.getItem("token"),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(orderData)  // moet worden omgezet naar een string
@@ -161,7 +167,12 @@ function getAssetList(passedParameter) {
     /*  passedParameter checken: indien 0 dan als gewoonlijk drop down opbouwen */
     if (passedParameter === 0) {
 
-        fetch('/assetoverviewbank')
+        fetch('/assetoverviewbank', {
+            method: 'GET',
+            headers: {
+                'Authorization': localStorage.getItem("token"),
+                'Content-Type': 'application/json'
+            }})
             .then((response) => response.json()).then(assetList => {
             console.log(assetList);
             let dropdown = document.getElementById("coinselector");
@@ -198,7 +209,6 @@ function getAssetList(passedParameter) {
         executeDropDownEvents();
     }
 }
-
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
 
