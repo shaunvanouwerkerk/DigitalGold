@@ -72,7 +72,7 @@ buttonPostBuyOrder.addEventListener("click",() => {
     if(validateOrderInput().valueOf(true)) {
         postRequest();
     } else {
-        alert("Form data is missing. \n Your buy order cannot be submitted \n Please fill in amount or value.")
+        alert("Form data is missing. \nYour buy order cannot be submitted \nPlease fill in amount or value.")
     }
 })
 
@@ -165,7 +165,7 @@ function executeDropDownEvents() {
 }
 
 
-/*TODO: Help schermpje met info tonen. */
+/*TODO: Help schermpje met info tonen? */
 const buttonHelp = document.getElementById("help");
 buttonHelp.addEventListener("click",() => {
     /* showHelp(); */
