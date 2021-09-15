@@ -20,7 +20,12 @@ const priceField = document.getElementById("price");
 
 
 function getAssetPriceByAssetCode () {
-    fetch('/assetoverviewbank')
+    fetch('/assetoverviewbank', {
+        method: 'GET',
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content-Type': 'application/json'
+        }})
         .then((response) => response.json()).then(assetData => {
         console.log(assetData);
         const crypto = selector.options[selector.selectedIndex].text.toLowerCase();
@@ -37,7 +42,6 @@ function getAssetPriceByAssetCode () {
 const cryptoValue = document.querySelector('#cryptoValue');
 const cryptoAmount = document.querySelector('#cryptoAmount');
 
-
 calc('crypto')
 cryptoValue.onkeyup = ()=>calc()
 cryptoValue.onchange = ()=>calc()
@@ -46,7 +50,6 @@ cryptoAmount.onchange = ()=>calc('crypto')
 
 /* TODO: Functie moet straks op basis van assetprice data ipv API Coindesk */
 function calc(changer){
-    const currency = "USD";
     const cryptoAmt = Number(cryptoAmount.value);
     const cryptoVal = Number(cryptoValue.value);
     const exchangeRate = parseFloat(document.getElementById("price").innerHTML);
@@ -56,30 +59,40 @@ function calc(changer){
         const amount =  cryptoAmt * exchangeRate
         cryptoValue.value = parseFloat(amount).toFixed(2)
     }else{
-        const amount =  cryptoVal / exchangeRate
-        cryptoAmount.value = amount
+        cryptoAmount.value = cryptoVal / exchangeRate
     }
 }
 /* * * * * * END CALCULATOR * * * * * */
 
 
-/* * * * * * POST ORDER * * * * * */
+/* * * * * * POST BUY ORDER * * * * * */
 
 const buttonPostBuyOrder = document.getElementById("postButton");
 buttonPostBuyOrder.addEventListener("click",() => {
-    postRequest();
+    if(validateOrderInput().valueOf(true)) {
+        postRequest();
+    } else {
+        alert("Form data is missing. \nYour buy order cannot be submitted \nPlease fill in amount or value.")
+    }
 })
+
+function validateOrderInput() {
+    let selectedCryptoSymbol = selector.options[selector.selectedIndex].text;
+    return Number(cryptoValue.value) > 0 && Number(cryptoAmount.value) > 0 && selectedCryptoSymbol !== "";
+}
 
 function postRequest() {
     let selectedCryptoSymbol = selector.options[selector.selectedIndex].text;
     let selectedCryptoAmount = document.getElementById("cryptoAmount").value;
 
-    let orderData = {assetCode: selectedCryptoSymbol, amountOfAsset: selectedCryptoAmount , type: "buy", limit: 0}; // javascript object Order, matches java Order
+    // javascript object Order, matches java Order
+    let orderData = {assetCode: selectedCryptoSymbol, amountOfAsset: selectedCryptoAmount , type: "buy", limit: 0};
 
     fetch('/order', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
+            'Authorization': localStorage.getItem("token"),
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(orderData)  // moet worden omgezet naar een string
@@ -95,6 +108,7 @@ function postRequest() {
         .catch((error) => {
             console.log("Order niet verwerkt. Fout: ", error)
         });
+    document.getElementById("order").reset();
 }
 /* * * * * * END POST ORDER * * * * * */
 
@@ -151,7 +165,7 @@ function executeDropDownEvents() {
 }
 
 
-/*TODO: Help schermpje met info tonen. */
+/*TODO: Help schermpje met info tonen? */
 const buttonHelp = document.getElementById("help");
 buttonHelp.addEventListener("click",() => {
     /* showHelp(); */
@@ -161,7 +175,12 @@ function getAssetList(passedParameter) {
     /*  passedParameter checken: indien 0 dan als gewoonlijk drop down opbouwen */
     if (passedParameter === 0) {
 
-        fetch('/assetoverviewbank')
+        fetch('/assetoverviewbank', {
+            method: 'GET',
+            headers: {
+                'Authorization': localStorage.getItem("token"),
+                'Content-Type': 'application/json'
+            }})
             .then((response) => response.json()).then(assetList => {
             console.log(assetList);
             let dropdown = document.getElementById("coinselector");
@@ -198,7 +217,6 @@ function getAssetList(passedParameter) {
         executeDropDownEvents();
     }
 }
-
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
 
