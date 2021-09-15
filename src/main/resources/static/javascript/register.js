@@ -17,7 +17,6 @@
         function (event){
         if(formValidation().valueOf(true)){
             event.preventDefault() // anders wordt de gebruiker naar andere pagina geleid
-            // // selecteer inputs en zet waarden omde normale submit functie uitgevoerd
             username = String(document.querySelector('#username').value)
             password = String(document.querySelector('#password').value)
             firstName = String(document.querySelector('#firstname').value)
@@ -34,7 +33,7 @@
 
             let data = {username: username,password: password ,fullName: {firstName: firstName, prefix: prefix,lastName: lastName},
                 address: {houseNumber: houseNumber,streetName: streetName,zipCode: zipCode,city: city},customerDetails: {dateOfBirth:
-                    dateOfBirth, bsn: bsn, iban: "12345678910", emailaddress: emailaddress}}
+                    dateOfBirth, bsn: bsn, emailaddress: emailaddress}}
 
 
             const url = '../register'
