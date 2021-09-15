@@ -26,6 +26,9 @@ public class CustomerDetails {
         this.iban = iban;
     }
 
+    public CustomerDetails() {
+    }
+
     public Date getDateOfBirth() {
         return dateOfBirth;
     }

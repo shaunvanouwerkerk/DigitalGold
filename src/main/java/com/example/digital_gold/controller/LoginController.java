@@ -51,12 +51,12 @@ public class LoginController {
 
     @PutMapping("/login/administrator")
     public ResponseEntity<?> loginAdministrator(@RequestParam String username, @RequestParam String password) {
-        String token = loginService.loginAdministrator(username,password);
+        String token = loginService.login(username,password);
 
         if(token != null) {
-            return ResponseEntity.created(URI.create("/login")).body("Token created" + token);
+            return ResponseEntity.created(URI.create("/login")).body(token);
         } else {
-            return ResponseEntity.badRequest().body("Token not created");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect credentials");
         }
     }
 
