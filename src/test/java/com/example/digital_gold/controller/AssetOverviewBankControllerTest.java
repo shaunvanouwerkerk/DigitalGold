@@ -2,6 +2,7 @@ package com.example.digital_gold.controller;
 
 import com.example.digital_gold.service.AssetOverviewBankService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,6 +26,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AssetOverviewBankControllerTest {
 
     private MockMvc mockMvc;
+
+    //1
+    /* @BeforeEach
+    public void initRestAsssuredMochMvcStandAlone() {
+        RestAssuredMockMvc.standaloneSetup(new AssetOverviewBankController());
+    }*/
+
+    //2 test 200 OK
+    //  methode greet_returns_200_ok() {}
+    // when().get("/greet").then().statusCode(200);
+    // when() --> import static io.restassured.module.mockmvc.restasssduredmockmvc.*
+
+    //3 , application/jsomn,
+    // methode greet_returns_content_type_app_josn() {
+    //when().get(/greet).then().contentType(MediaType.Application_Jsoin_value) }
+    //
+
+    //4 {"message": "hello"}
+    // greet_body_contains_message_content(){
+    // when().get(/greet).then().body(containsString("string"));}
+
+    //5 controleer format én inhoud
+    // greet_body_message_obhject_with_content(){
+    // Greeting expected = new Greeting("hello");
+    // Greeting message = when().get(/greet).then().extract().body().as(Greeting.class);
+    // assertThat(message).isEqualTo(expected);
+
+
 
     @MockBean
     private AssetOverviewBankService assetOverviewBankServiceMock;

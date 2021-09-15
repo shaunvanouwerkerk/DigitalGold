@@ -38,7 +38,7 @@ class JdbcAssetPriceDaoTest {
         assertThat(actualAssetPrice).isEqualTo(testAssetPrice);
     }
 
-    // LocalDateTime is niet compatible met H@DB. Niet te testen.
+    // LocalDateTime is niet compatible met H2 databse. Dus niet te testen.
     /*@Test
     public void findPriceByAssetCode() {
         Asset ethereumTest = new Asset("ETH", "Ethereum", "Beschrijving");
