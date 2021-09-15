@@ -88,22 +88,18 @@ public class TransactionService {
         String assetCode = transaction.getAssetCode();
         String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());
         String usernameBuyer = rootRepository.findUsernameByIban(transaction.getIbanBuy());
-
         double newAssetAmountSeller = rootRepository.getPortfolioAssetByUsernameAssetCode(usernameSeller,assetCode) - assetAmount;
         Customer seller = rootRepository.findAndReturnCustomerByUsername(usernameSeller);
         Map<Asset, Double> sellerPfAsset = new HashMap<Asset, Double>();
         sellerPfAsset.put(asset,newAssetAmountSeller);
         Portfolio portfolioSeller = new Portfolio(seller,sellerPfAsset);
-
         double newAssetAmountBuyer = rootRepository.getPortfolioAssetByUsernameAssetCode(usernameBuyer,assetCode) + assetAmount;
         Customer buyer = rootRepository.findAndReturnCustomerByUsername(usernameBuyer);
         Map<Asset, Double> buyerPfAsset = new HashMap<Asset, Double>();
         buyerPfAsset.put(asset,newAssetAmountBuyer);
         Portfolio portfolioBuyer = new Portfolio(buyer,buyerPfAsset);
-
         rootRepository.saveAssetChangesInPortfolio(portfolioBuyer);
         rootRepository.saveAssetChangesInPortfolio(portfolioSeller);
-
         logger.info("Portfolio assets updated.");
     }
 

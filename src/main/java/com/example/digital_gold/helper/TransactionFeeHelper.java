@@ -31,9 +31,7 @@ public class TransactionFeeHelper {
 
     public static TransactionFeeHelper splitTransactionFee(Transaction transaction) {
         double feeBuyer = 0, feeSeller = 0;
-        //waarde van de transactie berekenen:
         double transactionValue = transaction.getAssetPrice() * transaction.getAssetAmount();
-        //transactiekosten berekenen
         double transactionCosts = transactionValue * transaction.getTransactionFee();
         if(transaction.getIbanSell().equals(ibanBank)) {
             feeBuyer = transactionCosts;
