@@ -1,8 +1,6 @@
 package com.example.digital_gold.helper;
 
-import com.example.digital_gold.domain.BankAccount;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -33,4 +31,5 @@ public class IbanGeneratorTest {
         String result = ibanGenerator.generateIban();
         assertEquals(18, result.length());
     }
+
 }
