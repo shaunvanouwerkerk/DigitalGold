@@ -1,5 +1,7 @@
 /* @author Fiona Gray */
+
 /* general styling */
+
 * {
     box-sizing: border-box;
 }
@@ -28,6 +30,8 @@ h1 {
     color: #3b6c7a;
     padding: 0.5em;
 }
+
+/* navbar */
 
 .navbar {
     display: flex;
@@ -76,6 +80,7 @@ h1 {
 
 
 /* table */
+
 tr:hover {
     background-color: #f9f0a1;
 }
