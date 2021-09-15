@@ -26,7 +26,7 @@ fetch('/assetoverviewbank')
                 btn.className = "buy-button";
                 btn.value = "Buy";
                 btn.onclick = function() {
-                        (window.location.href = ("/buy.html/?assetCode=" + td1.textContent));
+                        (window.location.href = ("/buy.html?assetCode=" + td1.textContent));
                 }
                 td1.appendChild(btn);
 
