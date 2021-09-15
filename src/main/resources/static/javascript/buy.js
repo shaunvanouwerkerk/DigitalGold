@@ -50,7 +50,6 @@ cryptoAmount.onchange = ()=>calc('crypto')
 
 /* TODO: Functie moet straks op basis van assetprice data ipv API Coindesk */
 function calc(changer){
-    const currency = "USD";
     const cryptoAmt = Number(cryptoAmount.value);
     const cryptoVal = Number(cryptoValue.value);
     const exchangeRate = parseFloat(document.getElementById("price").innerHTML);
@@ -60,19 +59,27 @@ function calc(changer){
         const amount =  cryptoAmt * exchangeRate
         cryptoValue.value = parseFloat(amount).toFixed(2)
     }else{
-        const amount =  cryptoVal / exchangeRate
-        cryptoAmount.value = amount
+        cryptoAmount.value = cryptoVal / exchangeRate
     }
 }
 /* * * * * * END CALCULATOR * * * * * */
 
 
-/* * * * * * POST ORDER * * * * * */
+/* * * * * * POST BUY ORDER * * * * * */
 
 const buttonPostBuyOrder = document.getElementById("postButton");
 buttonPostBuyOrder.addEventListener("click",() => {
-    postRequest();
+    if(validateOrderInput().valueOf(true)) {
+        postRequest();
+    } else {
+        alert("Form data is missing. \n Your buy order cannot be submitted \n Please fill in amount or value.")
+    }
 })
+
+function validateOrderInput() {
+    let selectedCryptoSymbol = selector.options[selector.selectedIndex].text;
+    return Number(cryptoValue.value) > 0 && Number(cryptoAmount.value) > 0 && selectedCryptoSymbol !== "";
+}
 
 function postRequest() {
     let selectedCryptoSymbol = selector.options[selector.selectedIndex].text;
@@ -101,6 +108,7 @@ function postRequest() {
         .catch((error) => {
             console.log("Order niet verwerkt. Fout: ", error)
         });
+    document.getElementById("order").reset();
 }
 /* * * * * * END POST ORDER * * * * * */
 
