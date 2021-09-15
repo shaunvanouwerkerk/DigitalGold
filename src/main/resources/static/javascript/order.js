@@ -105,7 +105,28 @@ function postRequest() {
 function initialize() {
     document.getElementById("crypto-title").innerHTML = "";
     document.getElementById("form-title").innerHTML = "";
-    getAssetList();
+    const assetCodeParam = processUrlParam();
+    getAssetList(assetCodeParam);
+}
+
+/* controleren en afhandelen URL parameter
+*  functie geeft de parameter terug als die is meegegeven
+*  of 0 (nul) als er geen of geen geldige parameter is gevonden*/
+function processUrlParam () {
+    const paramsData = window.location.search;
+    const urlParameters = new URLSearchParams(paramsData);
+    if(urlParameters.has('assetCode')) {
+        let assetCodeParam = urlParameters.get('assetCode');
+        if (typeof assetCodeParam === 'string') {
+            const passedAssetCode = assetCodeParam.toLowerCase();
+            console.log("uit URL als parameter gehaald: " + passedAssetCode);
+
+            /* pararmeter gevonden dus teruggeven */
+            return passedAssetCode;
+        }
+    }
+    /* geen parameter of geen geldige parameter dan 0 teruggeven */
+    return 0;
 }
 
 
@@ -136,9 +157,12 @@ buttonHelp.addEventListener("click",() => {
     /* showHelp(); */
 })
 
-function getAssetList() {
-    fetch('/assetoverviewbank')
-        .then((response) => response.json()).then(assetList => {
+function getAssetList(passedParameter) {
+    /*  passedParameter checken: indien 0 dan als gewoonlijk drop down opbouwen */
+    if (passedParameter === 0) {
+
+        fetch('/assetoverviewbank')
+            .then((response) => response.json()).then(assetList => {
             console.log(assetList);
             let dropdown = document.getElementById("coinselector");
             dropdown.length = 0;
@@ -158,11 +182,23 @@ function getAssetList() {
                 document.getElementById("crypto-title").innerHTML = "Buy " + firstCryptoInList;
                 document.getElementById("form-title").innerHTML = firstCryptoInList;
                 document.getElementById("cryptoAmount").placeholder = "Enter " + firstCryptoInList + "..."
-                document.getElementById("price").innerHTML = firstCryptoPriceInList
-
+                document.getElementById("price").innerHTML = firstCryptoPriceInList;
             })
         })
+    } else {
+        /*  passedParameter is niet 0 dus dropdown alleen vullen met de assetCode uit de parameter */
+        let dropdown = document.getElementById("coinselector");
+        dropdown.length = 0;
+        dropdown.selectedIndex = 0;
+        let option;
+        option = document.createElement('option');
+        option.text = passedParameter.toUpperCase();
+        dropdown.add(option);
+        dropdown.selectedIndex = 0;
+        executeDropDownEvents();
+    }
 }
+
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
 
