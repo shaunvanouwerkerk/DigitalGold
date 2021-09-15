@@ -83,7 +83,7 @@ public class TransactionService {
     }
 
     public void adjustPortfolioAmount(Transaction transaction) {
-        Asset asset = rootRepository.findByAssetCode(transaction.getAssetCode());
+        Asset asset = rootRepository.findAssetByAssetCode(transaction.getAssetCode());
         double assetAmount = transaction.getAssetAmount();
         String assetCode = transaction.getAssetCode();
         String usernameSeller = rootRepository.findUsernameByIban(transaction.getIbanSell());

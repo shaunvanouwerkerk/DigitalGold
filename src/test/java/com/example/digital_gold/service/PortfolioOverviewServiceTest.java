@@ -45,9 +45,9 @@ class PortfolioOverviewServiceTest {
         Mockito.when(mockRepo.getPortfolioForCustomer("TestUser200")).thenReturn(new Portfolio(testCustomer,assetMap));
         Mockito.when(mockRepo.getPortfolioValuesForCustomer("TestUser200")).thenReturn(testList1);
         Mockito.when(mockRepo.getPortfolioValuesForCustomer("TestUser201")).thenReturn(testList2);
-        Mockito.when(mockRepo.findPriceByAssetCode("DOGE")).
+        Mockito.when(mockRepo.findAssetPriceByAssetCode("DOGE")).
                 thenReturn(new AssetPrice(testAsset001,1, LocalDateTime.now()));
-        Mockito.when(mockRepo.findPriceByAssetCode("ETH")).
+        Mockito.when(mockRepo.findAssetPriceByAssetCode("ETH")).
                 thenReturn(new AssetPrice(testAsset002,1, LocalDateTime.now()));
     }
 

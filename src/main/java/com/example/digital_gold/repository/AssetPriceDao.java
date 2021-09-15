@@ -12,7 +12,7 @@ import java.util.Map;
 public interface AssetPriceDao {
 
     AssetPrice saveAssetPrice(AssetPrice assetPrice);
-    AssetPrice findPriceByAssetCode(String assetCode);
-    List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now);
+    AssetPrice findAssetPriceByAssetCode(String assetCode);
+    //List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now);
 
 }

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -89,22 +88,20 @@ public class RootRepository {
     }
 
     // AssetDao
-    public void saveAsset(Asset asset) {
+    /*public void saveAsset(Asset asset) {
         assetDao.saveAsset(asset);
-    }
-
+    }*/
     public List<Asset> findAllAssets() {
         return assetDao.findAllAssets();
     }
-
-    public Asset findByAssetCode(String assetCode) {
-        return assetDao.findByAssetCode(assetCode);
+    public Asset findAssetByAssetCode(String assetCode) {
+        return assetDao.findAssetByAssetCode(assetCode);
     }
 
     // AssetPriceDao
     public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
-    public AssetPrice findPriceByAssetCode(String assetCode) { return assetPriceDao.findPriceByAssetCode(assetCode); }
-    public List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) { return assetPriceDao.findAllAvailableAssets(now); }
+    public AssetPrice findAssetPriceByAssetCode(String assetCode) { return assetPriceDao.findAssetPriceByAssetCode(assetCode); }
+  /*  public List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) { return assetPriceDao.findAllAvailableAssets(now); }*/
 
     // BankAccountDao
     public BankAccount saveBankAccount(BankAccount bankAccount) {
@@ -125,7 +122,7 @@ public class RootRepository {
         Customer customer = customerDao.findAndReturnCustomerByUsername(username);
         Map<Asset, Double> assetMap = new HashMap<>();
         for (PortfolioDatabase p : tempList) {
-            assetMap.put(assetDao.findByAssetCode(p.getAssetCode()), p.amount);
+            assetMap.put(assetDao.findAssetByAssetCode(p.getAssetCode()), p.amount);
         }
         return new Portfolio(customer, assetMap);
     }

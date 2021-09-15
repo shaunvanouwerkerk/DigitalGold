@@ -46,17 +46,18 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
     }
 
     @Override
-    public AssetPrice findPriceByAssetCode(String assetCode) {
+    public AssetPrice findAssetPriceByAssetCode(String assetCode) {
         String sql = "SELECT * FROM AssetPrice WHERE assetCode = ?" +
                 "AND (Datetime) IN (SELECT Max(Datetime) FROM AssetPrice)";
         return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
     }
 
-    @Override
+    // overbodig?
+   /* @Override
     public  List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) {
         String sql = "select `assetCode`, `price` from `AssetPrice` where `datetime` = ?";
         return jdbcTemplate.queryForList(sql, now);
-    }
+    }*/
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
 
@@ -64,7 +65,7 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
         public AssetPrice mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
             Asset asset = null;
             double price = resultSet.getDouble("price");
-            LocalDateTime dateTime = dateTimeFormatter(resultSet.getString("date"));
+            LocalDateTime dateTime = dateTimeFormatter(resultSet.getString("datetime"));
             AssetPrice assetPrice = new AssetPrice(asset, price, dateTime);
             return assetPrice;
         }

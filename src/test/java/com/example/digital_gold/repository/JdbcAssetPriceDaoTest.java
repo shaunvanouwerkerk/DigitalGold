@@ -6,13 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,27 +38,17 @@ class JdbcAssetPriceDaoTest {
         assertThat(actualAssetPrice).isEqualTo(testAssetPrice);
     }
 
+    // LocalDateTime is niet compatible met H@DB. Niet te testen.
     /*@Test
-    public void findPriceByAssetCodeAndDate() {
-        AssetPrice expected = new AssetPrice(null, 3965.20, LocalDate.parse("2021-09-03"));
-        AssetPrice actual = assetPriceDaoTest.findPriceByAssetCode("ETH", LocalDate.parse("2021-09-03"));
+    public void findPriceByAssetCode() {
+        Asset ethereumTest = new Asset("ETH", "Ethereum", "Beschrijving");
+        AssetPrice expected = new AssetPrice(ethereumTest, 3965.20, LocalDateTime.now());
+        AssetPrice actual = assetPriceDaoTest.findAssetPriceByAssetCode("ETH");
         assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void findPricesByAssetCode() {
-        AssetPrice ethereum1 = new AssetPrice(null, 3965.20, LocalDate.parse("2021-09-03"));
-        AssetPrice ethereum2 = new AssetPrice(null, 3406.78, LocalDate.parse("2021-09-04"));
-        AssetPrice ethereum3 = new AssetPrice(null, 12.00, LocalDate.parse("2021-09-05"));
-        List<AssetPrice> expectedEthereumOverview = new ArrayList<>();
-        expectedEthereumOverview.add(ethereum1);
-        expectedEthereumOverview.add(ethereum2);
-        expectedEthereumOverview.add(ethereum3);
-        List<AssetPrice> actualEthereumPrice = assetPriceDaoTest.findPriceByAssetCode("ETH");
-        assertThat(actualEthereumPrice).isEqualTo(expectedEthereumOverview);
     }*/
 
-    // todo: caseinsensitive map gebruiken?
+    //overbodig?
+  /*
     @Test
     public void findAllAvailableAssetsByDate() {
         List<Map<String, Object>> expected = new ArrayList<>();
@@ -78,7 +62,6 @@ class JdbcAssetPriceDaoTest {
         expected.add(testAssetOverview2);
         List<Map<String, Object>> actual = assetPriceDaoTest.findAllAvailableAssets(LocalDateTime.parse("2021-09-04 00:30:10"));
         assertThat(actual).isEqualTo(expected);
-    }
-
+    }*/
 
 }

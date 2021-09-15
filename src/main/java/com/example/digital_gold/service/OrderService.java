@@ -4,7 +4,6 @@ import com.example.digital_gold.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * @author Sandra Turina
@@ -27,7 +26,7 @@ public class OrderService {
         String assetCode = requestOrder.getAssetCode();
         double assetAmount = requestOrder.getAmountOfAsset();
         //double assetPrice = rootRepository.findPriceByAssetCodeAndDate(assetCode, transactionDate).getPrice();
-        double assetPrice = rootRepository.findPriceByAssetCode(assetCode).getPrice();
+        double assetPrice = rootRepository.findAssetPriceByAssetCode(assetCode).getPrice();
         double transactionFee = 0.5; // die wordt toch door de beheerder vastgelegd? waar?
 
         String ibanSell;

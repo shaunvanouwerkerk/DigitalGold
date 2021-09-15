@@ -10,7 +10,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +69,7 @@ public class PortfolioOverviewService {
     public PortfolioAssetOverview makePortfolioAssetOverview (Asset asset, double amount) {
         String assetName = asset.getAssetName();
         String assetCode = asset.getAssetCode();
-        double currentPrice = rootRepository.findPriceByAssetCode(asset.getAssetCode()).getPrice();
+        double currentPrice = rootRepository.findAssetPriceByAssetCode(asset.getAssetCode()).getPrice();
         double assetTotalValue = (currentPrice * amount);
         return new PortfolioAssetOverview(assetName, assetCode, currentPrice, amount, assetTotalValue);
     }
@@ -79,7 +78,7 @@ public class PortfolioOverviewService {
         final Double[] totalValue = {0.00};
         Map<Asset, Double> assetMap = portfolio.getAssetList();
         assetMap.forEach((key, value) -> {
-            AssetPrice assetPrice = rootRepository.findPriceByAssetCode(key.getAssetCode());
+            AssetPrice assetPrice = rootRepository.findAssetPriceByAssetCode(key.getAssetCode());
             double price = assetPrice.getPrice();
             double amount = value;
             totalValue[0] += (price * amount);

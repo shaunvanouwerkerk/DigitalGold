@@ -1,6 +1,7 @@
 package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.Asset;
+import com.example.digital_gold.domain.AssetPrice;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ import java.util.List;
 
 public interface AssetDao {
 
-    Asset saveAsset(Asset asset);
-    Asset findByAssetCode(String assetCode);
+    //Asset saveAsset(Asset asset);
+    Asset findAssetByAssetCode(String assetCode);
     List<Asset> findAllAssets();
 
 }

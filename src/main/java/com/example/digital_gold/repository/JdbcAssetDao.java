@@ -26,30 +26,31 @@ public class JdbcAssetDao implements AssetDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private PreparedStatement insertAssetStatement(Asset asset, Connection connection) throws SQLException {
+// for future purpose?
+   /* private PreparedStatement insertAssetStatement(Asset asset, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into Asset (assetCode, assetName, description) values (?, ?, ?)");
         preparedStatement.setString(1, asset.getAssetCode());
         preparedStatement.setString(2, asset.getAssetName());
         preparedStatement.setString(3, asset.getDescription());
         return preparedStatement;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public Asset saveAsset(Asset asset) {
         jdbcTemplate.update(connection -> insertAssetStatement(asset, connection));
         return asset;
     }
-
+*/
     //todo throws SQLexception?
     @Override
-    public Asset findByAssetCode(String assetCode) {
+    public Asset findAssetByAssetCode(String assetCode) {
         String sql = "Select * from Asset where assetCode = ?";
         return jdbcTemplate.queryForObject(sql, new AssetRowMapper(), assetCode);
     }
 
+    @Override
     public List<Asset> findAllAssets() {
-        //String sql = "Select distinct assetCode from Asset";
         String sql = "Select * from Asset";
         return jdbcTemplate.query(sql, new AssetRowMapper());
     }
