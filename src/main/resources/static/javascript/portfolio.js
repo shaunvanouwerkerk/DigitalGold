@@ -6,6 +6,17 @@ fetch('../portfoliovalueoverview',{
     .then((response) => response.json()).then(data => {
     let tr = '';
     let tableBody = document.querySelector('#portfoliovalueoverview');
+
+    // table headers
+    let trh = document.createElement('tr');
+    let th1 = document.createElement('th');
+    th1.textContent = "Date";
+    let th2 = document.createElement('th');
+    th2.textContent = "Portfolio value";
+    trh.appendChild(th1);
+    trh.appendChild(th2);
+    tableBody.appendChild(trh);
+
     data.forEach(function (value) {
         let tr = document.createElement('tr');
         let td =document.createElement('td');
@@ -28,6 +39,26 @@ fetch('../portfolioassetoverview',{
     .then((response) => response.json()).then(data => {
     let tr = '';
     let tableBody = document.querySelector('#portfolioassetoverview');
+
+    // table headers
+    let trh = document.createElement('tr');
+    let th1 = document.createElement('th');
+    th1.textContent = "Name";
+    let th2 = document.createElement('th');
+    th2.textContent = " ";
+    let th3 = document.createElement('th');
+    th3.textContent = "Price";
+    let th4 = document.createElement('th');
+    th4.textContent = "Amount";
+    let th5 = document.createElement('th');
+    th5.textContent = "Total Value";
+    trh.appendChild(th1);
+    trh.appendChild(th2);
+    trh.appendChild(th3);
+    trh.appendChild(th4);
+    trh.appendChild(th5);
+    tableBody.appendChild(trh);
+
     data.forEach(function (value) {
         console.log(value);
         let tr = document.createElement('tr');
