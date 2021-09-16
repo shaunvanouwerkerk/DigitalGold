@@ -21,9 +21,9 @@ public class TransactionFeeHelper {
     private static String ibanBank = "NL00DIGO0000000001";
     private static double transactionFee = 0.01;
     private static double shareBuyer = 0.5;
-    private static double shareSeller =0.5;
-    private double feeBuyer;
-    private double feeSeller;
+    private static double shareSeller = 0.5;
+    private static double feeBuyer;
+    private static double feeSeller;
 
 
     public TransactionFeeHelper(double feeBuyer, double feeSeller) {
@@ -50,7 +50,7 @@ public class TransactionFeeHelper {
         return ibanBank;
     }
 
-    public void setIbanBank(String ibanBank) {
+    public static void setIbanBank(String ibanBank) {
         TransactionFeeHelper.ibanBank = ibanBank;
     }
 
@@ -58,27 +58,27 @@ public class TransactionFeeHelper {
 
     public static void setTransactionFee(double transactionFee) { TransactionFeeHelper.transactionFee = transactionFee; }
 
-    public double getShareBuyer() {
+    public static double getShareBuyer() {
         return shareBuyer;
     }
 
-    public void setShareBuyer(double shareBuyer) {
+    public static void setShareBuyer(double shareBuyer) {
         TransactionFeeHelper.shareBuyer = shareBuyer;
     }
 
-    public double getShareSeller() {
+    public static double getShareSeller() {
         return shareSeller;
     }
 
-    public void setShareSeller(double shareSeller) {
+    public static void setShareSeller(double shareSeller) {
         TransactionFeeHelper.shareSeller = shareSeller;
     }
 
-    public double getFeeBuyer() {
+    public static double getFeeBuyer() {
         return feeBuyer;
     }
 
-    public double getFeeSeller() {
+    public static double getFeeSeller() {
         return feeSeller;
     }
 }
