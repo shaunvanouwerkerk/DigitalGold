@@ -22,6 +22,9 @@ public class PortfolioAssetOverview {
         this.assetTotalValue = assetTotalValue;
     }
 
+    public PortfolioAssetOverview() {
+    }
+
     public String getAssetName() {
         return assetName;
     }
