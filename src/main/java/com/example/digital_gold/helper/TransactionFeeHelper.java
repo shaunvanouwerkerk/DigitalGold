@@ -21,7 +21,7 @@ public class TransactionFeeHelper {
     private static String ibanBank = "NL00DIGO0000000001";
     private static double transactionFee = 0.01;
     private static double shareBuyer = 0.5;
-    private static double shareSeller = 0.5;
+    private static double shareSeller =0.5;
     private double feeBuyer;
     private double feeSeller;
 

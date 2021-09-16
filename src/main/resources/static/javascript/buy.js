@@ -33,16 +33,17 @@ function getAssetPriceByAssetCode () {
         headers: {
             'Authorization': localStorage.getItem("token"),
             'Content-Type': 'application/json'
-        }})
+        }
+    })
         .then((response) => response.json()).then(assetData => {
-        console.log(assetData);
-        const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].text.toLowerCase();
-        console.log(crypto);
-        assetData.forEach(function (value) {
-            if (value.symbol === crypto) {
-                console.log("Assetcode gevonden " + value.symbol + " : " + value.current_price)
-                priceField.innerHTML = value.current_price;
-            }
+            console.log(assetData);
+            const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].text.toLowerCase();
+            console.log(crypto);
+            assetData.forEach(function (value) {
+                if (value.symbol === crypto) {
+                    console.log("Assetcode gevonden " + value.symbol + " : " + value.current_price);
+                    priceField.innerHTML = value.current_price;
+                }
             })
         })
 }
@@ -76,6 +77,7 @@ buttonPostBuyOrder.addEventListener("click",() => {
         postRequest();
     } else {
         alert("Form data is missing. \nYour buy order cannot be submitted \nPlease fill in amount or value.")
+        orderForm.reset();
     }
 })
 
