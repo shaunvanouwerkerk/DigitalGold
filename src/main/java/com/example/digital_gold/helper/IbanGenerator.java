@@ -1,22 +1,21 @@
 package com.example.digital_gold.helper;
+import java.math.BigInteger;
 import java.util.Random;
 
-public class IbanGenerator {
-    private static final int MOD = 97;
-    private static final long MAX = 999999999;
+public class IbanGenerator<BigInteger97> {
+
     private final static String COUNTRY_CODE_NL = "NL";
+    private final static String COUNTRY_CODE_NL_NUMERIC = "2321";
     private final static String DEFAULT_CHECK_DIGIT = "00";
     private final static String BANK_CODE = "DIGO";
-    private String checkDigit;
-    private String accountNumber;
+    private final static String BANK_CODE_NUMERIC = "13181624";
 
+    public String accountNumber;
 
     public String generateIban() {
         this.accountNumber = generateAccountNumber();
-        this.checkDigit = calculateCheckDigit(accountNumber);
-        return COUNTRY_CODE_NL + checkDigit + BANK_CODE + accountNumber;
+        return createIbanFromAccountNumber(accountNumber);
     }
-
 
     public String generateAccountNumber() {
         Random rnd = new Random();
@@ -25,30 +24,20 @@ public class IbanGenerator {
         return String.format("%05d%05d", number1, number2);
     }
 
-
-    public static String calculateCheckDigit(String accountNumber)  {
-        final int modResult = calculateMod(accountNumber);
-        final int checkDigitIntValue = (98 - modResult);
-        final String checkDigit = Integer.toString(checkDigitIntValue);
-        return checkDigitIntValue > 9 ? checkDigit : "0" + checkDigit;
-    }
-
-
-    private static int calculateMod(String accountNumber) {
-        String reformattedIban = BANK_CODE + accountNumber + COUNTRY_CODE_NL + DEFAULT_CHECK_DIGIT;
-        long total = 0;
-        for (int i = 0; i < reformattedIban.length(); i++) {
-            final int numericValue = Character.getNumericValue(reformattedIban.charAt(i));
-
-            total = (numericValue > 9 ? total * 100 : total * 10) + numericValue;
-
-            if (total > MAX) {
-                total = (total % MOD);
-            }
-
+    public String createIbanFromAccountNumber(String accountNumber) {
+        String checkSum;
+        BigInteger iban =
+                new BigInteger(BANK_CODE_NUMERIC + accountNumber + COUNTRY_CODE_NL_NUMERIC + DEFAULT_CHECK_DIGIT);
+        BigInteger BigIntOf97 = BigInteger.valueOf(97);
+        BigInteger rest = iban.mod(BigIntOf97);
+        BigInteger BigIntOf98 = BigInteger.valueOf(98);
+        BigInteger remainder = BigIntOf98.subtract(rest);
+        String checkDigit = remainder.toString();
+        if (checkDigit.length() < 2) {
+            checkSum =  "0" + checkDigit;
+        } else {
+            checkSum = checkDigit;
         }
-        return (int) (total % MOD);
+        return COUNTRY_CODE_NL + checkSum + BANK_CODE + accountNumber;
     }
-
-
 }

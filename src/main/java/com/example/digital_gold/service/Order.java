@@ -51,6 +51,26 @@ public class Order {
         return limit;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAssetCode(String assetCode) {
+        this.assetCode = assetCode;
+    }
+
+    public void setAmountOfAsset(double amountOfAsset) {
+        this.amountOfAsset = amountOfAsset;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setLimit(double limit) {
+        this.limit = limit;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
