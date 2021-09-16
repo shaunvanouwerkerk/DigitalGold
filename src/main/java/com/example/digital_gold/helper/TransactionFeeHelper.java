@@ -18,12 +18,12 @@ import com.example.digital_gold.domain.Transaction;
 
 public class TransactionFeeHelper {
 
-    private static String ibanBank = "NL00DIGO0000000001";
-    private static double transactionFee = 0.01;
-    private static double shareBuyer = 0.5;
-    private static double shareSeller = 0.5;
-    private static double feeBuyer;
-    private static double feeSeller;
+    private  static String ibanBank = "NL00DIGO0000000001";
+    private  static double transactionFee = 0.01;
+    private  static double shareBuyer = 0.5;
+    private  static double shareSeller = 0.5;
+    private  double feeBuyer;
+    private  double feeSeller;
 
 
     public TransactionFeeHelper(double feeBuyer, double feeSeller) {
@@ -50,35 +50,39 @@ public class TransactionFeeHelper {
         return ibanBank;
     }
 
-    public static void setIbanBank(String ibanBank) {
+    public void setIbanBank(String ibanBank) {
         TransactionFeeHelper.ibanBank = ibanBank;
     }
 
-    public static double getTransactionFee() { return transactionFee; }
+    public static double getTransactionFee() {
+        return transactionFee;
+    }
 
-    public static void setTransactionFee(double transactionFee) { TransactionFeeHelper.transactionFee = transactionFee; }
+    public void setTransactionFee(double transactionFee) {
+        TransactionFeeHelper.transactionFee = transactionFee;
+    }
 
     public static double getShareBuyer() {
         return shareBuyer;
     }
 
-    public static void setShareBuyer(double shareBuyer) {
+    public void setShareBuyer(double shareBuyer) {
         TransactionFeeHelper.shareBuyer = shareBuyer;
     }
 
-    public static double getShareSeller() {
+    public double getShareSeller() {
         return shareSeller;
     }
 
-    public static void setShareSeller(double shareSeller) {
+    public void setShareSeller(double shareSeller) {
         TransactionFeeHelper.shareSeller = shareSeller;
     }
 
-    public static double getFeeBuyer() {
+    public double getFeeBuyer() {
         return feeBuyer;
     }
 
-    public static double getFeeSeller() {
+    public double getFeeSeller() {
         return feeSeller;
     }
 }

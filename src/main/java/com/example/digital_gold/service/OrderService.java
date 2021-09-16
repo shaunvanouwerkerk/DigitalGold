@@ -13,8 +13,7 @@ import java.time.LocalDate;
 public class OrderService {
     private RootRepository rootRepository;
     private TransactionService transactionService;
-    private TransactionFeeHelper transactionFeeHelper;
-    private String ibanBank = transactionFeeHelper.getIbanBank();
+    private String ibanBank = TransactionFeeHelper.getIbanBank();
 
     @Autowired
     public OrderService(RootRepository rootRepository, TransactionService transactionService) {
@@ -28,7 +27,7 @@ public class OrderService {
         String assetCode = requestOrder.getAssetCode();
         double assetAmount = requestOrder.getAmountOfAsset();
         double assetPrice = rootRepository.findAssetPriceByAssetCode(assetCode).getPrice();
-        double transactionFee = transactionFeeHelper.getTransactionFee();
+        double transactionFee = TransactionFeeHelper.getTransactionFee();
 
         String ibanSell;
         if (requestOrder.getType().equals("sell")) {

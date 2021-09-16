@@ -62,7 +62,7 @@ public class JdbcCustomerDao implements CustomerDao {
 
     @Override
     public String findIbanByUsername(String username) {
-        String sql = "SELECT iban FORM customer WHERE username = ?";
+        String sql = "SELECT iban FROM customer WHERE username = ?";
         return jdbcTemplate.queryForObject(sql,new Object[]{username}, String.class);
     }
 
