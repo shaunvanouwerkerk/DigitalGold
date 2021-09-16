@@ -68,9 +68,9 @@ public class TransactionService {
         double valueSeller = transactionValue - TransactionFeeHelper.splitTransactionFee(transaction).getFeeSeller();
         double valueBuyer = TransactionFeeHelper.splitTransactionFee(transaction).getFeeBuyer() + transactionValue;
         double transactionCosts = transaction.getAssetAmount() * transaction.getAssetPrice() * transaction.getTransactionFee();
-        double newBalanceSeller = rootRepository.getBalanceByIban(transaction.getIbanSell()) + valueSeller;
-        double newBalanceBuyer = rootRepository.getBalanceByIban(transaction.getIbanBuy()) - valueBuyer;
-        double newBalanceBank = rootRepository.getBalanceByIban(transaction.getIbanBuy()) + transactionCosts;
+        double newBalanceSeller = Math.round((rootRepository.getBalanceByIban(transaction.getIbanSell()) + valueSeller) * 100.0) / 100.0;
+        double newBalanceBuyer = Math.round((rootRepository.getBalanceByIban(transaction.getIbanBuy()) - valueBuyer) * 100.0) / 100.0;
+        double newBalanceBank = Math.round((rootRepository.getBalanceByIban(transaction.getIbanBuy()) + transactionCosts) * 100.0) / 100.0;
         BankAccount bankAccountSeller = new BankAccount(transaction.getIbanSell(),newBalanceSeller);
         BankAccount bankAccountBuyer = new BankAccount(transaction.getIbanBuy(), newBalanceBuyer);
         BankAccount bankAccountBank = new BankAccount(TransactionFeeHelper.getIbanBank(),newBalanceBank);
