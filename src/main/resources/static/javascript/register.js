@@ -52,7 +52,7 @@
                             alert("Registration successful")
                             window.location.href = "../index.html"
                         } else {
-                            alert("Register unsuccessful")
+                            alert("Username or email already exists")
                         }
                 return response.json()}
                 )
@@ -71,10 +71,10 @@
         let isZipCodeValid = checkPostcode(document.getElementById('zipcode'))
         let isPasswordValid = checkLenght(document.getElementById('password'),8,50)
         let isDateOfBirthValid = checkDateOfBirth(document.getElementById('dateofbirth'))
-        // let isNotEmpty = checkRequired([document.getElementById('username'),
-        //     document.getElementById('firstname'),document.getElementById('lastname'),
-        //         document.getElementById('housenumber'),document.getElementById('streetname'),
-        //             document.getElementById('city')]);
+        let isNotEmpty = checkRequired([document.getElementById('username'),
+            document.getElementById('firstname'),document.getElementById('lastname'),
+                document.getElementById('housenumber'),document.getElementById('streetname'),
+                    document.getElementById('city')]);
 
 
         // Check of alle velden op true staan
