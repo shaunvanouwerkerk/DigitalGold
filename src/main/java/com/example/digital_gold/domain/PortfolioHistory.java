@@ -11,12 +11,12 @@ public class PortfolioHistory implements Comparable<PortfolioHistory> {
 
     private Customer customer;
     private LocalDate date;
-    private double totalvalue;
+    private double totalValue;
 
-    public PortfolioHistory(Customer customer, LocalDate date, double totalvalue) {
+    public PortfolioHistory(Customer customer, LocalDate date, double totalValue) {
         this.customer = customer;
         this.date = date;
-        this.totalvalue = totalvalue;
+        this.totalValue = totalValue;
     }
 
     public PortfolioHistory() {
@@ -39,11 +39,11 @@ public class PortfolioHistory implements Comparable<PortfolioHistory> {
     }
 
     public double getTotalvalue() {
-        return totalvalue;
+        return totalValue;
     }
 
     public void setTotalvalue(double totalvalue) {
-        this.totalvalue = totalvalue;
+        this.totalValue = totalvalue;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class PortfolioHistory implements Comparable<PortfolioHistory> {
         return "PortfolioHistory{" +
                 "customer=" + customer +
                 ", date=" + date +
-                ", totalvalue=" + totalvalue +
+                ", totalvalue=" + totalValue +
                 '}';
     }
 
