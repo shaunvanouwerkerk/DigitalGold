@@ -9,8 +9,8 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/styles-order.css" type="text/css">
-    <script src="javascript/order.js" defer></script>
-    <script src="javascript/authenticate.js"defer></script>
+    <script src="javascript/sell.js" defer></script>
+    <script src="javascript/authenticate.js" defer></script>
 </head>
 <body onload="initialize()">
 <nav class="navbar">
@@ -22,7 +22,9 @@
     </a>
     <div class="nav-links">
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="market.html">Market</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="index.html" id="btnLogout">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -41,7 +43,7 @@
             <h2L id="form-title"></h2L>
         </div>
         <div class="row">
-            <label for="price">Price: </label><span class="price" id="price">2000.50</span>
+            <label for="price">Price: </label><span class="price" id="price"></span>
         </div>
 
         <form id="order">
@@ -59,7 +61,7 @@
                     <label for="cryptoValue">Value in USD: </label>
                 </div>
                 <div class="col-70">
-                    <input type="number" step="0.01" min="0" pattern="\d+(\.\d*)?" id="cryptoValue" name="cryptoValue" placeholder="Enter USD..." required>
+                    <input type="number" step="0.1" min="0" pattern="\d+(\.\d*)?" id="cryptoValue" name="cryptoValue" placeholder="Enter USD..." required>
                 </div>
             </div>
             <div class="row">

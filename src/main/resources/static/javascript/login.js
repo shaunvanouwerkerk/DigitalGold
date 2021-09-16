@@ -1,6 +1,6 @@
 let username
 let password
-const administrator = "admin01"
+const administrator = "DigitalGoldBank"
 
 document.querySelector('#sbSubmit').addEventListener('click',
     function (event) {

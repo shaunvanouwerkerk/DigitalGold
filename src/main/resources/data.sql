@@ -190,8 +190,8 @@ values ('TestUser111','TestPassword', 'JanTester', 'van', 'JanssenTester', '1950
         'TestCity', 'tester111@gmail.com', 'testzoutje',true, 'NL10DIGO9876543211');
 insert into customer (username, password, firstName, prefix, lastName, dateOfBirth, bsn, houseNumber, streetName,
                       zipCode, city, emailAddress, salt, status, iban)
-values ('DigitalGoldBank','GoForGold', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
-        'BankCity', 'bank@digitalgold.com', 'testzoutje',true, 'NL00DIGO0000000001' );
+values ('DigitalGoldBank','6fc7fc56ec6007065324f4fd5cb7abc82786b55bb6f12f4c712f750c0db9832f', 'Go', 'for', 'Gold', '1900-01-01', '753654852', '1', 'Golden Alley', '500',
+        'BankCity', 'bank@digitalgold.com', '022ba0e4',true, 'NL00DIGO0000000001' );
 
 insert into bankaccount (iban, balance) values ('NL10DIGO9876543211', 38459.69);
 insert into bankaccount (iban, balance) values ('NL10DIGO9876543212', 9426.85);
