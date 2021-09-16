@@ -1,5 +1,6 @@
 package com.example.digital_gold.service;
 import com.example.digital_gold.domain.Transaction;
+import com.example.digital_gold.helper.TransactionFeeHelper;
 import com.example.digital_gold.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,8 @@ import java.time.LocalDate;
 public class OrderService {
     private RootRepository rootRepository;
     private TransactionService transactionService;
-    private static String ibanBank = "NL00DIGO0000000001"; //get from transActionFeeHelper
+    private TransactionFeeHelper transactionFeeHelper;
+    private String ibanBank = transactionFeeHelper.getIbanBank();
 
     @Autowired
     public OrderService(RootRepository rootRepository, TransactionService transactionService) {
@@ -26,7 +28,7 @@ public class OrderService {
         String assetCode = requestOrder.getAssetCode();
         double assetAmount = requestOrder.getAmountOfAsset();
         double assetPrice = rootRepository.findAssetPriceByAssetCode(assetCode).getPrice();
-        double transactionFee = 0.5; // transactionFeeHelper.get...
+        double transactionFee = transactionFeeHelper.getTransactionFee();
 
         String ibanSell;
         if (requestOrder.getType().equals("sell")) {
