@@ -11,15 +11,17 @@ import com.example.digital_gold.domain.Transaction;
  *          Als IBAN_BANK == ibanSell dan buyer 100% fee
  *          anders seller 50% fee en buyer 50% fee
  *
- * Hier wordt ook de IBAN van de bank vastgelegd en de verdeling tussen klant transacties
- * Beide onderhoudbaar door de Admin
+ * Hier wordt ook de IBAN van de bank vastgelegd, de transactionfee
+ * en de verdeling van de transactiekosten tussen klant transacties.
+ * Onderhoudbaar door de Admin
  */
 
 public class TransactionFeeHelper {
 
     private static String ibanBank = "NL00DIGO0000000001";
+    private static double transactionFee = 0.01;
     private static double shareBuyer = 0.5;
-    private static double shareSeller = 0.5;
+    private static double shareSeller =0.5;
     private double feeBuyer;
     private double feeSeller;
 
@@ -39,7 +41,7 @@ public class TransactionFeeHelper {
             feeSeller = transactionCosts;
         } else {
             feeBuyer = transactionCosts * shareBuyer;
-            feeSeller = feeBuyer * shareSeller;
+            feeSeller = transactionCosts * shareSeller;
         }
         return new TransactionFeeHelper(feeBuyer,feeSeller);
     }
@@ -51,6 +53,10 @@ public class TransactionFeeHelper {
     public void setIbanBank(String ibanBank) {
         TransactionFeeHelper.ibanBank = ibanBank;
     }
+
+    public static double getTransactionFee() { return transactionFee; }
+
+    public static void setTransactionFee(double transactionFee) { TransactionFeeHelper.transactionFee = transactionFee; }
 
     public double getShareBuyer() {
         return shareBuyer;

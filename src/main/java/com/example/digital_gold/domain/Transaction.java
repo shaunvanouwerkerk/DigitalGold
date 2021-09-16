@@ -1,6 +1,7 @@
 package com.example.digital_gold.domain;
 
 
+import com.example.digital_gold.helper.TransactionFeeHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ public class Transaction {
     private String assetCode;
     private double assetAmount;
     private double assetPrice;
-    private double transactionFee; //dit is het default percentage, in beheer van Admin
+    private double transactionFee;
     private String ibanSell;
     private String ibanBuy;
 
@@ -28,6 +29,7 @@ public class Transaction {
     public Transaction() {
         this.transactionId = 0;
         transactionDate = LocalDate.now();
+        transactionFee = TransactionFeeHelper.getTransactionFee();
         logger.info("New empty transaction with timestamp: " + this.transactionDate);
     }
 
