@@ -60,7 +60,7 @@ public class AdministratorController {
         System.out.println("Methode currentStartCapital werkt");
 
         if(currentStartingCapital!= 0 ) {
-            return ResponseEntity.status(HttpStatus.OK).body("Correct request");
+            return ResponseEntity.status(HttpStatus.OK).body(currentStartingCapital);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect request");
         }
@@ -72,7 +72,7 @@ public class AdministratorController {
         System.out.println("Methode currentTransactionfee werkt");
 
         if(currentTransactionFee != 0 ) {
-            return ResponseEntity.status(HttpStatus.OK).body("Correct request");
+            return ResponseEntity.status(HttpStatus.OK).body(currentTransactionFee);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect request");
         }
