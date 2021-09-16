@@ -80,47 +80,6 @@ values ('TestUser111', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
 values ('TestUser111', 'DOGE', 1.00);
 
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'ETH', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'BTC', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'DOGE', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'ADA', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'BNB', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'USDT', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'XRP', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'SOL', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'DOT', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'USDC', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'UNI', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'LINK', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'LUNA', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'BCH', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'BUSD', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'LTC', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'ICP', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'WBTC', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'MATIC', 5000.00);
-insert into portfolio (username, assetCode, amount)
-values ('DigitalGoldBank', 'VET', 5000.00);
-
 insert into portfoliohistory (userName, date, totalValue)
 VALUES ('TestUser105', '2021-09-13', 100.00);
 insert into portfoliohistory (userName, date, totalValue)
