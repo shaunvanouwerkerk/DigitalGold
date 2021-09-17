@@ -22,15 +22,22 @@ fetch('/assetoverviewbank')
                 let td1 = document.createElement('td');
                 let btn = document.createElement('input');
 
-                td1.textContent = value.symbol.toUpperCase();
+                //let img = new Image();
+                //img.src =  value.image.value
+                //td1.appendChild(img);
+
+                let assetCode = value.symbol.toUpperCase();
+                let assetName = value.name;
+                td1.textContent = assetCode + "      " + assetName;
 
                 btn.type = "button";
                 btn.className = "buy-button";
                 btn.value = "Buy";
-                btn.onclick = function() {
-                        (window.location.href = ("/buy.html?assetCode=" + td1.textContent));
+                btn.onclick = function(value) {
+                        (window.location.href = ("/buy.html?assetCode=" + assetCode));
                 }
                 td1.appendChild(btn);
+
 
                 let td2 = document.createElement('td');
                 td2.textContent= new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' })

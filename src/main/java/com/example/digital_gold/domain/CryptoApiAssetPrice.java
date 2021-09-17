@@ -17,9 +17,17 @@ public class CryptoApiAssetPrice {
     @JsonProperty("current_price")
     private double currentPrice;
 
-    public CryptoApiAssetPrice(String symbol, double currentPrice) {
+    @JsonProperty("name")
+    private String name;
+
+    @JsonProperty("image")
+    private String image;
+
+    public CryptoApiAssetPrice(String symbol, double currentPrice, String name, String image) {
         this.symbol = symbol;
         this.currentPrice = currentPrice;
+        this.name = name;
+        this.image = image;
     }
 
     public CryptoApiAssetPrice() {
