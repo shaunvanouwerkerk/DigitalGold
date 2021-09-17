@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author Fiona Gray
@@ -49,6 +50,13 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
                 "AND (Datetime) IN (SELECT Max(Datetime) FROM AssetPrice)";
         return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
     }
+
+    @Override
+    public List<AssetPrice> findAllAssetPrices() {
+        String sql = "SELECT * FROM AssetPrice WHERE (Datetime) IN (SELECT Max(Datetime) FROM AssetPrice)";
+        return jdbcTemplate.query(sql, new AssetPriceRowMapper());
+    }
+
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
 

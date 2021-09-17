@@ -2,6 +2,7 @@ package com.example.digital_gold.controller;
 
 import com.example.digital_gold.domain.CryptoApiAssetPrice;
 import com.example.digital_gold.service.AssetOverviewBankService;
+import com.example.digital_gold.service.AuthenticatorService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -25,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AssetOverviewBankControllerTest {
     @Mock
     private AssetOverviewBankService assetOverviewBankService;
+    @Mock
+    private AuthenticatorService authenticatorService;
 
     private MockMvc mockMvc;
     private ObjectMapper mapper;
@@ -32,7 +35,7 @@ public class AssetOverviewBankControllerTest {
     @BeforeEach
     public void initRestAssuredMockStandAlone() {
         this.assetOverviewBankService = Mockito.mock(AssetOverviewBankService.class);
-        RestAssuredMockMvc.standaloneSetup(new AssetOverviewBankController(assetOverviewBankService));
+        RestAssuredMockMvc.standaloneSetup(new AssetOverviewBankController(assetOverviewBankService, authenticatorService));
     }
 
     @Test
@@ -81,7 +84,9 @@ public class AssetOverviewBankControllerTest {
         assertThat(actual.contains(btc.getSymbol()));
         assertThat(actual.contains(eth.getSymbol()));
     }
-   /* @Test
+
+/*    // todo: werkend krijgen
+    @Test
     public void assetOverviewBank_returnListOfTwentyApiPrices() throws IOException {
         List<CryptoApiAssetPrice> prices = getJsonFileAndMapIntoObjects();
         List<CryptoApiAssetPrice> twentyPrices = new ArrayList<>();

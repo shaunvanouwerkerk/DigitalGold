@@ -18,16 +18,15 @@ public class CryptoApiAssetPrice {
     private double currentPrice;
 
     @JsonProperty("name")
-    private String name;
+    private String assetName;
 
     @JsonProperty("image")
     private String image;
 
-    public CryptoApiAssetPrice(String symbol, double currentPrice, String name, String image) {
+    public CryptoApiAssetPrice(String symbol, double currentPrice, String assetName) {
         this.symbol = symbol;
         this.currentPrice = currentPrice;
-        this.name = name;
-        this.image = image;
+        this.assetName = assetName;
     }
 
     public CryptoApiAssetPrice() {
@@ -49,12 +48,12 @@ public class CryptoApiAssetPrice {
         this.currentPrice = currentPrice;
     }
 
-    @Override
-    public String toString() {
-        return "CryptoApiAssetPrice{" +
-                "symbol='" + symbol + '\'' +
-                ", currentPrice=" + currentPrice +
-                '}';
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
     @Override
@@ -62,11 +61,20 @@ public class CryptoApiAssetPrice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CryptoApiAssetPrice that = (CryptoApiAssetPrice) o;
-        return Double.compare(that.currentPrice, currentPrice) == 0 && Objects.equals(symbol, that.symbol);
+        return Double.compare(that.currentPrice, currentPrice) == 0 && Objects.equals(symbol, that.symbol) && Objects.equals(assetName, that.assetName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, currentPrice);
+        return Objects.hash(symbol, currentPrice, assetName);
+    }
+
+    @Override
+    public String toString() {
+        return "CryptoApiAssetPrice{" +
+                "symbol='" + symbol + '\'' +
+                ", currentPrice=" + currentPrice +
+                ", assetName='" + assetName + '\'' +
+                '}';
     }
 }

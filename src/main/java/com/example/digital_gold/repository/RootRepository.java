@@ -88,9 +88,6 @@ public class RootRepository {
     }
 
     // AssetDao
-    /*public void saveAsset(Asset asset) {
-        assetDao.saveAsset(asset);
-    }*/
     public List<Asset> findAllAssets() {
         return assetDao.findAllAssets();
     }
@@ -101,7 +98,7 @@ public class RootRepository {
     // AssetPriceDao
     public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
     public AssetPrice findAssetPriceByAssetCode(String assetCode) { return assetPriceDao.findAssetPriceByAssetCode(assetCode); }
-  /*  public List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) { return assetPriceDao.findAllAvailableAssets(now); }*/
+    public List<AssetPrice> findAllAssetPrices() { return assetPriceDao.findAllAssetPrices(); }
 
     // BankAccountDao
     public BankAccount saveBankAccount(BankAccount bankAccount) {
