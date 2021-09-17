@@ -1,105 +1,99 @@
 package com.example.digital_gold.controller;
 
+import com.example.digital_gold.domain.CryptoApiAssetPrice;
 import com.example.digital_gold.service.AssetOverviewBankService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import java.time.LocalDate;
+import org.springframework.util.ResourceUtils;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@WebMvcTest(AssetOverviewBankController.class)
-class AssetOverviewBankControllerTest {
+
+public class AssetOverviewBankControllerTest {
+    @Mock
+    private AssetOverviewBankService assetOverviewBankService;
 
     private MockMvc mockMvc;
+    private ObjectMapper mapper;
 
-    //1
-    /* @BeforeEach
-    public void initRestAsssuredMochMvcStandAlone() {
-        RestAssuredMockMvc.standaloneSetup(new AssetOverviewBankController());
-    }*/
-
-    //2 test 200 OK
-    //  methode greet_returns_200_ok() {}
-    // when().get("/greet").then().statusCode(200);
-    // when() --> import static io.restassured.module.mockmvc.restasssduredmockmvc.*
-
-    //3 , application/jsomn,
-    // methode greet_returns_content_type_app_josn() {
-    //when().get(/greet).then().contentType(MediaType.Application_Jsoin_value) }
-    //
-
-    //4 {"message": "hello"}
-    // greet_body_contains_message_content(){
-    // when().get(/greet).then().body(containsString("string"));}
-
-    //5 controleer format én inhoud
-    // greet_body_message_obhject_with_content(){
-    // Greeting expected = new Greeting("hello");
-    // Greeting message = when().get(/greet).then().extract().body().as(Greeting.class);
-    // assertThat(message).isEqualTo(expected);
-
-
-
-    @MockBean
-    private AssetOverviewBankService assetOverviewBankServiceMock;
-
-    @Autowired
-    public AssetOverviewBankControllerTest(MockMvc mockMvc) {
-        this.mockMvc = mockMvc;
+    @BeforeEach
+    public void initRestAssuredMockStandAlone() {
+        this.assetOverviewBankService = Mockito.mock(AssetOverviewBankService.class);
+        RestAssuredMockMvc.standaloneSetup(new AssetOverviewBankController(assetOverviewBankService));
     }
 
-    private List<Map<String, Object>> createTestOverview() {
-        List<Map<String, Object>> testOverview = new ArrayList<>();
-        Map<String, Object> testAssetPrice1 = new HashMap<>();
-        Map<String, Object> testAssetPrice2 = new HashMap<>();
-        testAssetPrice1.put("ASSETCODE", "ADA");
-        testAssetPrice1.put("PRICE", 31.75);
-        testAssetPrice2.put("ASSETCODE", "VET");
-        testAssetPrice2.put("PRICE", 77.89);
-        testOverview.add(testAssetPrice1);
-        testOverview.add(testAssetPrice2);
-        return testOverview;
-    }
-
-    private String createJsonfromAssetOverviewBank() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(createTestOverview());
-    }
-
-   /* @Test
-    public void validRequestGetAssetOverviewBank() {
-        List<Map<String, Object>> assetOverview = createTestOverview();
-        Mockito.when(assetOverviewBankServiceMock.getAssetOverviewBank(Mockito.any(LocalDate.class))).thenReturn(assetOverview);
-
-        MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get("/assetoverviewbank");
-
-        try {
-            ResultActions response = mockMvc.perform(getRequest).andExpect(status().isOk());
-            String responseBody = response.andReturn().getResponse().getContentAsString();
-            assertThat(responseBody).isEqualTo(createJsonfromAssetOverviewBank());
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }*/
-
-    //TODO invalid Request
     @Test
-    public void invalidRequestGetAssetOverviewBank() {
-
+    public void assetOverviewBank_return200() {
+        when()
+                .get("/assetoverviewbank")
+                .then()
+                .statusCode(200);
     }
+
+    @Test
+    public void assetOverviewBank_returnContentTypeAppJson() {
+        when()
+                .get("/assetoverviewbank")
+                .then()
+                .contentType(MediaType.APPLICATION_JSON_VALUE);
+    }
+
+    public List<CryptoApiAssetPrice>  getJsonFileAndMapIntoObjects() throws IOException {
+        File file = ResourceUtils.getFile("classpath:testData_30_cryptoApiAssets.json");
+        System.out.println("File Found : " + file.exists());
+        //Read File Content
+        String content = new String(Files.readAllBytes(file.toPath()));
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<CryptoApiAssetPrice> list = mapper.readValue(content, new TypeReference<>(){});
+        return list;
+    }
+
+    @Test
+    public void assetOverviewBank_returnResponseParsedIntoObjects() throws IOException {
+        List<CryptoApiAssetPrice> expected = getJsonFileAndMapIntoObjects();
+        CryptoApiAssetPrice btc = expected.get(0);
+        CryptoApiAssetPrice eth = expected.get(1);
+        CryptoApiAssetPrice ada = expected.get(2);
+
+        List<CryptoApiAssetPrice> actual =
+                when().get("/assetoverviewbank")
+                        .then()
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .statusCode(200)
+                        .extract()
+                        .body().jsonPath()
+                        .getList(".", CryptoApiAssetPrice.class);
+        assertThat(actual.contains(ada.getSymbol()));
+        assertThat(actual.contains(btc.getSymbol()));
+        assertThat(actual.contains(eth.getSymbol()));
+    }
+   /* @Test
+    public void assetOverviewBank_returnListOfTwentyApiPrices() throws IOException {
+        List<CryptoApiAssetPrice> prices = getJsonFileAndMapIntoObjects();
+        List<CryptoApiAssetPrice> twentyPrices = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            twentyPrices.add(prices.get(i));
+        }
+        CryptoApiAssetPrice btc = twentyPrices.get(0);
+
+        //assertThat(Mockito.when(assetOverviewBankService.getAndSaveTwentyPrices(prices).containsAll(twentyPrices)));
+        //assertThat(Mockito.when(assetOverviewBankService.getAndSaveTwentyPrices(prices).contains(btc.getSymbol())));
+        //assertEquals(Mockito.when(assetOverviewBankService.getAndSaveTwentyPrices(prices).size()), twentyPrices.size());
+        Mockito.when(assetOverviewBankService.getAndSaveTwentyPrices(prices));
+        assertEquals(20, prices.size());
+    }*/
 }
