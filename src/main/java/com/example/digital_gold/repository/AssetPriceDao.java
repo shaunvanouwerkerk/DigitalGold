@@ -13,6 +13,6 @@ public interface AssetPriceDao {
 
     AssetPrice saveAssetPrice(AssetPrice assetPrice);
     AssetPrice findAssetPriceByAssetCode(String assetCode);
-    //List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now);
+    List<AssetPrice> findAllAssetPrices();
 
 }

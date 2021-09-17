@@ -2,15 +2,15 @@ package com.example.digital_gold.domain;
 
 import java.util.Objects;
 
-public class AssetPriceDTO {
+public class AssetPriceDto {
 
     String symbol;
-    String name;
+    String assetName;
     double currentPrice;
 
-    public AssetPriceDTO(String symbol, String name, double currentPrice) {
+    public AssetPriceDto(String symbol, String assetName, double currentPrice) {
         this.symbol = symbol;
-        this.name = name;
+        this.assetName = assetName;
         this.currentPrice = currentPrice;
     }
 
@@ -22,12 +22,12 @@ public class AssetPriceDTO {
         this.symbol = symbol;
     }
 
-    public String getName() {
-        return name;
+    public String getAssetName() {
+        return assetName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
     public double getCurrentPrice() {
@@ -42,20 +42,20 @@ public class AssetPriceDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AssetPriceDTO that = (AssetPriceDTO) o;
-        return Double.compare(that.currentPrice, currentPrice) == 0 && Objects.equals(symbol, that.symbol) && Objects.equals(name, that.name);
+        AssetPriceDto that = (AssetPriceDto) o;
+        return Double.compare(that.currentPrice, currentPrice) == 0 && Objects.equals(symbol, that.symbol) && Objects.equals(assetName, that.assetName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, name, currentPrice);
+        return Objects.hash(symbol, assetName, currentPrice);
     }
 
     @Override
     public String toString() {
         return "AssetPriceDTO{" +
                 "symbol='" + symbol + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + assetName + '\'' +
                 ", currentPrice=" + currentPrice +
                 '}';
     }

@@ -32,7 +32,7 @@ fetch('/assetoverviewbank',{
                 //td1.appendChild(img);
 
                 let assetCode = value.symbol.toUpperCase();
-                let assetName = value.name;
+                let assetName = value.assetName;
                 td1.textContent = assetCode + "      " + assetName;
 
                 btn.type = "button";
@@ -43,10 +43,9 @@ fetch('/assetoverviewbank',{
                 }
                 td1.appendChild(btn);
 
-
                 let td2 = document.createElement('td');
                 td2.textContent= new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' })
-                    .format(value.current_price);
+                    .format(value.currentPrice);
                 tr.appendChild(td1);
                 tr.appendChild(td2);
                 tableBody.appendChild(tr);
@@ -56,6 +55,7 @@ fetch('/assetoverviewbank',{
     });
 
 /* * * * * * NAVIGATION * * * * * */
+const menuButton = document.getElementsByClassName('menu-button')[0];
 menuButton.addEventListener('click',() => {
         menuLinks.classList.toggle('active')
 })

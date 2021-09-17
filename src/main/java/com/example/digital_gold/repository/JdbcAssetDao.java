@@ -26,22 +26,6 @@ public class JdbcAssetDao implements AssetDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-// for future purpose?
-   /* private PreparedStatement insertAssetStatement(Asset asset, Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into Asset (assetCode, assetName, description) values (?, ?, ?)");
-        preparedStatement.setString(1, asset.getAssetCode());
-        preparedStatement.setString(2, asset.getAssetName());
-        preparedStatement.setString(3, asset.getDescription());
-        return preparedStatement;
-    }*/
-
-   /* @Override
-    public Asset saveAsset(Asset asset) {
-        jdbcTemplate.update(connection -> insertAssetStatement(asset, connection));
-        return asset;
-    }
-*/
     //todo throws SQLexception?
     @Override
     public Asset findAssetByAssetCode(String assetCode) {

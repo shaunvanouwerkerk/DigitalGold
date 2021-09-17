@@ -98,6 +98,7 @@ public class RootRepository {
     // AssetPriceDao
     public void saveAssetPrice(AssetPrice assetPrice) { assetPriceDao.saveAssetPrice(assetPrice); }
     public AssetPrice findAssetPriceByAssetCode(String assetCode) { return assetPriceDao.findAssetPriceByAssetCode(assetCode); }
+    public List<AssetPrice> findAllAssetPrices() { return assetPriceDao.findAllAssetPrices(); }
 
     // BankAccountDao
     public BankAccount saveBankAccount(BankAccount bankAccount) {

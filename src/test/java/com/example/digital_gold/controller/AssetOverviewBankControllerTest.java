@@ -85,8 +85,8 @@ public class AssetOverviewBankControllerTest {
         assertThat(actual.contains(eth.getSymbol()));
     }
 
-    // todo: werkend krijgen
-   /* @Test
+/*    // todo: werkend krijgen
+    @Test
     public void assetOverviewBank_returnListOfTwentyApiPrices() throws IOException {
         List<CryptoApiAssetPrice> prices = getJsonFileAndMapIntoObjects();
         List<CryptoApiAssetPrice> twentyPrices = new ArrayList<>();

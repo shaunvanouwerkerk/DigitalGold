@@ -3,11 +3,11 @@ package com.example.digital_gold.schedulingtasks;
 import com.example.digital_gold.controller.AssetOverviewBankController;
 import com.example.digital_gold.domain.*;
 import com.example.digital_gold.repository.RootRepository;
+import com.example.digital_gold.service.AssetOverviewBankService;
 import com.example.digital_gold.service.PortfolioOverviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,14 +20,14 @@ public class Scheduler {
 
     private final RootRepository rootRepository;
     private final PortfolioOverviewService portfolioOverviewService;
-    private final AssetOverviewBankController assetOverviewBankController;
+    private final AssetOverviewBankService assetOverviewBankService;
 
     @Autowired
     public Scheduler(RootRepository rootRepository, PortfolioOverviewService portfolioOverviewService,
-                     AssetOverviewBankController assetOverviewBankController) {
+                     AssetOverviewBankService assetOverviewBankService) {
         this.rootRepository = rootRepository;
         this.portfolioOverviewService = portfolioOverviewService;
-        this.assetOverviewBankController = assetOverviewBankController;
+        this.assetOverviewBankService = assetOverviewBankService;
     }
 
     @Scheduled(cron = "0 59 23 * * *")
@@ -37,7 +37,7 @@ public class Scheduler {
 
     @Scheduled(cron = "0 0/1 * * * *")
     public void testTask2() {
-        getCurrentAssetPrices();
+        getAndSaveCurrentAssetPrices();
     }
 
     public void saveDailyPortfolioValues() {
@@ -49,34 +49,15 @@ public class Scheduler {
         }
     }
 
-    public void saveCurrentAssetPrices() {
-        // List<Asset> assetList = rootRepository.findAllAssets();
-        //getCurrentAssetPrices();
-        //assetList.forEach(this::getCurrentAssetPrices);
-    }
-
     public void savePortfolioValue(PortfolioHistory portfolioHistory) {
         rootRepository.savePortfolioValue(portfolioHistory);
     }
 
-    public void getCurrentAssetPrices() {
-        try {
-            //assetOverviewBankController.getAssetOverviewBank();
-            //List<CryptoApiAssetPrice> assetPriceList = assetOverviewBankController.getAssetOverviewBank();
-            /*for(Asset asset: assetList) {
-                for (CryptoApiAssetPrice price: assetPriceList) {
-                    if (price.getSymbol().toUpperCase(Locale.ROOT).equals(asset.getAssetCode())) {
-                        AssetPrice assetPrice = new AssetPrice(asset, price.getCurrentPrice(), LocalDate.now()); // todo: convert to localdatetime
-                        saveAssetPrice(assetPrice);
-                    }
-                }
-            }*/
-        } catch (Exception exception) {
+    public void getAndSaveCurrentAssetPrices() {
+        try { assetOverviewBankService.getAndSaveCryptoApiPrices();
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
     }
-
-    /*public void saveAssetPrice(AssetPrice assetPrice) {
-        rootRepository.saveAssetPrice(assetPrice);
-    }*/
 }
