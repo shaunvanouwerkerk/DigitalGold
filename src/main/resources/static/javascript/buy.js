@@ -54,7 +54,6 @@ cryptoValue.onchange = ()=>calc()
 cryptoAmount.onkeyup = ()=>calc('crypto')
 cryptoAmount.onchange = ()=>calc('crypto')
 
-/* TODO: Functie moet straks op basis van assetprice data ipv API Coindesk */
 function calc(changer){
     const cryptoAmt = Number(cryptoAmount.value);
     const cryptoVal = Number(cryptoValue.value);
@@ -207,10 +206,5 @@ function getAssetList(passedParameter) {
 }
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
 
-/*TODO: Help schermpje met info tonen? */
-const buttonHelp = document.getElementById("help");
-buttonHelp.addEventListener("click",() => {
-    /* showHelp(); */
-})
 
 
