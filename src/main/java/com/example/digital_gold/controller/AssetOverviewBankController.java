@@ -1,6 +1,7 @@
 package com.example.digital_gold.controller;
 import com.example.digital_gold.domain.CryptoApiAssetPrice;
 import com.example.digital_gold.service.AssetOverviewBankService;
+import com.example.digital_gold.service.AuthenticatorService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,20 +24,22 @@ import java.util.List;
 public class AssetOverviewBankController {
 
     private AssetOverviewBankService assetOverviewBankService;
-
+    private AuthenticatorService authenticatorService;
     private final Logger logger = LoggerFactory.getLogger(AssetOverviewBankController.class);
 
     private static final String CRYPTO_API_URL =
             "https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=30&page=1&sparkline=false";
 
     @Autowired
-    public AssetOverviewBankController(AssetOverviewBankService assetOverviewBankService) {
+    public AssetOverviewBankController(AssetOverviewBankService assetOverviewBankService, AuthenticatorService authenticatorService) {
         this.assetOverviewBankService = assetOverviewBankService;
+        this.authenticatorService = authenticatorService;
         logger.info("New AssetOverviewBankController");
     }
 
     @GetMapping ("/assetoverviewbank")
-    public List<CryptoApiAssetPrice> getAssetOverviewBank() throws IOException, InterruptedException {
+    public List<CryptoApiAssetPrice> getAssetOverviewBank(@RequestHeader("Authorization") String token) throws IOException, InterruptedException {
+        String username = authenticatorService.authenticateUsername(token); // voor balance tonen aan frontend
         HttpResponse<String> response = createHttpResponse();
         List<CryptoApiAssetPrice> prices = parseResponseIntoObjects(response);
         return getTwentyPrices(prices);
