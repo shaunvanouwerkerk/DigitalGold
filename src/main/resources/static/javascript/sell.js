@@ -13,6 +13,7 @@ const buttonPostBuyOrder = document.getElementById("postButton");
 const formTitle = document.getElementById("form-title");
 const cryptoTitle = document.getElementById("crypto-title");
 const orderForm = document.getElementById("order");
+let balanceField;
 
 /* * * * * * * * * * * * * * * * */
 
@@ -23,6 +24,25 @@ menuButton.addEventListener('click',() => {
 })
 /* * * * * * * * * * * * * * * * */
 
+
+/* * * * * * BALANCE * * * * * * */
+fetch('/balance', {
+    method: 'GET',
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content': 'application/json'
+    },
+})
+    .then((response) => response.json())
+    .then( data => {
+        balanceField = data;
+        document.getElementById("balance").innerHTML = balanceField;
+        console.log(balanceField);
+    }).catch((error) => {
+    console.error('Error', error);
+});
+
+/* * * * * * * * * * * * * * * * */
 
 /* * * * * * CALCULATOR * * * * * */
 
@@ -206,11 +226,4 @@ function getAssetList(passedParameter) {
     }
 }
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */
-
-/*TODO: Help schermpje met info tonen? */
-const buttonHelp = document.getElementById("help");
-buttonHelp.addEventListener("click",() => {
-    /* showHelp(); */
-})
-
 

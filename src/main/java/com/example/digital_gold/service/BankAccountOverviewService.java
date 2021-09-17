@@ -23,7 +23,7 @@ public class BankAccountOverviewService {
     }
 
     public BankAccount bankAccountOverview(String username) {
-            String iban = rootRepository.findUsernameByIban(username);  // todo getIbanByUsername in CustomerDao
+            String iban = rootRepository.findIbanByUsername(username);
             double balance = rootRepository.getBalanceByIban(iban);
             BankAccount bankAccount = new BankAccount(iban, balance);
             return bankAccount;

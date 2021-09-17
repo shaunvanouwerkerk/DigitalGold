@@ -1,5 +1,6 @@
 package com.example.digital_gold.controller;
 
+import com.example.digital_gold.service.AuthenticatorService;
 import com.example.digital_gold.service.BankAccountOverviewService;
 import com.example.digital_gold.service.PortfolioOverviewService;
 import org.slf4j.Logger;
@@ -10,25 +11,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Sandra Turina
  **/
-@Controller
-public class BankAccountOverviewController {
 
+@RestController
+public class BankAccountOverviewController {
     private BankAccountOverviewService bankAccountOverviewService;
+    private AuthenticatorService authenticatorService;
 
     private final Logger logger = LoggerFactory.getLogger(BankAccountOverviewController.class);
 
     @Autowired
-    public BankAccountOverviewController(BankAccountOverviewService bankAccountOverviewService) {
+    public BankAccountOverviewController(BankAccountOverviewService bankAccountOverviewService,
+                                         AuthenticatorService authenticatorService) {
         this.bankAccountOverviewService = bankAccountOverviewService;
+        this.authenticatorService = authenticatorService;
+        logger.info("New BankAccountOverviewController");
     }
 
-    @GetMapping("/bankaccountoverview/{username}")
-    public ResponseEntity<?> getOverviewAssets(@PathVariable String username) {
-        return new ResponseEntity(bankAccountOverviewService.bankAccountOverview(username), HttpStatus.OK);
+    @GetMapping("/balance")
+    public ResponseEntity<?> getCurrentBalance(@RequestHeader("Authorization") String token) {
+
+        String username = authenticatorService.authenticateUsername(token);
+        if (!(username == null)) {
+            return ResponseEntity.status(HttpStatus.OK).body(bankAccountOverviewService.bankAccountOverview(username).getBalance());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }
