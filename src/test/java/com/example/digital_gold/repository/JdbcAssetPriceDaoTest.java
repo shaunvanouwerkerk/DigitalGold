@@ -37,4 +37,5 @@ class JdbcAssetPriceDaoTest {
         AssetPrice actualAssetPrice = assetPriceDaoTest.saveAssetPrice(testAssetPrice);
         assertThat(actualAssetPrice).isEqualTo(testAssetPrice);
     }
+
 }
