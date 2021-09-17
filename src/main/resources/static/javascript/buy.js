@@ -26,8 +26,8 @@ menuButton.addEventListener('click',() => {
 
 /* * * * * * CALCULATOR * * * * * */
 
-/* * * * van gekozen crypto prijs ophalen om te kunnen doorgeven aan calculator * * * */
-function getAssetPriceByAssetCode () {
+/* * * * van gekozen crypto de info ophalen om te kunnen doorgeven aan calculator en aan de DOM * * * */
+function getAssetDetailsByAssetCode () {
     fetch('/assetoverviewbank', {
         method: 'GET',
         headers: {
@@ -37,12 +37,15 @@ function getAssetPriceByAssetCode () {
     })
         .then((response) => response.json()).then(assetData => {
             console.log(assetData);
-            const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].text.toLowerCase();
+            const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].value;
             console.log(crypto);
             assetData.forEach(function (value) {
                 if (value.symbol === crypto) {
-                    console.log("Assetcode gevonden " + value.symbol + " : " + value.current_price);
-                    priceField.innerHTML = value.current_price;
+                    console.log("Assetcode gevonden " + value.symbol + " : " + value.currentPrice);
+                    priceField.innerHTML = value.currentPrice;
+                    formTitle.innerHTML = value.assetName;
+                    cryptoTitle.innerHTML = "Buy " + value.assetName + " (" + value.symbol + ")";
+                    cryptoAmount.placeholder = "Enter " + value.symbol + "..."
                 }
             })
         })
@@ -86,7 +89,7 @@ function validateOrderInput() {
 }
 
 function postRequest() {
-    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].text;
+    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].value;
     let selectedCryptoAmount = cryptoAmount.value;
 
     // javascript object Order, matches java Order
@@ -149,15 +152,7 @@ dropDownSelector.addEventListener('change', () => {
 })
 
 function executeDropDownEvents() {
-    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].text;
-    let selectedCryptoPrice= dropDownSelector.options[dropDownSelector.selectedIndex].value;
-    console.log(selectedCryptoSymbol + " : " + selectedCryptoPrice);
-    cryptoTitle.innerHTML = "";
-    formTitle.innerHTML = "";
-    cryptoTitle.innerHTML = "Buy " + selectedCryptoSymbol;
-    formTitle.innerHTML = selectedCryptoSymbol;
-    cryptoAmount.placeholder = "Enter " + selectedCryptoSymbol + "..."
-    getAssetPriceByAssetCode();
+    getAssetDetailsByAssetCode();
     orderForm.reset();
 }
 
@@ -178,27 +173,21 @@ function getAssetList(passedParameter) {
 
             assetList.forEach(function (value) {
                 option = document.createElement('option');
-                option.text = value.symbol.toUpperCase();
-                option.value = value.current_price;
-                /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
-                   Hoe nu de crypto naam tonen hier?? */
+                option.text = value.symbol + " - " + value.assetName /* bitcoin - btc*/
+                option.value = value.symbol; /* btc */
                 dropDownSelector.add(option);
-                dropDownSelector.selectedIndex = 0;
-                let firstCryptoInList = dropDownSelector.options[dropDownSelector.selectedIndex].text;
-                let firstCryptoPriceInList = dropDownSelector.options[dropDownSelector.selectedIndex].value;
-                cryptoTitle.innerHTML = "Buy " + firstCryptoInList;
-                formTitle.innerHTML = firstCryptoInList;
-                cryptoAmount.placeholder = "Enter " + firstCryptoInList + "..."
-                priceField.innerHTML = firstCryptoPriceInList;
             })
-        })
+                dropDownSelector.selectedIndex = 0;
+                executeDropDownEvents();
+            })
     } else {
         /*  passedParameter is niet 0 dus dropdown alleen vullen met de assetCode uit de parameter */
         dropDownSelector.length = 0;
         dropDownSelector.selectedIndex = 0;
         let option;
         option = document.createElement('option');
-        option.text = passedParameter.toUpperCase();
+        option.text = "Selected crypto name"
+        option.value = passedParameter;
         dropDownSelector.add(option);
         dropDownSelector.selectedIndex = 0;
         executeDropDownEvents();
