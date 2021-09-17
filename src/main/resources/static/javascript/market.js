@@ -1,6 +1,10 @@
 /* @author Fiona Gray */
 
-fetch('/assetoverviewbank')
+fetch('/assetoverviewbank',{
+        headers: {
+                'Authorization': localStorage.getItem("token"),
+                'Content-Type': 'application/json'
+        },})
     .then((response) => response.json()).then(data =>
         {console.log(data);
         let tr = '';
@@ -22,6 +26,7 @@ fetch('/assetoverviewbank')
                 let td1 = document.createElement('td');
                 let btn = document.createElement('input');
 
+                // todo: image meegeven aan front?
                 //let img = new Image();
                 //img.src =  value.image.value
                 //td1.appendChild(img);
@@ -49,3 +54,8 @@ fetch('/assetoverviewbank')
         }).catch(error => {
         console.log(error);
     });
+
+/* * * * * * NAVIGATION * * * * * */
+menuButton.addEventListener('click',() => {
+        menuLinks.classList.toggle('active')
+})
