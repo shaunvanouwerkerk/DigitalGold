@@ -33,34 +33,24 @@ public class AssetOverviewBankService {
     public List<CryptoApiAssetPrice> getAndSaveTwentyPrices(List<CryptoApiAssetPrice> prices) {
         List<Asset> assets = rootRepository.findAllAssets();
         List<CryptoApiAssetPrice> twentyPrices = new ArrayList<>();
-        for(Asset asset: assets) {
+        for(Asset asset : assets) {
             for (CryptoApiAssetPrice price : prices) {
                 if (price.getSymbol().toUpperCase(Locale.ROOT).equals(asset.getAssetCode())) {
                     twentyPrices.add(price);
-                    double roundedAssetPrice = roundDouble(price.getCurrentPrice());
-                    AssetPrice assetPrice = new AssetPrice(asset, roundedAssetPrice, LocalDateTime.now());
-                    rootRepository.saveAssetPrice(assetPrice);
+                    roundAndSaveAssetPrice(asset, price);
                 }
             }
         }
         return twentyPrices;
     }
 
-    public double roundDouble(double price) {
-        double roundedPrice = Math.round(price * 1000.00) / 1000.00;
-        return roundedPrice;
+    public void roundAndSaveAssetPrice(Asset asset, CryptoApiAssetPrice price) {
+        double roundedAssetPrice = roundDouble(price.getCurrentPrice());
+        AssetPrice assetPrice = new AssetPrice(asset, roundedAssetPrice, LocalDateTime.now());
+        rootRepository.saveAssetPrice(assetPrice);
     }
 
-// via randomgenerator
-/*
-    public List<Map<String, Object>> getAssetOverviewBank(LocalDate today) {
-        List<Map<String, Object>> assetList = rootRepository.findAllAvailableAssets(today);
-        if (!assetList.isEmpty()) {
-            logger.info("AssetOverview is created");
-            return assetList;
-        } else {
-            logger.info("AssetOverview could not be created");
-            return null;
-        }
-    }*/
+    public double roundDouble(double price) {
+        return Math.round(price * 1000.00) / 1000.00;
+    }
 }

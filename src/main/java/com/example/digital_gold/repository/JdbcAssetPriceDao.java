@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Fiona Gray
@@ -51,13 +49,6 @@ public class JdbcAssetPriceDao implements AssetPriceDao {
                 "AND (Datetime) IN (SELECT Max(Datetime) FROM AssetPrice)";
         return jdbcTemplate.queryForObject(sql, new AssetPriceRowMapper(), assetCode);
     }
-
-    // overbodig?
-   /* @Override
-    public  List<Map<String, Object>> findAllAvailableAssets(LocalDateTime now) {
-        String sql = "select `assetCode`, `price` from `AssetPrice` where `datetime` = ?";
-        return jdbcTemplate.queryForList(sql, now);
-    }*/
 
     private static class AssetPriceRowMapper implements RowMapper<AssetPrice> {
 
