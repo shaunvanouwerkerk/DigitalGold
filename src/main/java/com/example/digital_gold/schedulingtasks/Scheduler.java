@@ -20,7 +20,6 @@ public class Scheduler {
 
     private final RootRepository rootRepository;
     private final PortfolioOverviewService portfolioOverviewService;
-    //private final Random randomNumberGenerator = new Random();
     private final AssetOverviewBankController assetOverviewBankController;
 
     @Autowired
@@ -34,7 +33,6 @@ public class Scheduler {
     @Scheduled(cron = "0 59 23 * * *")
     public void testTask() {
         saveDailyPortfolioValues();
-        //saveDailyAssetPrices();
     }
 
     @Scheduled(cron = "0 0/1 * * * *")
@@ -50,14 +48,9 @@ public class Scheduler {
             savePortfolioValue(portfolioHistory);
         }
     }
-// via randomgenerator
-    /*public void saveDailyAssetPrices() {
-        List<Asset> assetList = rootRepository.findAllAssets();
-        assetList.forEach(this::generateAssetPrices);
-    }*/
 
     public void saveCurrentAssetPrices() {
-        //List<Asset> assetList = rootRepository.findAllAssets();
+        // List<Asset> assetList = rootRepository.findAllAssets();
         //getCurrentAssetPrices();
         //assetList.forEach(this::getCurrentAssetPrices);
     }
@@ -66,19 +59,9 @@ public class Scheduler {
         rootRepository.savePortfolioValue(portfolioHistory);
     }
 
-    // via randomgenerator
-   /* public void generateAssetPrices(Asset asset) {
-        List<AssetPrice> assetPriceList = rootRepository.findPricesByAssetCode(asset.getAssetCode());
-        AssetPrice yesterdaysAssetPrice = assetPriceList.get(assetPriceList.size() - 1);
-        double yesterdaysPrice = yesterdaysAssetPrice.getPrice();
-        double todaysPrice = yesterdaysPrice * (1 + randomNumberGenerator.nextDouble());
-        AssetPrice todaysAssetPrice = new AssetPrice(asset, todaysPrice, LocalDate.now());
-        saveAssetPrice(todaysAssetPrice);
-    }*/
-
     public void getCurrentAssetPrices() {
         try {
-            assetOverviewBankController.getAssetOverviewBank();
+            //assetOverviewBankController.getAssetOverviewBank();
             //List<CryptoApiAssetPrice> assetPriceList = assetOverviewBankController.getAssetOverviewBank();
             /*for(Asset asset: assetList) {
                 for (CryptoApiAssetPrice price: assetPriceList) {

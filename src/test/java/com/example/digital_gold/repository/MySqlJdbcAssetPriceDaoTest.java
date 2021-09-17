@@ -14,10 +14,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // LocalDateTime en SQL query zijn niet compatible met H2 databse.
 // Deze methode moet getest worden met MySQL DB, maar is wegens ()now niet continu te testen.
+// Door findPriceByAssetCode aan te passen is deze eenmalig toch te testen.
 @SpringBootTest
 public class MySqlJdbcAssetPriceDaoTest {
 
-    private AssetPriceDao assetPriceDaoTest;
+  /*  private AssetPriceDao assetPriceDaoTest;
 
     @Autowired
     public MySqlJdbcAssetPriceDaoTest(AssetPriceDao assetPriceDaoTest) {
@@ -29,8 +30,10 @@ public class MySqlJdbcAssetPriceDaoTest {
         assertThat(assetPriceDaoTest).isNotNull();
     }
 
+// stop in var. datetime en expected een datetime en price die je net opgeslagen hebt, om te kunnen testen
     @Test
     public void findPriceByAssetCode() {
+
         LocalDateTime datetime = dateTimeFormatter("2021-09-16 15:58:15");
         AssetPrice expected = new AssetPrice(null, 3964, datetime);
         AssetPrice actual = assetPriceDaoTest.findAssetPriceByAssetCode("ETH");
@@ -42,5 +45,5 @@ public class MySqlJdbcAssetPriceDaoTest {
         String sqlDateTime = resultSet;
         LocalDateTime dateTime = LocalDateTime.parse(sqlDateTime, formatter);
         return dateTime;
-    }
+    }*/
 }
