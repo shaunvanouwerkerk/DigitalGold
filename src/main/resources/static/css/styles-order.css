@@ -154,6 +154,17 @@ FORMS
     margin-bottom: 2em;
 }
 
+.balance-container {
+    width: 250px;
+    height: 55px;
+    background-color:  #bb883c;
+    color: #f9f0a1;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 0px 10px 10px 0px;
+    padding: 6px 20px;
+    margin-top: 25px;
+}
+
 input[type=text],[type=password],[type=email],[type=number], select, textarea {
     width: 100%;
     padding: 12px;

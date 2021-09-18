@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 /**
  *  @author Sandra Turina
  * */
@@ -53,5 +55,18 @@ public class BankAccount {
                 "iban='" + iban + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankAccount that = (BankAccount) o;
+        return Double.compare(that.balance, balance) == 0 && iban.equals(that.iban);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(iban, balance);
     }
 }
