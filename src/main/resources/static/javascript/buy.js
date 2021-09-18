@@ -16,6 +16,28 @@ const orderForm = document.getElementById("order");
 
 /* * * * * * * * * * * * * * * * */
 
+let balanceField;
+
+/* * * * * * BALANCE * * * * * * */
+fetch('/balance', {
+    method: 'GET',
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content': 'application/json'
+    },
+})
+    .then((response) => response.json())
+    .then( data => {
+        balanceField = data;
+        document.getElementById("balance").innerHTML = balanceField;
+        console.log(balanceField);
+    }).catch((error) => {
+    console.error('Error', error);
+});
+
+/* * * * * * * * * * * * * * * * */
+
+
 
 /* * * * * * NAVIGATION * * * * * */
 menuButton.addEventListener('click',() => {
@@ -26,8 +48,8 @@ menuButton.addEventListener('click',() => {
 
 /* * * * * * CALCULATOR * * * * * */
 
-/* * * * van gekozen crypto prijs ophalen om te kunnen doorgeven aan calculator * * * */
-function getAssetPriceByAssetCode () {
+/* * * * van gekozen crypto de info ophalen om te kunnen doorgeven aan calculator en aan de DOM * * * */
+function getAssetDetailsByAssetCode () {
     fetch('/assetoverviewbank', {
         method: 'GET',
         headers: {
@@ -37,13 +59,19 @@ function getAssetPriceByAssetCode () {
     })
         .then((response) => response.json()).then(assetData => {
             console.log(assetData);
-            const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].text.toLowerCase();
+            const crypto = dropDownSelector.options[dropDownSelector.selectedIndex].value;
             console.log(crypto);
-            assetData.forEach(function (value) {
+            assetData.every(function (value) {
                 if (value.symbol === crypto) {
-                    console.log("Assetcode gevonden " + value.symbol + " : " + value.current_price);
-                    priceField.innerHTML = value.current_price;
+                    console.log("Assetcode gevonden " + value.symbol + "  :  " + value.currentPrice);
+                    priceField.textContent = value.currentPrice;
+                    formTitle.textContent = value.assetName;
+                    cryptoTitle.textContent = "Buy " + value.assetName + " (" + value.symbol + ")";
+                    cryptoAmount.placeholder = "Enter " + value.symbol + "...";
+                    orderForm.reset();
+                    return false;
                 }
+                return true;
             })
         })
 }
@@ -57,7 +85,7 @@ cryptoAmount.onchange = ()=>calc('crypto')
 function calc(changer){
     const cryptoAmt = Number(cryptoAmount.value);
     const cryptoVal = Number(cryptoValue.value);
-    const exchangeRate = parseFloat(document.getElementById("price").innerHTML);
+    const exchangeRate = parseFloat(document.getElementById("price").textContent);
 
     console.log(exchangeRate)
     if(changer==='crypto'){
@@ -86,7 +114,7 @@ function validateOrderInput() {
 }
 
 function postRequest() {
-    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].text;
+    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].value;
     let selectedCryptoAmount = cryptoAmount.value;
 
     // javascript object Order, matches java Order
@@ -121,8 +149,8 @@ function postRequest() {
 
 /* wordt aangeroepen bij body.onload */
 function initialize() {
-    cryptoTitle.innerHTML = "";
-    formTitle.innerHTML = "";
+    cryptoTitle.textContent = "";
+    formTitle.textContent = "";
     const assetCodeParam = processUrlParam();
     getAssetList(assetCodeParam);
 }
@@ -136,7 +164,7 @@ function processUrlParam () {
     if(urlParameters.has('assetCode')) {
         let assetCodeParam = urlParameters.get('assetCode');
         if (typeof assetCodeParam === 'string') {
-            const passedAssetCode = assetCodeParam.toLowerCase();
+            const passedAssetCode = assetCodeParam.toUpperCase();
             console.log("uit URL als parameter gehaald: " + passedAssetCode);
             return passedAssetCode;
         }
@@ -145,21 +173,8 @@ function processUrlParam () {
 }
 
 dropDownSelector.addEventListener('change', () => {
-    executeDropDownEvents();
+    getAssetDetailsByAssetCode();
 })
-
-function executeDropDownEvents() {
-    let selectedCryptoSymbol = dropDownSelector.options[dropDownSelector.selectedIndex].text;
-    let selectedCryptoPrice= dropDownSelector.options[dropDownSelector.selectedIndex].value;
-    console.log(selectedCryptoSymbol + " : " + selectedCryptoPrice);
-    cryptoTitle.innerHTML = "";
-    formTitle.innerHTML = "";
-    cryptoTitle.innerHTML = "Buy " + selectedCryptoSymbol;
-    formTitle.innerHTML = selectedCryptoSymbol;
-    cryptoAmount.placeholder = "Enter " + selectedCryptoSymbol + "..."
-    getAssetPriceByAssetCode();
-    orderForm.reset();
-}
 
 function getAssetList(passedParameter) {
     /*  passedParameter checken: indien 0 dan als gewoonlijk drop down opbouwen */
@@ -178,30 +193,24 @@ function getAssetList(passedParameter) {
 
             assetList.forEach(function (value) {
                 option = document.createElement('option');
-                option.text = value.symbol.toUpperCase();
-                option.value = value.current_price;
-                /*TODO: Asset name helaas niet beschikbaar via assetoverviewbank. assetprice wordt gebruikt.
-                   Hoe nu de crypto naam tonen hier?? */
+                option.text = value.symbol + "  -  " + value.assetName /* bitcoin - btc*/
+                option.value = value.symbol; /* btc */
                 dropDownSelector.add(option);
-                dropDownSelector.selectedIndex = 0;
-                let firstCryptoInList = dropDownSelector.options[dropDownSelector.selectedIndex].text;
-                let firstCryptoPriceInList = dropDownSelector.options[dropDownSelector.selectedIndex].value;
-                cryptoTitle.innerHTML = "Buy " + firstCryptoInList;
-                formTitle.innerHTML = firstCryptoInList;
-                cryptoAmount.placeholder = "Enter " + firstCryptoInList + "..."
-                priceField.innerHTML = firstCryptoPriceInList;
             })
-        })
+                dropDownSelector.selectedIndex = 0;
+                getAssetDetailsByAssetCode();
+            })
     } else {
         /*  passedParameter is niet 0 dus dropdown alleen vullen met de assetCode uit de parameter */
         dropDownSelector.length = 0;
         dropDownSelector.selectedIndex = 0;
         let option;
         option = document.createElement('option');
-        option.text = passedParameter.toUpperCase();
+        option.value = passedParameter;
+        option.text = passedParameter;
         dropDownSelector.add(option);
         dropDownSelector.selectedIndex = 0;
-        executeDropDownEvents();
+        getAssetDetailsByAssetCode();
     }
 }
 /* * * * * * END ASSETLIST DROPDOWN * * * * * */

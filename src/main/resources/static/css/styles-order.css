@@ -5,12 +5,12 @@ GENERAL STYLING
 
 * {
     box-sizing: border-box;
+    font-family: "Calibri Light", sans-serif;
 }
 
 h1 {
     font-size: 3em;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
     color: #3b6c7a;
     padding: 0.5em;
 }
@@ -18,7 +18,6 @@ h1 {
 h2 {
     font-size: 2em;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
     color: #1d4a54;
     padding: 0.5em;
 }
@@ -27,36 +26,30 @@ h2L {
     font-size: 2em;
     text-transform: uppercase;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
     color: #f9f0a1;
 }
 
 h3 {
     font-size: 1.5em;
-    font-family: 'Courier New', Courier, monospace;
-    color: #3b6c7a;
+    color: #a8b4b8;
 }
 
 h4 {
     font-size: 1.2em;
-    font-family: 'Courier New', Courier, monospace;
-    color: #3b6c7a;
+    color: #a8b4b8;
 }
 
 h4L {
     font-size: 1.2em;
-    font-family: 'Courier New', Courier, monospace;
     color: #f9f0a1;
 }
 
 h5 {
     font-size: 1em;
-    font-family: 'Courier New', Courier, monospace;
-    color: #3b6c7a;
+    color: #a8b4b8;
 }
 
 a {
-    font-family: 'Courier New', Courier, monospace;
     color: #1d4a54;
 }
 
@@ -87,7 +80,6 @@ body {
 button {
     background-color: #1d4a54;
     color: #f9f0a1;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 1.2em;
     padding: 0.5em;
     border-radius: 10px;
@@ -98,7 +90,6 @@ button {
 .big-button {
     background-color: #3b6c7a;
     color: #f9f0a1;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 1.4em;
     padding-left: 2.5em;
     padding-right: 2.5em;
@@ -111,7 +102,6 @@ button {
 .small-button {
     background-color: #1d4a54;
     color: #f9f0a1;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 0.7em;
     padding-left: 1em;
     padding-right: 1em;
@@ -142,7 +132,6 @@ FORMS
 .form-container {
     background-color: #1d4a54;
     color: #f9f0a1;
-    font-family: 'Courier New', Courier, monospace;
     border-radius: 10px;
     padding: 3em;
     margin-left: 5%;
@@ -176,6 +165,7 @@ input[type=text],[type=password],[type=email],[type=number], select, textarea {
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;
+    font-size: 1.2em;
 }
 
 input[type=submit] {
@@ -244,7 +234,6 @@ NAVIGATION
     align-items: center;
     font-size: 2rem;
     text-transform: uppercase;
-    font-family: 'Courier New', Courier, monospace;
     margin: 0.5rem;
 }
 
@@ -260,7 +249,6 @@ NAVIGATION
 
 .nav-links li a {
     text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 1.1rem;
     color: #f9f0a1;
     padding: 1rem;
@@ -269,6 +257,7 @@ NAVIGATION
 
 .nav-links li:hover {
     background-color: #3b6c7a;
+    border-radius: 10px;
 }
 
 .menu-button {
