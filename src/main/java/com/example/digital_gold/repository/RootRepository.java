@@ -21,11 +21,12 @@ public class RootRepository {
     private PortfolioDao portfolioDao;
     private PortfolioHistoryDao portfolioHistoryDao;
     private BankAccountDao bankAccountDao;
+    private AministratorDashboardDao aministratorDashboardDao;
 
     @Autowired
     public RootRepository(CustomerDao customerDao, AdministratorDao administratorDao, TransactionDao transactionDao,
                           AssetDao assetDao, AssetPriceDao assetPriceDao, PortfolioDao portfolioDao,
-                          PortfolioHistoryDao portfolioHistoryDao, BankAccountDao bankAccountDao) {
+                          PortfolioHistoryDao portfolioHistoryDao, BankAccountDao bankAccountDao, AministratorDashboardDao aministratorDashboardDao) {
         this.customerDao = customerDao;
         this.administratorDao = administratorDao;
         this.transactionDao = transactionDao;
@@ -34,6 +35,7 @@ public class RootRepository {
         this.portfolioDao = portfolioDao;
         this.bankAccountDao = bankAccountDao;
         this.portfolioHistoryDao = portfolioHistoryDao;
+        this.aministratorDashboardDao = aministratorDashboardDao;
         logger.info("New RootRepository");
     }
 
@@ -183,6 +185,26 @@ public class RootRepository {
     public void deleteAssetInPortfolio(PortfolioDatabase portfolioDatabase) {
         portfolioDao.deletePortfolioAsset(portfolioDatabase);
     }
+
+    //AdministratorDasboardDao
+
+    public double findStartingBudgetByUsername (String username){
+        return aministratorDashboardDao.findStartingBudgetByUsername(username);
+    }
+
+    public double findTransactionFeeByUsername (String username){
+    return aministratorDashboardDao.findTransactionFeeByUsername(username);
+    }
+
+    public void updateStartingBudget(AdministratorDashboard administratorDashboard){
+        aministratorDashboardDao.updateStartingBudget(administratorDashboard);
+    }
+
+    public void updateTransactionFee (AdministratorDashboard administratorDashboard){
+        aministratorDashboardDao.updateTransactionFee(administratorDashboard);
+    }
+
+
 }
 
 

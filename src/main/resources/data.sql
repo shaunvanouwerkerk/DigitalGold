@@ -157,3 +157,5 @@ insert into bankaccount (iban, balance) values ('NL10DIGO9876543212', 9426.85);
 insert into bankaccount (iban, balance) values ('NL10DIGO9876543214', 10385.24);
 insert into bankaccount (iban, balance) values ('NL10DIGO9876543215', 305.79);
 insert into bankaccount (iban, balance) values ('NL00DIGO0000000001', 5000000.00);
+
+INSERT INTO AdministratorDashboard (userName, startingBudget, transactionFee) VALUES ('DigitalGoldBank', '1250', '0.05');
