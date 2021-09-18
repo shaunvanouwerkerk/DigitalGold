@@ -62,17 +62,17 @@
                         <label for="cryptoAmount">Amount: </label>
                     </div>
                     <div class="col-70">
-                        <input type="number" step="0.01" min="0" pattern="\d+(\.\d*)?" id="cryptoAmount"
+                        <input type="number" step="0.01" min="0" max="10" pattern="\d+(\.\d*)?" id="cryptoAmount"
                             name="cryptoAmount" placeholder="Enter crypto..." required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-30">
-                        <label for="cryptoValue">Value in USD: </label>
+                        <label for="cryptoValue">Value in €: </label>
                     </div>
                     <div class="col-70">
-                        <input type="number" step="0.1" min="0" pattern="\d+(\.\d*)?" id="cryptoValue"
-                            name="cryptoValue" placeholder="Enter USD..." required>
+                        <input type="number" step="0.1" min="0" max="balance" pattern="\d+(\.\d*)?" id="cryptoValue"
+                            name="cryptoValue" placeholder="Enter €..." required>
                     </div>
                 </div>
                 <div class="row">
