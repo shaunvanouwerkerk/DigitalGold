@@ -155,15 +155,14 @@ FORMS
 }
 
 .balance-container {
-    width: 90px;
-    height: 20px;
-    background-color:  #3b6c7a;
+    width: 250px;
+    height: 55px;
+    background-color:  #bb883c;
     color: #f9f0a1;
     font-family: 'Courier New', Courier, monospace;
     border-radius: 0px 10px 10px 0px;
-    padding: 3em;
-    margin-top: 20px;
-    margin-right: 0;
+    padding: 6px 20px;
+    margin-top: 25px;
 }
 
 input[type=text],[type=password],[type=email],[type=number], select, textarea {
@@ -222,12 +221,6 @@ input[type=submit]:hover {
     padding: 6px 12px 12px 5px;
     display: inline-block;
     font-size: 1.5em;
-}
-
-.balance {
-    padding: 6px 12px 12px 5px;
-    display: inline-block;
-    font-size: 1em;
 }
 
 /************************************************************************************
