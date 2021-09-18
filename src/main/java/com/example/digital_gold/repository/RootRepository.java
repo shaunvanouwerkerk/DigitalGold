@@ -119,11 +119,13 @@ public class RootRepository {
     public Portfolio getPortfolioForCustomer(String username) {
         List<PortfolioDatabase> tempList = portfolioDao.getPortfolioAssetsByUsername(username);
         Customer customer = customerDao.findAndReturnCustomerByUsername(username);
-        Map<Asset, Double> assetMap = new HashMap<>();
-        for (PortfolioDatabase p : tempList) {
-            assetMap.put(assetDao.findAssetByAssetCode(p.getAssetCode()), p.amount);
-        }
-        return new Portfolio(customer, assetMap);
+        Map<Asset, Double> tempMap = new HashMap<>();
+        tempList.forEach(object -> {
+            tempMap.put(assetDao.findAssetByAssetCode(
+                    object.getAssetCode()),
+                    object.amount);
+        });
+        return new Portfolio(customer, tempMap);
     }
 
     public double getPortfolioAssetByUsernameAssetCode(String username, String assetCode) {
@@ -132,14 +134,14 @@ public class RootRepository {
 
     public List<Portfolio> getAllPortfolios() {
         List<String> userList = portfolioDao.getAllUsersWithAPortfolio();
-        List<Portfolio> portfolios = new ArrayList<>();
-        for (String user : userList) {
+        List<Portfolio> portfolioList = new ArrayList<>();
+        userList.forEach(user -> {
             Customer customer = customerDao.findAndReturnCustomerByUsername(user);
             Portfolio portfolio = getPortfolioForCustomer(user);
             portfolio.setCustomer(customer);
-            portfolios.add(portfolio);
-        }
-        return portfolios;
+            portfolioList.add(portfolio);
+        });
+        return portfolioList;
     }
 
     public void savePortfolioValue(PortfolioHistory portfolioHistory) {
@@ -151,36 +153,27 @@ public class RootRepository {
     }
 
     public void saveAssetChangesInPortfolio(Portfolio portfolio) {
-        List<PortfolioDatabase> portfolioDatabaseList = new ArrayList<>();
-        for (Map.Entry<Asset, Double> entry : portfolio.getAssetList().entrySet()) {
-            portfolioDatabaseList.add(new PortfolioDatabase(portfolio.getCustomer().getUsername(),
-                    entry.getKey().getAssetCode(), entry.getValue()));
-        }
-        updatePortfolio(portfolioDatabaseList);
+        List<PortfolioDatabase> tempList = new ArrayList<>();
+        portfolio.getAssetList().forEach((key, value) -> {
+            tempList.add(new PortfolioDatabase
+                    (portfolio.getCustomer().getUsername(),
+                    key.getAssetCode(),
+                    value));
+            updatePortfolio(tempList);
+        });
     }
 
-    public void updatePortfolio(List<PortfolioDatabase> portfolioDatabaseList) {
-        for (PortfolioDatabase portfolioDatabase : portfolioDatabaseList) {
-            if (portfolioDatabase.amount == 0.00) {
-                deleteAssetInPortfolio(portfolioDatabase);
-            } else if (getPortfolioAssetByUsernameAssetCode(portfolioDatabase.username, portfolioDatabase.getAssetCode()) == 0.00) {
-                saveAssetInPortfolio(portfolioDatabase);
+    public void updatePortfolio(List<PortfolioDatabase> list) {
+        list.forEach(object -> {
+            if (object.amount == 0.00) {
+                portfolioDao.deletePortfolioAsset(object);
+            } else if (portfolioDao.getPortfolioAssetByUsernameAssetCode
+                    (object.username, object.assetCode) == 0.00) {
+                portfolioDao.addPortfolioAsset(object);
             } else {
-                updateAssetInPortfolio(portfolioDatabase);
+                portfolioDao.updatePortfolioAsset(object);
             }
-        }
-    }
-
-    public void saveAssetInPortfolio(PortfolioDatabase portfolioDatabase) {
-        portfolioDao.addPortfolioAsset(portfolioDatabase);
-    }
-
-    public void updateAssetInPortfolio(PortfolioDatabase portfolioDatabase) {
-        portfolioDao.updatePortfolioAsset(portfolioDatabase);
-    }
-
-    public void deleteAssetInPortfolio(PortfolioDatabase portfolioDatabase) {
-        portfolioDao.deletePortfolioAsset(portfolioDatabase);
+        });
     }
 
     //AdministratorDasboardDao

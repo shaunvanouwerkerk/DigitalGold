@@ -6,7 +6,7 @@ import java.util.Objects;
 @Author Jany Gaal
 */
 
-public class PortfolioAssetOverview {
+public class PortfolioAssetOverview implements Comparable<PortfolioAssetOverview> {
 
     private String assetName;
     private String assetCode;
@@ -20,9 +20,6 @@ public class PortfolioAssetOverview {
         this.currentPrice = currentPrice;
         this.amountOfAsset = amountOfAsset;
         this.assetTotalValue = assetTotalValue;
-    }
-
-    public PortfolioAssetOverview() {
     }
 
     public String getAssetName() {
@@ -87,5 +84,10 @@ public class PortfolioAssetOverview {
                 ", amountOfAsset=" + amountOfAsset +
                 ", assetTotalValue=" + assetTotalValue +
                 '}';
+    }
+
+    @Override
+    public int compareTo(PortfolioAssetOverview o) {
+        return this.assetName.compareTo(o.assetName);
     }
 }
