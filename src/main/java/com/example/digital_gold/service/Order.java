@@ -27,7 +27,7 @@ public class Order {
         this.assetCode = assetCode;
         this.amountOfAsset = amountOfAsset;
         this.type = type;
-        this.limit = 0; // klopt dit?
+        this.limit = 0;
     }
 
     public Order() {
