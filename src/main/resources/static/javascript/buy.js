@@ -13,28 +13,30 @@ const buttonPostBuyOrder = document.getElementById("postButton");
 const formTitle = document.getElementById("form-title");
 const cryptoTitle = document.getElementById("crypto-title");
 const orderForm = document.getElementById("order");
+const balanceField = document.getElementById("balance")
 
 /* * * * * * * * * * * * * * * * */
 
-let balanceField;
 
 /* * * * * * BALANCE * * * * * * */
-fetch('/balance', {
-    method: 'GET',
-    headers: {
-        'Authorization': localStorage.getItem("token"),
-        'Content': 'application/json'
-    },
-})
-    .then((response) => response.json())
-    .then( data => {
-        balanceField = data;
-        document.getElementById("balance").innerHTML = balanceField;
-        console.log(balanceField);
-    }).catch((error) => {
-    console.error('Error', error);
-});
 
+function showAccountBalance () {
+
+    fetch('/balance', {
+        method: 'GET',
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content': 'application/json'
+        },
+    })
+        .then((response) => response.json())
+        .then( data => {
+            balanceField.innerHTML = data;
+            console.log(data);
+        }).catch((error) => {
+        console.error('Error', error);
+    });
+}
 /* * * * * * * * * * * * * * * * */
 
 
@@ -85,14 +87,13 @@ cryptoAmount.onchange = ()=>calc('crypto')
 function calc(changer){
     const cryptoAmt = Number(cryptoAmount.value);
     const cryptoVal = Number(cryptoValue.value);
-    const exchangeRate = parseFloat(document.getElementById("price").textContent);
-
-    console.log(exchangeRate)
+    let exchangeRate = parseFloat(document.getElementById("price").textContent);
     if(changer==='crypto'){
         const amount =  cryptoAmt * exchangeRate
         cryptoValue.value = parseFloat(amount).toFixed(2)
     }else{
-        cryptoAmount.value = cryptoVal / exchangeRate
+        /*cryptoAmount.value = cryptoVal / exchangeRate*/
+        cryptoAmount.value = Number(cryptoVal / exchangeRate).toFixed(3)
     }
 }
 /* * * * * * * * * * * * * * * */
@@ -104,8 +105,8 @@ buttonPostBuyOrder.addEventListener("click",() => {
         postRequest();
     } else {
         alert("Form data is missing. \nYour buy order cannot be submitted \nPlease fill in amount or value.")
-        orderForm.reset();
     }
+    orderForm.reset();
 })
 
 function validateOrderInput() {
@@ -133,6 +134,7 @@ function postRequest() {
             console.log(response.status);
             if(response.ok) {
                 alert("Order processed successfully")
+                showAccountBalance();
             } else {
                 alert("Order processing failed")
             }
@@ -140,7 +142,6 @@ function postRequest() {
         .catch((error) => {
             console.log("Order niet verwerkt. Fout: ", error)
         });
-    document.getElementById("order").reset();
 }
 /* * * * * * * * * * * * * * * * * * * * */
 
@@ -149,8 +150,7 @@ function postRequest() {
 
 /* wordt aangeroepen bij body.onload */
 function initialize() {
-    cryptoTitle.textContent = "";
-    formTitle.textContent = "";
+    showAccountBalance();
     const assetCodeParam = processUrlParam();
     getAssetList(assetCodeParam);
 }
