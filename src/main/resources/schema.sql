@@ -17,11 +17,11 @@ create table Customer
     iban varchar(20) NOT NULL
     );
 
-create table Administrator
+create table AdministratorDashboard
 (
     `userName` VARCHAR(200) NOT NULL primary key ,
-    `password` VARCHAR(200) NOT NULL,
-    `salt` VARCHAR(200)
+    `startingBudget` DOUBLE NOT NULL,
+    `transactionFee` DOUBLE NOT NULL
 );
 
 create table BankAccount
@@ -72,3 +72,5 @@ create table PortfolioHistory
     `totalValue` DOUBLE NOT NULL,
     PRIMARY KEY (`userName`, `date`)
 );
+
+

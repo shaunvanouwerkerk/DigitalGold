@@ -46,6 +46,7 @@ fetch('../currentstartingcapital',{
             const options = {
                 method: `POST`,
                 headers: {
+                    'Authorization': localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 }
 
@@ -77,6 +78,7 @@ fetch('../currentstartingcapital',{
             const options = {
                 method: `POST`,
                 headers: {
+                    'Authorization': localStorage.getItem("token"),
                     'Content-Type': 'application/json'
                 }
 

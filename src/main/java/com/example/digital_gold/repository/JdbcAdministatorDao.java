@@ -1,7 +1,6 @@
 package com.example.digital_gold.repository;
 
 import com.example.digital_gold.domain.Administrator;
-import com.example.digital_gold.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,7 +19,7 @@ public class JdbcAdministatorDao implements AdministratorDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private PreparedStatement insertCustomerStatement(Administrator administrator, Connection connection) throws SQLException {
+    private PreparedStatement insertAdministratorStatement(Administrator administrator, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "insert into administrator (username, password,  salt) values (?, ?, ?)"
         );
@@ -33,7 +32,7 @@ public class JdbcAdministatorDao implements AdministratorDao {
 
     @Override
     public Administrator save(Administrator administrator) {
-        jdbcTemplate.update(connection -> insertCustomerStatement(administrator, connection));
+        jdbcTemplate.update(connection -> insertAdministratorStatement(administrator, connection));
         return administrator;
     }
 

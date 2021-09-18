@@ -4,6 +4,7 @@ package com.example.digital_gold.controller;
  * @author Shaun van Ouwerkerk
  */
 
+import com.example.digital_gold.service.AdministratorService;
 import com.example.digital_gold.service.AuthenticatorService;
 import com.example.digital_gold.service.LoginService;
 import org.slf4j.Logger;
@@ -21,32 +22,38 @@ public class AdministratorController {
 
     private LoginService loginService;
     private AuthenticatorService authenticatorService;
+    private AdministratorService administratorService;
 
     private final Logger logger = LoggerFactory.getLogger(AdministratorController.class);
 
     @Autowired
-    public AdministratorController(LoginService loginService, AuthenticatorService authenticatorService) {
+    public AdministratorController(LoginService loginService, AuthenticatorService authenticatorService, AdministratorService administratorService) {
         this.loginService = loginService;
         this.authenticatorService = authenticatorService;
+        this.administratorService = administratorService;
         logger.info("New AdministratorController");
     }
 
 
     @PostMapping("/adjuststartingcapital")
-    public ResponseEntity<?> adjustStartingCapital(@RequestParam Double startingBudget) {
-        double budget = startingBudget;
-        System.out.println("Dit is het budget" + budget);
-        if (budget != 0) {
-            return ResponseEntity.created(URI.create("/adminstrator")).body(budget);
+    public ResponseEntity<?> adjustStartingCapital(@RequestHeader("Authorization") String token,
+                                                   @RequestParam Double startingBudget) {
+        administratorService.updateStartingBudget(token,startingBudget);
+        double startingCapitalNew = startingBudget;
+
+        if (startingCapitalNew!= 0) {
+            return ResponseEntity.created(URI.create("/adminstrator")).body(startingCapitalNew);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect request");
         }
     }
 
     @PostMapping("/adjusttransactionfee")
-    public ResponseEntity<?> adjustTransactionFee(@RequestParam Double transactionFee) {
+    public ResponseEntity<?> adjustTransactionFee(@RequestHeader("Authorization") String token,
+                                                  @RequestParam Double transactionFee) {
+        administratorService.updateTransactionFee(token,transactionFee);
         double feePercentage = transactionFee;
-        System.out.println("Dit is de transactionfee" + transactionFee);
+
         if (feePercentage != 0) {
             return ResponseEntity.created(URI.create("/administrator")).body(transactionFee);
         } else {
@@ -55,9 +62,8 @@ public class AdministratorController {
     }
 
     @GetMapping ("/currentstartingcapital")
-    public ResponseEntity<?> currentStartingCapital() {
-        double currentStartingCapital = 25;
-        System.out.println("Methode currentStartCapital werkt");
+    public ResponseEntity<?> currentStartingCapital(@RequestHeader("Authorization") String token) {
+        double currentStartingCapital = administratorService.getStartingBudgetByUsername(token);
 
         if(currentStartingCapital!= 0 ) {
             return ResponseEntity.status(HttpStatus.OK).body(currentStartingCapital);
@@ -67,9 +73,8 @@ public class AdministratorController {
     }
 
     @GetMapping ("/currenttransactionfee")
-    public ResponseEntity<?> currentTransactionFee() {
-        double currentTransactionFee = 0.05;
-        System.out.println("Methode currentTransactionfee werkt");
+    public ResponseEntity<?> currentTransactionFee(@RequestHeader("Authorization") String token) {
+        double currentTransactionFee = administratorService.getTransactionFeeByUsername(token);
 
         if(currentTransactionFee != 0 ) {
             return ResponseEntity.status(HttpStatus.OK).body(currentTransactionFee);
