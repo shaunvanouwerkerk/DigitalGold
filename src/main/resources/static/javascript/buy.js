@@ -16,6 +16,28 @@ const orderForm = document.getElementById("order");
 
 /* * * * * * * * * * * * * * * * */
 
+let balanceField;
+
+/* * * * * * BALANCE * * * * * * */
+fetch('/balance', {
+    method: 'GET',
+    headers: {
+        'Authorization': localStorage.getItem("token"),
+        'Content': 'application/json'
+    },
+})
+    .then((response) => response.json())
+    .then( data => {
+        balanceField = data;
+        document.getElementById("balance").innerHTML = balanceField;
+        console.log(balanceField);
+    }).catch((error) => {
+    console.error('Error', error);
+});
+
+/* * * * * * * * * * * * * * * * */
+
+
 
 /* * * * * * NAVIGATION * * * * * */
 menuButton.addEventListener('click',() => {
