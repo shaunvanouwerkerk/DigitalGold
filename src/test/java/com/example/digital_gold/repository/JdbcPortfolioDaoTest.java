@@ -161,6 +161,7 @@ class JdbcPortfolioDaoTest {
         expected.add("TestUser110");
         expected.add("TestUser111");
         expected.add("TestUser175");
+        expected.add("TestUser176");
         List<String> actual = portfolioDaoTest.getAllUsersWithAPortfolio();
         assertThat(actual).isEqualTo(expected);
     }

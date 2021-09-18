@@ -30,7 +30,7 @@ public class Scheduler {
         this.assetOverviewBankService = assetOverviewBankService;
     }
 
-    @Scheduled(cron = "0 49 18 * * *")
+    @Scheduled(cron = "0 59 23 * * *")
     public void testTask() {
         saveDailyPortfolioValues();
     }

@@ -82,10 +82,9 @@ public class PortfolioOverviewControllerTest {
     @Test
     public void portfolioToday_object_with_content() {
         String uuid = "0a461378-16b1-11ec-9621-0242ac130002";
-        Mockito.when(authenticatorService.authenticateUsername(uuid)).thenReturn("username");
         PortfolioValueOverview expected = new PortfolioValueOverview(LocalDate.now(),1);
-        Mockito.when(portfolioOverviewService.getPortfolioOverviewToday(authenticatorService.
-                authenticateUsername(uuid))).thenReturn(expected);
+        Mockito.when(authenticatorService.authenticateUsername(uuid)).thenReturn("username");
+        Mockito.when(portfolioOverviewService.getPortfolioOverviewToday("username")).thenReturn(expected);
         PortfolioValueOverview actual =
         given()
                 .header("Authorization", uuid).

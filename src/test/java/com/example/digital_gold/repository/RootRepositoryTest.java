@@ -111,5 +111,21 @@ class RootRepositoryTest {
         double actual = rootRepository.getPortfolioAssetByUsernameAssetCode("TestUser104", "MATIC");
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void getPortfolioForCustomer() {
+        Customer TestUser176 = new Customer("TestUser176", "TestPassword", "testzoutje", true,
+                new FullName("JanTester", "van", "JanssenTester"),
+                new Address(1, "TestStraat", "1111AA", "TestCity"),
+                new CustomerDetails(Date.valueOf("1950-01-01"), "17565486", "tester176@gmail.com", "NL10DIGO9876543166"));
+        Asset testasset1761= new Asset("LUNA", "Terra", "Beschrijving");
+        Asset testasset1762 = new Asset("SOL", "Solana", "Beschrijving");
+        Map<Asset, Double> testmap101 = new HashMap<>();
+        testmap101.put(testasset1761, 1.00);
+        testmap101.put(testasset1762, 1.00);
+        Portfolio expected = new Portfolio(TestUser176,testmap101);
+        Portfolio actual = rootRepository.getPortfolioForCustomer("TestUser176");
+        assertThat(actual).isEqualTo(expected);
+    }
 }
 

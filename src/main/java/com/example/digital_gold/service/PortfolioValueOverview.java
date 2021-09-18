@@ -17,6 +17,9 @@ public class PortfolioValueOverview {
         this.portfolioValue = portfolioValue;
     }
 
+    public PortfolioValueOverview() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,6 +39,14 @@ public class PortfolioValueOverview {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public double getPortfolioValue() {
+        return portfolioValue;
+    }
+
+    public void setPortfolioValue(double portfolioValue) {
+        this.portfolioValue = portfolioValue;
     }
 
     @Override
