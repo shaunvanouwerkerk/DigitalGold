@@ -35,28 +35,25 @@ public class PortfolioOverviewController {
     ResponseEntity<Object> getPortfolioValueToday(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
         if (!(username == null)) {
-            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday(authenticatorService.
-                    authenticateUsername(token)), HttpStatus.OK);
+            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewToday(username), HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @GetMapping("/portfoliovalueoverview")
-    public ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@RequestHeader("Authorization") String token) {
+    public @ResponseBody ResponseEntity<List<PortfolioValueOverview>> getPortfolioValueOverview(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
         if (!(username == null)) {
-            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(authenticatorService.
-                    authenticateUsername(token)), HttpStatus.OK);
+            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverview(username), HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @GetMapping("/portfolioassetoverview")
-    public ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets(@RequestHeader("Authorization") String token) {
+    public @ResponseBody ResponseEntity<List<PortfolioAssetOverview>> getPortfolioOverviewAssets(@RequestHeader("Authorization") String token) {
         String username = authenticatorService.authenticateUsername(token);
         if (!(username == null)) {
-            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets(authenticatorService.
-                    authenticateUsername(token)), HttpStatus.OK);
+            return new ResponseEntity<>(portfolioOverviewService.getPortfolioOverviewAssets(username), HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

@@ -31,7 +31,7 @@ public class Scheduler {
         this.assetOverviewBankController = assetOverviewBankController;
     }
 
-    @Scheduled(cron = "0 59 23 * * *")
+    @Scheduled(cron = "0 49 18 * * *")
     public void testTask() {
         saveDailyPortfolioValues();
         //saveDailyAssetPrices();

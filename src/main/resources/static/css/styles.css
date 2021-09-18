@@ -403,7 +403,7 @@ Tables
 *************************************************************************************/
 
 th, td, p, input {
-    font:16px Calibri;
+    font:16px 'Courier New', Courier, monospace;
 }
 table, th, td
 {
@@ -412,7 +412,7 @@ table, th, td
     background-color: #3b6c7a;
     padding: 5px 5px;
     text-align: left;
-    font-family: "Calibri Light";
+    font-family: 'Courier New', Courier, monospace;
     font-size: 2.0rem;
     color: #f9f0a1;
     margin: 15px;

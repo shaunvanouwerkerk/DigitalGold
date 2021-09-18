@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,7 @@ public class PortfolioOverviewService {
             map.forEach((key, value) -> {
                 list.add(makePortfolioAssetOverview(key, value));
             });
+            Collections.sort(list);
             return list;
         } catch (DataAccessException e) {
             return null;
