@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +14,7 @@ import java.util.Map;
  * @author David Truijens
  */
 
-//TODO: check of AuthenticatorService nodig is voor transactie.
-// Berekenen we transactiekosten in front-end al? Lijkt logisch, of tonen we alleen het percentage transactiekosten?
+//TODO: tonen we in de front end het percentage transactiekosten?
 
 @Service
 public class TransactionService {
