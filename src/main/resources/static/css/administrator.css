@@ -3,6 +3,12 @@
 GENERAL STYLING
 *************************************************************************************/
 
+:root {
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -33,8 +39,7 @@ h2L {
 
 h3 {
     font-size: 1.5em;
-    font-family: 'Courier New', Courier, monospace;
-    color: #3b6c7a;
+    color: #a8b4b8;
 }
 
 h4 {
@@ -138,6 +143,31 @@ button:hover {
 /************************************************************************************
 FORMS
 *************************************************************************************/
+.form-control small {
+    font-size: 14px;
+    background: #3b6c7a;
+    border-radius: 4px;
+    color: Black;
+    visibility: hidden;
+    border: 0px solid;
+    margin: 10px 0px;
+    padding-left:2em;
+    padding-right:2em;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.form:after {
+    transform: skew(-10deg, -10deg);
+}
+.form-control.error small {
+    visibility: visible;
+}
+.form-control.error input {
+    border-color: var(--error-color);
+}
+.form-control.success input {
+    border-color: var(--success-color);
+}
 
 .form-container {
     background-color: #1d4a54;

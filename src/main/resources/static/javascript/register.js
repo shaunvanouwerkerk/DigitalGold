@@ -52,7 +52,7 @@
                             alert("Registration successful")
                             window.location.href = "../index.html"
                         } else {
-                            alert("Username or email already exists")
+                            alert("Registration unsuccessful \nPlease try with another email or username")
                         }
                 return response.json()}
                 )
@@ -78,7 +78,7 @@
 
 
         // Check of alle velden op true staan
-        var validForm = isEmailValid && isBsnValid && isZipCodeValid && isDateOfBirthValid && isPasswordValid
+        var validForm = isEmailValid && isBsnValid && isZipCodeValid && isDateOfBirthValid && isPasswordValid && isNotEmpty
         return validForm
 
     }

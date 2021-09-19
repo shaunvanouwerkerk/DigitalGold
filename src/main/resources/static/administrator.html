@@ -48,7 +48,10 @@
                     <label for="newstartupcapital">Adjust to: </label>
                 </div>
                 <div class="col-70">
-                    <input type="text"   id="newstartupcapital" name="newstartupcapital" placeholder="Amount in euros.." >
+                    <div class="form-control">
+                    <input type="text"   id="newstartupcapital" name="newstartupcapital" placeholder="Amount rounded in euros.." >
+                        <small>Error message</small>
+                    </div>
                 </div>
             </div>
             <div class="action-button-container">
@@ -68,7 +71,12 @@
                     <label for="newtransactionfee">Adjust to: </label>
                 </div>
                 <div class="col-70">
-                    <input type="text" id="newtransactionfee" name="newtransactionfee" placeholder="In percentage.." required>
+                    <div class="form-field">
+                         <div class="form-control">
+                             <input type="text" id="newtransactionfee" name="newtransactionfee" placeholder="In percentage.. Example: 0.05 = 5%" >
+                            <small>Error message</small>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
