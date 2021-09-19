@@ -1,6 +1,6 @@
 package com.example.digital_gold.domain;
 
-import com.example.digital_gold.configuration.Config;
+
 import com.example.digital_gold.helper.IbanGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  *  @author Sandra Turina
  * */
-@Component
+
 public class BankAccount {
     private final Logger logger = LoggerFactory.getLogger(Customer.class);
     private double startingBudget;
@@ -21,10 +21,9 @@ public class BankAccount {
     private double balance; // TODO in dollars, positief, niet negatief
 
 
-    @Autowired
-    public BankAccount(Config config) {
+
+    public BankAccount() {
         IbanGenerator ibanGenerator = new IbanGenerator();
-        startingBudget = config.getStartingBudget();
         this.iban = ibanGenerator.generateIban();
         this.balance = startingBudget;
 

@@ -52,7 +52,7 @@
                             alert("Registration successful")
                             window.location.href = "../index.html"
                         } else {
-                            alert("Registration unsuccessful \n Please try with another email or username")
+                            alert("Registration unsuccessful \nPlease try with another email or username")
                         }
                 return response.json()}
                 )

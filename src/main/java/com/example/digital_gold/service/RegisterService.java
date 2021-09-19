@@ -2,13 +2,13 @@ package com.example.digital_gold.service;
 
 import com.example.digital_gold.domain.Administrator;
 import com.example.digital_gold.domain.BankAccount;
-import com.example.digital_gold.configuration.Config;
 import com.example.digital_gold.domain.Customer;
 import com.example.digital_gold.helper.SaltMaker;
 import com.example.digital_gold.repository.RootRepository;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -18,16 +18,16 @@ public class RegisterService {
     private RootRepository rootRepository;
     private SaltMaker saltMaker;
     private HashService hashService;
-    private Config config;
+    @Value("${usernameDGB}")
+    public String usernameBank;
 
     private final Logger logger = LoggerFactory.getLogger(RegisterService.class);
 
     @Autowired
-    public RegisterService(RootRepository rootRepository, SaltMaker saltMaker, HashService hashService, Config config) {
+    public RegisterService(RootRepository rootRepository, SaltMaker saltMaker, HashService hashService) {
         this.rootRepository = rootRepository;
         this.saltMaker = saltMaker;
         this.hashService = hashService;
-        this.config = config;
         logger.info("New RegisterService");
     }
 
@@ -59,8 +59,10 @@ public class RegisterService {
     }
 
     public String createBankAccount() {
-        BankAccount newBankAccount = new BankAccount(config);//TODO SHAUN AANGEPAST KIJKEN OF DIT NOG WERK
+        BankAccount newBankAccount = new BankAccount();
+        newBankAccount.setBalance(rootRepository.findStartingBudgetByUsername(usernameBank));
         rootRepository.saveBankAccount(newBankAccount);
+
         return newBankAccount.getIban();
     }
 

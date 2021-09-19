@@ -4,7 +4,7 @@ package com.example.digital_gold.service;
  * @Author Shaun van Ouwerkerk
  */
 
-import com.example.digital_gold.configuration.Config;
+
 import com.example.digital_gold.domain.AdministratorDashboard;
 import com.example.digital_gold.domain.BankAccount;
 import com.example.digital_gold.repository.MapDatabase;
@@ -16,18 +16,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdministratorService {
 
-    private BankAccount bankAccount;
     private RootRepository rootRepository;
     private MapDatabase tokenDatabase;
-    private Config config;
+
 
 
     @Autowired
-    public AdministratorService(BankAccount bankAccount, RootRepository rootRepository, MapDatabase tokenDatabase, Config config) {
-        this.bankAccount = bankAccount;
+    public AdministratorService(RootRepository rootRepository, MapDatabase tokenDatabase) {
         this.rootRepository = rootRepository;
         this.tokenDatabase = tokenDatabase;
-        this.config = config;
+
     }
 
     public double getStartingBudgetByUsername(String token){

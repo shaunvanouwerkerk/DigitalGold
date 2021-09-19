@@ -129,7 +129,7 @@ function checkTransactionFee(input){
         ShowSuccess(input, "");
         return true;
     } else {
-        ShowError(input, "Transactionfee not in format 0.05");
+        ShowError(input, "Transaction fee not in format 0.05");
         return false;
     }
 }
