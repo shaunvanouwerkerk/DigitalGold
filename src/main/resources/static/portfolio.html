@@ -8,41 +8,64 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <script type="text/javascript" src="javascript/portfolio.js" defer></script>
     <script src="javascript/authenticate.js"defer></script>
+    <link rel="stylesheet" href="css/portfolio-styles.css" type="text/css">
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <style>
     </style>
 </head>
 <body>
 <nav class="navbar">
-    <div class="brand_name"><a href="index.html"><img class="logo" src="/logo_small.png" alt="logo Digital Gold"></a>digital gold</div>
-    <a href="#" class="menu-button">
-        <span class="streep"></span>
-        <span class="streep"></span>
-        <span class="streep"></span>
-    </a>
+    <div class="brand_name"><img class="logo" src="logo_small.png" alt="logo Digital Gold">digital gold</div>
+        <a href="#" class="menu-button">
+            <span class="streep"></span>
+            <span class="streep"></span>
+            <span class="streep"></span>
+        </a>
     <div class="nav-links">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="market.html">Market</a></li>
             <li><a href="buy.html">Buy</a></li>
             <li><a href="sell.html">Sell</a></li>
-            <li><a href="index.html" id="btnLogout">Log out</a></li>
+            <li><a href="index.html" id="btnLogout">Logout</a></li>
         </ul>
     </div>
 </nav>
-<div class="container">
-    <div class="title">
-        <table id="portfoliovalueoverviewtoday" >
-        </table>
+
+
+<div class="grid-container01">
+    <div class="grid-child A">
+        <div class="balance-container">
+            <label for="balance">Balance: € </label><span id="balance"></span>
+        </div>
     </div>
-    <div class="portfolio-container">
-        <div class="Your Portfolio">
-            <table id="portfoliovalueoverview" >
-            </table>
-            <table id="portfolioassetoverview" >
-            </table>
+    <div class="grid-child B">
+        <div class="portfolioValue-container">
+            <label for="balance">Portfolio Value: € </label><span id="portfoliovalue"></span>
         </div>
     </div>
 </div>
+<div class="grid-container02">
+    <div class="grid-child C">
+        <table id="portfolioassetoverview">
+            <tr>
+                <th>Name</th>
+                <th></th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total Value</th>
+            </tr>
+        </table>
+    </div>
+    <div class="grid-child D">
+        <table class="portfoliovalueoverview" id="portfoliovalueoverview">
+            <tr>
+                <th>Date</th>
+                <th>Portfolio Value</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>

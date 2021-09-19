@@ -1,10 +1,71 @@
-table,
-td {
-    border: 1px solid #333;
+* {
+    box-sizing: border-box;
+    font-family: "Calibri Light", sans-serif;
 }
 
-thead,
-tfoot {
-    background-color: #333;
-    color: #fff;
+
+.grid-container01 {
+    margin: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
 }
+
+.grid-container02 {
+    margin: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.portfolioValue-container {
+    width: 300px;
+    height: 55px;
+    background-color:  #bb883c;
+    color: #f9f0a1;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 0px 10px 10px 0px;
+    padding: 6px 20px;
+    margin-top: 25px;
+}
+
+.balance-container {
+    width: 300px;
+    height: 55px;
+    background-color:  #bb883c;
+    color: #f9f0a1;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 0px 10px 10px 0px;
+    padding: 6px 20px;
+    margin-top: 25px;
+}
+
+table {
+    width: 550px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f9f0a1;
+    background-color: #1d4a54;
+    padding: 5px;
+    border: 0.5rem outset #f7ed9f;
+    border-radius: 10px;
+}
+
+th {
+    color: #f9f0a1;
+    text-decoration: underline;
+    text-align-all: left;
+}
+
+td {
+    color: #f9f0a1;
+    text-align-all: center;
+}
+
+.portfoliovalueoverview {
+    width: 275px;
+}
+
+

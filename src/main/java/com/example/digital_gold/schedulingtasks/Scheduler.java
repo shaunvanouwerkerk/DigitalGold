@@ -41,7 +41,9 @@ public class Scheduler {
     }
 
     public void saveDailyPortfolioValues() {
+
         List<Portfolio> portfolios = rootRepository.getAllPortfolios();
+        System.out.println(portfolios);
         for (Portfolio portfolio : portfolios) {
             double value = portfolioOverviewService.calculatePortfolioValue(portfolio);
             PortfolioHistory portfolioHistory = new PortfolioHistory(portfolio.getCustomer(), LocalDate.now(), value);

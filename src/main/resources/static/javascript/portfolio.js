@@ -1,33 +1,24 @@
-fetch('../portfoliovalueoverview',{
+fetch('/portfoliovalueoverview',{
     headers: {
         'Authorization': localStorage.getItem("token"),
         'Content-Type': 'application/json'
     },})
     .then((response) => response.json()).then(data => {
-    let tr = '';
     let tableBody = document.querySelector('#portfoliovalueoverview');
 
-    // table headers
-    let trh = document.createElement('tr');
-    let th1 = document.createElement('th');
-    th1.textContent = "Date";
-    let th2 = document.createElement('th');
-    th2.textContent = "Portfolio value";
-    trh.appendChild(th1);
-    trh.appendChild(th2);
-    tableBody.appendChild(trh);
-
-    data.forEach(function (value) {
+    data.forEach(function (object) {
         let tr = document.createElement('tr');
         let td =document.createElement('td');
-        td.textContent = value.date;
+        td.style.textAlign = "center"
+        td.textContent = object.date;
         let td2 =document.createElement('td');
-        td2.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format( value.portfolioValue);
+        td2.style.textAlign = "right"
+        td2.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format
+        (object.portfolioValue);
         tr.appendChild(td);
         tr.appendChild(td2);
         tableBody.appendChild(tr);
     });
-
 }).catch(error => {
 });
 
@@ -40,38 +31,23 @@ fetch('../portfolioassetoverview',{
     let tr = '';
     let tableBody = document.querySelector('#portfolioassetoverview');
 
-    // table headers
-    let trh = document.createElement('tr');
-    let th1 = document.createElement('th');
-    th1.textContent = "Name";
-    let th2 = document.createElement('th');
-    th2.textContent = " ";
-    let th3 = document.createElement('th');
-    th3.textContent = "Price";
-    let th4 = document.createElement('th');
-    th4.textContent = "Amount";
-    let th5 = document.createElement('th');
-    th5.textContent = "Total Value";
-    trh.appendChild(th1);
-    trh.appendChild(th2);
-    trh.appendChild(th3);
-    trh.appendChild(th4);
-    trh.appendChild(th5);
-    tableBody.appendChild(trh);
-
-    data.forEach(function (value) {
-        console.log(value);
+    data.forEach(function (object2) {
         let tr = document.createElement('tr');
         let td =document.createElement('td');
-        td.textContent = value.assetName;
+        td.textContent = object2.assetName
         let td2 =document.createElement('td');
-        td2.textContent = value.assetCode;
+        td2.textContent = object2.assetCode;
         let td3 =document.createElement('td');
-        td3.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value.currentPrice);
+        td3.style.textAlign = "right"
+        td3.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' })
+            .format(object2.currentPrice);
         let td4 =document.createElement('td');
-        td4.textContent = value.amountOfAsset;
+        td4.style.textAlign = "center"
+        td4.textContent = object2.amountOfAsset;
         let td5 =document.createElement('td');
-        td5.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value.assetTotalValue);
+        td5.style.textAlign = "right"
+        td5.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' })
+            .format(object2.assetTotalValue);
         tr.appendChild(td);
         tr.appendChild(td2);
         tr.appendChild(td3);
@@ -79,24 +55,42 @@ fetch('../portfolioassetoverview',{
         tr.appendChild(td5);
         tableBody.appendChild(tr);
     });
-
 }).catch(error => {
 });
 
-fetch('../portfoliovalueoverviewtoday',{
+const portfoliovalueField = document.getElementById("portfoliovalue")
+
+fetch('/portfoliovalueoverviewtoday', {
+    method: 'GET',
     headers: {
         'Authorization': localStorage.getItem("token"),
-        'Content-Type': 'application/json'
-    },})
-    .then((response) => response.json()).then(data => {
-    let tableBody = document.querySelector('#portfoliovalueoverviewtoday');
-    let tr = document.createElement('tr');
-    let td = document.createElement('td');
-    td.textContent =  "Portfolio Value";
-    let td2 = document.createElement('td');
-    td2.textContent = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(data.portfolioValue);
-    tr.appendChild(td);
-    tr.appendChild(td2);
-    tableBody.appendChild(tr);
-}).catch(error => {
+        'Content': 'application/json'
+    },
+})
+    .then((response) => response.json())
+    .then( data => {
+        portfoliovalue.innerHTML = new Intl.NumberFormat('nl-NL', {minimumFractionDigits:2,
+            maximumFractionDigits: 2}).format(data.portfolioValue);
+        console.log(data);
+    }).catch((error) => {
+    console.error('Error', error);
 });
+
+const balanceField = document.getElementById("balance")
+
+    fetch('/balance', {
+        method: 'GET',
+        headers: {
+            'Authorization': localStorage.getItem("token"),
+            'Content': 'application/json'
+        },
+    })
+        .then((response) => response.json())
+        .then( data => {
+            balanceField.innerHTML = new Intl.NumberFormat('nl-NL', { minimumFractionDigits:2,
+                maximumFractionDigits: 2}).format(data);
+            console.log(data);
+        }).catch((error) => {
+        console.error('Error', error);
+    });
+

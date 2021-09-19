@@ -402,21 +402,22 @@ MEDIA QUERIES
 Tables
 *************************************************************************************/
 
-th, td, p, input {
-    font:16px 'Courier New', Courier, monospace;
-}
-table, th, td
-{
-    border-radius: 5px;
-    border-collapse: collapse;
-    background-color: #3b6c7a;
-    padding: 5px 5px;
-    text-align: left;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2.0rem;
-    color: #f9f0a1;
-    margin: 15px;
-}
-th {
-    font-weight:bold;
-}
+/*th, td, p, input {*/
+/*    font:16px 'Courier New', Courier, monospace;*/
+/*}*/
+/*table, th, td*/
+/*{*/
+/*    border-radius: 5px;*/
+/*    border-radius: 5px;*/
+/*    border-collapse: collapse;*/
+/*    background-color: #3b6c7a;*/
+/*    padding: 5px 5px;*/
+/*    text-align: left;*/
+/*    font-family: 'Courier New', Courier, monospace;*/
+/*    font-size: 2.0rem;*/
+/*    color: #f9f0a1;*/
+/*    margin: 15px;*/
+/*}*/
+/*th {*/
+/*    font-weight:bold;*/
+/*}*/

@@ -53,15 +53,6 @@ class JdbcPortfolioDaoTest {
         }
     }
 
-    //TODO zorgen dat er geen onbekende Asset de database in gaat ?
-/*    @Test
-    public void addPortfolioAssetTestUnknownAssetCode() {
-        PortfolioDatabase testAsset = new PortfolioDatabase
-                ("TestUser101", "AAA", 6);
-        int expected = 0;
-        int actual = portfolioDaoTest.addPortfolioAsset(testAsset);
-        assertThat(actual).isEqualTo(expected);
-    }*/
 
     @Test
     public void updatePortfolioAsset() {
@@ -93,7 +84,7 @@ class JdbcPortfolioDaoTest {
     @Test
     public void deletePortfolioAssetInDB() {
         PortfolioDatabase testDelete = new PortfolioDatabase
-                ("TestUser109", "BTV", 25);
+                ("TestUser109", "BTC", 25);
         int expected = 1;
         int actual = portfolioDaoTest.deletePortfolioAsset(testDelete);
         assertThat(actual).isEqualTo(expected);
@@ -146,7 +137,7 @@ class JdbcPortfolioDaoTest {
     }
 
     @Test
-    public void getAllUsersWithAPortfolio() {
+    public void getAllUsersWithAPortfolioTest() {
         List<String> expected = new ArrayList<>();
         expected.add("TestUser100");
         expected.add("TestUser101");

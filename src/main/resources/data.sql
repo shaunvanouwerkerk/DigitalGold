@@ -68,7 +68,7 @@ values ('TestUser108', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
 values ('TestUser109', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
-values ('TestUser109', 'BTV', 1.00);
+values ('TestUser109', 'BTC', 1.00);
 insert into portfolio (username, assetCode, amount)
 values ('TestUser110', 'MATIC', 1.00);
 insert into portfolio (username, assetCode, amount)
