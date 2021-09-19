@@ -24,7 +24,6 @@ public class BankAccount {
     @Autowired
     public BankAccount(Config config) {
         IbanGenerator ibanGenerator = new IbanGenerator();
-        // TODO Haalt startingBudget uit de properties maar moet nog uit config komen
         startingBudget = config.getStartingBudget();
         this.iban = ibanGenerator.generateIban();
         this.balance = startingBudget;

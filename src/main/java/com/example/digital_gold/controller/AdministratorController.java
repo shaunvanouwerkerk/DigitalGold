@@ -39,10 +39,10 @@ public class AdministratorController {
     public ResponseEntity<?> adjustStartingCapital(@RequestHeader("Authorization") String token,
                                                    @RequestParam Double startingBudget) {
         administratorService.updateStartingBudget(token,startingBudget);
-        double startingCapitalNew = startingBudget;
+        double startingCapitalDatabase = administratorService.getStartingBudgetByUsername(token);
 
-        if (startingCapitalNew!= 0) {
-            return ResponseEntity.created(URI.create("/adminstrator")).body(startingCapitalNew);
+        if (startingCapitalDatabase == startingBudget) {
+            return ResponseEntity.status(HttpStatus.OK).body("Changes Adapted");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect request");
         }
@@ -51,11 +51,12 @@ public class AdministratorController {
     @PostMapping("/adjusttransactionfee")
     public ResponseEntity<?> adjustTransactionFee(@RequestHeader("Authorization") String token,
                                                   @RequestParam Double transactionFee) {
-        administratorService.updateTransactionFee(token,transactionFee);
-        double feePercentage = transactionFee;
 
-        if (feePercentage != 0) {
-            return ResponseEntity.created(URI.create("/administrator")).body(transactionFee);
+        administratorService.updateTransactionFee(token,transactionFee);
+        double transactionFeeDatabase = administratorService.getTransactionFeeByUsername(token);
+
+        if (transactionFee == transactionFeeDatabase ) {
+            return ResponseEntity.status(HttpStatus.OK).body("Changes Adapted");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect request");
         }
